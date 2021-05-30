@@ -1,0 +1,4812 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width initial-scale=1'>
+    <title>JavaSE_第7章 面向对象基础（下）2</title>
+    <link href='https://fonts.loli.net/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext'
+          rel='stylesheet' type='text/css'/>
+    <style type='text/css'>html {
+        overflow-x: initial !important;
+    }
+
+    :root {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --select-text-bg-color: #B5D6FC;
+        --select-text-font-color: auto;
+        --monospace: "Lucida Console", Consolas, "Courier", monospace;
+    }
+
+    html {
+        font-size: 14px;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        margin: 0px;
+        padding: 0px;
+        height: auto;
+        bottom: 0px;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        font-size: 1rem;
+        line-height: 1.42857;
+        overflow-x: hidden;
+        background: inherit;
+    }
+
+    iframe {
+        margin: auto;
+    }
+
+    a.url {
+        word-break: break-all;
+    }
+
+    a:active, a:hover {
+        outline: 0px;
+    }
+
+    .in-text-selection, ::selection {
+        text-shadow: none;
+        background: var(--select-text-bg-color);
+        color: var(--select-text-font-color);
+    }
+
+    #write {
+        margin: 0px auto;
+        height: auto;
+        width: inherit;
+        word-break: normal;
+        word-wrap: break-word;
+        position: relative;
+        white-space: normal;
+        overflow-x: visible;
+        padding-top: 40px;
+    }
+
+    #write.first-line-indent p {
+        text-indent: 2em;
+    }
+
+    #write.first-line-indent li p, #write.first-line-indent p * {
+        text-indent: 0px;
+    }
+
+    #write.first-line-indent li {
+        margin-left: 2em;
+    }
+
+    .for-image #write {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    body.typora-export {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .typora-export .footnote-line, .typora-export li, .typora-export p {
+        white-space: pre-wrap;
+    }
+
+    @media screen and (max-width: 500px) {
+        body.typora-export {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        #write {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .CodeMirror-sizer {
+            margin-left: 0px !important;
+        }
+
+        .CodeMirror-gutters {
+            display: none !important;
+        }
+    }
+
+    #write li > figure:first-child {
+        margin-top: -20px;
+    }
+
+    #write ol, #write ul {
+        position: relative;
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    button, input, select, textarea {
+        color: inherit;
+        font-style: inherit;
+        font-variant: inherit;
+        font-weight: inherit;
+        font-stretch: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        font-family: inherit;
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+        line-height: normal;
+        padding: 0px;
+    }
+
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre {
+        width: inherit;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p {
+        position: relative;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        break-after: avoid-page;
+        break-inside: avoid;
+        orphans: 2;
+    }
+
+    p {
+        orphans: 4;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+    }
+
+    h4 {
+        font-size: 1.4rem;
+    }
+
+    h5 {
+        font-size: 1.2rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+    }
+
+    .md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .md-blockmeta {
+        color: rgb(204, 204, 204);
+        font-weight: 700;
+        font-style: italic;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    sup.md-footnote {
+        padding: 2px 4px;
+        background-color: rgba(238, 238, 238, 0.7);
+        color: rgb(85, 85, 85);
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    sup.md-footnote a, sup.md-footnote a:hover {
+        color: inherit;
+        text-transform: inherit;
+        text-decoration: inherit;
+    }
+
+    #write input[type="checkbox"] {
+        cursor: pointer;
+        width: inherit;
+        height: inherit;
+    }
+
+    figure {
+        overflow-x: auto;
+        margin: 1.2em 0px;
+        max-width: calc(100% + 16px);
+        padding: 0px;
+    }
+
+    figure > table {
+        margin: 0px !important;
+    }
+
+    tr {
+        break-inside: avoid;
+        break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+        width: 100%;
+        overflow: auto;
+        break-inside: auto;
+        text-align: left;
+    }
+
+    table.md-table td {
+        min-width: 32px;
+    }
+
+    .CodeMirror-gutters {
+        border-right: 0px;
+        background-color: inherit;
+    }
+
+    .CodeMirror {
+        text-align: left;
+    }
+
+    .CodeMirror-placeholder {
+        opacity: 0.3;
+    }
+
+    .CodeMirror pre {
+        padding: 0px 4px;
+    }
+
+    .CodeMirror-lines {
+        padding: 0px;
+    }
+
+    div.hr:focus {
+        cursor: none;
+    }
+
+    #write pre {
+        white-space: pre-wrap;
+    }
+
+    #write.fences-no-line-wrapping pre {
+        white-space: pre;
+    }
+
+    #write pre.ty-contain-cm {
+        white-space: normal;
+    }
+
+    .CodeMirror-gutters {
+        margin-right: 4px;
+    }
+
+    .md-fences {
+        font-size: 0.9rem;
+        display: block;
+        break-inside: avoid;
+        text-align: left;
+        overflow: visible;
+        white-space: pre;
+        background: inherit;
+        position: relative !important;
+    }
+
+    .md-diagram-panel {
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+        padding-top: 0px;
+        padding-bottom: 8px;
+        overflow-x: auto;
+    }
+
+    #write .md-fences.mock-cm {
+        white-space: pre-wrap;
+    }
+
+    .md-fences.md-fences-with-lineno {
+        padding-left: 0px;
+    }
+
+    #write.fences-no-line-wrapping .md-fences.mock-cm {
+        white-space: pre;
+        overflow-x: auto;
+    }
+
+    .md-fences.mock-cm.md-fences-with-lineno {
+        padding-left: 8px;
+    }
+
+    .CodeMirror-line, twitterwidget {
+        break-inside: avoid;
+    }
+
+    .footnotes {
+        opacity: 0.8;
+        font-size: 0.9rem;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .footnotes + .footnotes {
+        margin-top: 0px;
+    }
+
+    .md-reset {
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        outline: 0px;
+        vertical-align: top;
+        background: 0px 0px;
+        text-decoration: none;
+        text-shadow: none;
+        float: none;
+        position: static;
+        width: auto;
+        height: auto;
+        white-space: nowrap;
+        cursor: inherit;
+        -webkit-tap-highlight-color: transparent;
+        line-height: normal;
+        font-weight: 400;
+        text-align: left;
+        box-sizing: content-box;
+        direction: ltr;
+    }
+
+    li div {
+        padding-top: 0px;
+    }
+
+    blockquote {
+        margin: 1rem 0px;
+    }
+
+    li .mathjax-block, li p {
+        margin: 0.5rem 0px;
+    }
+
+    li {
+        margin: 0px;
+        position: relative;
+    }
+
+    blockquote > :last-child {
+        margin-bottom: 0px;
+    }
+
+    blockquote > :first-child, li > :first-child {
+        margin-top: 0px;
+    }
+
+    .footnotes-area {
+        color: rgb(136, 136, 136);
+        margin-top: 0.714rem;
+        padding-bottom: 0.143rem;
+        white-space: normal;
+    }
+
+    #write .footnote-line {
+        white-space: pre-wrap;
+    }
+
+    @media print {
+        body, html {
+            border: 1px solid transparent;
+            height: 99%;
+            break-after: avoid;
+            break-before: avoid;
+        }
+
+        #write {
+            margin-top: 0px;
+            padding-top: 0px;
+            border-color: transparent !important;
+        }
+
+        .typora-export * {
+            -webkit-print-color-adjust: exact;
+        }
+
+        html.blink-to-pdf {
+            font-size: 13px;
+        }
+
+        .typora-export #write {
+            padding-left: 32px;
+            padding-right: 32px;
+            padding-bottom: 0px;
+            break-after: avoid;
+        }
+
+        .typora-export #write::after {
+            height: 0px;
+        }
+
+        @page {
+            margin: 20mm 0px;
+        }
+    }
+
+    .footnote-line {
+        margin-top: 0.714em;
+        font-size: 0.7em;
+    }
+
+    a img, img a {
+        cursor: pointer;
+    }
+
+    pre.md-meta-block {
+        font-size: 0.8rem;
+        min-height: 0.8rem;
+        white-space: pre-wrap;
+        background: rgb(204, 204, 204);
+        display: block;
+        overflow-x: hidden;
+    }
+
+    p > .md-image:only-child:not(.md-img-error) img, p > img:only-child {
+        display: block;
+        margin: auto;
+    }
+
+    p > .md-image:only-child {
+        display: inline-block;
+        width: 100%;
+    }
+
+    #write .MathJax_Display {
+        margin: 0.8em 0px 0px;
+    }
+
+    .md-math-block {
+        width: 100%;
+    }
+
+    .md-math-block:not(:empty)::after {
+        display: none;
+    }
+
+    [contenteditable="true"]:active, [contenteditable="true"]:focus {
+        outline: 0px;
+        box-shadow: none;
+    }
+
+    .md-task-list-item {
+        position: relative;
+        list-style-type: none;
+    }
+
+    .task-list-item.md-task-list-item {
+        padding-left: 0px;
+    }
+
+    .md-task-list-item > input {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        margin-left: -1.2em;
+        margin-top: calc(1em - 10px);
+        border: none;
+    }
+
+    .math {
+        font-size: 1rem;
+    }
+
+    .md-toc {
+        min-height: 3.58rem;
+        position: relative;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .md-toc-content {
+        position: relative;
+        margin-left: 0px;
+    }
+
+    .md-toc-content::after, .md-toc::after {
+        display: none;
+    }
+
+    .md-toc-item {
+        display: block;
+        color: rgb(65, 131, 196);
+    }
+
+    .md-toc-item a {
+        text-decoration: none;
+    }
+
+    .md-toc-inner:hover {
+        text-decoration: underline;
+    }
+
+    .md-toc-inner {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .md-toc-h1 .md-toc-inner {
+        margin-left: 0px;
+        font-weight: 700;
+    }
+
+    .md-toc-h2 .md-toc-inner {
+        margin-left: 2em;
+    }
+
+    .md-toc-h3 .md-toc-inner {
+        margin-left: 4em;
+    }
+
+    .md-toc-h4 .md-toc-inner {
+        margin-left: 6em;
+    }
+
+    .md-toc-h5 .md-toc-inner {
+        margin-left: 8em;
+    }
+
+    .md-toc-h6 .md-toc-inner {
+        margin-left: 10em;
+    }
+
+    @media screen and (max-width: 48em) {
+        .md-toc-h3 .md-toc-inner {
+            margin-left: 3.5em;
+        }
+
+        .md-toc-h4 .md-toc-inner {
+            margin-left: 5em;
+        }
+
+        .md-toc-h5 .md-toc-inner {
+            margin-left: 6.5em;
+        }
+
+        .md-toc-h6 .md-toc-inner {
+            margin-left: 8em;
+        }
+    }
+
+    a.md-toc-inner {
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+
+    .footnote-line a:not(.reversefootnote) {
+        color: inherit;
+    }
+
+    .md-attr {
+        display: none;
+    }
+
+    .md-fn-count::after {
+        content: ".";
+    }
+
+    code, pre, samp, tt {
+        font-family: var(--monospace);
+    }
+
+    kbd {
+        margin: 0px 0.1em;
+        padding: 0.1em 0.6em;
+        font-size: 0.8em;
+        color: rgb(36, 39, 41);
+        background: rgb(255, 255, 255);
+        border: 1px solid rgb(173, 179, 185);
+        border-radius: 3px;
+        box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    .md-comment {
+        color: rgb(162, 127, 3);
+        opacity: 0.8;
+        font-family: var(--monospace);
+    }
+
+    code {
+        text-align: left;
+        vertical-align: initial;
+    }
+
+    a.md-print-anchor {
+        white-space: pre !important;
+        border-width: initial !important;
+        border-style: none !important;
+        border-color: initial !important;
+        display: inline-block !important;
+        position: absolute !important;
+        width: 1px !important;
+        right: 0px !important;
+        outline: 0px !important;
+        background: 0px 0px !important;
+        text-decoration: initial !important;
+        text-shadow: initial !important;
+    }
+
+    .md-inline-math .MathJax_SVG .noError {
+        display: none !important;
+    }
+
+    .html-for-mac .inline-math-svg .MathJax_SVG {
+        vertical-align: 0.2px;
+    }
+
+    .md-math-block .MathJax_SVG_Display {
+        text-align: center;
+        margin: 0px;
+        position: relative;
+        text-indent: 0px;
+        max-width: none;
+        max-height: none;
+        min-height: 0px;
+        min-width: 100%;
+        width: auto;
+        overflow-y: hidden;
+        display: block !important;
+    }
+
+    .MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display {
+        width: auto;
+        margin: inherit;
+        display: inline-block !important;
+    }
+
+    .MathJax_SVG .MJX-monospace {
+        font-family: var(--monospace);
+    }
+
+    .MathJax_SVG .MJX-sans-serif {
+        font-family: sans-serif;
+    }
+
+    .MathJax_SVG {
+        display: inline;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        zoom: 90%;
+        text-indent: 0px;
+        text-align: left;
+        text-transform: none;
+        letter-spacing: normal;
+        word-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        float: none;
+        direction: ltr;
+        max-width: none;
+        max-height: none;
+        min-width: 0px;
+        min-height: 0px;
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .MathJax_SVG * {
+        transition: none;
+    }
+
+    .MathJax_SVG_Display svg {
+        vertical-align: middle !important;
+        margin-bottom: 0px !important;
+    }
+
+    .os-windows.monocolor-emoji .md-emoji {
+        font-family: "Segoe UI Symbol", sans-serif;
+    }
+
+    .md-diagram-panel > svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] svg, [lang="flow"] svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] .node text {
+        font-size: 1rem;
+    }
+
+    table tr th {
+        border-bottom: 0px;
+    }
+
+    video {
+        max-width: 100%;
+        display: block;
+        margin: 0px auto;
+    }
+
+    iframe {
+        max-width: 100%;
+        width: 100%;
+        border: none;
+    }
+
+    .highlight td, .highlight tr {
+        border: 0px;
+    }
+
+
+    .CodeMirror {
+        height: auto;
+    }
+
+    .CodeMirror.cm-s-inner {
+        background: inherit;
+    }
+
+    .CodeMirror-scroll {
+        overflow-y: hidden;
+        overflow-x: auto;
+        z-index: 3;
+    }
+
+    .CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler {
+        background-color: rgb(255, 255, 255);
+    }
+
+    .CodeMirror-gutters {
+        border-right: 1px solid rgb(221, 221, 221);
+        background: inherit;
+        white-space: nowrap;
+    }
+
+    .CodeMirror-linenumber {
+        padding: 0px 3px 0px 5px;
+        text-align: right;
+        color: rgb(153, 153, 153);
+    }
+
+    .cm-s-inner .cm-keyword {
+        color: rgb(119, 0, 136);
+    }
+
+    .cm-s-inner .cm-atom, .cm-s-inner.cm-atom {
+        color: rgb(34, 17, 153);
+    }
+
+    .cm-s-inner .cm-number {
+        color: rgb(17, 102, 68);
+    }
+
+    .cm-s-inner .cm-def {
+        color: rgb(0, 0, 255);
+    }
+
+    .cm-s-inner .cm-variable {
+        color: rgb(0, 0, 0);
+    }
+
+    .cm-s-inner .cm-variable-2 {
+        color: rgb(0, 85, 170);
+    }
+
+    .cm-s-inner .cm-variable-3 {
+        color: rgb(0, 136, 85);
+    }
+
+    .cm-s-inner .cm-string {
+        color: rgb(170, 17, 17);
+    }
+
+    .cm-s-inner .cm-property {
+        color: rgb(0, 0, 0);
+    }
+
+    .cm-s-inner .cm-operator {
+        color: rgb(152, 26, 26);
+    }
+
+    .cm-s-inner .cm-comment, .cm-s-inner.cm-comment {
+        color: rgb(170, 85, 0);
+    }
+
+    .cm-s-inner .cm-string-2 {
+        color: rgb(255, 85, 0);
+    }
+
+    .cm-s-inner .cm-meta {
+        color: rgb(85, 85, 85);
+    }
+
+    .cm-s-inner .cm-qualifier {
+        color: rgb(85, 85, 85);
+    }
+
+    .cm-s-inner .cm-builtin {
+        color: rgb(51, 0, 170);
+    }
+
+    .cm-s-inner .cm-bracket {
+        color: rgb(153, 153, 119);
+    }
+
+    .cm-s-inner .cm-tag {
+        color: rgb(17, 119, 0);
+    }
+
+    .cm-s-inner .cm-attribute {
+        color: rgb(0, 0, 204);
+    }
+
+    .cm-s-inner .cm-header, .cm-s-inner.cm-header {
+        color: rgb(0, 0, 255);
+    }
+
+    .cm-s-inner .cm-quote, .cm-s-inner.cm-quote {
+        color: rgb(0, 153, 0);
+    }
+
+    .cm-s-inner .cm-hr, .cm-s-inner.cm-hr {
+        color: rgb(153, 153, 153);
+    }
+
+    .cm-s-inner .cm-link, .cm-s-inner.cm-link {
+        color: rgb(0, 0, 204);
+    }
+
+    .cm-negative {
+        color: rgb(221, 68, 68);
+    }
+
+    .cm-positive {
+        color: rgb(34, 153, 34);
+    }
+
+    .cm-header, .cm-strong {
+        font-weight: 700;
+    }
+
+    .cm-del {
+        text-decoration: line-through;
+    }
+
+    .cm-em {
+        font-style: italic;
+    }
+
+    .cm-link {
+        text-decoration: underline;
+    }
+
+    .cm-error {
+        color: red;
+    }
+
+    .cm-invalidchar {
+        color: red;
+    }
+
+    .cm-constant {
+        color: rgb(38, 139, 210);
+    }
+
+    .cm-defined {
+        color: rgb(181, 137, 0);
+    }
+
+    div.CodeMirror span.CodeMirror-matchingbracket {
+        color: rgb(0, 255, 0);
+    }
+
+    div.CodeMirror span.CodeMirror-nonmatchingbracket {
+        color: rgb(255, 34, 34);
+    }
+
+    .cm-s-inner .CodeMirror-activeline-background {
+        background: inherit;
+    }
+
+    .CodeMirror {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .CodeMirror-scroll {
+        height: 100%;
+        outline: 0px;
+        position: relative;
+        box-sizing: content-box;
+        background: inherit;
+    }
+
+    .CodeMirror-sizer {
+        position: relative;
+    }
+
+    .CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar {
+        position: absolute;
+        z-index: 6;
+        display: none;
+    }
+
+    .CodeMirror-vscrollbar {
+        right: 0px;
+        top: 0px;
+        overflow: hidden;
+    }
+
+    .CodeMirror-hscrollbar {
+        bottom: 0px;
+        left: 0px;
+        overflow: hidden;
+    }
+
+    .CodeMirror-scrollbar-filler {
+        right: 0px;
+        bottom: 0px;
+    }
+
+    .CodeMirror-gutter-filler {
+        left: 0px;
+        bottom: 0px;
+    }
+
+    .CodeMirror-gutters {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        padding-bottom: 30px;
+        z-index: 3;
+    }
+
+    .CodeMirror-gutter {
+        white-space: normal;
+        height: 100%;
+        box-sizing: content-box;
+        padding-bottom: 30px;
+        margin-bottom: -32px;
+        display: inline-block;
+    }
+
+    .CodeMirror-gutter-wrapper {
+        position: absolute;
+        z-index: 4;
+        background: 0px 0px !important;
+        border: none !important;
+    }
+
+    .CodeMirror-gutter-background {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        z-index: 4;
+    }
+
+    .CodeMirror-gutter-elt {
+        position: absolute;
+        cursor: default;
+        z-index: 4;
+    }
+
+    .CodeMirror-lines {
+        cursor: text;
+    }
+
+    .CodeMirror pre {
+        border-radius: 0px;
+        border-width: 0px;
+        background: 0px 0px;
+        font-family: inherit;
+        font-size: inherit;
+        margin: 0px;
+        white-space: pre;
+        word-wrap: normal;
+        color: inherit;
+        z-index: 2;
+        position: relative;
+        overflow: visible;
+    }
+
+    .CodeMirror-wrap pre {
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        word-break: normal;
+    }
+
+    .CodeMirror-code pre {
+        border-right: 30px solid transparent;
+        width: fit-content;
+    }
+
+    .CodeMirror-wrap .CodeMirror-code pre {
+        border-right: none;
+        width: auto;
+    }
+
+    .CodeMirror-linebackground {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        z-index: 0;
+    }
+
+    .CodeMirror-linewidget {
+        position: relative;
+        z-index: 2;
+        overflow: auto;
+    }
+
+    .CodeMirror-wrap .CodeMirror-scroll {
+        overflow-x: hidden;
+    }
+
+    .CodeMirror-measure {
+        position: absolute;
+        width: 100%;
+        height: 0px;
+        overflow: hidden;
+        visibility: hidden;
+    }
+
+    .CodeMirror-measure pre {
+        position: static;
+    }
+
+    .CodeMirror div.CodeMirror-cursor {
+        position: absolute;
+        visibility: hidden;
+        border-right: none;
+        width: 0px;
+    }
+
+    .CodeMirror div.CodeMirror-cursor {
+        visibility: hidden;
+    }
+
+    .CodeMirror-focused div.CodeMirror-cursor {
+        visibility: inherit;
+    }
+
+    .cm-searching {
+        background: rgba(255, 255, 0, 0.4);
+    }
+
+    @media print {
+        .CodeMirror div.CodeMirror-cursor {
+            visibility: hidden;
+        }
+    }
+
+
+    :root {
+        --active-file-bg-color: rgba(32, 43, 51, 0.63);
+        --active-file-text-color: white;
+        --bg-color: #f3f2ee;
+        --text-color: #1f0909;
+        --control-text-color: #444;
+        --rawblock-edit-panel-bd: #e5e5e5;
+        --select-text-bg-color: rgba(32, 43, 51, 0.63);
+        --select-text-font-color: white;
+    }
+
+    pre {
+        --select-text-bg-color: #36284e;
+        --select-text-font-color: #fff;
+    }
+
+    html {
+        font-size: 16px;
+    }
+
+    html, body {
+        background-color: rgb(243, 242, 238);
+        font-family: "PT Serif", "Times New Roman", Times, serif;
+        color: rgb(31, 9, 9);
+        line-height: 1.5em;
+    }
+
+    #write {
+        max-width: 40em;
+    }
+
+    ol li {
+        list-style-type: decimal;
+        list-style-position: outside;
+    }
+
+    ul li {
+        list-style-type: disc;
+        list-style-position: outside;
+    }
+
+    ol, ul {
+        list-style: none;
+    }
+
+    blockquote, q {
+        quotes: none;
+    }
+
+    blockquote::before, blockquote::after, q::before, q::after {
+        content: none;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 1.875em;
+        line-height: 1.6em;
+        margin-top: 2em;
+    }
+
+    h2, h3 {
+        font-size: 1.3125em;
+        line-height: 1.15;
+        margin-top: 2.28571em;
+        margin-bottom: 1.15em;
+    }
+
+    h3 {
+        font-weight: normal;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        margin-top: 2.67em;
+    }
+
+    h5, h6 {
+        font-size: 1em;
+    }
+
+    h1 {
+        border-bottom: 1px solid;
+        margin-bottom: 1.875em;
+        padding-bottom: 0.8125em;
+    }
+
+    a {
+        text-decoration: none;
+        color: rgb(6, 85, 136);
+    }
+
+    a:hover, a:active {
+        text-decoration: underline;
+    }
+
+    p, blockquote, .md-fences {
+        margin-bottom: 1.5em;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 1.5em;
+    }
+
+    blockquote {
+        font-style: italic;
+        border-left: 5px solid;
+        margin-left: 2em;
+        padding-left: 1em;
+    }
+
+    ul, ol {
+        margin: 0px 0px 1.5em 1.5em;
+    }
+
+    .md-meta, .md-before, .md-after {
+        color: rgb(153, 153, 153);
+    }
+
+    table {
+        margin-bottom: 1.5em;
+        font-size: 1em;
+    }
+
+    thead th, tfoot th {
+        padding: 0.25em 0.25em 0.25em 0.4em;
+        text-transform: uppercase;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    td {
+        vertical-align: top;
+        padding: 0.25em 0.25em 0.25em 0.4em;
+    }
+
+    code, .md-fences {
+        background-color: rgb(218, 218, 218);
+    }
+
+    code {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .md-fences {
+        margin-left: 2em;
+        margin-bottom: 3em;
+        padding-left: 1ch;
+        padding-right: 1ch;
+    }
+
+    pre, code, tt {
+        font-size: 0.875em;
+        line-height: 1.71429em;
+    }
+
+    h1 {
+        line-height: 1.3em;
+        font-weight: normal;
+        margin-bottom: 0.5em;
+    }
+
+    p + ul, p + ol {
+        margin-top: 0.5em;
+    }
+
+    h3 + ul, h4 + ul, h5 + ul, h6 + ul, h3 + ol, h4 + ol, h5 + ol, h6 + ol {
+        margin-top: 0.5em;
+    }
+
+    li > ul, li > ol {
+        margin-top: inherit;
+        margin-bottom: 0px;
+    }
+
+    li ol > li {
+        list-style-type: lower-alpha;
+    }
+
+    li li ol > li {
+        list-style-type: lower-roman;
+    }
+
+    h2, h3 {
+        margin-bottom: 0.75em;
+    }
+
+    hr {
+        border-top: none;
+        border-right: none;
+        border-bottom: 1px solid;
+        border-left: none;
+    }
+
+    h1 {
+        border-color: rgb(197, 197, 197);
+    }
+
+    blockquote {
+        border-color: rgb(186, 186, 186);
+        color: rgb(101, 101, 101);
+    }
+
+    blockquote ul, blockquote ol {
+        margin-left: 0px;
+    }
+
+    .ty-table-edit {
+        background-color: transparent;
+    }
+
+    thead {
+        background-color: rgb(218, 218, 218);
+    }
+
+    tr:nth-child(2n) {
+        background: rgb(232, 231, 231);
+    }
+
+    hr {
+        border-color: rgb(197, 197, 197);
+    }
+
+    .task-list {
+        padding-left: 1rem;
+    }
+
+    .md-task-list-item {
+        padding-left: 1.5rem;
+        list-style-type: none;
+    }
+
+    .md-task-list-item > input::before {
+        content: "√";
+        display: inline-block;
+        width: 1.25rem;
+        height: 1.6rem;
+        vertical-align: middle;
+        text-align: center;
+        color: rgb(221, 221, 221);
+        background-color: rgb(243, 242, 238);
+    }
+
+    .md-task-list-item > input:checked::before, .md-task-list-item > input[checked]::before {
+        color: inherit;
+    }
+
+    #write pre.md-meta-block {
+        min-height: 1.875rem;
+        color: rgb(85, 85, 85);
+        border: 0px;
+        background: transparent;
+        margin-left: 1em;
+        margin-top: 1em;
+    }
+
+    .md-image > .md-meta {
+        color: rgb(155, 81, 70);
+    }
+
+    .md-image > .md-meta {
+        font-family: Menlo, "Ubuntu Mono", Consolas, "Courier New", "Microsoft Yahei", "Hiragino Sans GB", "WenQuanYi Micro Hei", serif;
+    }
+
+    #write > h3.md-focus::before {
+        left: -1.5rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h4.md-focus::before {
+        left: -1.5rem;
+        top: 0.25rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h5.md-focus::before {
+        left: -1.5rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h6.md-focus::before {
+        left: -1.5rem;
+        top: 0.3125rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    .md-toc:focus .md-toc-content {
+        margin-top: 19px;
+    }
+
+    .md-toc-content:empty::before {
+        color: rgb(6, 85, 136);
+    }
+
+    .md-toc-item {
+        color: rgb(6, 85, 136);
+    }
+
+    #write div.md-toc-tooltip {
+        background-color: rgb(243, 242, 238);
+    }
+
+    #typora-sidebar {
+        background-color: rgb(243, 242, 238);
+        box-shadow: rgba(0, 0, 0, 0.376) 0px 6px 12px;
+    }
+
+    .pin-outline #typora-sidebar {
+        background: inherit;
+        box-shadow: none;
+        border-right: 1px dashed;
+    }
+
+    .pin-outline #typora-sidebar:hover .outline-title-wrapper {
+        border-left: 1px dashed;
+    }
+
+    .outline-item:hover {
+        background-color: rgb(218, 218, 218);
+        border-left: 28px solid rgb(218, 218, 218);
+        border-right: 18px solid rgb(218, 218, 218);
+    }
+
+    .typora-node .outline-item:hover {
+        border-right: 28px solid rgb(218, 218, 218);
+    }
+
+    .outline-expander::before {
+        content: "";
+        font-family: FontAwesome;
+        font-size: 14px;
+        top: 1px;
+    }
+
+    .outline-expander:hover::before, .outline-item-open > .outline-item > .outline-expander::before {
+        content: "";
+    }
+
+    .modal-content {
+        background-color: rgb(243, 242, 238);
+    }
+
+    .auto-suggest-container ul li {
+        list-style-type: none;
+    }
+
+    .megamenu-menu, #top-titlebar, #top-titlebar *, .megamenu-content {
+        background: rgb(243, 242, 238);
+        color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-header {
+        border-bottom: 1px dashed rgb(32, 43, 51);
+    }
+
+    .megamenu-menu {
+        box-shadow: none;
+        border-right: 1px dashed;
+    }
+
+    header, .context-menu, .megamenu-content, footer {
+        font-family: "PT Serif", "Times New Roman", Times, serif;
+        color: rgb(31, 9, 9);
+    }
+
+    #megamenu-back-btn {
+        color: rgb(31, 9, 9);
+        border-color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-header #megamenu-menu-header-title::before {
+        color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-list li a:hover, .megamenu-menu-list li a.active {
+        color: inherit;
+        background-color: rgb(232, 231, 223);
+    }
+
+    .long-btn:hover {
+        background-color: rgb(232, 231, 223);
+    }
+
+    #recent-file-panel tbody tr:nth-child(2n-1) {
+        background-color: transparent !important;
+    }
+
+    .megamenu-menu-panel tbody tr:hover td:nth-child(2) {
+        color: inherit;
+    }
+
+    .megamenu-menu-panel .btn {
+        background-color: rgb(210, 209, 209);
+    }
+
+    .btn-default {
+        background-color: transparent;
+    }
+
+    .typora-sourceview-on #toggle-sourceview-btn, .ty-show-word-count #footer-word-count {
+        background: rgb(199, 197, 197);
+    }
+
+    #typora-quick-open {
+        background-color: inherit;
+    }
+
+    .md-diagram-panel {
+        margin-top: 8px;
+    }
+
+    .file-list-item-file-name {
+        font-weight: initial;
+    }
+
+    .file-list-item-summary {
+        opacity: 1;
+    }
+
+    .file-list-item {
+        color: rgb(119, 119, 119);
+    }
+
+    .file-list-item.active {
+        background-color: inherit;
+        color: black;
+    }
+
+    .ty-side-sort-btn.active {
+        background-color: inherit;
+    }
+
+    .file-list-item.active .file-list-item-file-name {
+        font-weight: bold;
+    }
+
+    .file-list-item {
+        opacity: 1 !important;
+    }
+
+    .file-library-node.active > .file-node-background {
+        background-color: var(--active-file-bg-color);
+    }
+
+    .file-tree-node.active > .file-node-content {
+        color: var(--active-file-text-color);
+    }
+
+    .md-task-list-item > input {
+        margin-left: -1.6em;
+        margin-top: calc(1rem - 12px);
+    }
+
+    input {
+        border: 1px solid rgb(170, 170, 170);
+    }
+
+    .megamenu-menu-header #megamenu-menu-header-title, .megamenu-menu-header:hover, .megamenu-menu-header:focus {
+        color: inherit;
+    }
+
+    .dropdown-menu .divider {
+        border-color: rgb(229, 229, 229);
+    }
+
+    .os-windows-7 strong, .os-windows-7 strong {
+        font-weight: 760;
+    }
+
+
+    .typora-export li, .typora-export p, .typora-export, .footnote-line {
+        white-space: normal;
+    }
+    </style>
+</head>
+<body class='typora-export os-windows'>
+<div id='write' class='is-node'><h1><a name='header-n0' class='md-header-anchor '></a>第7章 面向对象基础（下）</h1>
+    <h2><a name='header-n2' class='md-header-anchor '></a>学习目标</h2>
+    <ul>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够声明抽象类</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够说出抽象类的特点</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够继承抽象类</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>掌握声明接口的格式</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>掌握实现接口的格式</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>说出接口中成员的特点</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>说出接口的其他特点</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>掌握static关键字的用法</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>说出内部类的几种形式</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够声明静态内部类和非静态成员内部类</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够看懂和声明匿名内部类</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够使用系统预定义的三个基本注解</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够编写文档注释</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够使用JUnit框架的@Test注解</p></li>
+    </ul>
+    <h1><a name='header-n32' class='md-header-anchor '></a>第七章 面向对象基础--下（续）</h1>
+    <h2><a name='header-n33' class='md-header-anchor '></a>7.1 抽象类</h2>
+    <h3><a name='header-n34' class='md-header-anchor '></a>7.1.1 引入</h3>
+    <p>抽象：即不具体、或无法具体</p>
+    <p>
+        例如：当我们声明一个几何图形类：圆、矩形、三角形类等，发现这些类都有共同特征：求面积、求周长、获取图形详细信息。那么这些共同特征应该抽取到一个公共父类中。但是这些方法在父类中又<strong>无法给出具体的实现</strong>，而是应该交给子类各自具体实现。那么父类在声明这些方法时，<strong>就只有方法签名，没有方法体</strong>，我们把没有方法体的方法称为<strong>抽象方法</strong>。Java语法规定，包含抽象方法的类必须是<strong>抽象类</strong>。
+    </p>
+    <p><em>动物 - 猫 - 狗案例：动物类方法无需具体实现</em></p>
+    <h3><a name='header-n38' class='md-header-anchor '></a>7.1.2 语法格式</h3>
+    <ul>
+        <li><strong>抽象方法</strong> ： 没有方法体的方法。</li>
+        <li><strong>抽象类</strong>：被abstract所修饰的类。</li>
+    </ul>
+    <p>抽象类的语法格式</p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">【权限修饰符】</span> <span class="cm-keyword">abstract</span> <span
+            class="cm-keyword">class</span> <span class="cm-def">类名</span>{</span></pre></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                style="padding-right: 0.1px;">}</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">【权限修饰符】</span> <span class="cm-keyword">abstract</span> <span
+            class="cm-keyword">class</span> <span class="cm-def">类名</span> <span class="cm-keyword">extends</span> <span
+            class="cm-variable">父类</span>{</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;</span></pre><pre class=" CodeMirror-line "
+                                                                                              role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 148px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 148px;"></div></div></div></pre>
+    <p>抽象方法的语法格式</p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">【其他修饰符】</span> <span class="cm-keyword">abstract</span> <span
+            class="cm-variable">返回值类型</span> &nbsp;<span class="cm-def">方法名</span>(<span
+            class="cm-variable">【形参列表】</span>);</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 25px;"></div></div></div></pre>
+    <blockquote><p>注意：抽象方法没有方法体</p></blockquote>
+    <p>代码举例：</p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">public</span> <span class="cm-keyword">abstract</span> <span
+            class="cm-keyword">class</span> <span class="cm-def">Animal</span> {</span></pre></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-keyword">public</span> <span class="cm-keyword">abstract</span> <span
+            class="cm-variable-3">void</span> <span class="cm-variable">run</span>()<span
+            class="cm-variable">；</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 74px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 74px;"></div></div></div></pre>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span class="cm-def">Cat</span> <span
+            class="cm-keyword">extends</span> <span class="cm-variable">Animal</span> {</span></pre></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-keyword">public</span> <span class="cm-variable-3">void</span> <span
+            class="cm-variable">run</span> (){</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;  <span class="cm-tab" role="presentation"
+                                                                                    cm-text="	">  </span><span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">println</span>(<span class="cm-string">"小猫在墙头走~~~"</span>)<span
+            class="cm-variable">；</span> <span class="cm-tab" role="presentation"
+                                               cm-text="	">   </span> </span></pre><pre class=" CodeMirror-line "
+                                                                                           role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre><pre class=" CodeMirror-line "
+                                                                                          role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 123px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 123px;"></div></div></div></pre>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span class="cm-def">CatTest</span> {</span></pre></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> <span
+            class="cm-tab" role="presentation" cm-text="	">   </span> <span class="cm-keyword">public</span> <span
+            class="cm-keyword">static</span> <span class="cm-variable-3">void</span> <span
+            class="cm-variable">main</span>(<span class="cm-variable-3">String</span>[] <span
+            class="cm-variable">args</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">// 创建子类对象</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">Cat</span> <span class="cm-variable">c</span> <span class="cm-operator">=</span> <span
+            class="cm-keyword">new</span> <span class="cm-variable">Cat</span>(); </span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; </span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-comment">// 调用run方法</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">c</span>.<span class="cm-variable">run</span>();</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                style="padding-right: 0.1px;">  <span class="cm-tab"
+                                                                                                      role="presentation"
+                                                                                                      cm-text="	">  </span>}</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                style="padding-right: 0.1px;">}</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">输出结果：</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">小猫在墙头走~~~</span></span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 271px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 271px;"></div></div></div></pre>
+    <p>此时的方法重写，是子类对父类抽象方法的完成实现，我们将这种方法重写的操作，也叫做<strong>实现方法</strong>。</p>
+    <h3><a name='header-n55' class='md-header-anchor '></a>7.1.3 抽象类特点</h3>
+    <p>关于抽象类的使用，以下为语法上要注意的细节，虽然条目较多，但若理解了抽象的本质，无需死记硬背。</p>
+    <ol start=''>
+        <li><p>抽象类<strong>不能创建对象</strong>，如果创建，编译无法通过而报错。只能创建其非抽象子类的对象。</p>
+            <blockquote><p>理解：假设创建了抽象类的对象，调用抽象的方法，而抽象方法没有具体的方法体，没有意义。</p></blockquote>
+        </li>
+        <li><p>抽象类中，也有构造方法，是供子类创建对象时，初始化父类成员变量使用的。</p>
+            <blockquote><p>理解：子类的构造方法中，有默认的super()或手动的super(实参列表)，需要访问父类构造方法。</p></blockquote>
+        </li>
+        <li><p>抽象类中，不一定包含抽象方法，但是有抽象方法的类必定是抽象类。</p>
+            <blockquote><p>理解：未包含抽象方法的抽象类，目的就是不想让调用者创建该类对象，通常用于某些特殊的类结构设计。</p></blockquote>
+        </li>
+        <li><p>抽象类的子类，必须重写抽象父类中<strong>所有的</strong>抽象方法，否则，编译无法通过而报错。除非该子类也是抽象类。 </p>
+            <blockquote><p>理解：假设不重写所有抽象方法，则类中可能包含抽象方法。那么创建对象后，调用抽象的方法，没有意义。</p></blockquote>
+        </li>
+    </ol>
+    <h3><a name='header-n74' class='md-header-anchor '></a>7.1.4 练习</h3>
+    <ol start=''>
+        <li><h4><a name='header-n77' class='md-header-anchor '></a>练习1</h4>
+            <p>定义一个几何图形父类Graphic。所有几何图形都应该具备一个计算面积的方法。但是不同的几何图形计算面积的方式完全不同。</p>
+            <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"
+                 style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                    style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                    autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                    style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                    class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                    class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                      tabindex="-1"><div
+                    class="CodeMirror-sizer"
+                    style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                    style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                    role="presentation" style="position: relative; outline: none;"><div
+                    class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div
+                    style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"
+                                                                       style=""><div class="CodeMirror-activeline"
+                                                                                     style="position: relative;"><div
+                    class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                    class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                    style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">abstract</span> <span
+                    class="cm-keyword">class</span> <span class="cm-def">Graphic</span>{</span></pre></div><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+                    class="cm-keyword">abstract</span> <span class="cm-variable-3">double</span> <span
+                    class="cm-variable">getArea</span>();</span></pre><pre class=" CodeMirror-line "
+                                                                           role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;">}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-keyword">class</span> <span class="cm-def">Circle</span> <span
+                    class="cm-keyword">extends</span> <span class="cm-variable">Graphic</span>{</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">private</span> <span
+                    class="cm-variable-3">double</span> <span class="cm-variable">radius</span>;</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-keyword">public</span> <span class="cm-variable">Circle</span>(<span
+                    class="cm-variable-3">double</span> <span class="cm-variable">radius</span>) {</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-keyword">super</span>();</span></pre><pre class=" CodeMirror-line "
+                                                                        role="presentation"><span role="presentation"
+                                                                                                  style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-keyword">this</span>.<span class="cm-variable">radius</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">radius</span>;</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-keyword">public</span> <span class="cm-variable">Circle</span>() {</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-keyword">super</span>();</span></pre><pre class=" CodeMirror-line "
+                                                                        role="presentation"><span role="presentation"
+                                                                                                  style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-keyword">public</span> <span class="cm-variable-3">double</span> <span
+                    class="cm-variable">getRadius</span>() {</span></pre><pre class=" CodeMirror-line "
+                                                                              role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">return</span> <span
+                    class="cm-variable">radius</span>;</span></pre><pre class=" CodeMirror-line "
+                                                                        role="presentation"><span role="presentation"
+                                                                                                  style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-keyword">public</span> <span class="cm-variable-3">void</span> <span class="cm-variable">setRadius</span>(<span
+                    class="cm-variable-3">double</span> <span class="cm-variable">radius</span>) {</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-keyword">this</span>.<span class="cm-variable">radius</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">radius</span>;</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-meta">@Override</span></span></pre><pre class=" CodeMirror-line "
+                                                                      role="presentation"><span role="presentation"
+                                                                                                style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+                    class="cm-variable-3">double</span> <span class="cm-variable">getArea</span>() {</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-keyword">return</span> <span class="cm-variable">Math</span>.<span
+                    class="cm-variable">PI</span> <span class="cm-operator">*</span> <span
+                    class="cm-variable">radius</span> <span class="cm-operator">*</span> <span class="cm-variable">radius</span>;</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;">}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-keyword">class</span> <span class="cm-def">Rectangle</span> <span class="cm-keyword">extends</span> <span
+                    class="cm-variable">Graphic</span>{</span></pre><pre class=" CodeMirror-line "
+                                                                         role="presentation"><span role="presentation"
+                                                                                                   style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">private</span> <span
+                    class="cm-variable-3">double</span> <span class="cm-variable">length</span>;</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">private</span> <span
+                    class="cm-variable-3">double</span> <span class="cm-variable">width</span>;</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+                    class="cm-variable">Rectangle</span>(<span class="cm-variable-3">double</span> <span
+                    class="cm-variable">length</span>, <span class="cm-variable-3">double</span> <span
+                    class="cm-variable">width</span>) {</span></pre><pre class=" CodeMirror-line "
+                                                                         role="presentation"><span role="presentation"
+                                                                                                   style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-keyword">super</span>();</span></pre><pre class=" CodeMirror-line "
+                                                                        role="presentation"><span role="presentation"
+                                                                                                  style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-keyword">this</span>.<span class="cm-variable">length</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">length</span>;</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-keyword">this</span>.<span class="cm-variable">width</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">width</span>;</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+                    class="cm-variable">Rectangle</span>() {</span></pre><pre class=" CodeMirror-line "
+                                                                              role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">super</span>();</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+                    class="cm-variable-3">double</span> <span class="cm-variable">getLength</span>() {</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-keyword">return</span> <span class="cm-variable">length</span>;</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+                    class="cm-variable-3">void</span> <span class="cm-variable">setLength</span>(<span
+                    class="cm-variable-3">double</span> <span class="cm-variable">length</span>) {</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-keyword">this</span>.<span class="cm-variable">length</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">length</span>;</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+                    class="cm-variable-3">double</span> <span class="cm-variable">getWidth</span>() {</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-keyword">return</span> <span class="cm-variable">width</span>;</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+                    class="cm-variable-3">void</span> <span class="cm-variable">setWidth</span>(<span
+                    class="cm-variable-3">double</span> <span class="cm-variable">width</span>) {</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-keyword">this</span>.<span class="cm-variable">width</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">width</span>;</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-meta">@Override</span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+                    class="cm-variable-3">double</span> <span class="cm-variable">getArea</span>() {</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-keyword">return</span> <span class="cm-variable">length</span> <span
+                    class="cm-operator">*</span> <span class="cm-variable">width</span>;</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+                    style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 1406px;"></div><div
+                    class="CodeMirror-gutters" style="display: none; height: 1406px;"></div></div></div></pre>
+        </li>
+        <li><h4><a name='header-n81' class='md-header-anchor '></a>练习2</h4>
+            <p>1、声明抽象父类：Person，包含抽象方法：
+                public abstract void walk();
+                public abstract void eat();</p>
+            <p>2、声明子类Man，继承Person
+                重写walk()：大步流星走路
+                重写eat()：狼吞虎咽吃饭
+                新增方法：public void smoke()实现为吞云吐雾</p>
+            <p>3、声明子类Woman，继承Person
+                重写walk()：婀娜多姿走路
+                重写eat()：细嚼慢咽吃饭
+                新增方法：public void buy()实现为买买买...</p>
+            <p>4、在测试类中创建子类对象，调用方法测试</p>
+            <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+                    class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                    style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                    autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                    style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                    class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                    class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                      tabindex="-1"><div
+                    class="CodeMirror-sizer"
+                    style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                    style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                    role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+                    class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+                    class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                              style="position: relative;"><div
+                    class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                    class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                    style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span
+                    class="cm-keyword">abstract</span> <span class="cm-keyword">class</span> <span
+                    class="cm-def">Person</span> {</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-keyword">public</span> <span class="cm-keyword">abstract</span> <span
+                    class="cm-variable-3">void</span> <span class="cm-variable">walk</span>();</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+                    class="cm-keyword">abstract</span> <span class="cm-variable-3">void</span> <span
+                    class="cm-variable">eat</span>();</span></pre><pre class=" CodeMirror-line "
+                                                                       role="presentation"><span role="presentation"
+                                                                                                 style="padding-right: 0.1px;">}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    cm-text="">​</span></span></pre></div></div></div></div></div><div
+                    style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 123px;"></div><div
+                    class="CodeMirror-gutters" style="display: none; height: 123px;"></div></div></div></pre>
+            <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"
+                 style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                    style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                    autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                    style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                    class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                    class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                      tabindex="-1"><div
+                    class="CodeMirror-sizer"
+                    style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                    style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                    role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+                    class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+                    class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                              style="position: relative;"><div
+                    class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                    class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                    style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span
+                    class="cm-keyword">class</span> <span class="cm-def">Man</span> <span
+                    class="cm-keyword">extends</span> <span class="cm-variable">Person</span> {</span></pre></div><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-meta">@Override</span></span></pre><pre class=" CodeMirror-line "
+                                                                      role="presentation"><span role="presentation"
+                                                                                                style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+                    class="cm-variable-3">void</span> <span class="cm-variable">walk</span>() {</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-string">"大步流星走路"</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                         role="presentation"><span role="presentation"
+                                                                                                   style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-meta">@Override</span></span></pre><pre class=" CodeMirror-line "
+                                                                      role="presentation"><span role="presentation"
+                                                                                                style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+                    class="cm-variable-3">void</span> <span class="cm-variable">eat</span>() {</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-string">"狼吞虎咽吃饭"</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                         role="presentation"><span role="presentation"
+                                                                                                   style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-keyword">public</span> <span class="cm-variable-3">void</span> <span class="cm-variable">smoke</span>(){</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-string">"吞云吐雾"</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                       role="presentation"><span role="presentation"
+                                                                                                 style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+                    style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 395px;"></div><div
+                    class="CodeMirror-gutters" style="display: none; height: 395px;"></div></div></div></pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n88"
+                 mdtype="fences" style="break-inside: unset;">public class Woman extends Person {
+
+	@Override
+	public void walk() {
+		System.out.println("婀娜多姿走路");
+	}
+
+	@Override
+	public void eat() {
+		System.out.println("细嚼慢咽吃饭");
+	}
+	
+	public void buy(){
+		System.out.println("买买买...");
+	}
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n89"
+                 mdtype="fences" style="break-inside: unset;">public class TestExer1 {
+
+	public static void main(String[] args) {
+		Man m = new Man();
+		m.eat();
+		m.walk();
+		m.smoke();
+		
+		System.out.println("-------------------------");
+		
+		Woman w = new Woman();
+		w.eat();
+		w.walk();
+		w.buy();
+	}
+
+}
+</pre>
+        </li>
+    </ol>
+    <p>&nbsp;</p>
+    <h2><a name='header-n92' class='md-header-anchor '></a>7.2 接口（interface）</h2>
+    <h3><a name='header-n93' class='md-header-anchor '></a>7.2.1 概述</h3>
+    <ul>
+        <li><p>一方面 ，有时必须从几个类中派生出一个子类，继承它们所有的属性和方法。但是 ， Java不支持多重继承。有了接口 ，就可以得到多重继承的效果 。</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n97"
+                 mdtype="fences">public abstract class Animal{ public abstract void eat();}
+public abstract class Jumpable{public abstract void jump();}
+//定义一个Cat类如何能获取这两个类中的eat和jump功能，java类因为单继承，无法做到
+</pre>
+        </li>
+        <li><p>另一方面，有时必须从几个类中抽取出一些共同的行为特征，而它们之间又没有 is -a的关系，仅是具有相同行为特征而已 。例如 ：鼠标、键盘、打印机、 扫描仪、摄像头、充电器、移动硬盘等都支持USB连接 。</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n100" mdtype="fences">public class Mouse{ publicvoid usb(){}}
+public class Keyboard{ publicvoid usb(){}}
+public class Printer{ publicvoid usb(){}}
+public class Scanner{ publicvoid usb(){}}
+//如何提取共同特征？把usb功能提取到一个叫Usb的父类中？继承描述的是is-a关系，显然这些设备类并not is a Usb,这样提取不合适。
+</pre>
+        </li>
+        <li><p>接口的本质是契约，标准规范 。 </p>
+            <p>生活中大家每天都在用USB接口，那么USB接口与我们今天要学习的接口有什么相同点呢？</p>
+            <p><span>	</span>USB是通用串行总线的英文缩写，是Intel公司开发的总线架构，使得在计算机上添加串行设备（鼠标、键盘、打印机、扫描仪、摄像头、充电器、MP3机、手机、数码相机、移动硬盘等）非常容易。只须将设备插入计算机的USB端口中，系统会自动识别和配置。
+                有了USB，我们电脑需要提供的各种插槽的口越来越少，而能支持的其他设备的连接却越来越多。</p>
+            <p><span>	</span>那么我们平时看到的电脑上的USB插口、以及其他设备上的USB插口是什么呢？</p>
+            <p><span>	</span>其实，不管是电脑上的USB插口，还是其他设备上的USB插口都只是遵循了USB规范的一种具体设备而已。</p>
+            <p><span>	</span>根据时代发展，USB接口标准经历了一代USB、第二代USB 2.0和第三代USB 3.0 。</p>
+            <p><span>	</span>USB规格第一次是于1995年，由Intel、IBM、Compaq、Microsoft、NEC、Digital、North Telecom等七家公司组成的USBIF(USB
+                Implement Forum)共同提出，USBIF于1996年1月正式提出USB1.0规格，频宽为1.5Mbps。</p>
+            <p> USB2.0技术规范是有由Compaq、Hewlett
+                Packard、Intel、Lucent、Microsoft、NEC、Philips共同制定、发布的，规范把外设数据传输速度提高到了480Mbps，被称为USB
+                2.0的高速(High-speed)版本.</p>
+            <p> USB 3.0是最新的USB规范，该规范由英特尔等公司发起,USB3.0的最大传输带宽高达5.0Gbps(640MB/s),USB3.0
+                引入全双工数据传输。5根线路中2根用来发送数据，另2根用来接收数据，还有1根是地线。也就是说，USB 3.0可以同步全速地进行读写操作。</p>
+            <figure>
+                <table>
+                    <thead>
+                    <tr>
+                        <th><strong>USB版本</strong></th>
+                        <th><strong>最大传输速率</strong></th>
+                        <th><strong>速率称号</strong></th>
+                        <th><strong>最大输出电流</strong></th>
+                        <th><strong>推出时间</strong></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>USB1.0</td>
+                        <td>1.5Mbps(192KB/s)</td>
+                        <td>低速(Low-Speed)</td>
+                        <td>5V/500mA</td>
+                        <td>1996年1月</td>
+                    </tr>
+                    <tr>
+                        <td>USB1.1</td>
+                        <td>12Mbps(1.5MB/s)</td>
+                        <td>全速(Full-Speed)</td>
+                        <td>5V/500mA</td>
+                        <td>1998年9月</td>
+                    </tr>
+                    <tr>
+                        <td>USB2.0</td>
+                        <td>480Mbps(60MB/s)</td>
+                        <td>高速(High-Speed)</td>
+                        <td>5V/500mA</td>
+                        <td>2000年4月</td>
+                    </tr>
+                    <tr>
+                        <td>USB3.0</td>
+                        <td>5Gbps(500MB/s)</td>
+                        <td>超高速(Super-Speed)</td>
+                        <td>5V/900mA</td>
+                        <td>2008年11月</td>
+                    </tr>
+                    <tr>
+                        <td>USB 3.1</td>
+                        <td>10Gbps(1280MB/s)</td>
+                        <td>超高速+(Super-speed+)</td>
+                        <td>20V/5A</td>
+                        <td>2013年12月</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </figure>
+            <p> 下面是USB2.0和USB3.0标准下的各类接口示意图： </p>
+            <p><img src='imgs07/20180627200402517.png' alt='' referrerPolicy='no-referrer'/></p>
+            <p><span>		</span>电脑边上提供了USB插槽，这个插槽遵循了USB的规范，只要其他设备也是遵循USB规范的，那么就可以互联，并正常通信。至于这个电脑、以及其他设备是哪个厂家制造的，内部是如何实现的，我们都无需关心。
+            </p>
+            <p><span>		</span>这种设计是将规范和实现分离，这也正是Java接口的好处。Java的软件系统会有很多模块组成，那么各个模块之间也应该采用这种面向接口的低耦合设计，为系统提供更好的可扩展性和可维护性。
+            </p></li>
+    </ul>
+    <ul>
+        <li><p>接口定义的是一组规则，体现了现实世界中“如果你是/要...则必须能...”的思想。继承是一个&quot;是不是&quot;的is-a关系，而接口实现则是 &quot;能不能&quot;的has-a关系。</p>
+            <ul>
+                <li>例如：你能不能用USB进行连接，或是否具备USB通信功能，就看你是否遵循USB接口规范</li>
+                <li>例如：Java程序是否能够连接使用某种数据库产品，那么要看该数据库产品有没有实现Java设计的JDBC规范</li>
+            </ul>
+        </li>
+    </ul>
+    <p><img src='imgs07/1562216188519.png' alt='1562216188519' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs07/1562891521094.png' alt='1562891521094' referrerPolicy='no-referrer'/></p>
+    <h3><a name='header-n162' class='md-header-anchor '></a>7.2.2 定义格式与特点</h3>
+    <p>接口是静态常量与抽象方法定义的集合。跟定义类的方式类似，接口使用关键字interface定义。</p>
+    <ol start=''>
+        <li><h4><a name='header-n166' class='md-header-anchor '></a>接口的声明格式</h4>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n167" mdtype="fences">【修饰符】 interface 接口名{
+    
+}
+</pre>
+            <p>示例代码：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n169" mdtype="fences" style="break-inside: unset;">interface Usb3{
+    //静态常量
+	long MAX_SPEED = 500*1024*1024;//500MB/s
+    
+    //抽象方法
+	void read();
+    void write();
+    
+    //默认方法
+    public default void start(){
+        System.out.println("开始");
+    }
+    public default void stop(){
+        System.out.println("结束");
+    }
+    
+    //静态方法
+    public static void show(){
+        System.out.println("USB 3.0可以同步全速地进行读写操作");
+    }
+}
+</pre>
+        </li>
+        <li><h4><a name='header-n171' class='md-header-anchor '></a>接口的特点</h4>
+            <p>接口定义的是多个类共同的公共行为规范，这些行为规范是与外部交流的通道，这就意味着接口里通常是定义一组公共方法。</p>
+            <ul>
+                <li><p>接口没有构造方法，不能创建对象。</p></li>
+                <li><p>成员变量默认自带修饰符public static final，即为<strong>静态常量</strong>。</p></li>
+                <li><p>抽象方法默认自带修饰符public abstract（jdk8之前版本接口中方法只能是抽象方法）</p></li>
+                <li><p>接口是用来被实现的，其实现类必须重写它的所有抽象方法，除非实现类是个抽象类</p></li>
+                <li><p>接口可以多实现，一个类可以同时实现多个接口</p></li>
+                <li><p>接口可以继承接口，接口之间支持多继承</p></li>
+                <li><p>在JDK1.8时，接口中允许声明默认方法和静态方法：</p>
+                    <ul>
+                        <li><strong>公共的默认的方法</strong>：其中public 可以省略，建议保留，但是default不能省略</li>
+                        <li><strong>公共的静态的方法</strong>：其中public 可以省略，建议保留，但是static不能省略</li>
+                    </ul>
+                </li>
+                <li><p>在JDK1.9时，接口又增加了<strong>私有方法</strong></p></li>
+            </ul>
+        </li>
+        <li><h4><a name='header-n196' class='md-header-anchor '></a>面试题（了解）</h4>
+            <ul>
+                <li><p><strong>为什么接口中只能声明公共的静态的常量？</strong></p>
+                    <p>因为接口是标准规范，那么在规范中需要声明一些底线边界值，当实现者在实现这些规范时，不能去随意修改和触碰这些底线，否则就有“危险”。</p>
+                    <p>例如：USB1.0规范中规定最大传输速率是1.5Mbps，最大输出电流是5V/500mA</p>
+                    <p> USB3.0规范中规定最大传输速率是5Gbps(500MB/s)，最大输出电流是5V/900mA</p></li>
+                <li><p><strong>为什么JDK1.8之后要允许接口定义静态方法和默认方法呢？这样做违反了接口作为一个抽象标准定义的概念。</strong></p>
+                    <p><strong>关于静态方法</strong>：因为之前的标准类库设计中，有很多Collection/Colletions或者Path/Paths这样成对的接口和类，后面的类中都是静态方法，而这些静态方法都是为前面的接口服务的，那么这样设计一对API，不如把静态方法直接定义到接口中使用和维护更方便。接口中的静态方法不能被实现类覆盖，并且只能由接口名调用。
+                    </p>
+                    <p><strong>关于默认方法</strong>：（1）我们要在已有的老版接口中提供新方法时，如果添加抽象方法，原来使用这些接口的类就会有问题，需要修改实现新增的抽象方法，那么为了保持与旧版本代码的兼容性，只能允许在接口中定义默认方法实现。比如：Java8中对Collection、List、Comparator等接口提供了丰富的默认方法。（2）当我们接口的某个抽象方法，在很多实现类中的实现代码是一样的，此时将这个抽象方法设计为默认方法更为合适，那么实现类就可以选择重写，也可以选择不重写。
+                    </p></li>
+                <li><p><strong>我们说接口是规范，规范时需要公开让大家遵守的，为什么JDK1.9要允许接口定义私有方法呢？</strong></p>
+                    <p><strong>私有方法</strong>：因为有了默认方法和静态方法这样具有具体实现的方法，那么就可能出现多个方法由共同的代码可以抽取，而这些共同的代码抽取出来的方法又只希望在接口内部使用，所以就增加了私有方法。
+                    </p></li>
+            </ul>
+        </li>
+    </ol>
+    <h3><a name='header-n210' class='md-header-anchor '></a>7.4.3 实现接口</h3>
+    <p>接口是一套规范，是功能的拓展，使用接口，就需要类实现接口，理解为符合接口规范的类或额外拓展功能的类。</p>
+    <p>类与接口的关系为实现关系，即<strong>类实现接口</strong>，该类可以称为接口的实现类，也可以称为接口的子类。实现的动作类似继承，格式相仿，只是关键字不同，实现使用 <code>implements</code>关键字。
+    </p>
+    <ol start=''>
+        <li><h4><a name='header-n215' class='md-header-anchor '></a>实现接口语法格式</h4>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n216" mdtype="fences">【修饰符】 class 实现类  implements 接口{
+	// 重写接口中抽象方法【必须】，当然如果实现类是抽象类，那么可以不重写
+  	// 重写接口中默认方法【可选】
+}
+
+【修饰符】 class 实现类 extends 父类 implements 接口1{
+    // 重写接口中抽象方法【必须】，当然如果实现类是抽象类，那么可以不重写
+  	// 重写接口中默认方法【可选】
+}
+</pre>
+            <p>注意：</p>
+            <ol start=''>
+                <li><p>如果接口的实现类是非抽象类，那么必须重写接口中<strong>所有</strong>抽象方法。</p></li>
+                <li><p>默认方法可以选择保留，也可以重写。</p>
+                    <blockquote><p>重写时，default单词就不要再写了，它只用于在接口中表示默认方法，到类中就没有默认方法的概念了</p></blockquote>
+                </li>
+                <li><p>不能重写静态方法</p></li>
+            </ol>
+            <p>示例代码：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n228" mdtype="fences" style="break-inside: unset;">class MobileHDD implements Usb3{
+
+	//重写/实现接口的抽象方法，【必选】
+	public void read() {
+		System.out.println("读数据");
+	}
+    public void write(){
+        System.out.println("写数据");
+    }
+	
+	//重写接口的默认方法，【可选】
+	//重写默认方法时，default单词去掉
+	public void end(){
+        System.out.println("清理硬盘中的隐藏回收站中的东西，再结束");
+    }
+}
+</pre>
+        </li>
+        <li><h4><a name='header-n230' class='md-header-anchor '></a>如何调用对应的方法</h4>
+            <ul>
+                <li><p>对于接口的静态方法，直接使用“接口名.”进行调用即可</p>
+                    <ul>
+                        <li>也只能使用“接口名.&quot;进行调用，不能通过实现类的对象进行调用</li>
+                    </ul>
+                </li>
+                <li><p>对于接口的抽象方法、默认方法，只能通过实现类对象才可以调用</p>
+                    <ul>
+                        <li>接口不能直接创建对象，只能创建实现类的对象</li>
+                    </ul>
+                </li>
+            </ul>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n242" mdtype="fences" style="break-inside: unset;">public class TestInteface {
+	public static void main(String[] args) {
+		//创建实现类对象
+		MobileHDD b = new MobileHDD();
+		
+		//通过实现类对象调用重写的抽象方法，以及接口的默认方法，如果实现类重写了就执行重写的默认方法，如果没有重写，就执行接口中的默认方法
+		b.start();
+		b.read();
+		b.stop();
+		
+		//通过接口名调用接口的静态方法
+		MobileHDD.show();
+	}
+}
+</pre>
+            <h4><a name='header-n243' class='md-header-anchor '></a>练习</h4>
+            <p>1、声明一个LiveAble接口</p>
+            <ul>
+                <li><p>包含两个抽象方法：</p>
+                    <ul>
+                        <li>void eat();<span>	</span></li>
+                        <li>void breathe();</li>
+                    </ul>
+                </li>
+                <li><p>包含默认方法 default void sleep()，实现为打印“静止不动”</p></li>
+                <li><p>包含静态方法 static void drink()，实现为“喝水”</p></li>
+            </ul>
+            <p>2、声明动物Animal类，实现LiveAble接口。</p>
+            <ul>
+                <li>void eat();实现为“吃东西”，</li>
+                <li>void breathe();实现为&quot;吸入氧气呼出二氧化碳&quot;</li>
+                <li>void sleep()重写为”闭上眼睛睡觉&quot;</li>
+            </ul>
+            <p>3、声明植物Plant类，实现LiveAble接口。</p>
+            <ul>
+                <li>void eat();实现为“吸收营养”</li>
+                <li>void breathe();实现为&quot;吸入二氧化碳呼出氧气&quot;</li>
+            </ul>
+            <p>4、在测试类中，分别创建两个实现类的对象，调用对应的方法。通过接口名，调用静态方法</p>
+            <p>定义接口：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n273" mdtype="fences">public interface LiveAble {  //接口
+    // 定义抽象方法
+    public abstract void eat();
+    public abstract void breathe();
+    //定义默认方法
+    public default void sleep(){
+    	System.out.println("静止不动");
+    }
+    //定义静态方法
+    public static void drink(){
+    	System.out.println("喝水");
+    }
+}
+</pre>
+            <p>定义实现类：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n275" mdtype="fences" style="break-inside: unset;">public class Animal implements LiveAble {
+	//重写/实现接口的抽象方法
+    @Override
+    public void eat() {
+        System.out.println("吃东西");
+    }
+    
+    //重写/实现接口的抽象方法
+    @Override
+    public void breathe(){
+        System.out.println("吸入氧气呼出二氧化碳");
+    }
+    
+    //重写接口的默认方法
+    @Override
+    public void sleep() {
+        System.out.println("闭上眼睛睡觉");
+    }
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n276" mdtype="fences">public class Plant implements LiveAble {
+	//重写/实现接口的抽象方法
+    @Override
+    public void eat() {
+        System.out.println("吸收营养");
+    }
+    //重写/实现接口的抽象方法
+    @Override
+    public void breathe(){
+        System.out.println("吸入二氧化碳呼出氧气");
+    }
+}
+</pre>
+            <p>定义测试类：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n278" mdtype="fences" style="break-inside: unset;">public class InterfaceDemo {
+    public static void main(String[] args) {
+        // 创建实现类（子类）对象  
+        Animal a = new Animal();
+        // 调用实现后的方法
+        a.eat();
+        a.sleep();
+        a.breathe();
+        
+        //创建实现类（子类）对象
+        Plant p = new Plant();
+        p.eat();
+        p.sleep();
+        p.breathe();
+        
+        //通过接口调用静态方法
+        LiveAble.drink();
+    }
+}
+输出结果：
+吃东西
+闭上眼睛睡觉
+吸入氧气呼出二氧化碳
+吸收营养
+静止不动
+吸入二氧化碳呼出氧气
+喝水
+</pre>
+        </li>
+    </ol>
+    <h3><a name='header-n279' class='md-header-anchor '></a>7.2.3 接口的多实现</h3>
+    <p>之前学过，在继承体系中，一个类只能继承一个父类。而对于接口而言，一个类是可以实现多个接口的，这叫做接口的<strong>多实现</strong>。并且，一个类能继承一个父类，同时实现多个接口。</p>
+    <p>实现格式：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n282"
+         mdtype="fences">【修饰符】 class 实现类  implements 接口1，接口2，接口3。。。{
+	// 重写接口中所有抽象方法【必须】，当然如果实现类是抽象类，那么可以不重写
+  	// 重写接口中默认方法【可选】
+}
+
+【修饰符】 class 实现类 extends 父类 implements 接口1，接口2，接口3。。。{
+    // 重写接口中所有抽象方法【必须】，当然如果实现类是抽象类，那么可以不重写
+  	// 重写接口中默认方法【可选】
+}
+</pre>
+    <blockquote><p>接口中，有多个抽象方法时，实现类必须重写所有抽象方法。<strong>如果抽象方法有重名的，只需要重写一次</strong>。</p></blockquote>
+    <p>定义多个接口：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n286"
+         mdtype="fences">interface A {
+    public abstract void showA();
+    public abstract void show();
+}
+
+interface B {
+    public abstract void showB();
+    public abstract void show();
+}
+</pre>
+    <p>定义实现类：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n288"
+         mdtype="fences" style="break-inside: unset;">public class C implements A,B{
+    @Override
+    public void showA() {
+        System.out.println("showA");
+    }
+
+    @Override
+    public void showB() {
+        System.out.println("showB");
+    }
+
+    @Override
+    public void show() {
+        System.out.println("show");
+    }
+}
+</pre>
+    <h4><a name='header-n289' class='md-header-anchor '></a>练习</h4>
+    <p>1、声明第一个接口Runner，包含抽象方法：void run()</p>
+    <p>2、声明第二个接口Swimming，包含抽象方法：void swim()</p>
+    <p>3、声明兔子类，实现Runner接口</p>
+    <p>4、声明乌龟类，实现Runner接口和Swimming接口</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n294"
+         mdtype="fences">interface Runner{
+	void run();
+}
+</pre>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n295"
+         mdtype="fences">interface Swimming{
+	void swim();
+}
+</pre>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n296"
+         mdtype="fences">class Rabbit implements Runner{
+
+	@Override
+	public void run() {
+		System.out.println("兔子跑得快");
+	}
+	
+}
+</pre>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n297"
+         mdtype="fences">class Tortoise implements Runner,Swimming{
+
+	@Override
+	public void swim() {
+		System.out.println("乌龟游得快");
+	}
+
+	@Override
+	public void run() {
+		System.out.println("乌龟跑的慢");
+	}
+	
+}
+</pre>
+    <h3><a name='header-n298' class='md-header-anchor '></a>7.2.4 默认方法冲突问题(了解)</h3>
+    <ol start=''>
+        <li><h4><a name='header-n301' class='md-header-anchor '></a>亲爹优先原则</h4>
+            <p>当一个类，既继承一个父类，又实现若干个接口时，父类中的成员方法与接口中的抽象方法重名，子类就近选择执行父类的成员方法。代码如下：</p>
+            <p>定义接口：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n304" mdtype="fences">interface A {
+    public default void methodA(){
+        System.out.println("AAAAAAAAAAAA");
+    }
+}
+</pre>
+            <p>定义父类：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n306" mdtype="fences">class D {
+    public void methodA(){
+        System.out.println("DDDDDDDDDDDD");
+    }
+}
+</pre>
+            <p>定义子类：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n308" mdtype="fences">class C extends D implements A {
+  	// 未重写methodA方法
+}
+class B extends D implements A{
+    //当然也可以选择重写
+    public void methodA(){
+        System.out.println("BBBBBBBBBBBB");
+    }
+}
+</pre>
+            <p>定义测试类：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n310" mdtype="fences">public class Test {
+    public static void main(String[] args) {
+        C c = new C();
+        c.methodA(); 
+        
+        B b = new B();
+        b.methodA();
+    }
+}
+输出结果:
+DDDDDDDDDDDD
+BBBBBBBBBBBB
+</pre>
+        </li>
+        <li><h4><a name='header-n312' class='md-header-anchor '></a>必须做出选择</h4>
+            <p>当一个类同时实现了多个接口，而多个接口中包含方法签名相同的默认方法时，怎么办呢？</p>
+            <p><img src='imgs07/选择困难.jpg' alt='' referrerPolicy='no-referrer'/></p>
+            <p>无论你多难抉择，最终都是要做出选择的。代码如下：</p>
+            <p>声明接口：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n317" mdtype="fences">interface A{
+	public default void d(){
+		System.out.println("今晚7点-8点陪我吃饭看电影");
+	}
+}
+interface B{
+	public default void d(){
+		System.out.println("今晚7点-8点陪我逛街吃饭");
+	}
+}
+</pre>
+            <p>选择保留其中一个，通过“接口名.super.方法名&quot;的方法选择保留哪个接口的默认方法。</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n319" mdtype="fences">class C implements A,B{
+
+	@Override
+	public void d() {
+		A.super.d();
+	}
+	
+}
+</pre>
+            <p>选择自己完全重写：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n321" mdtype="fences">class D implements A,B{
+	@Override
+	public void d() {
+		System.out.println("自己待着");
+	}
+}
+</pre>
+        </li>
+    </ol>
+    <h3><a name='header-n322' class='md-header-anchor '></a>7.2.5 接口的多继承 </h3>
+    <p>一个接口能继承另一个或者多个接口，接口的继承也使用 <code>extends</code> 关键字，子接口继承父接口的方法。</p>
+    <p>定义父接口：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n325"
+         mdtype="fences">interface A {
+    void a();
+    public default void methodA(){
+        System.out.println("AAAAAAAAAAAAAAAAAAA");
+    }
+}
+
+interface B {
+    void b();
+    public default void methodB(){
+        System.out.println("BBBBBBBBBBBBBBBBBBB");
+    }
+}
+</pre>
+    <p>定义子接口：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n327"
+         mdtype="fences">interface C extends A,B{
+    @Override
+    public default void methodB() {
+        System.out.println("CCCCCCCCCCCCCCCCCCCC");
+    }
+}
+</pre>
+    <blockquote><p>小贴士：</p>
+        <p>子接口重写默认方法时，default关键字可以保留。</p>
+        <p>子类重写默认方法时，default关键字不可以保留。</p></blockquote>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n332"
+         mdtype="fences">class D implements C{
+
+	@Override
+	public void a() {
+		System.out.println("xxxxx");
+	}
+
+	@Override
+	public void b() {
+		System.out.println("yyyyy");
+	}
+	
+}
+</pre>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n333"
+         mdtype="fences">class E implements A,B,C{//效果和上面的D是等价的
+
+	@Override
+	public void b() {
+		System.out.println("xxxxx");
+	}
+
+	@Override
+	public void a() {
+		System.out.println("yyyyy");
+	}
+	
+}
+</pre>
+    <h3><a name='header-n334' class='md-header-anchor '></a>7.2.6 接口与实现类对象的多态引用</h3>
+    <p>实现类实现接口，类似于子类继承父类，因此，接口类型的变量与实现类的对象之间，也可以构成多态引用。通过接口类型的变量调用方法，最终执行的是你new的实现类对象实现的方法体。</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n336"
+         mdtype="fences" style="break-inside: unset;">public class TestInterface {
+	public static void main(String[] args) {
+		Flyable b = new Bird();
+		b.fly();
+		
+		Flyable k = new Kite();
+		k.fly();
+	}
+}
+interface Flyable{
+    //抽象方法
+	void fly();
+}
+class Bird implements Flyable{
+
+	@Override
+	public void fly() {
+		System.out.println("展翅高飞");
+	}
+	
+}
+class Kite implements Flyable{
+
+	@Override
+	public void fly() {
+		System.out.println("别拽我，我要飞");
+	}
+	
+}
+</pre>
+    <h3><a name='header-n337' class='md-header-anchor '></a>7.2.7 接口面试题排错</h3>
+    <p><strong>成员变量冲突问题，需要指明调用的哪一个</strong></p>
+    <p><img src='imgs07/1562417617254.png' alt='1562417617254' referrerPolicy='no-referrer'/></p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n340"
+         mdtype="fences" style="break-inside: unset;">class Base{
+    int x = 1;
+}
+interface JieKou1{
+    int x = 2;//公共的静态的常量
+}
+interface JieKou2{
+    int x = 3;
+}
+class Sub extends Base implements JieKou1,JieKou2{
+    public void test(){
+//        System.out.println(x);//错误，模糊不清
+        System.out.println(super.x);
+        System.out.println(JieKou1.x);
+        System.out.println(JieKou2.x);
+    }
+}
+</pre>
+    <h3><a name='header-n341' class='md-header-anchor '></a>7.2.8 经典接口介绍与使用</h3><h4><a name='header-n342'
+                                                                                       class='md-header-anchor '></a>1、java.lang.Comparable
+    </h4>
+    <p>
+        我们知道基本数据类型的数据（除boolean类型外）需要比较大小的话，之间使用比较运算符即可，但是引用数据类型是不能直接使用比较运算符来比较大小的。因为引用类型本身之间本身没有大小可言（包装类除外），需要我们根据需求来决定那一个对象是大还是小，那么不同的引用类型就可能判断依据不一样。我们一定义一个接口，给出比较两个对象大小的方法，但具体实现由不同的实现类完成。</p>
+    <p>Java给所有引用数据类型的大小比较，指定了一个标准接口，就是java.lang.Comparable接口：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n345"
+         mdtype="fences">package java.lang;
+
+public interface Comparable{
+    int compareTo(Object obj);
+}
+</pre>
+    <p>那么我们想要使得我们某个类的对象可以比较大小，怎么做呢？步骤：</p>
+    <p>第一步：哪个类的对象要比较大小，哪个类就实现java.lang.Comparable接口，并重写方法</p>
+    <ul>
+        <li>方法体就是你要如何比较当前对象和指定的另一个对象的大小</li>
+    </ul>
+    <p>第二步：对象比较大小时，通过对象调用compareTo方法，根据方法的返回值决定谁大谁小。</p>
+    <ul>
+        <li>this对象（调用compareTo方法的对象）大于指定对象（传入compareTo()的参数对象）返回正整数</li>
+        <li>this对象（调用compareTo方法的对象）小于指定对象（传入compareTo()的参数对象）返回负整数</li>
+        <li>this对象（调用compareTo方法的对象）等于指定对象（传入compareTo()的参数对象）返回零</li>
+    </ul>
+    <p>代码示例：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n360"
+         mdtype="fences" style="break-inside: unset;">public class TestComparable {
+	public static void main(String[] args) {
+		Student s1 = new Student(1,"张三",89);
+		Student s2 = new Student(2,"李四",89);
+		if(s1.compareTo(s2)&gt;0){
+			System.out.println("s1&gt;s2");
+		}else if(s1.compareTo(s2)&lt;0){
+			System.out.println("s1&lt;s2");
+		}else{
+			System.out.println("s1 = s2");
+		}
+	}
+}
+class Student implements Comparable{
+	private int id;
+	private String name;
+	private int score;
+	
+	//省略了构造器、get/set、toString等方法
+
+	@Override
+	public int compareTo(Object o) {
+		//这些需要强制，将o对象向下转型为Student类型的变量，才能调用Student类中的属性
+		Student stu = (Student) o;
+		if(this.score != stu.score){
+			return this.score - stu.score;
+		}else{//成绩相同，按照学号比较大小
+			return this.id - stu.id;
+		}
+	}
+	
+}
+</pre>
+    <ol start=''>
+        <li><h5><a name='header-n363' class='md-header-anchor '></a>练习1：冒泡排序</h5>
+            <p>声明一个Employee员工类，包含编号、姓名、薪资，实现Comparable接口，要求，按照薪资比较大小，如果薪资相同，按照编号比较大小。</p>
+            <p>声明一个测试类TestEmployee类，在main中创建Employee[]数组，长度为5，并且存储5个员工对象，现在要求用冒泡排序，实现对这个数组进行排序，遍历结果。</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n366" mdtype="fences" style="break-inside: unset;">class Employee implements Comparable{
+	private int id;
+	private String name;
+	private double salary;
+	public Employee(int id, String name, double salary) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+	}
+	public Employee() {
+		super();
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + "]";
+	}
+	@Override
+	public int compareTo(Object o) {
+		Employee emp = (Employee) o;
+		if(this.getSalary() != emp.getSalary()){
+			return Double.compare(this.getSalary(), emp.getSalary());
+		}
+		return this.id - emp.id;
+	}
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n367" mdtype="fences" style="break-inside: unset;">public class TestComparable {
+	public static void main(String[] args) {
+		Employee[] arr = new Employee[5];
+		arr[0] = new Employee(1,"张三",13000);
+		arr[1] = new Employee(2,"李四",13000);
+		arr[2] = new Employee(3,"王五",14000);
+		arr[3] = new Employee(4,"赵六",7000);
+		arr[4] = new Employee(5,"钱七",9000);
+		
+		//原顺序
+		System.out.println("员工列表：");
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+		//冒泡排序
+		for (int i = 1; i &lt; arr.length; i++) {
+			for (int j = 0; j &lt; arr.length-i; j++) {
+                //因为Employee类型实现了Comparable接口，所以有compareTo()方法
+				if(arr[j].compareTo(arr[j+1])&gt;0){
+					Employee temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+				}
+			}
+		}
+		System.out.println("排序后员工列表：");
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+	}
+}
+</pre>
+            <h5><a name='header-n368' class='md-header-anchor '></a>练习2：自定义数组排序工具类</h5>
+            <p>自定义一个数组工具类MyArrays，它包含一个静态方法，可以给任意对象数组用冒泡排序实现从小到大排序，该怎么定义这个方法呢？</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n370" mdtype="fences" style="break-inside: unset;">class MyArrays{
+	public static void sort(Object[] arr){
+		//冒泡排序
+		for (int i = 1; i &lt; arr.length; i++) {
+			for (int j = 0; j &lt; arr.length-i; j++) {
+				//将arr[j]强制为Comparable接口类型，目的是调用compareTo方法
+				//当然如果数组的元素没有实现这个接口，那么将会发生ClassCastException
+				Comparable c = (Comparable) arr[j];
+				if(c.compareTo(arr[j+1])&gt;0){
+					Object temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+				}
+			}
+		}
+	}
+    
+    public static void print(Object[] arr){
+        for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+    }
+}
+
+</pre>
+            <p>使用自定义的MyArrays数组工具类，给练习1的员工数组进行排序</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n372" mdtype="fences" style="break-inside: unset;">public class TestComparable {
+	public static void main(String[] args) {
+		Employee[] arr = new Employee[5];
+		arr[0] = new Employee(1,"张三",13000);
+		arr[1] = new Employee(2,"李四",13000);
+		arr[2] = new Employee(3,"王五",14000);
+		arr[3] = new Employee(4,"赵六",7000);
+		arr[4] = new Employee(5,"钱七",9000);
+		
+		//原顺序
+		System.out.println("员工列表：");
+		MyArrays.print(arr);
+        
+        //要求Employee类型必须实现Comparable接口，否则将发生ClassCastException异常
+		MyArrays.sort(arr);
+        
+		System.out.println("排序后员工列表：");
+		MyArrays.print(arr);
+	}
+}
+</pre>
+            <blockquote><p>java.util.Arrays数组工具类的public static void sort(Object[]
+                a)就是这么实现的，只不过它使用的排序算法是效率更高快排，而不是冒泡排序，但是无论哪种排序算法，最终都要涉及到两个元素的比较大小，都需要通过元素调用compareTo()方法。</p>
+            </blockquote>
+        </li>
+    </ol>
+    <h4><a name='header-n376' class='md-header-anchor '></a>2、java.util.Comparator</h4>
+    <p>思考：</p>
+    <p>（1）如果一个类，没有实现Comparable接口，而这个类你又不方便修改（例如：一些第三方的类，你只有.class文件，没有源文件），那么这样类的对象也要比较大小怎么办？</p>
+    <p>（2）如果一个类，实现了Comparable接口，也指定了两个对象的比较大小的规则，但是此时此刻我不想按照它预定义的方法比较大小，但是我又不能随意修改，因为会影响其他地方的使用，怎么办？</p>
+    <p>JDK在设计类库之初，也考虑到这种情况了，所以又增加了一个java.util.Comparator接口。</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n381"
+         mdtype="fences">package java.util;
+
+public interface Comparator{
+    int compare(Object o1,Object o2);
+}
+</pre>
+    <p>那么我们想要比较某个类的两个对象的大小，怎么做呢？步骤：</p>
+    <p>第一步：编写一个类，我们称之为比较器类型，实现java.util.Comparator接口，并重写方法</p>
+    <ul>
+        <li>方法体就是你要如何指定的两个对象的大小</li>
+    </ul>
+    <p>第二步：比较大小时，通过比较器类型的对象调用compare()方法，将要比较大小的两个对象作为compare方法的实参传入，根据方法的返回值决定谁大谁小。</p>
+    <ul>
+        <li>o1对象大于o2返回正整数</li>
+        <li>o1对象小于o2返回负整数</li>
+        <li>o1对象等于o2返回零</li>
+    </ul>
+    <p>代码示例：一个没有实现Comparable接口的学生类</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n396"
+         mdtype="fences" style="break-inside: unset;">class Student{
+	private String name;
+	private int score;
+	public Student(String name, int score) {
+		super();
+		this.name = name;
+		this.score = score;
+	}
+	public Student() {
+		super();
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
+	@Override
+	public String toString() {
+		return "Student [name=" + name + ", score=" + score + "]";
+	}
+	
+}
+</pre>
+    <p>代码示例：定义定制比较器类</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n398"
+         mdtype="fences">class StudentScoreCompare implements Comparator{
+
+	@Override
+	public int compare(Object o1, Object o2) {
+		Student s1 = (Student) o1;
+		Student s2 = (Student) o2;
+		return s1.getScore() - s2.getScore();
+	}
+	
+}
+</pre>
+    <p>代码示例：测试类</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n400"
+         mdtype="fences" style="break-inside: unset;">import java.util.Comparator;
+
+public class TestComparator {
+	public static void main(String[] args) {
+		Student stu1 = new Student("张三",89);
+		Student stu2 = new Student("李四",78);
+		
+		StudentScoreCompare ssc = new StudentScoreCompare();
+		if(ssc.compare(stu1, stu2)&gt;0){
+			System.out.println(stu1 + "&gt;" + stu2);
+		}else if(ssc.compare(stu1, stu2)&lt;0){
+			System.out.println(stu1 + "&lt;" + stu2);
+		}else{
+			System.out.println(stu1 + "=" + stu2);
+		}
+	}
+}
+</pre>
+    <ol start=''>
+        <li><h5><a name='header-n403' class='md-header-anchor '></a>练习1：冒泡排序</h5>
+            <p>声明一个Employee员工类，包含编号、姓名、薪资，</p>
+            <p>声明一个测试类，在main中，创建Employee[]数组，长度为5，显示原来顺序结果</p>
+            <p>声明一个定制比较器EmpSalaryComparator，实现Comparator接口，按照薪资比较大小</p>
+            <p>声明一个定制比较器EmpIdComparator，实现Comparator接口，按照编号比较大小</p>
+            <p>在测试类中，分别用这个两个比较器对象，对数组进行排序，并显示排序后结果</p>
+            <p>员工类示例代码：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n410" mdtype="fences" style="break-inside: unset;">class Employee{
+	private int id;
+	private String name;
+	private double salary;
+	public Employee(int id, String name, double salary) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+	}
+	public Employee() {
+		super();
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + "]";
+	}
+}
+</pre>
+            <p>员工薪资定制比较器类型：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n412" mdtype="fences">class EmpSalaryComparator implements Comparator{
+
+	@Override
+	public int compare(Object o1, Object o2) {
+		Employee e1 = (Employee) o1;
+		Employee e2 = (Employee) o2;
+		return Double.compare(e1.getSalary(), e2.getSalary());
+	}
+	
+}
+</pre>
+            <p>员工编号定制比较器类型：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n414" mdtype="fences">class EmpIdComparator implements Comparator{
+
+	@Override
+	public int compare(Object o1, Object o2) {
+		Employee e1 = (Employee) o1;
+		Employee e2 = (Employee) o2;
+		return e1.getId() - e2.getId();
+	}
+	
+}
+</pre>
+            <p>测试类示例代码：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n416" mdtype="fences" style="break-inside: unset;">import java.util.Comparator;
+
+public class TestComparator {
+	public static void main(String[] args) {
+		Employee[] arr = new Employee[5];
+		arr[0] = new Employee(1,"张三",13000);
+		arr[1] = new Employee(3,"王五",14000);
+		arr[2] = new Employee(2,"李四",13000);
+		arr[3] = new Employee(4,"赵六",7000);
+		arr[4] = new Employee(5,"钱七",9000);
+		
+		//原顺序
+		System.out.println("员工列表：");
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+		
+		EmpSalaryComparator ec = new EmpSalaryComparator();
+		//冒泡排序
+		for (int i = 1; i &lt; arr.length; i++) {
+			for (int j = 0; j &lt; arr.length-i; j++) {
+				if(ec.compare(arr[j], arr[j+1])&gt;0){
+					Employee temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+				}
+			}
+		}
+		
+		System.out.println("按照薪资排序后员工列表：");
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+		
+		EmpIdComparator ec2 = new EmpIdComparator();
+		//冒泡排序
+		for (int i = 1; i &lt; arr.length; i++) {
+			for (int j = 0; j &lt; arr.length-i; j++) {
+				if(ec2.compare(arr[j], arr[j+1])&gt;0){
+					Employee temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+				}
+			}
+		}
+				
+		System.out.println("按照编号排序后员工列表：");
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+	}
+}
+</pre>
+        </li>
+        <li><h5><a name='header-n418' class='md-header-anchor '></a>练习2：自定义数组排序工具类</h5>
+            <p>自定义一个数组工具类MyArrays，它包含一个静态方法，可以给任意对象数组用冒泡排序实现从小到大排序，该怎么定义这个方法呢？</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n420" mdtype="fences" style="break-inside: unset;">class MyArrays{
+	public static void sort(Object[] arr,Comparator c){
+		//冒泡排序
+		for (int i = 1; i &lt; arr.length; i++) {
+			for (int j = 0; j &lt; arr.length-i; j++) {
+				//这里不需要强制类型转换
+				if(c.compare(arr[j], arr[j+1])&gt;0){
+					Object temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+				}
+			}
+		}
+	}
+	
+    public static void print(Object[] arr){
+ 		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}       
+    }
+}
+</pre>
+            <p>用新工具类，简化练习1测试类的代码</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n422" mdtype="fences" style="break-inside: unset;">public class TestComparator {
+	public static void main(String[] args) {
+		Employee[] arr = new Employee[5];
+		arr[0] = new Employee(1,"张三",13000);
+		arr[1] = new Employee(3,"王五",14000);
+		arr[2] = new Employee(2,"李四",13000);
+		arr[3] = new Employee(4,"赵六",7000);
+		arr[4] = new Employee(5,"钱七",9000);
+		
+		//原顺序
+		System.out.println("员工列表：");
+		MyArrays.print(arr);
+		
+		EmpSalaryComparator ec = new EmpSalaryComparator();
+		MyArrays.sort(arr, ec);
+		
+		System.out.println("按照薪资排序后员工列表：");
+		MyArrays.print(arr);
+		
+		EmpIdComparator ec2 = new EmpIdComparator();
+		MyArrays.sort(arr, ec2);
+				
+		System.out.println("按照编号排序后员工列表：");
+		MyArrays.print(arr);
+	}
+}
+</pre>
+            <blockquote>
+                <p>java.util.Arrays数组工具类的public static
+                    <T> void sort(T[] a, Comparator&lt;? super T&gt; c)就是这做的
+                </p>
+            </blockquote>
+        </li>
+    </ol>
+    <h4><a name='header-n425' class='md-header-anchor '></a>3、java.lang.Cloneable标记接口</h4>
+    <p>标记接口：没有任何方法的接口。类似注解。</p>
+    <p>在java.lang.Object类中有一个方法：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n428"
+         mdtype="fences">protected Object clone()throws CloneNotSupportedException
+</pre>
+    <p>所有类型都可以重写这个方法，它是获取一个对象的克隆体对象用的，就是造一个和当前对象各种属性值一模一样的对象。当然地址肯定不同。</p>
+    <p>我们在重写这个方法后时，调用super.clone()，发现报异常CloneNotSupportedException，因为我们没有实现java.lang.Cloneable接口。</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n431"
+         mdtype="fences" style="break-inside: unset;">class Teacher implements Cloneable{
+	private int id;
+	private String name;
+	public Teacher(int id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+	public Teacher() {
+		super();
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	@Override
+	public String toString() {
+		return "Teacher [id=" + id + ", name=" + name + "]";
+	}
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Teacher other = (Teacher) obj;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+}
+</pre>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n432"
+         mdtype="fences">public class TestClonable {
+	public static void main(String[] args) throws CloneNotSupportedException {
+		Teacher src = new Teacher(1,"苍老师");
+		Object clone = src.clone();
+		System.out.println(clone);
+		System.out.println(src == clone);
+		System.out.println(src.equals(clone));
+	}
+}
+</pre>
+    <h2><a name='header-n433' class='md-header-anchor '></a>7.3 内部类（理解）</h2>
+    <h3><a name='header-n434' class='md-header-anchor '></a>7.3.1 概述</h3>
+    <p>1、什么是内部类？</p>
+    <p>将一个类A定义在另一个类B里面，里面的那个类A就称为<strong>内部类</strong>，B则称为<strong>外部类</strong>。</p>
+    <p>2、为什么要声明内部类呢？</p>
+    <p>当一个事物的内部，还有一个部分需要一个完整的结构进行描述，而这个内部的完整的结构又只为外部事物提供服务，不在其他地方单独使用，那么整个内部的完整结构最好使用内部类。</p>
+    <p>而且内部类因为在外部类的里面，因此可以直接访问外部类的私有成员。</p>
+    <p>3、内部类都有哪些形式？·</p>
+    <p>根据内部类声明的位置（如同变量的分类），我们可以分为：</p>
+    <p>（1）成员内部类：</p>
+    <ul>
+        <li>静态成员内部类</li>
+        <li>非静态成员内部类</li>
+    </ul>
+    <p>（2）局部内部类</p>
+    <ul>
+        <li>有名字的局部内部类</li>
+        <li>匿名的内部类</li>
+    </ul>
+    <h3><a name='header-n454' class='md-header-anchor '></a>7.3.2 静态内部类</h3>
+    <ol start=''>
+        <li><p><strong>语法格式：</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n458" mdtype="fences">【修饰符】 class 外部类{
+    【其他修饰符】 static class 内部类{
+    }
+}
+</pre>
+        </li>
+        <li><p><strong>静态内部类的特点：</strong></p>
+            <ul>
+                <li><p>和其他类一样，它只是定义在外部类中的另一个完整的类结构，主要是为外部类服务的，但与外部类的耦合度并不高。</p>
+                    <ul>
+                        <li>可以继承自己的想要继承的父类，实现自己想要实现的父接口们，和外部类的父类和父接口无关</li>
+                        <li>可以在静态内部类中声明属性、方法、构造器等结构，包括静态成员</li>
+                        <li>可以使用abstract修饰，因此它也可以被其他类继承</li>
+                        <li>可以使用final修饰，表示不能被继承</li>
+                        <li>编译后有自己的独立的字节码文件，只不过在内部类名前面冠以外部类名和$符号。</li>
+                    </ul>
+                </li>
+                <li><p>和外部类不同的是，它可以允许四种权限修饰符：public，protected，缺省，private</p>
+                    <ul>
+                        <li>外部类只允许public或缺省的</li>
+                    </ul>
+                </li>
+                <li><p><strong>只</strong>可以在静态内部类中使用外部类的<strong>静态成员</strong></p>
+                    <ul>
+                        <li>在静态内部类中不能使用外部类的非静态成员</li>
+                    </ul>
+                </li>
+                <li><p>在外部类的外面不需要通过外部类的对象就可以创建静态内部类的对象</p></li>
+                <li><p>如果在内部类中有变量与外部类的静态成员变量同名，可以使用“外部类名.&quot;进行区别</p></li>
+            </ul>
+        </li>
+        <li><p><strong>示例代码：</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n491" mdtype="fences" style="break-inside: unset;">public class TestInner{
+    public static void main(String[] args){
+    	Outer.Inner in= new Outer.Inner();
+    	in.inMethod();
+    	
+    	Outer.Inner.inTest();
+        
+        Outer.Inner.inFun(3);
+    }
+}
+
+class Outer{
+	private static int a = 1;
+	private int b = 2;
+	protected static class Inner{
+		static int d = 4;//可以
+		void inMethod(){
+			System.out.println("out.a = " + a);
+//			System.out.println("out.b = " + b);//错误的
+		}
+		static void inTest(){
+			System.out.println("out.a = " + a);
+		}
+        static void inFun(int a){
+			System.out.println("out.a = " + Outer.a);
+            System.out.println("local.a = " + a);
+		}
+	}
+}
+</pre>
+            <blockquote><p>其实严格的讲（在James Gosling等人编著的《The Java Language
+                Specification》）静态内部类不是内部类，而是类似于C++的嵌套类的概念，外部类仅仅是静态内部类的一种命名空间的限定名形式而已。所以接口中的内部类通常都不叫内部类，因为接口中的内部成员都是隐式是静态的（即public
+                static)。例如：Map.Entry。</p></blockquote>
+        </li>
+    </ol>
+    <h3><a name='header-n494' class='md-header-anchor '></a>7.3.3 非静态成员内部类</h3>
+    <ol start=''>
+        <li><p><strong>语法格式：</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n498" mdtype="fences">【修饰符】 class 外部类{
+    【修饰符】 class 内部类{
+    }
+}
+</pre>
+        </li>
+        <li><p><strong>非静态内部类的特点：</strong></p>
+            <ul>
+                <li><p>和其他类一样，它只是定义在外部类中的另一个完整的类结构，就是为了方便使用外部类的数据，与外部类的耦合度高。</p>
+                    <ul>
+                        <li>可以继承自己的想要继承的父类，实现自己想要实现的父接口们，和外部类的父类和父接口无关</li>
+                        <li>
+                            可以在非静态内部类中声明属性、方法、构造器等结构，但是<strong>不允许声明静态成员</strong>，但是可以<strong>继承</strong>父类的静态成员，而且<strong>可以声明静态常量</strong>。
+                        </li>
+                        <li>可以使用abstract修饰，因此它也可以被其他类继承</li>
+                        <li>可以使用final修饰，表示不能被继承</li>
+                        <li>编译后有自己的独立的字节码文件，只不过在内部类名前面冠以外部类名和$符号。</li>
+                    </ul>
+                </li>
+                <li><p>和外部类不同的是，它可以允许四种权限修饰符：public，protected，缺省，private</p>
+                    <ul>
+                        <li>外部类只允许public或缺省的</li>
+                    </ul>
+                </li>
+                <li><p>还可以在非静态内部类中使用外部类的<strong>所有成员</strong>，<strong>哪怕是私有的</strong></p></li>
+                <li><p>在外部类的静态成员中不可以使用非静态内部类哦</p>
+                    <ul>
+                        <li>就如同静态方法中不能访问本类的非静态成员变量和非静态方法一样</li>
+                    </ul>
+                </li>
+                <li><p>在外部类的外面必须通过外部类的对象才能创建非静态内部类的对象</p>
+                    <ul>
+                        <li>因此在非静态内部类的方法中有两个this对象，一个是外部类的this对象，一个是内部类的this对象</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><p><strong>示例代码：</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n534" mdtype="fences" style="break-inside: unset;">public class TestInner{
+    public static void main(String[] args){
+    	Outer out = new Outer();
+    	Outer.Inner in= out.new Inner();
+    	in.inMethod();
+    	
+    	Outer.Inner inner = out.getInner();
+    	inner.inMethod();
+    }
+}
+class Father{
+	protected static int c = 3;
+}
+class Outer{
+	private static int a = 1;
+	private int b = 2;
+	protected class Inner extends Father{
+//		static int d = 4;//错误
+		int b = 5;
+		void inMethod(){
+			System.out.println("out.a = " + a);
+			System.out.println("out.b = " + Outer.this.b);
+			System.out.println("in.b = " + b);
+			System.out.println("father.c = " + c);
+		}
+	}
+	
+	public static void outMethod(){
+//		Inner in = new Inner();//错误的
+	}
+	public Inner getInner(){
+		return new Inner();
+	}
+}
+</pre>
+        </li>
+    </ol>
+    <h3><a name='header-n535' class='md-header-anchor '></a>练习</h3>
+    <ol start=''>
+        <li><h4><a name='header-n538' class='md-header-anchor '></a>练习1：语法练习题</h4>
+            <p>声明一个身体Body类，包含一个私有的boolean类型的属性live，初始化为true，表示活着。属性私有化，提供get/set方法。</p>
+            <p>声明一个身体Body的内部类Heart，包含void beat()方法，当live为true时，打印“心脏在跳动”，否则打印“心脏停止跳动&quot;。因为Heart只为外部类Body服务，而又具有自己的方法，属性等，而且这里应该是有Body实体存在的情况下才能有Heart实体，所以这里把Heart声明为非静态内部类。</p>
+            <p>声明一个测试类，在测试类的主方法中，创建身体和心脏的对象，调用心脏对象的beat()方法，然后调用身体对象的setLive()方法，设置为false后，再调用心脏对象的beat()方法查看结果。</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n542" mdtype="fences" style="break-inside: unset;">public class Person {
+    private  boolean live = true;
+    class Heart {
+        public void beat() {
+            // 直接访问外部类成员
+            if (live) {
+                System.out.println("心脏在跳动");
+            } else {
+                System.out.println("心脏不跳了");
+            }
+        }
+    }
+
+    public boolean isLive() {
+        return live;
+    }
+
+    public void setLive(boolean live) {
+        this.live = live;
+    }
+
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n543" mdtype="fences" style="break-inside: unset;">public class InnerDemo {
+    public static void main(String[] args) {
+        // 创建外部类对象 
+        Person p  = new Person();
+        // 创建内部类对象
+        Heart heart = p.new Heart();
+
+        // 调用内部类方法
+        heart.beat();
+        // 调用外部类方法
+        p.setLive(false);
+        // 调用内部类方法
+        heart.beat();
+    }
+}
+输出结果:
+心脏在跳动
+心脏不跳了
+</pre>
+            <p>或</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n545" mdtype="fences">public abstract class Beatable{//可跳动的
+    public abstract void beat();
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n546" mdtype="fences" style="break-inside: unset;">public class Person {
+    private  boolean live = true;
+    private  Heart heart = new Heart();
+    private class Heart implements Beatable{
+        public void jump() {
+            // 直接访问外部类成员
+            if (live) {
+                System.out.println("心脏在跳动");
+            } else {
+                System.out.println("心脏不跳了");
+            }
+        }
+    }
+
+    public boolean isLive() {
+        return live;
+    }
+
+    public void setLive(boolean live) {
+        this.live = live;
+    }
+
+	public Beatable getHeart(){
+		return heart;
+	}
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n547" mdtype="fences" style="break-inside: unset;">public class InnerDemo {
+    public static void main(String[] args) {
+        // 创建外部类对象 
+        Person p  = new Person();
+        // 获取内部类对象
+        Beatable heart = p.getHeart();
+
+        // 调用内部类方法
+        heart.beat();
+        // 调用外部类方法
+        p.setLive(false);
+        // 调用内部类方法
+        heart.beat();
+    }
+}
+输出结果:
+心脏在跳动
+心脏不跳了
+</pre>
+            <p>&nbsp;</p></li>
+        <li><h4><a name='header-n550' class='md-header-anchor '></a>练习2：面试题</h4>
+            <p>判断如下代码的运行结果：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n552" mdtype="fences" style="break-inside: unset;">public class Test{
+	public Test(){
+		Inner s1 = new Inner();
+		s1.a = 10;
+		Inner s2 = new Inner();
+		s2.a = 20;
+		Test.Inner s3 = new Test().Inner();
+		System.out.println(s3.a);
+	}
+	class Inner{
+		public int a = 5;
+	}
+	public static void main(String[] args) {
+		Test t = new Test();
+		Inner r = t.new Inner();
+		System.out.println(r.a);
+	}
+}
+</pre>
+        </li>
+    </ol>
+    <h3><a name='header-n554' class='md-header-anchor '></a>7.3.4 局部内部类</h3>
+    <ol start=''>
+        <li><p><strong>语法格式：</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n558" mdtype="fences">【修饰符】 class 外部类{
+    【修饰符】 返回值类型  方法名(【形参列表】){
+            【final/abstract】 class 内部类{
+    	}
+    }    
+}
+</pre>
+        </li>
+        <li><p><strong>局部内部类的特点：</strong></p>
+            <ul>
+                <li><p>和外部类一样，它只是定义在外部类的某个方法中的另一个完整的类结构</p>
+                    <ul>
+                        <li><p>可以继承自己的想要继承的父类，实现自己想要实现的父接口们，和外部类的父类和父接口无关</p></li>
+                        <li><p>可以在局部内部类中声明属性、方法、构造器等结构，<strong>但不包括静态成员，除非是从父类继承的或静态常量</strong></p></li>
+                        <li><p>可以使用abstract修饰，因此它也可以被同一个方法的在它后面的其他内部类继承</p></li>
+                        <li><p>可以使用final修饰，表示不能被继承</p></li>
+                        <li><p>编译后有自己的独立的字节码文件，只不过在内部类名前面冠以外部类名、$符号、编号。</p>
+                            <ul>
+                                <li>这里有编号是因为同一个外部类中，不同的方法中存在相同名称的局部内部类</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><p>和成员内部类不同的是，它前面不能有权限修饰符等</p></li>
+                <li><p>局部内部类如同局部变量一样，有作用域</p></li>
+                <li><p>局部内部类中是否能访问外部类的静态还是非静态的成员，取决于所在的方法</p></li>
+                <li><p>局部内部类中还可以使用所在方法的局部常量，即用final声明的局部变量</p>
+                    <ul>
+                        <li>JDK1.8之后，如果某个局部变量在局部内部类中被使用了，自动加final</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><p><strong>示例代码：</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n591" mdtype="fences" style="break-inside: unset;">class Outer{
+	private static int a = 1;
+	private int b = 2;
+	
+	public static void outMethod(){
+		final int c = 3;
+		class Inner{
+			public void inMethod(){
+				System.out.println("out.a = " + a);
+//				System.out.println("out.b = " + b);//错误的，因为outMethod是静态的
+				System.out.println("out.local.c = " + c);
+			}
+		}
+		
+		Inner in = new Inner();
+		in.inMethod();
+	}
+	
+	public void outTest(){
+		final int c = 3;
+		class Inner{
+			public void inMethod(){
+				System.out.println("out.a = " + a);
+				System.out.println("out.b = " + b);//可以，因为outTest是非静态的
+				System.out.println("method.c = " + c);
+			}
+		}
+		
+		Inner in = new Inner();
+		in.inMethod();
+	}
+	
+}
+</pre>
+        </li>
+        <li><h4><a name='header-n593' class='md-header-anchor '></a>思考题</h4>
+            <p>为什么在局部内部类中使用外部类方法的局部变量要加final呢？</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n595" mdtype="fences" style="break-inside: unset;">public class TestInner{
+	public static void main(String[] args) {
+		A obj = Outer.method();
+		//因为如果c不是final的，那么method方法执行完，method的栈空间就释放了，那么c也就消失了
+		obj.a();//这里打印c就没有中可取了，所以把c声明为常量，存储在方法区中
+	}
+}
+
+interface A{
+	void a();
+}
+class Outer{
+	public static A method(){
+		final int c = 3;
+		class Sub implements A{
+			@Override
+			public void a() {
+				System.out.println("method.c = " + c);
+			}
+		}
+		return new Sub();
+	}
+}
+</pre>
+        </li>
+    </ol>
+    <h3><a name='header-n596' class='md-header-anchor '></a>7.3.5 匿名内部类</h3>
+    <ol start=''>
+        <li><h4><a name='header-n599' class='md-header-anchor '></a>引入</h4>
+            <p>当我们在开发过程中，需要用到一个抽象类的子类的对象或一个接口的实现类的对象，而且只创建一个对象，而且逻辑代码也不复杂。那么我们原先怎么做的呢？</p>
+            <p>（1）编写类，继承这个父类或实现这个接口</p>
+            <p>（2）重写父类或父接口的方法</p>
+            <p>（3）创建这个子类或实现类的对象</p>
+            <p>例如：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n605" mdtype="fences">public interface Runnable{
+    public abstract void run();
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n606" mdtype="fences">//声明接口实现类
+public class MyRunnable implements Runnable{
+    public void run(){
+        while(true){
+            System.out.println("大家注意安全");
+            try
+            	Thread.sleep(1000);
+            }catch(Exception e){                
+            }
+        }
+    }
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n607" mdtype="fences">public class Test{
+    public static void main(String[] args){
+        //如果MyRunnable类只是在这里使用一次，并且只创建它的一个对象
+        //分开两个.java源文件，反而不好维护
+        Runnable target = new MyRunnable();
+        Thread t = new Thread("安全提示线程",target);
+        t.start();
+    }
+}
+</pre>
+            <p>这里，因为考虑到这个子类或实现类是一次性的，那么我们“费尽心机”的给它取名字，就显得多余。那么我们完全可以使用匿名内部类的方式来实现，避免给类命名的问题。</p>
+            <p>可以修改为如下形式：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n610" mdtype="fences" style="break-inside: unset;">public class Test{
+    public static void main(String[] args){
+        //MyRunnable类只是在这里使用一次，并且只创建它的一个对象，那么这些写代码更紧凑，更好维护
+        Runnable target = new Runnable(){
+            public void run(){
+                while(true){
+                    System.out.println("大家注意安全");
+                    try
+                        Thread.sleep(1000);
+                    }catch(Exception e){                
+                    }
+                }
+            }
+        };
+        Thread t = new Thread("安全提示线程",target);
+        t.start();
+    }
+}
+</pre>
+        </li>
+        <li><h4><a name='header-n612' class='md-header-anchor '></a>语法格式</h4>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n613" mdtype="fences">new 父类(【实参列表】){
+    重写方法...
+}
+//()中是否需要【实参列表】，看你想要让这个匿名内部类调用父类的哪个构造器，如果调用父类的无参构造，那么()中就不用写参数，如果调用父类的有参构造，那么()中需要传入实参
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n614" mdtype="fences">new 父接口(){
+    重写方法...
+}
+//()中没有参数，因为此时匿名内部类的父类是Object类，它只有一个无参构造
+</pre>
+            <blockquote><p>匿名内部类是没有名字的类，因此在声明类的同时就创建好了唯一的对象。</p></blockquote>
+            <p>注意：</p>
+            <p>匿名内部类是一种特殊的局部内部类，只不过没有名称而已。所有局部内部类的限制都适用于匿名内部类。例如：</p>
+            <ul>
+                <li>在匿名内部类中是否可以使用外部类的非静态成员变量，看所在方法是否静态</li>
+                <li>在匿名内部类中如果需要访问当前方法的局部变量，该局部变量需要加final</li>
+            </ul>
+            <p>思考：这个对象能做什么呢？</p></li>
+    </ol>
+    <p> 答：（1）调用某个方法（2）赋值给父类/父接口的变量，通过多态引用使用这个对象（3）作为某个方法调用的实参</p>
+    <ol start='3'>
+        <li><h4><a name='header-n628' class='md-header-anchor '></a>使用方式一：匿名内部类的对象直接调用方法</h4>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n629" mdtype="fences">interface A{
+	void a();
+}
+public class Test{
+    public static void main(String[] args){
+    	new A(){
+			@Override
+			public void a() {
+				System.out.println("aaaa");
+			}
+    	}.a();
+    }
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n630" mdtype="fences" style="break-inside: unset;">class B{
+	public void b(){
+		System.out.println("bbbb");
+	}
+}
+public class Test{
+    public static void main(String[] args){
+    	new B(){
+    		public void b(){
+    			System.out.println("ccccc");
+    		}
+    	}.b();
+    	
+    }
+}
+</pre>
+        </li>
+        <li><h4><a name='header-n632' class='md-header-anchor '></a>使用方式二：通过父类或父接口的变量多态引用匿名内部类的对象</h4>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n633" mdtype="fences" style="break-inside: unset;">interface A{
+	void a();
+}
+public class Test{
+    public static void main(String[] args){
+    	A obj = new A(){
+			@Override
+			public void a() {
+				System.out.println("aaaa");
+			}
+    	};
+    	obj.a();
+    }
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n634" mdtype="fences" style="break-inside: unset;">class B{
+	public void b(){
+		System.out.println("bbbb");
+	}
+}
+public class Test{
+    public static void main(String[] args){
+    	B obj = new B(){
+    		public void b(){
+    			System.out.println("ccccc");
+    		}
+    	};
+    	obj.b();
+    }
+}
+</pre>
+        </li>
+        <li><h4><a name='header-n636' class='md-header-anchor '></a>使用方式三：匿名内部类的对象作为实参</h4>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n637" mdtype="fences" style="break-inside: unset;">interface A{
+	void method();
+}
+public class Test{
+    public static void test(A a){
+    	a.method();
+    }
+    
+    public static void main(String[] args){
+    	test(new A(){
+
+			@Override
+			public void method() {
+				System.out.println("aaaa");
+			}
+    		
+    	});
+    }   
+}
+</pre>
+        </li>
+    </ol>
+    <h4><a name='header-n638' class='md-header-anchor '></a>练习</h4>
+    <ol start=''>
+        <li><h5><a name='header-n641' class='md-header-anchor '></a>练习1</h5>
+            <p>声明一个Employee员工类，包含编号、姓名、薪资，</p>
+            <p>声明一个测试类，在main中，创建Employee[]数组，长度为5，显示原来顺序结果</p>
+            <p>调用java.util.Arrays数组工具类的排序方法public static void sort(Object[] a, Comparator
+                c)对数组的元素进行排序，用匿名内部类的对象给c形参传入按照薪资比较大小的定制比较器对象。并显示排序后结果</p>
+            <p>调用java.util.Arrays数组工具类的排序方法public static void sort(Object[] a, Comparator
+                c)对数组的元素进行排序，用匿名内部类的对象给c形参传入按照编号比较大小的定制比较器对象。并显示排序后结果</p>
+            <p>员工类示例代码：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n647" mdtype="fences" style="break-inside: unset;">class Employee{
+	private int id;
+	private String name;
+	private double salary;
+	public Employee(int id, String name, double salary) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+	}
+	public Employee() {
+		super();
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + "]";
+	}
+}
+</pre>
+            <p>测试类：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n649" mdtype="fences" style="break-inside: unset;">public class TestInner {
+	public static void main(String[] args) {
+		Employee[] arr = new Employee[5];
+		arr[0] = new Employee(1,"张三",13000);
+		arr[1] = new Employee(3,"王五",14000);
+		arr[2] = new Employee(2,"李四",13000);
+		arr[3] = new Employee(4,"赵六",7000);
+		arr[4] = new Employee(5,"钱七",9000);
+		
+		//原顺序
+		System.out.println("员工列表：");
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+		
+		Arrays.sort(arr, new Comparator() {
+			@Override
+			public int compare(Object o1, Object o2) {
+				Employee e1 = (Employee) o1;
+				Employee e2 = (Employee) o2;
+				return Double.compare(e1.getSalary(), e2.getSalary());
+			}
+		});
+		
+		System.out.println("按照薪资排序后员工列表：");
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+		
+		Arrays.sort(arr, new Comparator() {
+			@Override
+			public int compare(Object o1, Object o2) {
+				Employee e1 = (Employee) o1;
+				Employee e2 = (Employee) o2;
+				return e1.getId() - e2.getId();
+			}
+		});
+				
+		System.out.println("按照编号排序后员工列表：");
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+	}
+}
+</pre>
+        </li>
+        <li><h5><a name='header-n651' class='md-header-anchor '></a>练习2</h5>
+            <p>（1）声明一个抽象类Father，包含抽象方法：public abstract void method();
+                （2）用匿名内部类继承Father，并重写抽象方法，打印“hello baby&quot;
+                并调用子类对象的method方法</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n653" mdtype="fences">public abstract class Father{
+	public abstract void method();
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n654" mdtype="fences">public class TestExer1 {
+	public static void main(String[] args) {
+		new Father(){
+
+			@Override
+			public void method() {
+				System.out.println("hello 孩子");
+			}
+			
+		}.method();
+	}
+}
+</pre>
+        </li>
+        <li><h5><a name='header-n656' class='md-header-anchor '></a>练习3</h5>
+            <p>（1）声明一个员工类Triangle三角形，有属性：a,b,c表示三条边
+                （2）在测试类中创建Triangle数组
+                （3）分别调用Arrays.sort(数组，Comparator)，用匿名内部类实现按照编号周长排列
+                （4）分别调用Arrays.sort(数组，Comparator)，用匿名内部类实现按照薪资面积排列</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n658" mdtype="fences" style="break-inside: unset;">public class Triangle {
+	private double a;
+	private double b;
+	private double c;
+	public Triangle(double a, double b, double c) {
+		super();
+		this.a = a;
+		this.b = b;
+		this.c = c;
+	}
+	public Triangle() {
+		super();
+	}
+	public double getA() {
+		return a;
+	}
+	public void setA(double a) {
+		this.a = a;
+	}
+	public double getB() {
+		return b;
+	}
+	public void setB(double b) {
+		this.b = b;
+	}
+	public double getC() {
+		return c;
+	}
+	public void setC(double c) {
+		this.c = c;
+	}
+	@Override
+	public String toString() {
+		return "Triangle [a=" + a + ", b=" + b + ", c=" + c + "]";
+	}
+	public double getPerimeter(){
+		return a+b+c;
+	}
+	public double getArea(){
+		double p = getPerimeter()/2;
+		return Math.sqrt(p*(p-a)*(p-b)*(p-c));
+	}
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n659" mdtype="fences" style="break-inside: unset;">public class TestExer2 {
+	public static void main(String[] args) {
+		Triangle[] arr = new Triangle[3];
+		arr[0]  = new Triangle(6, 1, 6);
+		arr[1]  = new Triangle(3, 4, 5);
+		arr[2]  = new Triangle(6, 6, 6);
+		
+		System.out.println("原来的顺序：");
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+		System.out.println("--------------------");
+		System.out.println("按照周长排序：");
+		Arrays.sort(arr, new Comparator() {
+
+			@Override
+			public int compare(Object o1, Object o2) {
+				Triangle t1 = (Triangle) o1;
+				Triangle t2 = (Triangle) o2;
+				return Double.compare(t1.getPerimeter(), t2.getPerimeter());
+			}
+		});
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+		System.out.println("--------------------");
+		System.out.println("按照面积排序：");
+		Arrays.sort(arr, new Comparator() {
+
+			@Override
+			public int compare(Object o1, Object o2) {
+				Triangle t1 = (Triangle) o1;
+				Triangle t2 = (Triangle) o2;
+				return Double.compare(t1.getArea(), t2.getArea());
+			}
+		});
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+	}
+}
+</pre>
+        </li>
+        <li><h5><a name='header-n661' class='md-header-anchor '></a>练习4</h5>
+            <p>1、声明一个接口：Predicate接口，包含public abstract boolean test(Object obj);抽象方法
+                2、声明一个员工类：Employee,有属性：编号、姓名、年龄、薪资
+                3、声明一个员工管理类：EmployeeService，
+                （1）包含Employee[] arr，并在EmployeeService构造器中，创建数组，并初始化数组，例如：
+                arr = new Employee[5];
+                <span>		</span>arr[0] = new Employee(4, &quot;李四&quot;, 24, 24000);
+                <span>		</span>arr[1] = new Employee(3, &quot;张三&quot;, 23, 13000);
+                <span>		</span>arr[2] = new Employee(5, &quot;王五&quot;, 25, 15000);
+                <span>		</span>arr[3] = new Employee(1, &quot;赵六&quot;, 27, 17000);
+                <span>		</span>arr[4] = new Employee(2, &quot;钱七&quot;, 16, 6000);</p>
+            <p>（2）包含public Employee[] get(Predicate p){
+                <span>		</span>Employee[] result = new Employee[arr.length];
+                <span>		</span>int total = 0;
+                <span>		</span>for(int i=0; i&lt;arr.length; i++){
+                <span>			</span>if(p.test(arr[i]){
+                <span>				</span>result[total++] = arr[i];
+                <span>			</span>}
+                <span>		</span>}
+                <span>		</span>return Arrays.copyOf(result,total);
+                <span>	</span>}<span>		</span>
+                这个方法的作用，就是用于在arr数组中筛选满足条件的元素
+                4、在测试类中，创建EmployeeService对象，调用get(Predicate p)方法，通过匿名内部类的对象给形参p赋值，
+                分别获取：
+                （1）所有员工对象
+                （2）所有年龄超过25的员工
+                （3）所有薪资高于15000的员工
+                （4）所有编号是偶数的员工
+                （5）名字是“张三”的员工
+                （6）年龄超过25，薪资高于15000的员工</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n664" mdtype="fences">public interface Predicate {
+	public abstract boolean test(Object obj);
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n665" mdtype="fences" style="break-inside: unset;">public class Employee{
+	private int id;
+	private String name;
+	private int age;
+	private double salary;
+	public Employee() {
+		super();
+	}
+	public Employee(int id, String name, int age, double salary) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.salary = salary;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", age=" + age + ", salary=" + salary + "]";
+	}
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n666" mdtype="fences" style="break-inside: unset;">public class EmployeeService {
+	private Employee[] arr;
+
+	public EmployeeService() {
+		arr = new Employee[5];
+		arr[0] = new Employee(4, "李四", 24, 24000);
+		arr[1] = new Employee(3, "张三", 23, 13000);
+		arr[2] = new Employee(5, "王五", 25, 15000);
+		arr[3] = new Employee(1, "赵六", 27, 17000);
+		arr[4] = new Employee(2, "钱七", 16, 6000);
+	}
+	public Employee[] get(Predicate p){
+		Employee[] result = new Employee[arr.length] ;
+		int total = 0;
+		for (int i = 0; i &lt; arr.length; i++) {
+			if(p.test(arr[i])){
+				result[total++] = arr[i];
+			}
+		}
+		return Arrays.copyOf(result, total);
+	}
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n667" mdtype="fences" style="break-inside: unset;">public class TestExer5 {
+	public static void main(String[] args) {
+		EmployeeService es = new EmployeeService();
+		
+		//（1）所有员工对象
+		Employee[] employees = es.get(new Predicate(){
+
+			@Override
+			public boolean test(Object obj) {
+				return true;
+			}
+			
+		});
+		for (int i = 0; i &lt; employees.length; i++) {
+			System.out.println(employees[i]);
+		}
+		System.out.println("============================");
+//		（2）所有年龄超过25的员工
+		employees = es.get(new Predicate(){
+
+			@Override
+			public boolean test(Object obj) {
+				Employee emp = (Employee) obj;
+				return emp.getAge()&gt;25;
+			}
+			
+		});
+		for (int i = 0; i &lt; employees.length; i++) {
+			System.out.println(employees[i]);
+		}
+        //....
+	}
+}
+</pre>
+        </li>
+    </ol>
+    <h2><a name='header-n668' class='md-header-anchor '></a>7.4 static关键字</h2>
+    <p>static是一个修饰符，可以修饰：</p>
+    <ul>
+        <li><p>成员变量，我们称为类变量，或静态变量，表示某个类的所有对象共享的数据</p></li>
+        <li><p>成员方法，我们称为类方法，或静态方法，表示不需要实例对象就可以调用的方法，使用“类名.&quot;进行调用</p>
+            <ul>
+                <li>父类的静态方法可以被继承不能被重写</li>
+                <li>父接口的静态方法不能被实现类继承</li>
+            </ul>
+        </li>
+        <li><p>代码块，我们称为静态代码块，或静态初始化块，用于为静态变量初始化，每一个类的静态代码块只会执行一次，在类第一次初始化时执行</p></li>
+        <li><p>成员内部类，我们称为静态成员内部类，简称静态内部类，不需要外部类实例对象就可以使用的内部类，在静态内部类中只能使用外部类的静态成员</p>
+            <ul>
+                <li>static不能修饰top-level的类</li>
+            </ul>
+            <p><strong>静态随着类的加载而加载</strong>，实例相关的都是后加载，静态无法访问实例，实例可以访问静态。</p>
+            <p>静态变量：所有实例共享的一份数据。</p>
+            <p>静态方法：使用类名直接调用的方法（常用于工具类中，Arrays）</p>
+            <p>静态代码块：常用于在实例使用前准备一些数据的初始化</p></li>
+    </ul>
+    <ul>
+        <li>静态导入</li>
+    </ul>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n694"
+         mdtype="fences">import static 包.类名.静态成员;
+import static 包.类名.*;
+</pre>
+    <p>例如：使用一个枚举类的常量对象时，使用一个接口的内部接口时等</p><h4><a name='header-n696' class='md-header-anchor '></a>修饰符一起使用问题？</h4>
+    <figure>
+        <table>
+            <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>外部类</th>
+                <th>成员变量</th>
+                <th>代码块</th>
+                <th>构造器</th>
+                <th>方法</th>
+                <th>局部变量</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>public</td>
+                <td>√</td>
+                <td>√</td>
+                <td>×</td>
+                <td>√</td>
+                <td>√</td>
+                <td>×</td>
+            </tr>
+            <tr>
+                <td>protected</td>
+                <td>×</td>
+                <td>√</td>
+                <td>×</td>
+                <td>√</td>
+                <td>√</td>
+                <td>×</td>
+            </tr>
+            <tr>
+                <td>private</td>
+                <td>×</td>
+                <td>√</td>
+                <td>×</td>
+                <td>√</td>
+                <td>√</td>
+                <td>×</td>
+            </tr>
+            <tr>
+                <td>static</td>
+                <td>×</td>
+                <td>√</td>
+                <td>√</td>
+                <td>×</td>
+                <td>√</td>
+                <td>×</td>
+            </tr>
+            <tr>
+                <td>final</td>
+                <td>√</td>
+                <td>√</td>
+                <td>×</td>
+                <td>×</td>
+                <td>√</td>
+                <td>√</td>
+            </tr>
+            <tr>
+                <td>abstract</td>
+                <td>√</td>
+                <td>×</td>
+                <td>×</td>
+                <td>×</td>
+                <td>√</td>
+                <td>×</td>
+            </tr>
+            <tr>
+                <td>native</td>
+                <td>×</td>
+                <td>×</td>
+                <td>×</td>
+                <td>×</td>
+                <td>√</td>
+                <td>×</td>
+            </tr>
+            </tbody>
+        </table>
+    </figure>
+    <p>不能和abstract一起使用的修饰符？</p>
+    <p>（1）abstract和<strong>final</strong>不能一起修饰<strong>方法和类</strong></p>
+    <p>（2）abstract和<strong>static</strong>不能一起修饰<strong>方法</strong></p>
+    <p>（3）abstract和<strong>native</strong>不能一起修饰<strong>方法</strong></p>
+    <p>（4）abstract和<strong>private</strong>不能一起修饰<strong>方法</strong></p>
+    <p>static和final一起使用：</p>
+    <p>（1）修饰方法：可以，因为都不能被重写</p>
+    <p>（2）修饰成员变量：可以，表示静态常量</p>
+    <p>（3）修饰局部变量：不可以，static不能修饰局部变量</p>
+    <p>（4）修饰代码块：不可以，final不能修改代码块</p>
+    <p>（5）修饰内部类：可以一起修饰成员内部类，不能一起修饰局部内部类</p>
+    <p>&nbsp;</p>
+    <h2><a name='header-n774' class='md-header-anchor '></a>单例模式（暂）</h2>
+    <p>
+        设计模式：经验的总结，大量业务开发实践中，针对某些需求，总结的一套开发经验。比如程序运行时，希望内存中只存在一个对象的实例（或考虑用于共享数据，或考虑实例多了浪费空间），针对这样的需求如何做到呢？经长期实践总结，有以下方式可以轻松做到，你记住了这种设计模式也就可以轻松完成这个需求，不需要再从头思考各种细节问题来完成。</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n776"
+         mdtype="fences" style="break-inside: unset;">饿汉式：
+public class Singletion{
+    private static final Singleton instance = new Singleton();
+    private Singleton(){}
+    public Singleton getIstence(){
+        return instance;
+    }
+}
+懒汉式：//有线程安全问题
+pupublic class Singleton{
+    private static Singleton instance;
+    private Singleton(){}
+    public Singleton getIstence(){
+        if(instance==null){
+            instance=new Singleton();
+        }
+        return instance;
+    }
+}
+</pre>
+    <p>&nbsp;</p>
+    <h2><a name='header-n778' class='md-header-anchor '></a>7.7 注解（暂）</h2>
+    <h3><a name='header-n779' class='md-header-anchor '></a>7.7.1 什么是注解</h3>
+    <p>注解是以“<strong>@注释名</strong>”在代码中存在的，还可以添加一些参数值，例如：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n781"
+         mdtype="fences">@SuppressWarnings(value=”unchecked”)
+@Override
+@Deprecated
+@Test
+@author
+@param
+....
+</pre>
+    <p>注解Annotation是从JDK5.0开始引入。</p>
+    <p>
+        虽然说注解也是一种注释，因为它们都不会改变程序原有的逻辑，只是对程序增加了某些注释性信息。不过它又不同于单行注释和多行注释，对于单行注释和多行注释是给程序员看的，而注解是可以被编译器或其他程序读取的一种注释，程序还可以根据注解的不同，做出相应的处理。所以注解是插入到代码中以便有工具可以对它们进行处理的标签。</p>
+    <p>一个完整的注解有三个部分：</p>
+    <ul>
+        <li>注解的声明：就如同类、方法、变量等一样，需要先声明后使用</li>
+        <li>注解的使用：用于注解在包、类、方法、属性、构造、局部变量等上面的10个位置中一个或多个位置</li>
+        <li>注解的读取：有一段专门用来读取这些使用的注解，然后根据注解信息作出相应的处理，这段程序称为注解处理流程，这也是注解区别与普通注释最大的不同。</li>
+    </ul>
+    <p>注解和之前的类和方法不一样。之前的类和方法只有声明和使用两个部分。类声明完了，作用和功能就定了，调用时根据声明执行即可。而注解的声明只是说明了该注解的使用格式，注解的作用由读取该注解的程序决定。</p>
+    <p>示例说明：</p>
+    <p><img src='imgs07/image-20200307194703453.png' alt='image-20200307194703453' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs07/image-20200307200134140.png' alt='image-20200307200134140' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs07/image-20200307201107365.png' alt='image-20200307201107365' referrerPolicy='no-referrer'/></p>
+    <p>
+        而我们平时使用的注解，要么是JRE核心类库中声明的，要么是某个框架（例如JUunit框架，Spring框架等）声明的，如果是JRE类库中声明的注解，JDK中都会提供该注解的读取程序，要么是在编译中，要么在某个其他的地方。而框架中声明注解，读取该注解的程序在框架中定义，因此每一个注解的意义由框架（例如JUnit框架，Spring框架等）决定。</p>
+    <h3><a name='header-n798' class='md-header-anchor '></a>7.7.2 系统预定义的三个最基本的注解</h3><h4><a name='header-n799'
+                                                                                            class='md-header-anchor '></a>1、@Override
+    </h4>
+    <p><span>	</span>用于检测被修饰的方法为有效的重写方法，如果不是，则报编译错误!</p>
+    <p><span>	</span>只能标记在方法上。</p>
+    <p><span>	</span>它会被编译器程序读取。</p><h4><a name='header-n803' class='md-header-anchor '></a>2、@Deprecated</h4>
+    <p><span>	</span>用于表示被标记的数据已经过时，不建议使用。</p>
+    <p><span>	</span>可以用于修饰 属性、方法、构造、类、包、局部变量、参数。</p>
+    <p><span>	</span>它会被编译器程序读取。</p><h4><a name='header-n807' class='md-header-anchor '></a>3、@SuppressWarnings</h4>
+    <p><span>	</span>抑制编译警告。</p>
+    <p><span>	</span>可以用于修饰类、属性、方法、构造、局部变量、参数</p>
+    <p><span>	</span>它会被编译器程序读取。</p>
+    <p>示例代码：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n812"
+         mdtype="fences" style="break-inside: unset;">public class TestAnnotation {
+	@SuppressWarnings({"unused","rawtypes", "unchecked"})
+	public static void main(String[] args) {
+		
+		int i;
+	
+		List list = new ArrayList();
+		list.add("");
+		list.add(123);
+		list.add("");
+		
+		Father f = new Son();
+		f.show();
+		f.methodOl();
+	}
+
+}
+
+
+class Father{
+	@Deprecated
+	public void show() {
+		
+	}
+	public void methodOl() {
+		System.out.println("Father Method");
+	}
+	public void print1n(){
+		System.out.println("Father Method");
+	}
+	public int sum(int... nums){
+		int sum = 0;
+		for (int i = 0; i &lt; nums.length; i++) {
+			sum += nums[i];
+		}
+		return sum;
+	}
+}
+
+class Son extends Father{
+	
+/*	@Override
+	public void method01() {
+		System.out.println("Son Method");
+	}
+	
+	@Override
+	public void println(){
+		System.out.println("Father Method");
+	}
+	
+	@Override
+	public long sum(int[] nums){
+		int sum = 0;
+		for (int i = 0; i &lt; nums.length; i++) {
+			sum += nums[i];
+		}
+		return sum;
+	}*/
+}
+</pre>
+    <h3><a name='header-n813' class='md-header-anchor '></a>7.7.3 Java中文档注释（了解）</h3>
+    <ul>
+        <li><p>@author 标明开发该类模块的作者，多个作者之间使用,分割</p></li>
+        <li><p>@version 标明该类模块的版本</p></li>
+        <li><p>@see 参考转向，也就是相关主题</p></li>
+        <li><p>@since 从哪个版本开始增加的</p></li>
+        <li><p>@param 对方法中某参数的说明，如果没有参数就不能写</p></li>
+        <li><p>@return 对方法返回值的说明，如果方法的返回值类型是void就不能写</p></li>
+        <li><p>@throws/@exception 对方法可能抛出的异常进行说明 ，如果方法没有用throws显式抛出的异常就不能写</p>
+            <ul>
+                <li>其中 @param @return 和 @exception 这三个标记都是只用于方法的。</li>
+                <li>@param的格式要求：@param 形参名 形参类型 形参说明</li>
+                <li>@return 的格式要求：@return 返回值类型 返回值说明</li>
+                <li>@exception 的格式要求：@exception 异常类型 异常说明</li>
+                <li>@param和@exception可以并列多个</li>
+            </ul>
+        </li>
+    </ul>
+    <p>javadoc.exe就是这些注解的信息处理流程。</p>
+    <p>示例代码：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n842"
+         mdtype="fences" style="break-inside: unset;">/**
+ * 
+ * @author Irene
+ *
+ */
+public class TestAnnotation2 {
+	
+	/**
+	 * 这是Java的主方法，是Java程序的入口
+	 * @param args String[] 命令行参数，使用java命令时，在后面传入参数，例如
+	 * 	java 类名   参数1  参数2 ....
+	 */
+	public static void main(String[] args) {
+		
+	}
+	
+	/**
+	 * 这是一个求两个整数中最大值的方法
+	 * @param a int 其中一个整数
+	 * @param b int 另一个整数
+	 * @return int 返回最大值
+	 */
+	public static int getMax(int a, int b){
+		return a&gt;b?a:b;
+	}
+	
+	/**
+	 * 这是复制一个文件的方法
+	 * @param src String 源文件
+	 * @param dest  String 目标文件
+	 * @throws FileNotFoundException 当源文件找不到时会抛出该异常
+	 */
+	public static void copyFile(String src, String dest) throws FileNotFoundException{
+		FileInputStream fis = new FileInputStream(src);
+		//..
+	}
+	
+	/**
+	 * 
+	 */
+	public void println(){
+		
+	}
+}
+</pre>
+    <blockquote><p>注释与代码要一致，如果不一致，会误导别人或自己</p></blockquote>
+    <h4><a name='header-n845' class='md-header-anchor '></a>eclipse中导出javadoc</h4>
+    <p><img src='imgs07/1576665188851.png' alt='1576665188851' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs07/1576665298238.png' alt='1576665298238' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs07/1576665309340.png' alt='1576665309340' referrerPolicy='no-referrer'/></p>
+    <p>如果导出时有乱码问题，可以在上述窗口下面按next到最后一步通过增加Javadoc的额外参数选项来指定字符编码再导出：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="command" contenteditable="false" cid="n850"
+         mdtype="fences">-docencoding UTF-8
+-encoding UTF-8
+-charset UTF-8
+</pre>
+    <p><img src='imgs07/1576665525558.png' alt='1576665525558' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs07/1576665321307.png' alt='1576665321307' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs07/1576665331437.png' alt='1576665331437' referrerPolicy='no-referrer'/></p><h4><a
+            name='header-n854' class='md-header-anchor '></a>idea中导出javadoc</h4>
+    <p><img src='imgs07/1576467074566.png' alt='1576467074566' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs07/javadoc2.jpg' alt='img' referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <h3><a name='header-n858' class='md-header-anchor '></a>7.7.4 JUnit单元测试</h3>
+    <p>JUnit是由 Erich Gamma 和 Kent Beck 编写的一个回归测试框架（regression testing
+        framework）,供Java开发人员编写单元测试之用。多数Java的开发环境都已经集成了JUnit作为单元测试的工具。JUnit测试是程序员测试，即所谓白盒测试，因为程序员知道被测试的软件如何（How）完成功能和完成什么样（What）的功能。</p>
+    <p>要使用JUnit，必须在项目的编译路径中必须引入JUnit的库，即相关的.class文件组成的jar包。如何把JUnit的jar添加到编译路径如图所示：</p><h4><a name='header-n861'
+                                                                                              class='md-header-anchor '></a>在eclipse中截图如下：
+    </h4><h5><a name='header-n862' class='md-header-anchor '></a>方式一：</h5>
+    <p><img src='imgs07/1562474605131.png' alt='1562474605131' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs07/1562474620088.png' alt='1562474620088' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs07/1562474639231.png' alt='1562474639231' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs07/1562474653799.png' alt='1562474653799' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs07/1562474692691.png' alt='1562474692691' referrerPolicy='no-referrer'/></p><h5><a
+            name='header-n868' class='md-header-anchor '></a>方式二：</h5>
+    <p>在@Test后面按Ctrl + 1，在选择Add JUnit 4 library to the build path</p>
+    <p><img src='imgs07/1576580402867.png' alt='1576580402867' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs07/1576580476913.png' alt='1576580476913' referrerPolicy='no-referrer'/></p><h4><a
+            name='header-n872' class='md-header-anchor '></a>在idea中截图如下：</h4><h5><a name='header-n873'
+                                                                                    class='md-header-anchor '></a>方式一：指定本地jar目录
+    </h5>
+    <p>单击工具栏的<img src='imgs07/1576580533760.png' alt='1576580533760' referrerPolicy='no-referrer'/>打开项目设置</p>
+    <p><img src='imgs07/1576584674884.png' alt='1576584674884' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs07/1576584719209.png' alt='1576584719209' referrerPolicy='no-referrer'/></p>
+    <p>注意：如上操作需要提前下载，并将JUnit的相关jar放到当前模块的libs文件夹中。</p>
+    <p><img src='imgs07/1576584781088.png' alt='1576584781088' referrerPolicy='no-referrer'/></p><h5><a
+            name='header-n879' class='md-header-anchor '></a>方式二：指定Marven仓库</h5>
+    <p>在@Test后面按Alt + 回车，选择Add &#39;JUnit4&#39; to classpath即可</p>
+    <p><img src='imgs07/1576580013065.png' alt='1576580013065' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs07/1576580073306.png' alt='1576580073306' referrerPolicy='no-referrer'/></p>
+    <p><strong>注意：如果Maven的本地仓库（例如：C:\Users\Irene\.m2）中没有则需要联网从Maven的中央仓库中下载。</strong></p>
+    <p><img src='imgs07/1576580095402.png' alt='1576580095402' referrerPolicy='no-referrer'/></p>
+    <ul>
+        <li>首先使用JUnit测试的类必须是public的。需要测试的方法都必须是public，无参，无返回值。</li>
+        <li>
+            @Test：标记在非静态的测试方法上。只有标记@Test的方法才能被作为一个测试方法单独测试。一个类中可以有多个@Test标记的方法。运行时如果只想运行其中一个@Test标记的方法，那么选择这个方法名，然后单独运行，否则整个类的所有标记了@Test的方法都会被执行，<strong>而且执行顺序不可控</strong>。
+        </li>
+    </ul>
+    <p>@Test注解会被JUnit框架读取，并处理。</p>
+    <p>示例代码：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n892"
+         mdtype="fences" style="break-inside: unset;">package com.atguigu.annotation;
+
+import java.util.Arrays;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+public class TestJUnit {
+	private static Object[] array;
+	private static int total;
+
+	@Test
+	public void delete(){
+		//从数组中删除一个元素
+		System.out.println("delete");
+		System.arraycopy(array, 1, array, 0, 2);
+		array[--total]=null;
+        System.out.println(Arrays.toString(array));
+	}
+	@Test
+	public void tadd(){
+		//往数组中存储三个元素
+		System.out.println("add");
+		array[total++] = "hello";
+		array[total++] = "world";
+		array[total++] = "java";
+        System.out.println(Arrays.toString(array));
+	}
+	
+}
+</pre>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <figure>
+        <table>
+            <thead>
+            <tr>
+                <th style='text-align:right;'><a href='../javaSE.html'>回目录</a></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style='text-align:right;'>教程版本：1.2 更新日期：2019年1月3日</td>
+            </tr>
+            </tbody>
+        </table>
+    </figure>
+</div>
+</body>
+</html>

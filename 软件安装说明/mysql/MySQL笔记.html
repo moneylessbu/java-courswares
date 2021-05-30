@@ -1,0 +1,936 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>MySQL笔记</title><link href='https://fonts.loli.net/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:first-child { margin-top: -20px; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 2; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px !important; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 32px; padding-right: 32px; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="mermaid"] svg, [lang="flow"] svg { max-width: 100%; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; word-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { word-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+:root { --active-file-bg-color: rgba(32, 43, 51, 0.63); --active-file-text-color: white; --bg-color: #f3f2ee; --text-color: #1f0909; --control-text-color: #444; --rawblock-edit-panel-bd: #e5e5e5; --select-text-bg-color: rgba(32, 43, 51, 0.63); --select-text-font-color: white; }
+pre { --select-text-bg-color: #36284e; --select-text-font-color: #fff; }
+html { font-size: 16px; }
+html, body { background-color: rgb(243, 242, 238); font-family: "PT Serif", "Times New Roman", Times, serif; color: rgb(31, 9, 9); line-height: 1.5em; }
+#write { max-width: 40em; }
+ol li { list-style-type: decimal; list-style-position: outside; }
+ul li { list-style-type: disc; list-style-position: outside; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote::before, blockquote::after, q::before, q::after { content: none; }
+table { border-collapse: collapse; border-spacing: 0px; }
+h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+h1 { font-size: 1.875em; line-height: 1.6em; margin-top: 2em; }
+h2, h3 { font-size: 1.3125em; line-height: 1.15; margin-top: 2.28571em; margin-bottom: 1.15em; }
+h3 { font-weight: normal; }
+h4 { font-size: 1.125em; margin-top: 2.67em; }
+h5, h6 { font-size: 1em; }
+h1 { border-bottom: 1px solid; margin-bottom: 1.875em; padding-bottom: 0.8125em; }
+a { text-decoration: none; color: rgb(6, 85, 136); }
+a:hover, a:active { text-decoration: underline; }
+p, blockquote, .md-fences { margin-bottom: 1.5em; }
+h1, h2, h3, h4, h5, h6 { margin-bottom: 1.5em; }
+blockquote { font-style: italic; border-left: 5px solid; margin-left: 2em; padding-left: 1em; }
+ul, ol { margin: 0px 0px 1.5em 1.5em; }
+.md-meta, .md-before, .md-after { color: rgb(153, 153, 153); }
+table { margin-bottom: 1.5em; font-size: 1em; }
+thead th, tfoot th { padding: 0.25em 0.25em 0.25em 0.4em; text-transform: uppercase; }
+th { text-align: left; }
+td { vertical-align: top; padding: 0.25em 0.25em 0.25em 0.4em; }
+code, .md-fences { background-color: rgb(218, 218, 218); }
+code { padding-left: 2px; padding-right: 2px; }
+.md-fences { margin-left: 2em; margin-bottom: 3em; padding-left: 1ch; padding-right: 1ch; }
+pre, code, tt { font-size: 0.875em; line-height: 1.71429em; }
+h1 { line-height: 1.3em; font-weight: normal; margin-bottom: 0.5em; }
+p + ul, p + ol { margin-top: 0.5em; }
+h3 + ul, h4 + ul, h5 + ul, h6 + ul, h3 + ol, h4 + ol, h5 + ol, h6 + ol { margin-top: 0.5em; }
+li > ul, li > ol { margin-top: inherit; margin-bottom: 0px; }
+li ol > li { list-style-type: lower-alpha; }
+li li ol > li { list-style-type: lower-roman; }
+h2, h3 { margin-bottom: 0.75em; }
+hr { border-top: none; border-right: none; border-bottom: 1px solid; border-left: none; }
+h1 { border-color: rgb(197, 197, 197); }
+blockquote { border-color: rgb(186, 186, 186); color: rgb(101, 101, 101); }
+blockquote ul, blockquote ol { margin-left: 0px; }
+.ty-table-edit { background-color: transparent; }
+thead { background-color: rgb(218, 218, 218); }
+tr:nth-child(2n) { background: rgb(232, 231, 231); }
+hr { border-color: rgb(197, 197, 197); }
+.task-list { padding-left: 1rem; }
+.md-task-list-item { padding-left: 1.5rem; list-style-type: none; }
+.md-task-list-item > input::before { content: "√"; display: inline-block; width: 1.25rem; height: 1.6rem; vertical-align: middle; text-align: center; color: rgb(221, 221, 221); background-color: rgb(243, 242, 238); }
+.md-task-list-item > input:checked::before, .md-task-list-item > input[checked]::before { color: inherit; }
+#write pre.md-meta-block { min-height: 1.875rem; color: rgb(85, 85, 85); border: 0px; background: transparent; margin-left: 1em; margin-top: 1em; }
+.md-image > .md-meta { color: rgb(155, 81, 70); }
+.md-image > .md-meta { font-family: Menlo, "Ubuntu Mono", Consolas, "Courier New", "Microsoft Yahei", "Hiragino Sans GB", "WenQuanYi Micro Hei", serif; }
+#write > h3.md-focus::before { left: -1.5rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+#write > h4.md-focus::before { left: -1.5rem; top: 0.25rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+#write > h5.md-focus::before { left: -1.5rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+#write > h6.md-focus::before { left: -1.5rem; top: 0.3125rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+.md-toc:focus .md-toc-content { margin-top: 19px; }
+.md-toc-content:empty::before { color: rgb(6, 85, 136); }
+.md-toc-item { color: rgb(6, 85, 136); }
+#write div.md-toc-tooltip { background-color: rgb(243, 242, 238); }
+#typora-sidebar { background-color: rgb(243, 242, 238); box-shadow: rgba(0, 0, 0, 0.376) 0px 6px 12px; }
+.pin-outline #typora-sidebar { background: inherit; box-shadow: none; border-right: 1px dashed; }
+.pin-outline #typora-sidebar:hover .outline-title-wrapper { border-left: 1px dashed; }
+.outline-item:hover { background-color: rgb(218, 218, 218); border-left: 28px solid rgb(218, 218, 218); border-right: 18px solid rgb(218, 218, 218); }
+.typora-node .outline-item:hover { border-right: 28px solid rgb(218, 218, 218); }
+.outline-expander::before { content: ""; font-family: FontAwesome; font-size: 14px; top: 1px; }
+.outline-expander:hover::before, .outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.modal-content { background-color: rgb(243, 242, 238); }
+.auto-suggest-container ul li { list-style-type: none; }
+.megamenu-menu, #top-titlebar, #top-titlebar *, .megamenu-content { background: rgb(243, 242, 238); color: rgb(31, 9, 9); }
+.megamenu-menu-header { border-bottom: 1px dashed rgb(32, 43, 51); }
+.megamenu-menu { box-shadow: none; border-right: 1px dashed; }
+header, .context-menu, .megamenu-content, footer { font-family: "PT Serif", "Times New Roman", Times, serif; color: rgb(31, 9, 9); }
+#megamenu-back-btn { color: rgb(31, 9, 9); border-color: rgb(31, 9, 9); }
+.megamenu-menu-header #megamenu-menu-header-title::before { color: rgb(31, 9, 9); }
+.megamenu-menu-list li a:hover, .megamenu-menu-list li a.active { color: inherit; background-color: rgb(232, 231, 223); }
+.long-btn:hover { background-color: rgb(232, 231, 223); }
+#recent-file-panel tbody tr:nth-child(2n-1) { background-color: transparent !important; }
+.megamenu-menu-panel tbody tr:hover td:nth-child(2) { color: inherit; }
+.megamenu-menu-panel .btn { background-color: rgb(210, 209, 209); }
+.btn-default { background-color: transparent; }
+.typora-sourceview-on #toggle-sourceview-btn, .ty-show-word-count #footer-word-count { background: rgb(199, 197, 197); }
+#typora-quick-open { background-color: inherit; }
+.md-diagram-panel { margin-top: 8px; }
+.file-list-item-file-name { font-weight: initial; }
+.file-list-item-summary { opacity: 1; }
+.file-list-item { color: rgb(119, 119, 119); }
+.file-list-item.active { background-color: inherit; color: black; }
+.ty-side-sort-btn.active { background-color: inherit; }
+.file-list-item.active .file-list-item-file-name { font-weight: bold; }
+.file-list-item { opacity: 1 !important; }
+.file-library-node.active > .file-node-background { background-color: var(--active-file-bg-color); }
+.file-tree-node.active > .file-node-content { color: var(--active-file-text-color); }
+.md-task-list-item > input { margin-left: -1.6em; margin-top: calc(1rem - 12px); }
+input { border: 1px solid rgb(170, 170, 170); }
+.megamenu-menu-header #megamenu-menu-header-title, .megamenu-menu-header:hover, .megamenu-menu-header:focus { color: inherit; }
+.dropdown-menu .divider { border-color: rgb(229, 229, 229); }
+.os-windows-7 strong, .os-windows-7 strong { font-weight: 760; }
+
+
+
+
+
+ .typora-export li, .typora-export p, .typora-export,  .footnote-line {white-space: normal;} 
+</style>
+</head>
+<body class='typora-export os-windows' >
+<div  id='write'  class = 'is-node'><h1><a name='header-n0' class='md-header-anchor '></a>第一章 数据库概述</h1><h2><a name='header-n2' class='md-header-anchor '></a>1.1什么是数据库</h2><p>数据库是一种存储并管理数据的软件系统</p><p>存储：持久化</p><p>管理：增删改查</p><h5><a name='header-n6' class='md-header-anchor '></a>常用的存储数据的方式：</h5><p>1、Java中的变量：生命周期短，不能实现持久化</p><p>2、序列化：管理数据时依赖于Java中的反序列化</p><p>3、txt，办公软件：没有统一的方式管理数据</p><p>4、数据库</p><h2><a name='header-n11' class='md-header-anchor '></a>1.2 数据库概述</h2><p>DBMS：关系型数据库管理系统（Database Management System）是一种操纵和管理数据库的大型软件，例如建立、使用和维护数据库。</p><p>DB：数据库（Database）</p><p>SQL：结构化查询语言，（Structure Query Language），专门用来操作/访问数据库的通用语言。</p><p>MySQL：其中的一款关系型数据库管理系统</p><p>以下是2019年<strong>DB-Engines Ranking</strong> 对各数据库受欢迎程度进行调查后的统计结果：（查看数据库最新排名:<a href='https://db-engines.com/en/ranking' target='_blank' class='url'>https://db-engines.com/en/ranking</a>）</p><p><img src='imgs/1571362950860.png' alt='1571362950860' referrerPolicy='no-referrer' /></p><p><strong>关系型数据库</strong>，采用关系模型来组织数据，简单来说，<strong>关系模型指的就是二维表格模型</strong>。类似于Excel工作表。</p><p>特点：</p><p><span>	</span>所存储的数据有一定的关系</p><p><span>	</span>将数据存储在磁盘上</p><p><span>	</span>重在持久化</p><p><strong>非关系型数据库</strong>（NOSQL,not only sql），可看成传统关系型数据库的功能阉割版本，基于键值对存储数据，通过减少很少用的功能，来提高性能。</p><p>特点：</p><p><span>	</span>以key-value或json的方式存储数据</p><p><span>	</span>将数据存储在内存中</p><p><span>	</span>重在性能，读取速度快</p><h3><a name='header-n28' class='md-header-anchor '></a>关系型数据库设计规则</h3><ul><li><p><strong>遵循ER模型</strong></p><ul><li>E    entity   代表实体的意思      对应到数据库当中的一张表          </li><li>R    relationship 代表关系的意思  </li></ul></li><li><p><strong>具体体现</strong></p><ul><li>将数据放到表中，表再放到库中。</li><li>一个数据库中可以有多个表，每个表都有一个名字，用来标识自己。表名具有唯一性。</li><li>表具有一些特性，这些特性定义了数据在表中如何存储，类似java和python中 “类”的设计。</li><li>表由列组成，我们也称为<strong>字段</strong>。每个字段描述了它所含有的数据的意义，<strong>数据表的设计实际上就是对字段的设计</strong>。创建数据表时，为每个字段分配一个数据类型，定义它们的数据长度和字段名。每个字段类似java 或者python中的“实例属性”。</li><li>表中的数据是按行存储的，一行即为一条记录。每一行类似于java或python中的“对象”。</li></ul><p><img src='imgs/1557377471553.png' alt='1557377471553' referrerPolicy='no-referrer' /></p></li></ul><h2><a name='header-n51' class='md-header-anchor '></a>1.3  MySQL概述</h2><p>MySQL<strong>是一种开放源代码的关系型数据库管理系统，开发者为瑞典MySQL AB公司。在2008年1月16号被Sun公司收购。而2009年,SUN又被Oracle收购。目前 MySQL被广泛地应用在Internet上的中小型网站中。由于其</strong>体积小、速度快、总体拥有成本低，尤其是开放源码这一特点，使得很多互联网公司选择了MySQL作为网站数据库（Facebook, Twitter, YouTube，阿里的蚂蚁金服，去哪儿，魅族，百度外卖，腾讯）。</p><p><img src='imgs/1557377559776.png' alt='1557377559776' referrerPolicy='no-referrer' /></p><h2><a name='header-n54' class='md-header-anchor '></a>1.4 Mysql软件的卸载、安装和配置</h2><p>见《MySQL5.7安装文档.md》</p><h1><a name='header-n56' class='md-header-anchor '></a>第二章 MySQL的使用</h1><h2><a name='header-n57' class='md-header-anchor '></a>2.1 MySQL服务的启动</h2><p>“我的电脑/计算机”--&gt;右键--&gt;“管理”--&gt;“服务”--&gt;启动和关闭MySQL服务</p><p>“开始菜单”--&gt;“控制面板”--&gt;“管理工具”--&gt;“服务”--&gt;启动和关闭MySQL</p><p>“任务管理器”--&gt;“服务”--&gt;启动和关闭MySQL</p><p><img src='imgs\wps10.jpg' alt='img' referrerPolicy='no-referrer' />    <img src='imgs\wps11.jpg' alt='img' referrerPolicy='no-referrer' /></p><p>或者</p><p>命令行</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="cmd"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="cmd"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-identifier">net</span> &nbsp;<span class="cm-builtin">start</span> &nbsp;<span class="cm-identifier">MySQL</span><span class="cm-error">服务名</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-identifier">net</span> &nbsp;<span class="cm-identifier">stop</span> &nbsp;<span class="cm-identifier">MySQL</span><span class="cm-error">服务名</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 49px;"></div><div class="CodeMirror-gutters" style="display: none; height: 49px;"></div></div></div></pre><h2><a name='header-n65' class='md-header-anchor '></a>2.2 客户端连接MySQL</h2><p>1、命令行客户端：</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="cmd"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="cmd"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-identifier">mysql</span> <span class="cm-operator">-</span><span class="cm-builtin">h</span> <span class="cm-error">主机</span><span class="cm-identifier">IP</span><span class="cm-error">地址</span> <span class="cm-operator">-</span><span class="cm-identifier">P</span> <span class="cm-error">端口号</span><span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-operator">-</span><span class="cm-identifier">u</span> <span class="cm-error">用户名</span><span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-operator">-</span><span class="cm-identifier">p</span><span class="cm-error">回车</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-identifier">Enter</span> <span class="cm-identifier">Password</span><span class="cm-operator">:</span><span class="cm-error">密码</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 74px;"></div><div class="CodeMirror-gutters" style="display: none; height: 74px;"></div></div></div></pre><blockquote><p>如果访问本机，-h localhost可以省略</p><p>如果端口号没有修改，-P 3306可以省略</p><p>除了-p与密码之间不要空格外，其他的-h,-P,-u与后面的参数值之间可以有空格</p><p>想要连接成功，必须保证服务开启的</p></blockquote><p>2、其他客户端，例如：可视化工具Navicat或SQLyog等</p><p><img src='imgs/1557378069584.png' alt='1557378069584' referrerPolicy='no-referrer' /></p><h1><a name='header-n75' class='md-header-anchor '></a>第三章  MySQL数据类型和运算符</h1><h2><a name='header-n76' class='md-header-anchor '></a>3.1 MySQL数据类型</h2><p>整型系列：xxxInt</p><blockquote><p>int(5)，必须和unsigned zerofill一起使用才有意义</p><p>unsigned：无符号字符，将整形的范围变为从0开始，同时所对应的范围也会发生变化</p><p>zerofill：0填充，当设置了整形的宽度时，若为该字段所设置的值不够宽度的要求，则会在数据之前补0，以达到宽度的要求</p></blockquote><p><img src='imgs/1560933629123.png' alt='1560933629123' referrerPolicy='no-referrer' /></p><p>浮点型系列：float,double</p><blockquote><p>double(M,D)：表示最长为M位，其中小数点后D位</p><p>例如：double(5,2)表示的数据范围[-999.99,999.99]，如果超过这个范围会报错。</p></blockquote><p>定点型系列：decimal</p><blockquote><p>decimal(M,D)：表示最长为M位，其中小数点后D位</p></blockquote><p>字符串类型：char,varchar(M),text</p><blockquote><p>char如果没有指定宽度，默认为1个字符</p><p>varchar(M)，必须指定宽度</p></blockquote><p>日期时间类型：year, date, datetime, timestamp</p><blockquote><p>注意一下每一种日期时间的表示范围</p></blockquote><p><img src='imgs/1560933691657.png' alt='1560933691657' referrerPolicy='no-referrer' /></p><p>其他类型：bit（0或1）, xxBlob, 枚举，集合等</p><blockquote><p>TinyBlob 最大 255B
+Blob 最大 65K 
+MediumBlob 最大 16M 
+LongBlob 最大 4G </p></blockquote><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="mysql" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="mysql"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">+----------------+--------------+------+-----+---------+----------------+</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| <span class="cm-keyword">Field</span> &nbsp; &nbsp; &nbsp; &nbsp;  | Type &nbsp; &nbsp; &nbsp; &nbsp; | <span class="cm-atom">Null</span> | <span class="cm-keyword">Key</span> | <span class="cm-keyword">Default</span> | Extra &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">+----------------+--------------+------+-----+---------+----------------+</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| eid &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  | <span class="cm-builtin">int</span>(<span class="cm-number">11</span>) &nbsp; &nbsp;  | <span class="cm-keyword">NO</span> &nbsp; | PRI | <span class="cm-atom">NULL</span> &nbsp;  | <span class="cm-keyword">auto_increment</span> |</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| ename &nbsp; &nbsp; &nbsp; &nbsp;  | <span class="cm-builtin">varchar</span>(<span class="cm-number">20</span>)  | <span class="cm-keyword">NO</span> &nbsp; | &nbsp; &nbsp; | <span class="cm-atom">NULL</span> &nbsp;  | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| tel &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  | <span class="cm-builtin">char</span>(<span class="cm-number">11</span>) &nbsp; &nbsp; | <span class="cm-keyword">NO</span> &nbsp; | &nbsp; &nbsp; | <span class="cm-atom">NULL</span> &nbsp;  | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| gender &nbsp; &nbsp; &nbsp; &nbsp; | <span class="cm-builtin">char</span>(<span class="cm-number">1</span>) &nbsp; &nbsp;  | YES  | &nbsp; &nbsp; | 男 &nbsp; &nbsp; &nbsp;  | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| salary &nbsp; &nbsp; &nbsp; &nbsp; | <span class="cm-builtin">double</span> &nbsp; &nbsp; &nbsp; | YES  | &nbsp; &nbsp; | <span class="cm-atom">NULL</span> &nbsp;  | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| commission_pct | <span class="cm-builtin">double</span>(<span class="cm-number">3</span>,<span class="cm-number">2</span>)  | YES  | &nbsp; &nbsp; | <span class="cm-atom">NULL</span> &nbsp;  | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| birthday &nbsp; &nbsp; &nbsp; | <span class="cm-builtin">date</span> &nbsp; &nbsp; &nbsp; &nbsp; | YES  | &nbsp; &nbsp; | <span class="cm-atom">NULL</span> &nbsp;  | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| hiredate &nbsp; &nbsp; &nbsp; | <span class="cm-builtin">date</span> &nbsp; &nbsp; &nbsp; &nbsp; | YES  | &nbsp; &nbsp; | <span class="cm-atom">NULL</span> &nbsp;  | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| job_id &nbsp; &nbsp; &nbsp; &nbsp; | <span class="cm-builtin">int</span>(<span class="cm-number">11</span>) &nbsp; &nbsp;  | YES  | &nbsp; &nbsp; | <span class="cm-atom">NULL</span> &nbsp;  | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| email &nbsp; &nbsp; &nbsp; &nbsp;  | <span class="cm-builtin">varchar</span>(<span class="cm-number">32</span>)  | YES  | &nbsp; &nbsp; | <span class="cm-atom">NULL</span> &nbsp;  | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| mid &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  | <span class="cm-builtin">int</span>(<span class="cm-number">11</span>) &nbsp; &nbsp;  | YES  | &nbsp; &nbsp; | <span class="cm-atom">NULL</span> &nbsp;  | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| address &nbsp; &nbsp; &nbsp;  | <span class="cm-builtin">varchar</span>(<span class="cm-number">150</span>) | YES  | &nbsp; &nbsp; | <span class="cm-atom">NULL</span> &nbsp;  | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| native_place &nbsp; | <span class="cm-builtin">varchar</span>(<span class="cm-number">10</span>)  | YES  | &nbsp; &nbsp; | <span class="cm-atom">NULL</span> &nbsp;  | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| did &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  | <span class="cm-builtin">int</span>(<span class="cm-number">11</span>) &nbsp; &nbsp;  | YES  | &nbsp; &nbsp; | <span class="cm-atom">NULL</span> &nbsp;  | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">+----------------+--------------+------+-----+---------+----------------+</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 1332px;"></div><div class="CodeMirror-gutters" style="display: none; height: 1332px;"></div></div></div></pre><p>&nbsp;</p><h2><a name='header-n103' class='md-header-anchor '></a>3.2 MySQL运算符</h2><p>1、算术运算符</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang=""><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">加：+</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">减：-</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">乘：*</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">除：/ &nbsp; div（只保留整数部分）</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">模：% &nbsp; mod</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 123px;"></div><div class="CodeMirror-gutters" style="display: none; height: 123px;"></div></div></div></pre><p>2、比较运算符</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang=""><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">大于：&gt;</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">小于：&lt;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">大于等于：&gt;=</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">小于等于：&gt;=</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">等于：= &nbsp; 不能用于null判断</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">不等于：!=  或 &lt;&gt;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">安全等于：&lt;=&gt;  可以用于null值判断</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 173px;"></div><div class="CodeMirror-gutters" style="display: none; height: 173px;"></div></div></div></pre><p>3、逻辑运算符（建议用单词，可读性来说）</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang=""><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">逻辑与：&amp;&amp; 或 and</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">逻辑或：|| 或 or</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">逻辑非：! 或 not</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">逻辑异或：^ 或 xor</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">xor：只能满足其中的一个条件，不能同时满足，也不能都不满足，结果A∪B-A∩B</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 173px;"></div><div class="CodeMirror-gutters" style="display: none; height: 173px;"></div></div></div></pre><p>4、范围</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="mysql"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="mysql"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">区间范围：between x &nbsp;<span class="cm-keyword">and</span>  y</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span> &nbsp; &nbsp;<span class="cm-keyword">not</span> <span class="cm-keyword">between</span> x &nbsp;<span class="cm-keyword">and</span>  y</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">集合范围：in (x,x,x)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span> &nbsp; &nbsp;<span class="cm-keyword">not</span> &nbsp;<span class="cm-keyword">in</span>(x,x,x)</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 99px;"></div><div class="CodeMirror-gutters" style="display: none; height: 99px;"></div></div></div></pre><p>5、模糊查询（只针对字符串类型，日期类型）</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang=""><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">like 'xxx'</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">如果想要表示0~n个字符，用%</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">如果想要表示确定的1个字符，用_</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 74px;"></div><div class="CodeMirror-gutters" style="display: none; height: 74px;"></div></div></div></pre><p>6、位运算符（很少使用）</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n115" mdtype="fences">左移：&lt;&lt;
+右移：&gt;&gt;
+按位与：&amp;
+按位或：|
+按位异或：^
+</pre><p>7、特殊的null值处理</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n117" mdtype="fences">#（1）判断时
+xx is null
+xx is not null
+xx &lt;=&gt; null
+
+#(2)计算时
+ifnull(xx,代替值)  当xx是null时，用代替值计算
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n118" mdtype="fences" style="break-inside: unset;">/*一、运算符
+1、算术运算符
++：加
+-：减
+*：乘
+/：除   可以保留小数部分
+div：除  如果整数与整数相除只保留整数部分
+%：求余数
+mod：求余数
+*/
+select 1+1;
+select 1/2; #0.5
+select 1 div 2; #0
+
+/*
+2、比较运算符
+&gt;：大于
+&lt;：小于
+=：等于  注意区别，Java中是==,mysql中是=
+&gt;=：大于等于
+&lt;=：小于等于
+!=：不等于
+&lt;&gt;：不等于
+&lt;=&gt;：安全等于  用于判断null值的比较运算符
+		null值的判断，习惯上我们用is null 和is not null
+*/
+#查询薪资大于20000元的员工
+select * from t_employee where salary &gt; 20000;
+
+#查询所有男员工
+select * from t_employee where gender = '男';
+select * from t_employee where gender != '女';
+select * from t_employee where gender &lt;&gt; '女';
+
+#查询奖金比例commision_pct是null的员工
+select  * from t_employee where commission_pct &lt;=&gt; null;
+select  * from t_employee where commission_pct is null;
+
+/*
+3、逻辑运算符
+&amp;&amp;和and：逻辑与
+	两个条件同时满足
+||和or：逻辑或
+	两个条件满足任意一个
+^和xor：逻辑异或
+	两个条件只能满足其中一个
+!和not：
+	不满足xx条件
+	*/
+#查询薪资大于20000元的女员工	
+select * from t_employee where salary &gt; 20000 &amp;&amp; gender = '女';
+select * from t_employee where salary &gt; 20000 and gender = '女';
+
+#查询男员工
+select * from t_employee where not gender = '女';
+select * from t_employee where !(gender = '女');
+
+#查询薪资大于10000  异或 性别是男的，即它俩只能满足一个
+#即查询薪资大于10000的女的或薪资低于10000的男的
+select * from t_employee where salary&gt;10000 ^ gender ='男';
+select * from t_employee where salary&gt;10000 xor gender ='男';
+/*
+4、范围
+（1）区间范围：
+	在[a,b]之间，between a and b
+	不在[a,b]之间，not between a and b
+（2）集合范围
+	in(...)
+	not in(...)
+*/
+#查询薪资在[15000,20000]之间的员工
+select * from t_employee where salary between 15000 and 20000;
+select * from t_employee where salary &gt;= 15000 and salary &lt;=20000;
+
+#查询薪资在9000,10000,12000
+select * from t_employee where salary in(9000,10000,12000);
+select * from t_employee where salary =9000 || salary =10000 || salary =12000;
+ /*
+5、模糊查询
+like '%x%' x代表确定的字符 %表示不确定的0~n个字符
+     '_x%'  x代表确定的字符 _表示确定的1个字符
+*/
+#查询，名字ename中包含“冰”这个字的员工
+select * from t_employee where ename like '%冰%';
+
+#查询，名字ename是张xx，三个字
+select * from t_employee where ename like '张__';
+
+#查询，名字ename是第二个字是'冰'
+select * from t_employee where ename like '_冰%';
+
+</pre><p>&nbsp;</p><h1><a name='header-n120' class='md-header-anchor '></a>第四章 SQL</h1><h2><a name='header-n121' class='md-header-anchor '></a>4.1 MySQL的语法规范和要求</h2><p>（1）mysql的sql语法不区分大小写</p><blockquote><p>MySQL的关键字和函数名等不区分大小写，但是对于数据值是否区分大小写，和字符集与校对规则有关。</p></blockquote><p>ci（大小写不敏感），cs（大小写敏感），_bin（二元，即比较是基于字符编码的值而与language无关，区分大小写）</p><p>（2）命名时：尽量使用26个英文字母大小写，数字0-9，下划线，不要使用其他符号</p><p>studentName--&gt;student_name</p><p>（3）建议不要使用mysql的关键字等来作为表名、字段名等，如果不小心使用，请在SQL语句中使用`（飘号）引起来</p><p>（4）数据库和表名、字段名等对象名中间不要包含空格</p><p>（5）同一个mysql软件中，数据库不能同名，同一个库中，表不能重名，同一个表中，字段不能重名</p><p>（6）标点符号：</p><blockquote><p>必须成对</p><p>必须英文状态下半角输入方式</p><p>字符串和日期类型可以使用单引号&#39;&#39;</p><p>列的别名可以使用双引号&quot;&quot;，给表名取别名不要使用双引号。取别名时as可以省略</p><p>如果列的别名没有包含空格，可以省略双引号，如果有空格双引号不能省略。</p></blockquote><p>（7）SQL脚本中如何加注释</p><blockquote><p>单行注释：#注释内容</p><p>单行注释：--空格注释内容    其中--后面的空格必须有</p><p>多行注释：/* 注释内容 */</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n143" mdtype="fences" style="break-inside: unset;">#以下两句是一样的，不区分大小写
+show databases;
+SHOW DATABASES;
+
+#创建表格
+#create table student info(...); #表名错误，因为表名有空格
+create table student_info(...); 
+
+#其中name使用``飘号，因为name和系统关键字或系统函数名等预定义标识符重名了。
+CREATE TABLE t_stu(
+    id INT,
+    `name` VARCHAR(20)
+);
+
+select id as "编号", `name` as "姓名" from t_stu; #起别名时，as都可以省略
+select id as 编号, `name` as 姓名 from t_stu; #如果字段别名中没有空格，那么可以省略""
+select id as 编 号, `name` as 姓 名 from t_stu; #错误，如果字段别名中有空格，那么不能省略""
+</pre><h2><a name='header-n144' class='md-header-anchor '></a>4.2 SQL分类</h2><p>DDL：数据定义语言，定义库，表结构等，包括create,drop,alter等</p><p>DML：数据操作语言，增删改查数据，包括insert,delete,update,select等</p><p>DCL：数据控制语言，权限，事务等管理。</p><p>DQL：数据查询语言，select</p><p>&nbsp;</p><h2><a name='header-n150' class='md-header-anchor '></a>4.3 DDL(v1.0)</h2><p>1、查看所有数据库</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n152" mdtype="fences">show databases;
+</pre><p>2、指定使用某个数据库</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n154" mdtype="fences">use 数据库名;
+</pre><p>3、创建数据库</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n156" mdtype="fences">create database 数据库名;
+
+create database 数据库名 charset 'utf8'; #在mysql中字符集名称不要使用utf-8
+
+create database 数据库名 charset 'gbk';
+</pre><p>4、删除数据库</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n158" mdtype="fences">drop database 数据库名;
+</pre><p>5、查看某个库下的所有表格</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n160" mdtype="fences">show tables ;  #前提是前面有use 数据库名;的语句
+show tables from 数据库名;
+</pre><p>6、创建表格</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n162" mdtype="fences">create table 【数据名.】表名(
+	字段名1 数据类型,
+	字段名2 数据类型,
+	....
+);
+
+</pre><p>&nbsp;</p><p>7、删除表格</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n165" mdtype="fences">drop table 【数据库名.]表名称;
+</pre><p>8、查看某个表结构</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n167" mdtype="fences">describe 【数据库名.]表名称;
+desc 【数据库名.]表名称;
+</pre><p>9、增加一列</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n169" mdtype="fences">alter table 【数据库名.]表名称 add 【column】 字段名 数据类型;
+alter table 【数据库名.]表名称 add 【column】 字段名 数据类型 first;
+alter table 【数据库名.]表名称 add 【column】 字段名 数据类型 after 另一个字段;
+</pre><p>10、删除一列</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n171" mdtype="fences">alter table 【数据库名.]表名称 drop 【column】 字段名;
+</pre><p>11、修改列数据类型</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n173" mdtype="fences">alter table 【数据库名.]表名称 modify 【column】 字段名 新数据类型;
+</pre><p>12、修改列名</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n175" mdtype="fences">alter table 【数据库名.]表名称 change【column】 旧字段名 新字段名 新数据类型;
+</pre><p>13、修改列的位置</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n177" mdtype="fences">alter table 【数据库名.]表名称 modify 【column】字段名 数据类型 first;
+alter table 【数据库名.]表名称 modify 【column】字段名 数据类型 after 另一个字段;
+</pre><p>14、修改表名称</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n179" mdtype="fences">alter table 旧表名 rename 新表名;
+rename table 旧表名 to 新表名;
+</pre><p>&nbsp;</p><h2><a name='header-n181' class='md-header-anchor '></a>4.4 DML(v1.0)</h2><p>1、添加数据</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n183" mdtype="fences">insert into 【数据库名.]表名称 values(值列表)； 
+#要求值列表的顺序、个数、类型，要与表格中的字段的顺序、个数、类型一一匹配
+
+insert into 【数据库名.]表名称(部分字段列表) values(值列表)；
+#要求列表的顺序、个数、类型，要与前面的(部分字段列表)的顺序、个数、类型一一匹配
+
+insert into 【数据库名.]表名称 values(值列表1)，(值列表2)。。。;
+
+insert into 【数据库名.]表名称(部分字段列表) values(值列表1)，(值列表2)。。。;
+</pre><p>2、修改数据</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n185" mdtype="fences">update 【数据库名.]表名称 set 字段名1 = 值1, 字段名2 = 值2 。。。 【where 条件】;
+</pre><blockquote><p>如果没有加where条件，表示修改所有行，这个字段的值</p></blockquote><p>&nbsp;</p><p>3、删除数据</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n190" mdtype="fences">delete from 【数据库名.]表名称 【where 条件】;
+</pre><blockquote><p>如果没有where条件，表示删除整张表的数据;</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n193" mdtype="fences">truncate 【数据库名.]表名称;#删除整张表的数据，还可以使用这个语句，效率更高，但是它不能回滚
+</pre><p>用delete删除整张表和用truncate删除整张表的数据的区别？</p><p>（1）truncate速度快</p><p>（2）truncate无法回滚</p><p>truncate因为底层是把表drop掉，然后新建了一张空表。</p><p>delete因为底层是一行一行删数据。</p><p>&nbsp;</p><p>4、简单查询数据</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n201" mdtype="fences">select * from 【数据库名.]表名称; #查询整张表的所有数据
+
+select 字段列表  from 【数据库名.]表名称;  #查询部分列表
+
+select * from 【数据库名.]表名称 【where 条件】;
+
+select 字段列表  from 【数据库名.]表名称 【where 条件】;
+</pre><blockquote><p>使用distinct可以对查询结果进行去重（冗余）</p></blockquote><h1><a name='header-n204' class='md-header-anchor '></a>第五章<span>	</span>数据库的导入和导出</h1><h2><a name='header-n205' class='md-header-anchor '></a>5.1 导入和导出数据</h2><h3><a name='header-n206' class='md-header-anchor '></a>5.1.1 单个数据库备份</h3><p>mysql5.5</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n208" mdtype="fences">C:\Windows\System32&gt; mysqldump -h主机地址 -P端口号 -u用户名 -p密码 --database  数据名 &gt; 文件路径/文件名.sql
+</pre><p>例如：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n210" mdtype="fences">C:\Windows\System32&gt;mysqldump -hlocalhost -P3306 -uroot -p123456 --database  test &gt; d:/test.sql
+</pre><p><img src='imgs/1560928457771.png' alt='1560928457771' referrerPolicy='no-referrer' /></p><p>mysql5.7版</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="cmd" contenteditable="false" cid="n213" mdtype="fences">C:\Windows\System32&gt; mysqldump -h主机地址 -P端口号 -u用户名 -p密码  数据名 &gt; 文件路径/文件名.sql
+</pre><blockquote><p>不要再写--database</p></blockquote><h3><a name='header-n216' class='md-header-anchor '></a>5.1.2 导入执行备份的sql脚本</h3><p>先登录mysql，然后执行如下命令：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n218" mdtype="fences">mysql&gt; source  sql脚本路径名.sql
+</pre><p>例如：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n220" mdtype="fences">mysql&gt;source d:/test.sql;
+</pre><p><img src='imgs/1560928671347.png' alt='1560928671347' referrerPolicy='no-referrer' /></p><h1><a name='header-n222' class='md-header-anchor '></a>第六章  约束与索引</h1><h2><a name='header-n223' class='md-header-anchor '></a>6.1 关系型数据库设计规则</h2><ul><li><p><strong>遵循ER模型和三范式</strong></p><ul><li>E    entity   代表实体的意思      对应到数据库当中的一张表          </li><li>R    relationship 代表关系的意思  </li></ul></li><li><p><strong>三范式：1、列不能拆分     2、唯一标识    3、关系引用主键</strong></p></li><li><p><strong>具体体现</strong></p><ul><li>将数据放到表中，表再放到库中。</li><li>一个数据库中可以有多个表，每个表都有一个名字，用来标识自己。表名具有唯一性。</li><li>表具有一些特性，这些特性定义了数据在表中如何存储，类似java和python中 “类”的设计。</li><li>表由列组成，我们也称为<strong>字段</strong>。每个字段描述了它所含有的数据的意义，<strong>数据表的设计实际上就是对字段的设计</strong>。创建数据表时，为每个字段分配一个数据类型，定义它们的数据长度和字段名。每个字段类似java 或者python中的“实例属性”。</li><li>表中的数据是按行存储的，一行即为一条记录。每一行类似于java或python中的“对象”。</li></ul><p><img src='imgs/1557377471553.png' alt='1557377471553' referrerPolicy='no-referrer' /></p></li></ul><h2><a name='header-n248' class='md-header-anchor '></a>6.2  约束与索引的概念</h2><p>1、数据完整性（Data Integrity）是指数据的精确性（Accuracy）和可靠性（Reliability）。它是应防止数据库中存在不符合语义规定的数据和防止因错误信息的输入输出造成无效操作或错误信息而提出的。</p><p>数据的完整性要从以下四个方面考虑：</p><ul><li>实体完整性（Entity Integrity）：例如，同一个表中，不能存在两条完全相同无法区分的记录</li><li>域完整性（Domain Integrity）：例如：年龄范围0-120，性别范围“男/女”</li><li>引用完整性（Referential Integrity）：例如：员工所在部门，在部门表中要能找到这个部门</li><li>用户自定义完整性（User-defined Integrity）：例如：用户名唯一、密码不能为空等，本部门经理的工资不得高于本部门职工的平均工资的5倍。</li></ul><p>2、根据约束的特点，分为几种：</p><ul><li>键约束：主键约束、外键约束、唯一键约束</li><li>Not NULL约束：非空约束</li><li>Check约束：检查约束</li><li>Default约束：默认值约束</li><li>自增约束</li></ul><p>3、约束（CONSTRAINTS）与索引（INDEX）</p><p>约束是用来对数据业务规则和数据完整性进行实施、维护。约束的作用范围仅限在当前数据库，约束可以被当做<strong>数据库对象</strong>来处理，它们具有名称和关联模式，是逻辑约束，不会因为设置约束而额外占用空间。</p><p><strong>索引</strong>是一个单独、物理的存储在数据页上的数据库结构，它是表中<strong>一列或若干列值的集合</strong>和相应的指向表中数据值的物理标识数据页的<strong>逻辑指针清单</strong>（类似于新华字典的目录索引页）。索引的存在会增加数据库的存储空间，也会使插入、修改数据的时间开销变多(因为插入和修改数据时，索引也要随之变动），但是可以大大提高查询速度。因此应该在键列、或其他经常要查询、排序、按范围查找的列上建立索引，而对于在查询中很少使用和参考的列、修改非常频繁的列，值很少的列（例如性别只有男和女）等列上不应该创建索引。</p><blockquote><p>Mysql会在主键、唯一键、外键列上自动创建索引，其他列需要建立索引的话，需要手动创建。</p><p>其中主键删除，对应的索引也会删除</p><p>删除唯一键的方式是通过删除对应的索引来实现的</p><p>删除外键，外键列上的索引还在，如果需要删除，需要单独删除索引</p></blockquote><h2><a name='header-n280' class='md-header-anchor '></a>6.3  DDL(v2.0)</h2><h3><a name='header-n281' class='md-header-anchor '></a>1、查看某个表的约束</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n282" mdtype="fences">SELECT * FROM information_schema.table_constraints WHERE table_name = '表名称';
+或
+SHOW CREATE TABLE 表名;
+</pre><h3><a name='header-n283' class='md-header-anchor '></a>2、查看某个表的索引</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n284" mdtype="fences">SHOW INDEX FROM 表名称;
+</pre><h3><a name='header-n285' class='md-header-anchor '></a>3、主键约束：primary key</h3><p>主键分为单列主键和复合主键：</p><p><img src='imgs/1561002222421.png' alt='1561002222421' referrerPolicy='no-referrer' /></p><p>主键的特点：（1）唯一并且非空（2）一个表只能有一个主键约束（3）主键约束名就叫做PRIMARY（4）创建主键会自动创建对应的索引，同样删除主键对应的索引也会删除。</p><p>一个字段作为主键，该字段的值不能为null，不能重复</p><p>多个字段作为主键，每个作为主键的字段都可以重复，但是不能同时重复</p><p>（1）如何在建表时指定主键约束</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n292" mdtype="fences" style="break-inside: unset;">create table 【数据名.】表名(
+	字段名1 数据类型  primary key ,
+	....
+);
+或
+create table 【数据名.】表名(
+	字段名1 数据类型,
+	....,
+    primary key(字段名1)
+);
+或
+create table 【数据名.】表名(
+    字段名1 数据类型,
+    字段名2 数据类型,
+	....,
+    primary key(复合主键字段列表)#如果是复合主键，那么就需要在所有字段列表后面使用这种形式指定，不能在字段后面直接加primary key
+);
+</pre><p>（2）如何在建表后指定主键约束</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n294" mdtype="fences">alter table 表名称 add primary key (主键字段列表);
+</pre><p>（3）如何删除主键约束</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n296" mdtype="fences">alter table 表名称 drop primary key;
+</pre><h3><a name='header-n297' class='md-header-anchor '></a>4、唯一键约束：unique key</h3><p>（1）唯一键约束特点</p><ul><li>唯一键约束列允许为null。</li><li>同一个表可以有多个唯一约束。</li><li>唯一约束可以是某一个列的值唯一，也可以多个列组合值的唯一。</li><li>MySQL会给唯一约束的列上默认创建一个唯一索引。</li></ul><ul><li>删除唯一键只能通过删除对应索引的方式删除，删除时需要指定唯一键索引名</li></ul><p>（2）如何在建表时指定唯一键约束</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n313" mdtype="fences" style="break-inside: unset;">create table 【数据名.】表名(
+	字段名1 数据类型  primary key ,
+	字段名2 数据类型 unique key,
+	....
+);
+
+create table 【数据名.】表名(
+    字段名1 数据类型  primary key ,
+    字段名2 数据类型,
+    字段名3 数据类型,
+	....,
+    unique key(复合唯一字段列表)#如果是复合唯一键，那么就需要在所有字段列表后面使用这种形式指定，不能在字段后面直接加unique key
+);
+复合唯一约束，对于设置的整个字段列表有效，即单个的字段可以重复，但是所有字段不能同时重复
+</pre><p>（3）如何在建表后增加唯一键约束</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n315" mdtype="fences">alter table 表名称 add 【constraint 约束名】 unique 【key】 (字段名列表);
+#如果没有指定约束名，(字段名列表)中只有一个字段的，默认是该字段名，如果是多个字段的默认是字段名列表的第1个字段名。也可以通过show index from 表名;来查看
+</pre><p>（4）如何删除唯一键约束</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n317" mdtype="fences">ALTER TABLE 表名称 DROP INDEX 唯一性约束名;
+#注意：如果忘记名称，可以通过“show index from 表名称;”查看
+</pre><h3><a name='header-n318' class='md-header-anchor '></a>5、外键约束：foreign key</h3><p>表关系：</p><p>1、一对一</p><p>2、多对一</p><p>student(sid,sname,age,sex,cid)--clazz(cid,cname,location)</p><p>3、一对多</p><p>clazz(cid,cname,location)--student(sid,sname,age,sex,cid)</p><p>4、多对多</p><p>user(uid,username,password)</p><p>order(oid,create_time,total_count,total_amount,status,user_id)</p><p>order_goods(id,oid,gid)</p><p>goods(gid,gname,price,sales,stock)</p><p>（1）外键特点</p><ul><li>外键约束是保证一个或两个表之间的参照完整性,外键是构建于一个表的两个字段或是两个表的两个字段之间的参照关系。</li><li>在创建外键约束时，如果不给外键约束名称，默认名不是列名，而是自动产生一个外键名（例如 student_ibfk_1;），也可以指定外键约束名。</li><li>当创建外键约束时，系统默认会在所在的列上建立对应的普通索引。但是索引名是列名，不是外键的约束名。</li><li>删除外键时，关于外键列上的普通索引需要单独删除。</li></ul><p>（2）要求</p><ul><li>在从表上建立外键，而且主表要先存在。</li><li>一个表可以建立多个外键约束</li><li>从表的外键列，在主表中引用的只能是键列（主键，唯一键，外键），推荐引用主表的主键。</li><li>从表的外键列与主表被参照的列名字可以不相同，但是数据类型必须一样</li></ul><p>（3）约束关系：约束是针对双方的</p><ul><li>添加了外键约束后，主表的修改和删除数据受约束</li><li>添加了外键约束后，从表的添加和修改数据受约束</li><li>在从表上建立外键，要求主表必须存在</li><li>删除主表时，要求从表从表先删除，或将从表中外键引用该主表的关系先删除</li></ul><p>（4）5个约束等级</p><ul><li>Cascade方式：在父表上update/delete记录时，同步update/delete掉子表的匹配记录 </li><li>Set null方式：在父表上update/delete记录时，将子表上匹配记录的列设为null，但是要注意子表的外键列不能为not null  </li><li>No action方式：如果子表中有匹配的记录,则不允许对父表对应候选键进行update/delete操作  </li><li>Restrict方式：同no action, 都是立即检查外键约束</li><li>Set default方式（在可视化工具SQLyog中可能显示空白）：父表有变更时,子表将外键列设置成一个默认的值，但Innodb不能识别</li></ul><p>如果没有指定等级，就相当于Restrict方式</p><p>（5）如何在建表时指定外键约束</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n374" mdtype="fences" style="break-inside: unset;">create table 【数据名.】从表名(
+	字段名1 数据类型  primary key ,
+	字段名2 数据类型 【unique key】,
+	....,
+    【constraint 外键约束名】 foreign key (从表字段) references 主表名(主表字段) 【on update 外键约束等级】【on delete 外键约束等级【
+    #外键只能在所有字段列表后面单独指定
+    #如果要自己命名外键约束名，建议 主表名_从表名_关联字段名_fk
+);
+
+create table 【数据名.】表名(
+    字段名1 数据类型,
+    字段名2 数据类型,
+	....,
+    primary key(复合主键字段列表),#如果是复合主键，那么就需要在所有字段列表后面使用这种形式指定，不能在字段后面直接加primary key
+    unique key(复合唯一字段列表),#如果是复合唯一键，那么就需要在所有字段列表后面使用这种形式指定，不能在字段后面直接加unique key
+    foreign key (从表字段) references 主表名(主表字段) 【on update 外键约束等级】【on delete 外键约束等级【
+    #外键只能在所有字段列表后面单独指定
+);
+</pre><p>（6）如何在建表后指定外键约束</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n376" mdtype="fences">alter table 从表名称 add 【constraint 外键约束名】 foreign key (从表字段名) references 主表名(主表被参照字段名) 【on update xx】[on delete xx];
+</pre><p>（7）如何删除外键约束</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n378" mdtype="fences">ALTER TABLE 表名称 DROP FOREIGN KEY 外键约束名;
+#查看约束名 SELECT * FROM information_schema.table_constraints WHERE table_name = '表名称';
+#删除外键约束不会删除对应的索引，如果需要删除索引，需要用ALTER TABLE 表名称 DROP INDEX 索引名;
+#查看索引名 show index from 表名称;
+</pre><h3><a name='header-n379' class='md-header-anchor '></a>6、非空约束：not null</h3><p>NOT NULL 非空约束，规定某个字段不能为空</p><p>（1）如何在建表时给某个字段指定非空约束</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n382" mdtype="fences" style="break-inside: unset;">create table 【数据名.】表名(
+	字段名1 数据类型  primary key ,
+	字段名2 数据类型 【unique key】 【not null】,
+	....,
+    foreign key (从表字段) references 主表名(主表字段) 【on update 外键约束等级】【on delete 外键约束等级【
+    #外键只能在所有字段列表后面单独指定
+);
+
+create table 【数据名.】表名(
+    字段名1 数据类型 【not null】,
+    字段名2 数据类型 【not null】,
+	....,
+    primary key(复合主键字段列表),#如果是复合主键，那么就需要在所有字段列表后面使用这种形式指定，不能在字段后面直接加primary key
+    unique key(复合唯一字段列表),#如果是复合唯一键，那么就需要在所有字段列表后面使用这种形式指定，不能在字段后面直接加unique key
+    foreign key (从表字段) references 主表名(主表字段) 【on update 外键约束等级】【on delete 外键约束等级【
+    #外键只能在所有字段列表后面单独指定
+);
+</pre><p>（2）如何在建表后指定某个字段非空</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n384" mdtype="fences">ALTER TABLE 表名称 MODIFY 字段名 数据类型 NOT NULL 【default 默认值】;
+#如果该字段原来设置了默认值约束，要跟着一起再写一遍，否则默认值约束会丢失
+</pre><p>（3）如何在建表后取消某个字段非空</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n386" mdtype="fences">ALTER TABLE 表名称 MODIFY 字段名 数据类型 【default 默认值】;
+#如果该字段原来设置了默认值约束，要跟着一起再写一遍，否则默认值约束会丢失
+</pre><h3><a name='header-n387' class='md-header-anchor '></a>7、默认值约束：default</h3><p>（1）如何在建表时给某个字段指定默认约束</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n389" mdtype="fences" style="break-inside: unset;">create table 【数据名.】表名(
+	字段名1 数据类型  primary key ,
+	字段名2 数据类型 【unique key】 【not null】 【default 默认值】,
+	....,
+    foreign key (从表字段) references 主表名(主表字段) 【on update 外键约束等级】【on delete 外键约束等级【
+    #外键只能在所有字段列表后面单独指定
+);
+
+create table 【数据名.】表名(
+    字段名1 数据类型 【not null】 【default 默认值】,
+    字段名2 数据类型 【not null】 【default 默认值】,
+	....,
+    primary key(复合主键字段列表),#如果是复合主键，那么就需要在所有字段列表后面使用这种形式指定，不能在字段后面直接加primary key
+    unique key(复合唯一字段列表),#如果是复合唯一键，那么就需要在所有字段列表后面使用这种形式指定，不能在字段后面直接加unique key
+    foreign key (从表字段) references 主表名(主表字段) 【on update 外键约束等级】【on delete 外键约束等级【
+    #外键只能在所有字段列表后面单独指定
+);
+</pre><p>（2）如何在建表后指定某个字段的默认值约束</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n391" mdtype="fences">ALTER TABLE 表名称 MODIFY 字段名 数据类型  【default 默认值】 【NOT NULL】;
+#如果该字段原来设置了非空约束，要跟着一起再写一遍，否则非空约束会丢失
+</pre><p>（3）如何在建表后取消某个字段的默认值约束</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n393" mdtype="fences">ALTER TABLE 表名称 MODIFY 字段名 数据类型 【NOT NULL】;
+#如果该字段原来设置了非空约束，要跟着一起再写一遍，否则非空约束会丢失
+</pre><h3><a name='header-n394' class='md-header-anchor '></a>8、检查约束：check </h3><p>检查约束，mysql暂不支持</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n396" mdtype="fences" style="break-inside: unset;">create table stu(
+	sid int primary key,
+	sname varchar(20),
+	gender char check ('男'or'女')
+);
+insert into stu values(1,'张三','男');
+insert into stu values(2,'李四','妖');
+
+使用枚举类型解决如上问题：
+create table stu(
+	sid int primary key,
+	sname varchar(20),
+	gender enum ('男','女')
+);
+</pre><p>&nbsp;</p><h3><a name='header-n398' class='md-header-anchor '></a>9、自增约束：auto_increment</h3><p>（1）关于自增长auto_increment：</p><ul><li><p>一个表最多只能有一个自增长列</p></li><li><p>自增长列必须是键列（主键列，唯一键列，外键列），并且要求非空。</p></li><li><p>自增列必须是整数类型</p></li><li><p>InnoDB表的自动增长列可以手动插入，但是插入的值如果是空或者0，则实际插入的将是自动增长后的值。</p><p>每一次添加都会在上一次添加的基础上+1，跟当前表中的最大id无关</p><p>如何使自增的字段自动增长：</p><p>insert into 表名 values(null,...)</p><p>insert into t_user(username) values(&#39;admin&#39;)</p></li></ul><p>（2）如何在建表时指定自增长列</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n414" mdtype="fences">create table 【数据名.】表名(
+	字段名1 数据类型  primary key auto_increment,
+	字段名2 数据类型 【unique key】 【not null】 【default 默认值】,
+	....
+);
+
+或
+create table 【数据名.】表名(
+	字段名1 数据类型  primary key ,
+	字段名2 数据类型 【unique key  not null】 auto_increment,
+	....
+);
+</pre><p>（3）如何在建表后指定自增长列</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n416" mdtype="fences">alter table 【数据名.】表名 modify 自增字段名 数据类型 auto_increment;
+</pre><p>（4）如何删除自增约束</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n418" mdtype="fences">alter table 【数据名.】表名 modify 自增字段名 数据类型;
+</pre><h2><a name='header-n419' class='md-header-anchor '></a>6.4 DML(v2.0)</h2><p>1、如果某列有自增约束，怎么添加该字段的值</p><p>添加数据时，对于自增列</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n422" mdtype="fences">insert into 【数据库名.]表名称 values(值列表)；#在值列表中，对应自增列可以赋值为null和0
+
+insert into 【数据库名.]表名称(部分字段列表) values(值列表)；#自增列在(部分字段列表)中不写就可以
+</pre><p>2、如果某列有默认值约束，怎么添加、修改该字段的值</p><p>添加数据时，对于有默认值列</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n425" mdtype="fences">insert into 【数据库名.]表名称 values(值列表)；#在值列表中，对应默认值列，如果想用默认值，用default
+
+insert into 【数据库名.]表名称(部分字段列表) values(值列表)；#对应默认值列，如果想用默认值，在(部分字段列表)中不写就可以
+</pre><p>修改数据</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n427" mdtype="fences">update 【数据库名.]表名称 set 字段名1 = 值1, 字段名2 = 值2 。。。 【where 条件】; #对应默认值列，如果想用默认值，写字段名 = default就可以
+</pre><h1><a name='header-n428' class='md-header-anchor '></a>第七章 函数</h1><p><strong>两种SQL函数</strong></p><p><img src='imgs/1557457787630.png' alt='1557457787630' referrerPolicy='no-referrer' /></p><h2><a name='header-n431' class='md-header-anchor '></a>7.1单行函数**</h2><ul><li><strong>只对一行进行变换，每行返回一个结果</strong></li><li>可以嵌套</li><li>参数可以是一字段或一个表达式或一个值</li></ul><h3><a name='header-n439' class='md-header-anchor '></a>7.1.1 字符串函数</h3><figure><table><thead><tr><th>函数</th><th>用法</th></tr></thead><tbody><tr><td>CONCAT(S1,S2,......,Sn)</td><td>连接S1,S2,......,Sn为一个字符串</td></tr><tr><td>CONCAT_WS(s, S1,S2,......,Sn)</td><td>同CONCAT(s1,s2,...)函数，但是每个字符串之间要加上s</td></tr><tr><td>CHAR_LENGTH(s)</td><td>返回字符串s的字符数</td></tr><tr><td>LENGTH(s)</td><td>返回字符串s的字节数，和字符集有关</td></tr><tr><td>INSERT(str, index , len, instr)</td><td>将字符串str从第index位置开始，len个字符长的子串替换为字符串instr</td></tr><tr><td>UPPER(s) 或 UCASE(s)</td><td>将字符串s的所有字母转成大写字母</td></tr><tr><td>LOWER(s)  或LCASE(s)</td><td>将字符串s的所有字母转成小写字母</td></tr><tr><td>LEFT(s,n)</td><td>返回字符串s最左边的n个字符</td></tr><tr><td>RIGHT(s,n)</td><td>返回字符串s最右边的n个字符</td></tr><tr><td>LPAD(str, len, pad)</td><td>用字符串pad对str最左边进行填充，直到str的长度为len个字符</td></tr><tr><td>RPAD(str ,len, pad)</td><td>用字符串pad对str最右边进行填充，直到str的长度为len个字符</td></tr><tr><td>LTRIM(s)</td><td>去掉字符串s左侧的空格</td></tr><tr><td>RTRIM(s)</td><td>去掉字符串s右侧的空格</td></tr><tr><td>TRIM(s)</td><td>去掉字符串s开始与结尾的空格</td></tr><tr><td>TRIM(【BOTH 】s1 FROM s)</td><td>去掉字符串s开始与结尾的s1</td></tr><tr><td>TRIM(【LEADING】s1 FROM s)</td><td>去掉字符串s开始处的s1</td></tr><tr><td>TRIM(【TRAILING】s1 FROM s)</td><td>去掉字符串s结尾处的s1</td></tr><tr><td>REPEAT(str, n)</td><td>返回str重复n次的结果</td></tr><tr><td>REPLACE（str, a, b）</td><td>用字符串b替换字符串str中所有出现的字符串a</td></tr><tr><td>STRCMP(s1,s2)</td><td>比较字符串s1,s2</td></tr><tr><td>SUBSTRING(s,index,len)</td><td>返回从字符串s的index位置其len个字符</td></tr></tbody></table></figure><p>&nbsp;</p><ul><li><strong>举例1：大小写控制函数</strong></li></ul><figure><table><thead><tr><th>函数</th><th>结果</th></tr></thead><tbody><tr><td><strong>LOWER(&#39;SQL Course&#39;)</strong></td><td><strong>sql course</strong></td></tr><tr><td><strong>UPPER(&#39;SQL Course&#39;)</strong></td><td><strong>SQL COURSE</strong></td></tr></tbody></table></figure><blockquote><p>这类函数改变字符的大小写。</p></blockquote><ul><li><strong>举例2：字符控制函数</strong></li></ul><figure><table><thead><tr><th>函数</th><th>结果</th></tr></thead><tbody><tr><td><strong>CONCAT(&#39;Hello&#39;,&#39;World&#39;)</strong></td><td><strong>HelloWorld</strong></td></tr><tr><td><strong>SUBSTR(&#39;HelloWorld&#39;,1,5)</strong></td><td><strong>Hello</strong></td></tr><tr><td><strong>LENGTH(&#39;HelloWorld&#39;)</strong></td><td><strong>10</strong></td></tr><tr><td><strong>INSTR(&#39;HelloWorld&#39;,&#39;W&#39;)</strong></td><td><strong>6</strong></td></tr><tr><td><strong>LPAD(salary,10,&#39;*&#39;)</strong></td><td><strong>*****24000</strong></td></tr><tr><td><strong>RPAD(salary,10, &#39;*&#39;)</strong></td><td><strong>24000*<em>*</em>***</strong></td></tr><tr><td><strong>TRIM(&#39;H&#39; FROM &#39;HelloWorld&#39;)</strong></td><td><strong>elloWorld</strong></td></tr><tr><td><strong>REPLACE(&#39;abcd&#39;,&#39;b&#39;,&#39;m&#39;)</strong></td><td><strong>amcd</strong></td></tr></tbody></table></figure><h3><a name='header-n554' class='md-header-anchor '></a>7.1.2 数值函数/数学函数</h3><figure><table><thead><tr><th>函数</th><th>用法</th></tr></thead><tbody><tr><td>ABS(x)</td><td>返回x的绝对值</td></tr><tr><td>CEIL(x)</td><td>返回大于x的最小整数值</td></tr><tr><td>FLOOR(x)</td><td>返回小于x的最大整数值</td></tr><tr><td>MOD(x,y)</td><td>返回x/y的模</td></tr><tr><td>RAND()</td><td>返回0~1的随机值</td></tr><tr><td>ROUND(x,y)</td><td>返回参数x的四舍五入的有y位的小数的值</td></tr><tr><td>TRUNCATE(x,y)</td><td>返回数字x截断为y位小数的结果</td></tr><tr><td>SQRT(x)</td><td>返回x的平方根</td></tr><tr><td>POW(x,y)</td><td>返回x的y次方</td></tr></tbody></table></figure><ul><li><strong>举例1：ROUND:四舍五入</strong></li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n589" mdtype="fences">ROUND(45.926, 2)     --&gt;  45.93
+</pre><ul><li><strong>举例2：TRUNCATE:截断</strong></li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n593" mdtype="fences">TRUNCATE(45.926)      --&gt; 45
+</pre><ul><li><strong>举例3：MOD:求余</strong></li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n597" mdtype="fences">MOD(1600, 300)	 --&gt; 100
+</pre><p>&nbsp;</p><h3><a name='header-n599' class='md-header-anchor '></a>7.1.3 日期函数</h3><figure><table><thead><tr><th>函数</th><th>用法</th></tr></thead><tbody><tr><td><strong>CURDATE()</strong> 或 CURRENT_DATE()</td><td>返回当前日期</td></tr><tr><td><strong>CURTIME()</strong> 或 CURRENT_TIME()</td><td>返回当前时间</td></tr><tr><td><strong>NOW()</strong> / SYSDATE() / CURRENT_TIMESTAMP() / LOCALTIME() / LOCALTIMESTAMP()</td><td>返回当前系统日期时间</td></tr><tr><td><strong>YEAR(date) / MONTH(date) / DAY(date) / HOUR(time) / MINUTE(time) / SECOND(time)</strong></td><td>返回具体的时间值</td></tr><tr><td>WEEK(date) / WEEKOFYEAR(date)</td><td>返回一年中的第几周</td></tr><tr><td>DAYOFWEEK()</td><td>返回周几，注意：周日是1，周一是2，。。。周六是7</td></tr><tr><td>WEEKDAY(date)</td><td>返回周几，注意，周1是0，周2是1，。。。周日是6</td></tr><tr><td>DAYNAME(date)</td><td>返回星期：MONDAY,TUESDAY.....SUNDAY</td></tr><tr><td>MONTHNAME(date)</td><td>返回月份：January，。。。。。</td></tr><tr><td>DATEDIFF(date1,date2) / TIMEDIFF(time1, time2)</td><td>返回date1 - date2的日期间隔 / 返回time1 - time2的时间间隔</td></tr><tr><td>DATE_ADD(datetime, INTERVAL  expr type)</td><td>返回与给定日期时间相差INTERVAL时间段的日期时间</td></tr><tr><td>DATE_FORMAT(datetime ,fmt)</td><td>按照字符串fmt格式化日期datetime值</td></tr><tr><td>STR_TO_DATE(str, fmt)</td><td>按照字符串fmt对str进行解析，解析为一个日期</td></tr></tbody></table></figure><p>其中：</p><p><strong>（1）DATE_ADD(datetime,INTERVAL  expr type)</strong></p><p>表达式类型：</p><figure><table><thead><tr><th>参数类型</th><th>参数类型</th></tr></thead><tbody><tr><td>YEAR</td><td>YEAR_MONTH</td></tr><tr><td>MONTH</td><td>DAY_HOUR</td></tr><tr><td>DAY</td><td>DAY_MINUTE</td></tr><tr><td>HOUR</td><td>DAY_SECOND</td></tr><tr><td>MINUTE</td><td>HOUR_MINUTE</td></tr><tr><td>SECOND</td><td>HOUR_SECOND</td></tr><tr><td>&nbsp;</td><td>MINUTE_SECOND</td></tr></tbody></table></figure><p>举例：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n672" mdtype="fences">SELECT DATE_ADD(NOW(), INTERVAL 1 YEAR);
+SELECT DATE_ADD(NOW(), INTERVAL -1 YEAR);   #可以是负数
+SELECT DATE_ADD(NOW(), INTERVAL '1_1' YEAR_MONTH);   #需要单引号
+
+</pre><p><strong>（2）DATE_FORMAT(datetime,fmt) 和 STR_TO_DATE(str, fmt)</strong></p><figure><table><thead><tr><th>格式符</th><th>说明</th><th>格式符</th><th>说明</th></tr></thead><tbody><tr><td>%Y</td><td>4位数字表示年份</td><td>%y</td><td>表示两位数字表示年份</td></tr><tr><td>%M</td><td>月名表示月份（January,....）</td><td>%m</td><td>两位数字表示月份（01,02,03。。。）</td></tr><tr><td>%b</td><td>缩写的月名（Jan.，Feb.，....）</td><td>%c</td><td>数字表示月份（1,2,3,...）</td></tr><tr><td>%D</td><td>英文后缀表示月中的天数（1st,2nd,3rd,...）</td><td>%d</td><td>两位数字表示月中的天数(01,02...)</td></tr><tr><td>%e</td><td>数字形式表示月中的天数（1,2,3,4,5.....）</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>%H</td><td>两位数字表示小数，24小时制（01,02..）</td><td>%h和%I</td><td>两位数字表示小时，12小时制（01,02..）</td></tr><tr><td>%k</td><td>数字形式的小时，24小时制(1,2,3)</td><td>%l</td><td>数字形式表示小时，12小时制（1,2,3,4....）</td></tr><tr><td>%i</td><td>两位数字表示分钟（00,01,02）</td><td>%S和%s</td><td>两位数字表示秒(00,01,02...)</td></tr><tr><td>%W</td><td>一周中的星期名称（Sunday...）</td><td>%a</td><td>一周中的星期缩写（Sun.，Mon.,Tues.，..）</td></tr><tr><td>%w</td><td>以数字表示周中的天数(0=Sunday,1=Monday....)</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>%j</td><td>以3位数字表示年中的天数(001,002...)</td><td>%U</td><td>以数字表示年中的第几周，（1,2,3。。）其中Sunday为周中第一天</td></tr><tr><td>%u</td><td>以数字表示年中的第几周，（1,2,3。。）其中Monday为周中第一天</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>%T</td><td>24小时制，%H:%i:%s</td><td>%r</td><td>12小时制</td></tr><tr><td>%p</td><td>AM或PM</td><td>%%</td><td>表示%</td></tr></tbody></table></figure><p>&nbsp;</p><h3><a name='header-n751' class='md-header-anchor '></a>7.1.4 流程函数</h3><figure><table><thead><tr><th>函数</th><th>用法</th></tr></thead><tbody><tr><td>IF(value,t ,f)</td><td>如果value是真，返回t，否则返回f</td></tr><tr><td>IFNULL(value1, value2)</td><td>如果value1不为空，返回value1，否则返回value2</td></tr><tr><td>CASE WHEN 条件1 THEN result1 WHEN 条件2 THEN result2 .... [ELSE resultn] END</td><td>相当于Java的if...else if...else...</td></tr><tr><td>CASE  expr WHEN 常量值1 THEN 值1 WHEN 常量值1 THEN 值1 .... [ELSE 值n] END</td><td>相当于Java的switch...case...</td></tr></tbody></table></figure><ul><li>举例1：</li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n771" mdtype="fences">SELECT employee_id,12 * salary * (1 + IFNULL(commission_pct,0)) as "年薪"
+FROM employees;
+</pre><ul><li>举例2：</li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n775" mdtype="fences">SELECT last_name, job_id, salary,
+       CASE job_id WHEN 'IT_PROG'  THEN  1.10*salary
+                   WHEN 'ST_CLERK' THEN  1.15*salary
+                   WHEN 'SA_REP'   THEN  1.20*salary
+       ELSE      salary END     "实发工资"
+FROM   employees;
+</pre><ul><li>举例3：</li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n779" mdtype="fences">SELECT employee_id,salary, CASE WHEN salary&gt;=15000 THEN '高薪' 
+				  WHEN salary&gt;=10000 THEN '潜力股'  
+				  WHEN salary&gt;=8000 THEN '屌丝' 
+				  ELSE '草根' END  "描述"
+FROM employees; 
+</pre><h3><a name='header-n780' class='md-header-anchor '></a>7.1.5 其他函数</h3><figure><table><thead><tr><th>函数</th><th>用法</th></tr></thead><tbody><tr><td>database()</td><td>返回当前数据库名</td></tr><tr><td>version()</td><td>返回当前数据库版本</td></tr><tr><td>user()</td><td>返回当前登录用户名</td></tr><tr><td>password(str)</td><td>返回字符串str的加密版本，41位长的字符串</td></tr><tr><td>md5(str)</td><td>返回字符串str的md5值，也是一种加密方式</td></tr></tbody></table></figure><h2><a name='header-n800' class='md-header-anchor '></a>7.2 分组函数</h2><ul><li><strong>什么是分组函数</strong></li></ul><p>分组函数作用于一组数据，并对一组数据返回一个值。</p><p><img src='imgs/1557457823209.png' alt='1557457823209' referrerPolicy='no-referrer' /></p><ul><li><p><strong>组函数类型</strong></p><ul><li><strong>AVG()</strong> </li><li><strong>SUM()</strong></li><li><strong>MAX()</strong> </li><li><strong>MIN()</strong> </li><li><strong>COUNT() </strong></li></ul></li></ul><p>可以对<strong>数值型数据</strong>使用AVG 和 SUM 函数。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n821" mdtype="fences">SELECT AVG(salary), MAX(salary),MIN(salary), SUM(salary)
+FROM   employees
+WHERE  job_id LIKE '%REP%';
+
+</pre><p>可以对<strong>任意数据类型</strong>的数据使用 MIN 和 MAX 函数。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n823" mdtype="fences">SELECT MIN(hire_date), MAX(hire_date)
+FROM	  employees;
+</pre><p>COUNT(*)count(1返回表中记录总数,适用于<strong>任意数据类型</strong>。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n825" mdtype="fences">SELECT COUNT(*)
+FROM	  employees
+WHERE  department_id = 50;
+</pre><p>•COUNT(expr) 返回<strong>expr不为空</strong>的记录总数。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n827" mdtype="fences">SELECT COUNT(commission_pct)
+FROM   employees
+WHERE  department_id = 50;
+</pre><ul><li><p><strong>问题：用count(*)，count(1)谁好呢?</strong></p><p>其实，对于myisam引擎的表是没有区别的。这种引擎内部有一计数器在维护着行数。</p><p>Innodb引擎的表用count(*)直接读行数，效率很低，因为innodb真的要去数一遍。</p></li></ul><p>&nbsp;</p><h1><a name='header-n834' class='md-header-anchor '></a>第八章 关联查询（联合查询）</h1><h2><a name='header-n835' class='md-header-anchor '></a>8.1 关联查询的七种结果</h2><p><img src='imgs/1557194340352.png' alt='1557194340352' referrerPolicy='no-referrer' /></p><p>（1）A∩B</p><p>（2）A</p><p>（3）A -  A∩B</p><p>（4）B</p><p>（5）B - A∩B</p><p>（6）A ∪ B</p><p>（7）A ∪B- A∩B    或者   (A -  A∩B) ∪ （B - A∩B）</p><p>&nbsp;</p><h2><a name='header-n845' class='md-header-anchor '></a>8.2 如何实现？</h2><p>（1）内连接</p><p>（2）外连接：左外连接、右外连接、全外连接（mysql使用union代替全外连接）</p><h3><a name='header-n848' class='md-header-anchor '></a>1、内连接：实现A∩B</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n849" mdtype="fences">select 字段列表
+from A表 inner join B表
+on 关联条件
+where 等其他子句;
+
+或
+
+select 字段列表
+from A表 , B表
+where 关联条件 and 等其他子句;
+</pre><p>代码示例：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n851" mdtype="fences" style="break-inside: unset;">#查询员工的姓名和他所在的部门的名称
+#员工的姓名在t_employee
+#部门的名称在t_department
+SELECT ename "员工的姓名",dname "部门名称"
+FROM t_employee INNER JOIN t_department
+ON t_employee.did = t_department.did
+
+SELECT ename "员工的姓名",dname "部门名称"
+FROM t_employee , t_department
+WHERE t_employee.did = t_department.did
+
+
+#查询薪资高于20000的男员工的姓名和他所在的部门的名称
+SELECT ename "员工的姓名",dname "部门名称"
+FROM t_employee INNER JOIN t_department
+ON t_employee.did = t_department.did
+WHERE salary&gt;20000 AND gender = '男'
+</pre><p>&nbsp;</p><h3><a name='header-n853' class='md-header-anchor '></a>2、左外连接</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n854" mdtype="fences">#实现查询结果是A
+select 字段列表
+from A表 left join B表
+on 关联条件
+where 等其他子句;
+
+#实现A -  A∩B
+select 字段列表
+from A表 left join B表
+on 关联条件
+where 从表关联字段 is null and 等其他子句;
+</pre><p>代码示例：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n856" mdtype="fences">#查询所有员工的姓名和他所在的部门的名称
+SELECT ename "员工的姓名",dname "部门名称"
+FROM t_employee LEFT JOIN t_department
+ON t_employee.did = t_department.did
+
+
+#查询所有没有部门的员工
+SELECT ename "员工的姓名",dname "部门名称"
+FROM t_employee LEFT JOIN t_department
+ON t_employee.did = t_department.did
+WHERE t_employee.did IS NULL
+</pre><p>&nbsp;</p><h3><a name='header-n858' class='md-header-anchor '></a>3、右外连接</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n859" mdtype="fences">#实现查询结果是B
+select 字段列表
+from A表 right join B表
+on 关联条件
+where 等其他子句;
+
+#实现B -  A∩B
+select 字段列表
+from A表 right join B表
+on 关联条件
+where 从表关联字段 is null and 等其他子句;
+</pre><p>代码示例：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n861" mdtype="fences">#查询所有部门，以及所有部门下的员工信息
+SELECT * 
+FROM t_employee RIGHT JOIN t_department
+ON t_employee.did = t_department.did
+
+#查询那些没有员工属于它的部门
+SELECT * 
+FROM t_employee RIGHT JOIN t_department
+ON t_employee.did = t_department.did
+WHERE t_employee.did IS NULL
+</pre><p>&nbsp;</p><h3><a name='header-n863' class='md-header-anchor '></a>4、用union代替全外连接</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n864" mdtype="fences" style="break-inside: unset;">#实现查询结果是A∪B
+#用左外的A，union 右外的B
+select 字段列表
+from A表 left join B表
+on 关联条件
+where 等其他子句
+
+union 
+
+select 字段列表
+from A表 right join B表
+on 关联条件
+where 等其他子句;
+
+
+
+#实现A∪B -  A∩B  或   (A -  A∩B) ∪ （B - A∩B）
+#使用左外的 (A -  A∩B)  union 右外的（B - A∩B）
+select 字段列表
+from A表 left join B表
+on 关联条件
+where 从表关联字段 is null and 等其他子句
+
+union
+
+select 字段列表
+from A表 right join B表
+on 关联条件
+where 从表关联字段 is null and 等其他子句
+</pre><p>代码示例：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n866" mdtype="fences" style="break-inside: unset;">#查询所有员工，所有部门，包括没有员工的部门，和没有部门的员工
+SELECT *
+FROM t_employee LEFT JOIN t_department
+ON t_employee.did = t_department.did
+
+UNION
+
+SELECT *
+FROM t_employee RIGHT JOIN t_department
+ON t_employee.did = t_department.did
+
+
+#查询那些没有部门的员工和所有没有员工的部门
+
+#没有部门的员工
+SELECT *
+FROM t_employee LEFT JOIN t_department
+ON t_employee.did = t_department.did
+WHERE t_employee.did IS NULL
+
+UNION 
+
+#所有没有员工的部门
+SELECT *
+FROM t_employee RIGHT JOIN t_department
+ON t_employee.did = t_department.did
+WHERE t_employee.did IS NULL
+
+</pre><p>&nbsp;</p><h2><a name='header-n868' class='md-header-anchor '></a>8.3 特殊的关联查询：自连接</h2><p>两个关联查询的表是同一张表，通过取别名的方式来虚拟成两张表</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n870" mdtype="fences">select 字段列表
+from 表名 别名1 inner/left/right join 表名 别名2
+on 别名1.关联字段 = 别名2的关联字段
+where 其他条件
+</pre><p>代码示例：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n872" mdtype="fences">#查询员工的编号，姓名，薪资和他领导的编号，姓名，薪资
+#这些数据全部在员工表中
+#把t_employee表，即当做员工表，又当做领导表
+#领导表是虚拟的概念，我们可以通过取别名的方式虚拟
+SELECT emp.eid "员工的编号",emp.ename "员工的姓名" ,emp.salary "员工的薪资",
+	mgr.eid "领导的编号" ,mgr.ename "领导的姓名",mgr.salary "领导的薪资"
+FROM t_employee emp INNER JOIN t_employee mgr
+#t_employee emp：如果用emp.，表示的是员工表的
+#t_employee mgr：如果用mgr.，表示的是领导表的
+ON emp.mid = mgr.eid
+
+#表的别名不要加""，给列取别名，可以用""，列的别名不使用""也可以，但是要避免包含空格等特殊符号。
+
+</pre><p>&nbsp;</p><h1><a name='header-n874' class='md-header-anchor '></a>第九章 select语句的7大子句</h1><h2><a name='header-n875' class='md-header-anchor '></a>9.1 7大子句顺序</h2><p>（1）from：从哪些表中筛选</p><p>（2）on：关联多表查询时，去除笛卡尔积</p><p>（3）where：从表中筛选的条件</p><p>（4）group by：分组依据</p><p>（5）having：在统计结果中再次筛选</p><p>（6）order by：排序</p><p>（7）limit：分页</p><p>必须按照（1）-（7）的顺序编写子句。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n884" mdtype="fences">#查询每个部门的男生的人数，并且显示人数超过5人的，按照人数降序排列，
+#每页只能显示10条，我要第2页
+SELECT did,COUNT(*) "人数"
+FROM t_employee
+WHERE gender = '男'
+GROUP BY did
+HAVING COUNT(*)&gt;5
+ORDER BY 人数 DESC
+LIMIT 10,10
+</pre><h2><a name='header-n885' class='md-header-anchor '></a>9.2 group by与分组函数</h2><p><img src='imgs/1557457869608.png' alt='1557457869608' referrerPolicy='no-referrer' /></p><p><strong>可以使用GROUP BY子句将表中的数据分成若干组</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n888" mdtype="fences">SELECT column, group_function(column)
+FROM table
+[WHERE	condition]
+[GROUP BY	group_by_expression];
+</pre><blockquote><p><strong>明确：WHERE一定放在FROM后面GROUP BY 前面</strong></p></blockquote><p><strong>在SELECT列表中所有未包含在分组函数中的列都应该包含在 GROUP BY子句中</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n892" mdtype="fences">SELECT   department_id, AVG(salary)
+FROM     employees
+GROUP BY department_id ;
+</pre><p>包含在 GROUP BY 子句中的列不必包含在SELECT 列表中</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n894" mdtype="fences">SELECT   AVG(salary)
+FROM     employees
+GROUP BY department_id ;
+</pre><p><strong>使用多个列分组</strong></p><p><img src='imgs/1557457896747.png' alt='1557457896747' referrerPolicy='no-referrer' /></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n897" mdtype="fences">SELECT   department_id dept_id, job_id, SUM(salary)
+FROM     employees
+GROUP BY department_id, job_id ;
+</pre><h2><a name='header-n898' class='md-header-anchor '></a>9.3 having与分组函数</h2><p><img src='imgs/1557457922443.png' alt='1557457922443' referrerPolicy='no-referrer' /></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n900" mdtype="fences">SELECT   department_id, MAX(salary)
+FROM     employees
+GROUP BY department_id
+HAVING   MAX(salary)&gt;8000 ;
+</pre><p>having与where的区别？</p><p>（1）where是从表中筛选的条件，而having是统计结果中再次筛选</p><p>（2）where后面不能加“分组/聚合函数”，而having后面可以跟分组函数</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n904" mdtype="fences">#统计部门平均工资高于8000的部门和平均工资
+SELECT   department_id, AVG(salary)
+FROM     employees
+WHERE    AVG(salary) &gt; 8000 #错误
+GROUP BY department_id;
+</pre><p><img src='imgs/1557457937887.png' alt='1557457937887' referrerPolicy='no-referrer' /></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n906" mdtype="fences">#统计部门平均工资高于8000的部门和平均工资
+SELECT   department_id, AVG(salary)
+FROM     employees
+GROUP BY department_id
+HAVING   AVG(salary)&gt;8000 ;
+</pre><h2><a name='header-n907' class='md-header-anchor '></a>9.4 order by</h2><p>order by：</p><p>order by id desc</p><p>降序：desc</p><p>升序：用么默认，要么加asc</p><h2><a name='header-n912' class='md-header-anchor '></a>9.5 limit</h2><p>limit：</p><p>limit m,n </p><p>m = （第几页 - 1）*每页的数量</p><p>n = 每页的数量</p><p>代码示例：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n918" mdtype="fences">#查询每个部门的男生的人数，并且显示人数超过5人的，按照人数降序排列，
+#每页只能显示10条，我要第2页
+SELECT did,COUNT(*) "人数"
+FROM t_employee
+WHERE gender = '男'
+GROUP BY did
+HAVING COUNT(*)&gt;5
+ORDER BY 人数 DESC
+LIMIT 10,10
+</pre><p>&nbsp;</p><h1><a name='header-n920' class='md-header-anchor '></a>第十章 子查询</h1><p>嵌套在另一个查询中的查询，根据位置不同，分为：where型，from型，exists型。注意：不管子查询在哪里，子查询必须使用()括起来。</p><h2><a name='header-n922' class='md-header-anchor '></a>1、where型</h2><p>①子查询是单值结果，那么可以对其使用（=，&gt;等比较运算符）</p><p>②子查询是多值结果，那么可对其使用（【not】in(子查询结果)，或 &gt;all(子查询结果)，或&gt;=all(子查询结果)，&lt;all(子查询结果)，&lt;=all（子查询结果)，或 &gt;any(子查询结果)，或&gt;=any(子查询结果)，&lt;any(子查询结果)，&lt;=any（子查询结果)）</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n925" mdtype="fences">查询全公司最高工资的员工信息
+select * from 员工表 where 薪资 = (select max(薪资) from 员工表);
+
+select * from 员工表 where 薪资 &gt; all(select salary from 员工表  where 员工姓名 in(...));
+</pre><h2><a name='header-n926' class='md-header-anchor '></a>2、from型</h2><p>子查询的结果是多行多列的结果，类似于一张表格。</p><p>必须给子查询取别名，即临时表名，表的别名不要加“”和空格。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n929" mdtype="fences">查询每个部门的编号，名称，平均工资
+select 部门编号, 部门名称， 平均工资
+from 部门表 inner join (select 部门编号，avg(薪资) from 员工表  group by 部门编号) temp
+on 部门表.部门编号 = temp.部门编号
+</pre><h2><a name='header-n930' class='md-header-anchor '></a>3、exists型</h2><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n931" mdtype="fences">查询那些有员工的部门
+select 部门编号, 部门名称 from 部门表
+where exists (select * from 员工表  where 部门表.部门编号 = 员工表.部门编号);
+</pre><p>&nbsp;</p><h1><a name='header-n933' class='md-header-anchor '></a>第十一章  事务</h1><h2><a name='header-n934' class='md-header-anchor '></a>11.1 事务概述</h2><p><strong>1、事务处理</strong>（事务操作）：<strong>保证所有事务都作为一个工作单元来执行，即使出现了故障，都不能改变这种执行方式。当在一个事务中执行多个操作时，要么所有的事务都被提交(commit)，那么这些修改就永久地保存下来；要么数据库管理系统将放弃所作的所有修改，整个事务回滚(rollback)到最初状态。</strong></p><p>2、事务的ACID属性：</p><p>（1）<strong>原子性（Atomicity）</strong>
+原子性是指事务是一个不可分割的工作单位，事务中的操作要么都发生，要么都不发生。 </p><p>（2）<strong>一致性（Consistency）</strong>
+事务必须使数据库从一个一致性状态变换到另外一个一致性状态。</p><p>（3）<strong>隔离性（Isolation）</strong>
+事务的隔离性是指一个事务的执行不能被其他事务干扰，即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰。</p><p>（4）<strong>持久性（Durability）</strong>
+持久性是指一个事务一旦被提交，它对数据库中数据的改变就是永久性的，接下来的其他操作和数据库故障不应该对其有任何影响</p><p>&nbsp;</p><h2><a name='header-n942' class='md-header-anchor '></a>11.2 开启和结束事务</h2><p>1、mysql默认是自动提交，执行一句就提交一句。</p><p>即默认情况下，每一条sql都是一个独立的sql。</p><p>2、我想要手动提交事务：</p><p>（1）set autocommit=false; </p><p>接下来所有语句都必须手动提交，否则就不会永久生效</p><p>&nbsp;</p><p>（2）start transaction;</p><p>.....</p><p>commit; 或 rollback; 或发生异常;</p><p>3、注意：</p><p>事务的回滚只对DML语句有效，对于DDL语句无效。</p><h2><a name='header-n954' class='md-header-anchor '></a>11.3 事务隔离级别</h2><h3><a name='header-n955' class='md-header-anchor '></a>1、事务并发问题</h3><p>对于同时运行的多个事务, 当这些事务访问数据库中相同的数据时, 如果没有采取必要的隔离机制, 就会导致各种并发问题:</p><ul><li><strong>脏读</strong>: 对于两个事务 T1, T2, T1 读取了已经被 T2 更新但还<strong>没有被提交</strong>的字段。 之后, 若 T2 回滚, T1读取的内容就是临时且无效的。</li><li><strong>不可重复读</strong>: 对于两个事务T1, T2, T1 读取了一个字段, 然后 T2 <strong>更新</strong>了该字段。 之后, T1再次读取同一个字段, 值就不同了。</li><li><strong>幻读</strong>: 对于两个事务T1, T2, T1 从一个表中读取了一个字段, 然后 T2 在该表中<strong>插入/删除</strong>了一些新的行。 之后, 如果 T1 再次读取同一个表, 就会多/少几行。</li></ul><h3><a name='header-n964' class='md-header-anchor '></a>2、事务隔离级别</h3><p><strong>数据库事务的隔离性</strong>：数据库系统必须具有隔离并发运行各个事务的能力, 使它们不会相互影响, 避免各种并发问题。<strong>一个事务与其他事务隔离的程度称为隔离级别。</strong>数据库规定了多种事务隔离级别, 不同隔离级别对应不同的干扰程度, 隔离级别越高, 数据一致性就越好, 但并发性越弱。</p><p><strong>数据库提供的 4 种事务隔离级别：</strong></p><figure><table><thead><tr><th>隔离级别</th><th>描述</th></tr></thead><tbody><tr><td>read-uncommitted</td><td>允许A事务读取其他事务未提交和已提交的数据。会出现脏读、不可重复读、幻读问题</td></tr><tr><td>read-committed</td><td>只允许A事务读取其他事务已提交的数据。可以避免脏读，但仍然会出现不可重复读、幻读问题</td></tr><tr><td>repeatable-read</td><td>确保事务可以多次从一个字段中读取相同的值。在这个事务持续期间，禁止其他事务对这个字段进行更新。可以避免脏读和不可重复读。但是幻读问题仍然存在。注意：mysql中使用了MVCC多版本控制技术，在这个级别也可以避免幻读。</td></tr><tr><td>serializable</td><td>确保事务可以从一个表中读取相同的行，相同的记录。在这个事务持续期间，禁止其他事务对该表执行插入、更新、删除操作。所有并发问题都可以避免，但性能十分低下。</td></tr></tbody></table></figure><ul><li>Oracle 支持的 2 种事务隔离级别：<strong>READ-COMMITED</strong>, SERIALIZABLE。 Oracle 默认的事务隔离级别为: READ COMMITED 。</li><li>Mysql 支持 4 种事务隔离级别。 Mysql 默认的事务隔离级别为: <strong>REPEATABLE-READ</strong>。在mysql中REPEATABLE READ的隔离级别也可以避免幻读了。</li></ul><h3><a name='header-n988' class='md-header-anchor '></a>3、设置和查看隔离级别</h3><p>每启动一个 mysql 程序, 就会获得一个单独的数据库连接。每个数据库连接都有一个变量 @@tx_isolation, 表示当前连接的事务隔离级别。mysql服务也有一个全局变量@@global.tx_isolation，表示所有连接的默认事务隔离级别。</p><ul><li>查看当前mysql连接的隔离级别: </li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n993" mdtype="fences">select @@tx_isolation;
+</pre><ul><li>查看全局的隔离级别：</li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n996" mdtype="fences">select @@global.tx_isolation;
+</pre><ul><li>设置当前 mysql连接的隔离级别:  </li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n1001" mdtype="fences">set tx_isolation ='read-uncommitted';
+set tx_isolation ='read-committed';
+set tx_isolation ='repeatable-read';
+</pre><ul><li>设置数据库系统的全局的隔离级别:</li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n1005" mdtype="fences">set global tx_isolation ='read-committed';
+</pre><blockquote><p>注意：这里的隔离级别中间是减号，不是下划线。</p></blockquote><h1><a name='header-n1008' class='md-header-anchor '></a>第十二章  用户与权限</h1><h2><a name='header-n1009' class='md-header-anchor '></a>12.1 身份认证</h2><p>（1）IP+用户名作为身份验证</p><p><span>	</span>例如：root@localhost：只允许在本机使用root用户登录</p><p><span>		</span>  root@%：运行在任意机器上使用root用户登录</p><p><span>		</span>root@192.168.11.56：只允许IP地址为192.168.11.56的电脑通过root访问本机的mysql服务器。</p><p><span>		</span>chailinyan@%：运行在任意机器上使用chailinyan用户登录</p><blockquote><p>建立用户时，用于身份验证的IP地址，是连接你的服务的客户端的IP地址</p><p>例如：root@192.168.11.56，表示客户端在192.168.11.56的机器上可以访问你的mysql服务</p><p>而这个客户端，要连接你的服务时，-h后面的主机的IP地址是，服务器所在的机器的IP地址。</p><p>例如：mysql服务在192.168.11.11机器上，   客户端在192.168.11.56上，那么客户端可以用root@192.168.11.56或root@%，连接时填写mysql -h192.168.11.11 -u root -p密码</p></blockquote><p>&nbsp;</p><p>（2）密码</p><h2><a name='header-n1022' class='md-header-anchor '></a>12.2 分配权限</h2><h3><a name='header-n1023' class='md-header-anchor '></a>1、用户权限有4个权限级别</h3><p>（1）全局</p><p>（2）数据库</p><p>（3）表</p><p>（4）字段</p><p>依次校验权限，如果前面通过了，后面就不校验了：</p><p>全局 &gt; 数据库 &gt; 表 &gt; 字段</p><blockquote><p>注意：root@localhost，这个用户始终保留所有的全局权限。</p></blockquote><p>&nbsp;</p><h3><a name='header-n1033' class='md-header-anchor '></a>2、查看账户权限</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n1034" mdtype="fences">show grants for '用户名'@'主机IP地址';
+</pre><p> </p><h3><a name='header-n1036' class='md-header-anchor '></a>3、新建用户和删除用户</h3><p><img src='imgs/1561009788685.png' alt='1561009788685' referrerPolicy='no-referrer' /></p><p><img src='imgs/1561009769163.png' alt='1561009769163' referrerPolicy='no-referrer' /></p><p>对应的语句：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n1040" mdtype="fences">CREATE USER '用户名'@'主机IP地址' IDENTIFIED BY '123456';
+</pre><blockquote><p>如果主机IP地址写：（1）192.168.29.53，就仅限于在该IP登录</p><p><span>									</span>（2）%，就表示可以从任意IP登录</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n1044" mdtype="fences">drop user '用户名'@'主机IP地址';
+</pre><p>&nbsp;</p><h3><a name='header-n1046' class='md-header-anchor '></a>4、授予和收回权限</h3><p><img src='imgs/1561009821823.png' alt='1561009821823' referrerPolicy='no-referrer' /></p><p>对应语句：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n1049" mdtype="fences">GRANT 权限列表 ON *.* TO '用户名'@'主机IP地址';  #全局
+GRANT 权限列表 ON 数据库名.* TO '用户名'@'主机IP地址'; #某个库
+GRANT 权限列表 ON 数据库名.表格 TO '用户名'@'主机IP地址'; #某个库的某个表
+GRANT 权限列表 ON 表名.* TO '用户名'@'主机IP地址';  #某个表的字段
+</pre><p>例如：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n1051" mdtype="fences">GRANT SELECT ON *.* TO 'chai'@'192.168.29.53';
+GRANT SELECT ON `test`.* TO 'chai'@'192.168.29.53';
+GRANT UPDATE ON `test`.`t_department` TO 'chai'@'192.168.29.53';
+GRANT UPDATE ON `t_department`.* TO 'chai'@'192.168.29.53';
+GRANT SELECT (tid), INSERT (tid), UPDATE (tid), REFERENCES (tid) ON `1101db`.`course` TO 'chai'@'192.168.29.30';
+</pre><p>收回权限：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n1053" mdtype="fences">revoke 权限列表 ON *.* FROM '用户名'@'主机IP地址';
+revoke 权限列表 ON 数据库名.* FROM '用户名'@'主机IP地址';
+revoke 权限列表 ON 数据库名.表格 FROM '用户名'@'主机IP地址';
+revoke 权限列表 ON 表名.* FROM '用户名'@'主机IP地址';
+</pre><p>&nbsp;</p><h1><a name='header-n1055' class='md-header-anchor '></a>第十三章  经典问题</h1><h2><a name='header-n1056' class='md-header-anchor '></a>1、编码问题</h2><h3><a name='header-n1057' class='md-header-anchor '></a>命令行操作sql乱码问题</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n1058" mdtype="fences">mysql&gt; INSERT INTO t_stu VALUES(1,'张三','男');
+ERROR 1366 (HY000): Incorrect string value: '\xD5\xC5\xC8\xFD' for column 'sname' at row 1
+</pre><h3><a name='header-n1059' class='md-header-anchor '></a>修改my.ini配置文件</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="ini" contenteditable="false" cid="n1060" mdtype="fences">在路径：D:\ProgramFiles\mysql\MySQLServer5.7Data 找到my.ini文件
+
+修改内容1：
+	找到[mysql]命令，大概在63行左右，在其下一行添加 
+		default-character-set=utf8
+修改内容2:
+	找到[mysqld]命令，大概在76行左右，在其下一行添加
+		character-set-server=utf8
+		collation-server=utf8_general_ci
+
+修改完毕后，重启MySQL57服务
+</pre><p>查看编码命令</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n1062" mdtype="fences">show variables like 'character_%';
+show variables like 'collation_%';
+</pre><p><img src='imgs/MySQL编码1.jpg' alt='' referrerPolicy='no-referrer' /></p><p><img src='imgs/MySQL编码2.jpg' alt='' referrerPolicy='no-referrer' /></p><ul><li>如果是以上配置就说明对了</li></ul><h3><a name='header-n1068' class='md-header-anchor '></a>命令行操作sql仍然乱码问题</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="mysql" contenteditable="false" cid="n1069" mdtype="fences">mysql&gt; INSERT INTO t_stu VALUES(1,'张三','男');
+ERROR 1366 (HY000): Incorrect string value: '\xD5\xC5\xC8\xFD' for column 'sname' at row 1
+</pre><p>原因：按照刚才的配置，服务器端认为你的客户端的字符集是utf-8，而实际上你的客户端的字符集是GBK。</p><p><img src='imgs/1557458006195.png' alt='1557458006195' referrerPolicy='no-referrer' /></p><p>查看所有字符集：<strong>SHOW VARIABLES LIKE &#39;character_set_%&#39;;</strong></p><p><img src='imgs/1557458019409.png' alt='1557458019409' referrerPolicy='no-referrer' /></p><p>解决方案，设置当前连接的客户端字符集 <strong>“SET NAMES GBK;”</strong></p><p>set names gbk;是为了告诉服务器,客户端用的GBK编码,防止乱码。</p><p><img src='imgs/1557458032334.png' alt='1557458032334' referrerPolicy='no-referrer' /></p><p>有的时候，这样还不能解决，例如，某些win10操作系统环境下，那么修改命令行的属性-》选项-》勾选使用旧版控制台，然后重启电脑</p><p><img src='imgs/1560996958604.png' alt='1560996958604' referrerPolicy='no-referrer' /></p><p>&nbsp;</p><h2><a name='header-n1080' class='md-header-anchor '></a>2、忘记root用户密码问题</h2><p>1:通过任务管理器或者服务管理,关掉mysqld(服务进程)</p><p>2:通过命令行+特殊参数开启mysqld</p><p>mysql5.5</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="cmd" contenteditable="false" cid="n1084" mdtype="fences">mysqld --skip-grant-tables
+</pre><p>mysql5.7版</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="cmd" contenteditable="false" cid="n1086" mdtype="fences">mysqld --defaults-file="D:\ProgramFiles\mysql\MySQLServer5.7Data\my.ini" --skip-grant-tables
+</pre><blockquote><p>此处路径以你自己的世界路径为准</p></blockquote><p>3:此时,mysqld服务进程已经打开,并且,不需要权限检查.</p><p>4:mysql -uroot  无密码登陆服务器.另启动一个客户端进行</p><p>5: 修改权限表</p><p> （1） use mysql;</p><p>（2）</p><p>mysql5.5版</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n1095" mdtype="fences">update user set Password = password('123456') where User = 'root';
+</pre><p>mysql5.7版</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n1097" mdtype="fences">update user set authentication_string=password('新密码') where user='root' and Host='localhost'; 
+</pre><p>           </p><p>  （3）flush privileges;</p><p>6:通过任务管理器,关掉mysqld服务进程.</p><p>7:再次通过服务管理,打mysql服务。</p><p>8:即可用修改后的新密码登陆.</p><p>&nbsp;</p><h2><a name='header-n1104' class='md-header-anchor '></a>3、查看字符集和校对规则</h2><p>关于SQL的关键字和函数名等不区分大小写，但是对于数据值是否区分大小写，和字符集与校对规则有关。</p><p><em>ci（大小写不敏感），</em>cs（大小写敏感），_bin（二元，即比较是基于字符编码的值而与language无关）</p><p>（1）查看所有字符集和校对规则</p><p><img src='imgs/wps1.jpg' alt='img' referrerPolicy='no-referrer' /> </p><p>（2）查看GBK和UTF-8字符集的校对规则</p><p>show collation like &#39;gbk%&#39;;</p><p><img src='imgs\wps2.jpg' alt='img' referrerPolicy='no-referrer' /> </p><p>show collation like &#39;utf8%&#39;;</p><p><img src='imgs\wps3.jpg' alt='img' referrerPolicy='no-referrer' /> </p><p>utf8_unicode_ci和utf8_general_ci对中、英文来说没有实质的差别。
+utf8_general_ci 校对速度快，但准确度稍差。
+utf8_unicode_ci 准确度高，但校对速度稍慢。</p><p>如果你的应用有德语、法语或者俄语，请一定使用utf8_unicode_ci。一般用utf8_general_ci就够了。</p><p>（3）查看服务器的字符集和校对规则</p><p><img src='imgs\wps4.jpg' alt='img' referrerPolicy='no-referrer' /> </p><p>（4）查看和修改某个数据库的字符集和校对规则</p><p><img src='imgs\wps5.jpg' alt='img' referrerPolicy='no-referrer' /> </p><p>或</p><p><img src='imgs\wps6.jpg' alt='img' referrerPolicy='no-referrer' /> </p><p>修改数据库的字符集和校对规则：</p><p>ALTER DATABASE 数据库名称 DEFAULT CHARACTER SET 字符集名称 【COLLATE 校对规则名称】;</p><p>例如：</p><p>ALTER DATABASE ceshi_db DEFAULT CHARACTER SET utf8 collate utf8_general_ci;</p><p><img src='imgs\wps7.jpg' alt='img' referrerPolicy='no-referrer' /> </p><p>注意：修改了数据库的默认字符集和校对规则后，原来已经创建的表格的字符集和校对规则并不会改变，如果需要，那么需要单独修改。</p><p>（5）查看某个表格的字符集和校对规则</p><p>查看字符集：show create table users;</p><p><img src='imgs\wps8.jpg' alt='img' referrerPolicy='no-referrer' /> </p><p>如果要查看校对规则：show table status from bookstore like &#39;%users%&#39; ;</p><p><img src='imgs\wps9.jpg' alt='img' referrerPolicy='no-referrer' /> </p><p>修改某个表格的字符集和校对规则：</p><p>修改表的默认字符集：</p><p>ALTER TABLE 表名称 DEFAULT CHARACTER SET 字符集名称 【COLLATE 校对规则名称】;</p><p>把表默认的字符集和所有字符列（CHAR,VARCHAR,TEXT）改为新的字符集：</p><p>ALTER TABLE 表名称 CONVERT TO CHARACTER SET 字符集名称 【COLLATE 校对规则名称】;</p><p> </p><p>例如：ALTER TABLE ceshi_table DEFAULT CHARACTER SET gbk collate gbk_chinese_ci;</p><p>&nbsp;</p></div>
+<a href='../软件安装教程.html'>回目录</a> <br/>
+
+</body>
+</html>

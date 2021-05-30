@@ -1,0 +1,1564 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>第9章【核心类及API】-update</title><link href='https://fonts.loli.net/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:first-child { margin-top: -20px; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 2; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px !important; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 32px; padding-right: 32px; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="mermaid"] svg, [lang="flow"] svg { max-width: 100%; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; word-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { word-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+:root { --active-file-bg-color: rgba(32, 43, 51, 0.63); --active-file-text-color: white; --bg-color: #f3f2ee; --text-color: #1f0909; --control-text-color: #444; --rawblock-edit-panel-bd: #e5e5e5; --select-text-bg-color: rgba(32, 43, 51, 0.63); --select-text-font-color: white; }
+pre { --select-text-bg-color: #36284e; --select-text-font-color: #fff; }
+html { font-size: 16px; }
+html, body { background-color: rgb(243, 242, 238); font-family: "PT Serif", "Times New Roman", Times, serif; color: rgb(31, 9, 9); line-height: 1.5em; }
+#write { max-width: 40em; }
+ol li { list-style-type: decimal; list-style-position: outside; }
+ul li { list-style-type: disc; list-style-position: outside; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote::before, blockquote::after, q::before, q::after { content: none; }
+table { border-collapse: collapse; border-spacing: 0px; }
+h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+h1 { font-size: 1.875em; line-height: 1.6em; margin-top: 2em; }
+h2, h3 { font-size: 1.3125em; line-height: 1.15; margin-top: 2.28571em; margin-bottom: 1.15em; }
+h3 { font-weight: normal; }
+h4 { font-size: 1.125em; margin-top: 2.67em; }
+h5, h6 { font-size: 1em; }
+h1 { border-bottom: 1px solid; margin-bottom: 1.875em; padding-bottom: 0.8125em; }
+a { text-decoration: none; color: rgb(6, 85, 136); }
+a:hover, a:active { text-decoration: underline; }
+p, blockquote, .md-fences { margin-bottom: 1.5em; }
+h1, h2, h3, h4, h5, h6 { margin-bottom: 1.5em; }
+blockquote { font-style: italic; border-left: 5px solid; margin-left: 2em; padding-left: 1em; }
+ul, ol { margin: 0px 0px 1.5em 1.5em; }
+.md-meta, .md-before, .md-after { color: rgb(153, 153, 153); }
+table { margin-bottom: 1.5em; font-size: 1em; }
+thead th, tfoot th { padding: 0.25em 0.25em 0.25em 0.4em; text-transform: uppercase; }
+th { text-align: left; }
+td { vertical-align: top; padding: 0.25em 0.25em 0.25em 0.4em; }
+code, .md-fences { background-color: rgb(218, 218, 218); }
+code { padding-left: 2px; padding-right: 2px; }
+.md-fences { margin-left: 2em; margin-bottom: 3em; padding-left: 1ch; padding-right: 1ch; }
+pre, code, tt { font-size: 0.875em; line-height: 1.71429em; }
+h1 { line-height: 1.3em; font-weight: normal; margin-bottom: 0.5em; }
+p + ul, p + ol { margin-top: 0.5em; }
+h3 + ul, h4 + ul, h5 + ul, h6 + ul, h3 + ol, h4 + ol, h5 + ol, h6 + ol { margin-top: 0.5em; }
+li > ul, li > ol { margin-top: inherit; margin-bottom: 0px; }
+li ol > li { list-style-type: lower-alpha; }
+li li ol > li { list-style-type: lower-roman; }
+h2, h3 { margin-bottom: 0.75em; }
+hr { border-top: none; border-right: none; border-bottom: 1px solid; border-left: none; }
+h1 { border-color: rgb(197, 197, 197); }
+blockquote { border-color: rgb(186, 186, 186); color: rgb(101, 101, 101); }
+blockquote ul, blockquote ol { margin-left: 0px; }
+.ty-table-edit { background-color: transparent; }
+thead { background-color: rgb(218, 218, 218); }
+tr:nth-child(2n) { background: rgb(232, 231, 231); }
+hr { border-color: rgb(197, 197, 197); }
+.task-list { padding-left: 1rem; }
+.md-task-list-item { padding-left: 1.5rem; list-style-type: none; }
+.md-task-list-item > input::before { content: "√"; display: inline-block; width: 1.25rem; height: 1.6rem; vertical-align: middle; text-align: center; color: rgb(221, 221, 221); background-color: rgb(243, 242, 238); }
+.md-task-list-item > input:checked::before, .md-task-list-item > input[checked]::before { color: inherit; }
+#write pre.md-meta-block { min-height: 1.875rem; color: rgb(85, 85, 85); border: 0px; background: transparent; margin-left: 1em; margin-top: 1em; }
+.md-image > .md-meta { color: rgb(155, 81, 70); }
+.md-image > .md-meta { font-family: Menlo, "Ubuntu Mono", Consolas, "Courier New", "Microsoft Yahei", "Hiragino Sans GB", "WenQuanYi Micro Hei", serif; }
+#write > h3.md-focus::before { left: -1.5rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+#write > h4.md-focus::before { left: -1.5rem; top: 0.25rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+#write > h5.md-focus::before { left: -1.5rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+#write > h6.md-focus::before { left: -1.5rem; top: 0.3125rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+.md-toc:focus .md-toc-content { margin-top: 19px; }
+.md-toc-content:empty::before { color: rgb(6, 85, 136); }
+.md-toc-item { color: rgb(6, 85, 136); }
+#write div.md-toc-tooltip { background-color: rgb(243, 242, 238); }
+#typora-sidebar { background-color: rgb(243, 242, 238); box-shadow: rgba(0, 0, 0, 0.376) 0px 6px 12px; }
+.pin-outline #typora-sidebar { background: inherit; box-shadow: none; border-right: 1px dashed; }
+.pin-outline #typora-sidebar:hover .outline-title-wrapper { border-left: 1px dashed; }
+.outline-item:hover { background-color: rgb(218, 218, 218); border-left: 28px solid rgb(218, 218, 218); border-right: 18px solid rgb(218, 218, 218); }
+.typora-node .outline-item:hover { border-right: 28px solid rgb(218, 218, 218); }
+.outline-expander::before { content: ""; font-family: FontAwesome; font-size: 14px; top: 1px; }
+.outline-expander:hover::before, .outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.modal-content { background-color: rgb(243, 242, 238); }
+.auto-suggest-container ul li { list-style-type: none; }
+.megamenu-menu, #top-titlebar, #top-titlebar *, .megamenu-content { background: rgb(243, 242, 238); color: rgb(31, 9, 9); }
+.megamenu-menu-header { border-bottom: 1px dashed rgb(32, 43, 51); }
+.megamenu-menu { box-shadow: none; border-right: 1px dashed; }
+header, .context-menu, .megamenu-content, footer { font-family: "PT Serif", "Times New Roman", Times, serif; color: rgb(31, 9, 9); }
+#megamenu-back-btn { color: rgb(31, 9, 9); border-color: rgb(31, 9, 9); }
+.megamenu-menu-header #megamenu-menu-header-title::before { color: rgb(31, 9, 9); }
+.megamenu-menu-list li a:hover, .megamenu-menu-list li a.active { color: inherit; background-color: rgb(232, 231, 223); }
+.long-btn:hover { background-color: rgb(232, 231, 223); }
+#recent-file-panel tbody tr:nth-child(2n-1) { background-color: transparent !important; }
+.megamenu-menu-panel tbody tr:hover td:nth-child(2) { color: inherit; }
+.megamenu-menu-panel .btn { background-color: rgb(210, 209, 209); }
+.btn-default { background-color: transparent; }
+.typora-sourceview-on #toggle-sourceview-btn, .ty-show-word-count #footer-word-count { background: rgb(199, 197, 197); }
+#typora-quick-open { background-color: inherit; }
+.md-diagram-panel { margin-top: 8px; }
+.file-list-item-file-name { font-weight: initial; }
+.file-list-item-summary { opacity: 1; }
+.file-list-item { color: rgb(119, 119, 119); }
+.file-list-item.active { background-color: inherit; color: black; }
+.ty-side-sort-btn.active { background-color: inherit; }
+.file-list-item.active .file-list-item-file-name { font-weight: bold; }
+.file-list-item { opacity: 1 !important; }
+.file-library-node.active > .file-node-background { background-color: var(--active-file-bg-color); }
+.file-tree-node.active > .file-node-content { color: var(--active-file-text-color); }
+.md-task-list-item > input { margin-left: -1.6em; margin-top: calc(1rem - 12px); }
+input { border: 1px solid rgb(170, 170, 170); }
+.megamenu-menu-header #megamenu-menu-header-title, .megamenu-menu-header:hover, .megamenu-menu-header:focus { color: inherit; }
+.dropdown-menu .divider { border-color: rgb(229, 229, 229); }
+.os-windows-7 strong, .os-windows-7 strong { font-weight: 760; }
+
+
+
+
+
+ .typora-export li, .typora-export p, .typora-export,  .footnote-line {white-space: normal;} 
+</style>
+</head>
+<body class='typora-export os-windows' >
+<div  id='write'  class = 'is-node'><h1><a name='header-n0' class='md-header-anchor '></a>第9章 常用核心类及API</h1><h2><a name='header-n2' class='md-header-anchor '></a>学习目标</h2><ul><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>了解数学相关API</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>了解日期时间API</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>了解系统类API</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>掌握数组工具类的使用</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>熟练掌握String类的API</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>熟练掌握StringBuilder和StringBuffer类的API</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够处理字符串相关的算法处理</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>认识枚举类型</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>会使用枚举类型</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>认识包装类</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>认识包装类</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>会使用包装类进行处理字符串</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>会分析包装类的相关面试题</p></li></ul><h1><a name='header-n30' class='md-header-anchor '></a>第十章 常用核心类及API</h1><h2><a name='header-n31' class='md-header-anchor '></a>10.1 字符串String</h2><p>Java中的String是一个引用数据类型，表示字符串，String也是一个类，位于java.lang包下。Java程序中所有的字符串字面量（如<code>&quot;abc&quot;</code> ）都可以被看作是此类的实例。因为字符串太常用了，所以Java提供了这种简单的字符串字面量的表示方式。</p><h3><a name='header-n33' class='md-header-anchor '></a>10.1.1 字符串的特点</h3><ol start='' ><li><p>Java字符串的一个重要特点就是字符串<strong>不可变</strong>。</p><p>这种不可变性是通过内部的<code>private final char[]</code>字段，以及没有任何修改<code>char[]</code>的方法实现的。修改一个字符串变量值，相当于新生成一个字符串对象。</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span class="cm-keyword">final</span> <span class="cm-keyword">class</span> <span class="cm-variable-3">String</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">implements</span> <span class="cm-variable">java</span>.<span class="cm-variable">io</span>.<span class="cm-variable">Serializable</span>, <span class="cm-variable">Comparable</span><span class="cm-operator">&lt;</span><span class="cm-variable-3">String</span><span class="cm-operator">&gt;</span>, <span class="cm-variable">CharSequence</span> {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">/** The value is used for character storage. */</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">private</span> <span class="cm-keyword">final</span> <span class="cm-variable-3">char</span> <span class="cm-variable">value</span>[];</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  ...</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 148px;"></div><div class="CodeMirror-gutters" style="display: none; height: 148px;"></div></div></div></pre></li><li><p>上面这个字符数组 <code>private final char value[];</code>也是字符串对象的内部存储形式。</p><blockquote><p>JDK1.9之前有一个char[] value数组，JDK1.9之后byte[]数组</p></blockquote><p>所以<code>&quot;abc&quot;</code> 等效于 <code>char[] data={ &#39;a&#39; , &#39;b&#39; , &#39;c&#39; }</code>。</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">例如：</span> </span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable-3">String</span> <span class="cm-variable">str</span> <span class="cm-operator">=</span> <span class="cm-string">"abc"</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">相当于：</span> </span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable-3">char</span> <span class="cm-variable">data</span>[] <span class="cm-operator">=</span> {<span class="cm-string">'a'</span>, <span class="cm-string">'b'</span>, <span class="cm-string">'c'</span>}; &nbsp; &nbsp; </span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable-3">String</span> <span class="cm-variable">str</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable-3">String</span>(<span class="cm-variable">data</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">// String底层是靠字符数组实现的。</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 173px;"></div><div class="CodeMirror-gutters" style="display: none; height: 173px;"></div></div></div></pre></li><li><p>字符串字面量也是一个String类的实例，存储在字符串常量池中，相同的字符串字面量表示的对象在内存中只有一份。</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable-3">String</span> <span class="cm-variable">s1</span> <span class="cm-operator">=</span> <span class="cm-string">"abc"</span>;</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable-3">String</span> <span class="cm-variable">s2</span> <span class="cm-operator">=</span> <span class="cm-string">"abc"</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">s1</span> <span class="cm-operator">==</span> <span class="cm-variable">s2</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">// 内存中只有一个"abc"对象被创建，同时被s1和s2共享。</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 99px;"></div><div class="CodeMirror-gutters" style="display: none; height: 99px;"></div></div></div></pre></li><li><p>字符串String类型本身是final声明的，意味着我们不能继承String，也就意味着我们不能去重写他的方法。</p></li></ol><h3><a name='header-n50' class='md-header-anchor '></a>10.1.2 构造字符串对象</h3><ol start='' ><li><h4><a name='header-n53' class='md-header-anchor '></a>使用构造方法</h4><ul><li><code>public String()</code> ：初始化新创建的 String对象，以使其表示空字符序列。</li><li><code>String(String original)</code>： 初始化一个新创建的 <code>String</code> 对象，使其表示一个与参数相同的字符序列；换句话说，新创建的字符串是该参数字符串的副本。</li><li><code>public String(char[] value)</code> ：通过当前参数中的字符数组来构造新的String。</li><li><code>public String(char[] value,int offset, int count)</code> ：通过字符数组的一部分来构造新的String。</li><li><code>public String(byte[] bytes)</code> ：通过使用平台的默认字符集解码当前参数中的字节数组来构造新的String。</li><li><code>public String(byte[] bytes,String charsetName)</code> ：通过使用指定的字符集解码当前参数中的字节数组来构造新的String。</li></ul><p>代码示例：</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">//字符串常量对象，推荐</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable-3">String</span> <span class="cm-variable">str</span> <span class="cm-operator">=</span> <span class="cm-string">"hello"</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">// 无参构造，不推荐</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable-3">String</span> <span class="cm-variable">str1</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">String（）；</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">//创建"hello"字符串常量的副本，不推荐</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable-3">String</span> <span class="cm-variable">str2</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable-3">String</span>(<span class="cm-string">"hello"</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">//通过字符数组构造</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable-3">char</span> <span class="cm-variable">chars</span>[] <span class="cm-operator">=</span> {<span class="cm-string">'a'</span>, <span class="cm-string">'b'</span>, <span class="cm-string">'c'</span>,<span class="cm-string">'d'</span>,<span class="cm-string">'e'</span>}; &nbsp; &nbsp; </span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable-3">String</span> <span class="cm-variable">str3</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable-3">String</span>(<span class="cm-variable">chars</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable-3">String</span> <span class="cm-variable">str4</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable-3">String</span>(<span class="cm-variable">chars</span>,<span class="cm-number">0</span>,<span class="cm-number">3</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">// 通过字节数组构造</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable-3">byte</span> <span class="cm-variable">bytes</span>[] <span class="cm-operator">=</span> {<span class="cm-number">97</span>, <span class="cm-number">98</span>, <span class="cm-number">99</span> }; &nbsp; &nbsp; </span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable-3">String</span> <span class="cm-variable">str5</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable-3">String</span>(<span class="cm-variable">bytes</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable-3">String</span> <span class="cm-variable">str6</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable-3">String</span>(<span class="cm-variable">bytes</span>,<span class="cm-string">"GBK"</span>);</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 444px;"></div><div class="CodeMirror-gutters" style="display: none; height: 444px;"></div></div></div></pre></li><li><h4><a name='header-n70' class='md-header-anchor '></a>使用&quot;+&quot;</h4><p>任意数据类型与&quot;字符串&quot;进行拼接，结果都是字符串</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-keyword">static</span> <span class="cm-variable-3">void</span> <span class="cm-def">main</span>(<span class="cm-variable-3">String</span>[] <span class="cm-variable">args</span>) {</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable-3">int</span> <span class="cm-variable">num</span> <span class="cm-operator">=</span> <span class="cm-number">123456</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable-3">String</span> <span class="cm-variable">s</span> <span class="cm-operator">=</span> <span class="cm-variable">num</span> <span class="cm-operator">+</span> <span class="cm-string">""</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">s</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">Student</span> <span class="cm-variable">stu</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">Student</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable-3">String</span> <span class="cm-variable">s2</span> <span class="cm-operator">=</span> <span class="cm-variable">stu</span> <span class="cm-operator">+</span> <span class="cm-string">""</span>;<span class="cm-comment">//自动调用对象的toString()，然后与""进行拼接</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">s2</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 247px;"></div><div class="CodeMirror-gutters" style="display: none; height: 247px;"></div></div></div></pre></li></ol><h3><a name='header-n73' class='md-header-anchor '></a>10.1.3 字符串的常用方法</h3><h4><a name='header-n74' class='md-header-anchor '></a>1、系列1</h4><p>（1）boolean isEmpty()：字符串是否为空</p><p>（2）int length()：返回字符串的长度</p><p>（3）String concat(xx)：拼接，等价于+</p><p>（4）boolean equals(Object obj)：比较字符串是否相等，区分大小写</p><p>（5）boolean equalsIgnoreCase(Object obj)：比较字符串是否相等，不区分大小写</p><p>（6）int compareTo(String other)：比较字符串大小，区分大小写，按照Unicode编码值比较大小</p><p>（7）int compareToIgnoreCase(String other)：比较字符串大小，不区分大小写</p><p>（8）String toLowerCase()：将字符串中大写字母转为小写</p><p>（9）String toUpperCase()：将字符串中小写字母转为大写</p><p>（10）String trim()：去掉字符串前后空白符</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-meta">@Test</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-variable-3">void</span> <span class="cm-def">test01</span>(){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">//将用户输入的单词全部转为小写，如果用户没有输入单词，重新输入</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">Scanner</span> <span class="cm-variable">input</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">Scanner</span>(<span class="cm-variable">System</span>.<span class="cm-variable">in</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable-3">String</span> <span class="cm-variable">word</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">while</span>(<span class="cm-atom">true</span>){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">print</span>(<span class="cm-string">"请输入单词："</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">word</span> <span class="cm-operator">=</span> <span class="cm-variable">input</span>.<span class="cm-variable">nextLine</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">if</span>(<span class="cm-variable">word</span>.<span class="cm-variable">trim</span>().<span class="cm-variable">length</span>()<span class="cm-operator">!=</span><span class="cm-number">0</span>){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">word</span> <span class="cm-operator">=</span> <span class="cm-variable">word</span>.<span class="cm-variable">toLowerCase</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">break</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">word</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-meta">@Test</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-variable-3">void</span> <span class="cm-def">test02</span>(){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">//随机生成验证码，验证码由0-9，A-Z,a-z的字符组成</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable-3">char</span>[] <span class="cm-variable">array</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable-3">char</span>[<span class="cm-number">26</span><span class="cm-operator">*</span><span class="cm-number">2</span><span class="cm-operator">+</span><span class="cm-number">10</span>];</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">for</span> (<span class="cm-variable-3">int</span> <span class="cm-variable">i</span> <span class="cm-operator">=</span> <span class="cm-number">0</span>; <span class="cm-variable">i</span> <span class="cm-operator">&lt;</span> <span class="cm-number">10</span>; <span class="cm-variable">i</span><span class="cm-operator">++</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">array</span>[<span class="cm-variable">i</span>] <span class="cm-operator">=</span> (<span class="cm-variable-3">char</span>)(<span class="cm-string">'0'</span> <span class="cm-operator">+</span> <span class="cm-variable">i</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">for</span> (<span class="cm-variable-3">int</span> <span class="cm-variable">i</span> <span class="cm-operator">=</span> <span class="cm-number">10</span>,<span class="cm-variable">j</span><span class="cm-operator">=</span><span class="cm-number">0</span>; <span class="cm-variable">i</span> <span class="cm-operator">&lt;</span> <span class="cm-number">10</span><span class="cm-operator">+</span><span class="cm-number">26</span>; <span class="cm-variable">i</span><span class="cm-operator">++</span>,<span class="cm-variable">j</span><span class="cm-operator">++</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">array</span>[<span class="cm-variable">i</span>] <span class="cm-operator">=</span> (<span class="cm-variable-3">char</span>)(<span class="cm-string">'A'</span> <span class="cm-operator">+</span> <span class="cm-variable">j</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">for</span> (<span class="cm-variable-3">int</span> <span class="cm-variable">i</span> <span class="cm-operator">=</span> <span class="cm-number">10</span><span class="cm-operator">+</span><span class="cm-number">26</span>,<span class="cm-variable">j</span><span class="cm-operator">=</span><span class="cm-number">0</span>; <span class="cm-variable">i</span> <span class="cm-operator">&lt;</span> <span class="cm-variable">array</span>.<span class="cm-variable">length</span>; <span class="cm-variable">i</span><span class="cm-operator">++</span>,<span class="cm-variable">j</span><span class="cm-operator">++</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">array</span>[<span class="cm-variable">i</span>] <span class="cm-operator">=</span> (<span class="cm-variable-3">char</span>)(<span class="cm-string">'a'</span> <span class="cm-operator">+</span> <span class="cm-variable">j</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable-3">String</span> <span class="cm-variable">code</span> <span class="cm-operator">=</span> <span class="cm-string">""</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">Random</span> <span class="cm-variable">rand</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">Random</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">for</span> (<span class="cm-variable-3">int</span> <span class="cm-variable">i</span> <span class="cm-operator">=</span> <span class="cm-number">0</span>; <span class="cm-variable">i</span> <span class="cm-operator">&lt;</span> <span class="cm-number">4</span>; <span class="cm-variable">i</span><span class="cm-operator">++</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">code</span> <span class="cm-operator">+=</span> <span class="cm-variable">array</span>[<span class="cm-variable">rand</span>.<span class="cm-variable">nextInt</span>(<span class="cm-variable">array</span>.<span class="cm-variable">length</span>)];</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-string">"验证码："</span> <span class="cm-operator">+</span> <span class="cm-variable">code</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">//将用户输入的单词全部转为小写，如果用户没有输入单词，重新输入</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">Scanner</span> <span class="cm-variable">input</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">Scanner</span>(<span class="cm-variable">System</span>.<span class="cm-variable">in</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">print</span>(<span class="cm-string">"请输入验证码："</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable-3">String</span> <span class="cm-variable">inputCode</span> <span class="cm-operator">=</span> <span class="cm-variable">input</span>.<span class="cm-variable">nextLine</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">if</span>(<span class="cm-operator">!</span><span class="cm-variable">code</span>.<span class="cm-variable">equalsIgnoreCase</span>(<span class="cm-variable">inputCode</span>)){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-string">"验证码输入不正确"</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 1085px;"></div><div class="CodeMirror-gutters" style="display: none; height: 1085px;"></div></div></div></pre><h4><a name='header-n86' class='md-header-anchor '></a>2、系列2：查找</h4><p>（11）boolean contains(xx)：是否包含xx</p><p>（12）int indexOf(xx)：从前往后找当前字符串中xx，即如果有返回第一次出现的下标，要是没有返回-1</p><p>（13）int lastIndexOf(xx)：从后往前找当前字符串中xx，即如果有返回最后一次出现的下标，要是没有返回-1</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-meta">@Test</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-variable-3">void</span> <span class="cm-def">test01</span>(){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable-3">String</span> <span class="cm-variable">str</span> <span class="cm-operator">=</span> <span class="cm-string">"尚硅谷是一家靠谱的培训机构，尚硅谷可以说是IT培训的小清华，JavaEE是尚硅谷的当家学科，尚硅谷的大数据培训是行业独角兽。尚硅谷的前端和运维专业一样独领风骚。"</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-string">"是否包含清华："</span> <span class="cm-operator">+</span> <span class="cm-variable">str</span>.<span class="cm-variable">contains</span>(<span class="cm-string">"清华"</span>));</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-string">"培训出现的第一次下标："</span> <span class="cm-operator">+</span> <span class="cm-variable">str</span>.<span class="cm-variable">indexOf</span>(<span class="cm-string">"培训"</span>));</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-string">"培训出现的最后一次下标："</span> <span class="cm-operator">+</span> <span class="cm-variable">str</span>.<span class="cm-variable">lastIndexOf</span>(<span class="cm-string">"培训"</span>));</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 296px;"></div><div class="CodeMirror-gutters" style="display: none; height: 296px;"></div></div></div></pre><h4><a name='header-n91' class='md-header-anchor '></a>3、系列3：字符串截取</h4><p>（14）String substring(int beginIndex) ：返回一个新的字符串，它是此字符串的从beginIndex开始截取到最后的一个子字符串。 </p><p>（15）String substring(int beginIndex, int endIndex) ：返回一个新字符串，它是此字符串从beginIndex开始截取到endIndex(不包含)的一个子字符串。 </p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-meta">@Test</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-variable-3">void</span> <span class="cm-def">test01</span>(){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable-3">String</span> <span class="cm-variable">str</span> <span class="cm-operator">=</span> <span class="cm-string">"helloworldjavaatguigu"</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable-3">String</span> <span class="cm-variable">sub1</span> <span class="cm-operator">=</span> <span class="cm-variable">str</span>.<span class="cm-variable">substring</span>(<span class="cm-number">5</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable-3">String</span> <span class="cm-variable">sub2</span> <span class="cm-operator">=</span> <span class="cm-variable">str</span>.<span class="cm-variable">substring</span>(<span class="cm-number">5</span>,<span class="cm-number">10</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">sub1</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">sub2</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-meta">@Test</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-variable-3">void</span> <span class="cm-def">test02</span>(){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable-3">String</span> <span class="cm-variable">fileName</span> <span class="cm-operator">=</span> <span class="cm-string">"快速学习Java的秘诀.dat"</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">//截取文件名</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-string">"文件名："</span> <span class="cm-operator">+</span> <span class="cm-variable">fileName</span>.<span class="cm-variable">substring</span>(<span class="cm-number">0</span>,<span class="cm-variable">fileName</span>.<span class="cm-variable">lastIndexOf</span>(<span class="cm-string">"."</span>)));</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">//截取后缀名</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-string">"后缀名："</span> <span class="cm-operator">+</span> <span class="cm-variable">fileName</span>.<span class="cm-variable">substring</span>(<span class="cm-variable">fileName</span>.<span class="cm-variable">lastIndexOf</span>(<span class="cm-string">"."</span>)));</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 469px;"></div><div class="CodeMirror-gutters" style="display: none; height: 469px;"></div></div></div></pre><h4><a name='header-n95' class='md-header-anchor '></a>4、系列4：和字符相关</h4><p>（16）char charAt(index)：返回[index]位置的字符</p><p>（17）char[] toCharArray()： 将此字符串转换为一个新的字符数组返回</p><p>（18）String(char[] value)：返回指定数组中表示该字符序列的 String。 </p><p>（19）String(char[] value, int offset, int count)：返回指定数组中表示该字符序列的 String。</p><p>（20）static String copyValueOf(char[] data)： 返回指定数组中表示该字符序列的 String</p><p>（21）static String copyValueOf(char[] data, int offset, int count)：返回指定数组中表示该字符序列的 String</p><p>（22）static String valueOf(char[] data, int offset, int count) ： 返回指定数组中表示该字符序列的 String</p><p>（23）static String valueOf(char[] data)  ：返回指定数组中表示该字符序列的 String</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n104" mdtype="fences" style="break-inside: unset;">	@Test
+	public void test01(){
+		//将字符串中的字符按照大小顺序排列
+		String str = "helloworldjavaatguigu";
+		char[] array = str.toCharArray();
+		Arrays.sort(array);
+		str = new String(array);
+		System.out.println(str);
+	}
+	
+	@Test
+	public void test02(){
+		//将首字母转为大写
+		String str = "jack";
+		str = Character.toUpperCase(str.charAt(0))+str.substring(1);
+		System.out.println(str);
+	}
+</pre><h4><a name='header-n105' class='md-header-anchor '></a>5、系列5：编码与解码</h4><p>（24）byte[] getBytes()：编码，把字符串变为字节数组，按照平台默认的字符编码进行编码</p><p><span>			</span>byte[] getBytes(字符编码方式)：按照指定的编码方式进行编码</p><p>（25）new String(byte[] ) 或 new String(byte[], int, int)：解码，按照平台默认的字符编码进行解码</p><p>           new String(byte[]，字符编码方式 ) 或 new String(byte[], int, int，字符编码方式)：解码，按照指定的编码方式进行解码</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n110" mdtype="fences" style="break-inside: unset;">	/*
+	 * GBK，UTF-8，ISO8859-1所有的字符编码都向下兼容ASCII码
+	 */
+	public static void main(String[] args) throws Exception {
+		String str = "中国";
+		System.out.println(str.getBytes("ISO8859-1").length);// 2
+		// ISO8859-1把所有的字符都当做一个byte处理，处理不了多个字节
+		System.out.println(str.getBytes("GBK").length);// 4 每一个中文都是对应2个字节
+		System.out.println(str.getBytes("UTF-8").length);// 6 常规的中文都是3个字节
+
+		/*
+		 * 不乱码：（1）保证编码与解码的字符集名称一样（2）不缺字节
+		 */
+		System.out.println(new String(str.getBytes("ISO8859-1"), "ISO8859-1"));// 乱码
+		System.out.println(new String(str.getBytes("GBK"), "GBK"));// 中国
+		System.out.println(new String(str.getBytes("UTF-8"), "UTF-8"));// 中国
+	}
+</pre><p><strong>字符编码发展</strong></p><p><strong>ASCII码</strong></p><p>计算机一开始发明的时候是用来解决数字计算的问题，后来人们发现，计算机还可以做更多的事，例如文本处理。但由于计算机只识“数”，因此人们必须告诉计算机哪个数字来代表哪个特定字符，例如65代表字母‘A’，66代表字母‘B’，以此类推。但是计算机之间字符-数字的对应关系必须得一致，否则就会造成同一段数字在不同计算机上显示出来的字符不一样。因此美国国家标准协会ANSI制定了一个标准，规定了常用字符的集合以及每个字符对应的编号，这就是ASCII字符集（Character Set），也称ASCII码。</p><p>那时候的字符编解码系统非常简单，就是简单的查表过程。其中：</p><ul><li>0～31及127(共33个)是控制字符或通信专用字符（其余为可显示字符），如控制符：LF（换行）、CR（回车）、FF（换页）、DEL（删除）、BS（退格)</li><li>32～126(共95个)是字符(32是空格），其中48～57为0到9十个阿拉伯数字。</li><li>65～90为26个大写英文字母，97～122号为26个小写英文字母，其余为一些标点符号、运算符号等。</li></ul><p><strong>OEM字符集的衍生</strong></p><p>当计算机开始发展起来的时候，人们逐渐发现，ASCII字符集里那可怜的128个字符已经不能再满足他们的需求了。人们就在想，一个字节能够表示的数字（编号）有256个，而ASCII字符只用到了0x00~0x7F，也就是占用了前128个，后面128个数字不用白不用，因此很多人打起了后面这128个数字的主意。可是问题在于，很多人同时有这样的想法，但是大家对于0x80-0xFF这后面的128个数字分别对应什么样的字符，却有各自的想法。这就导致了当时销往世界各地的机器上出现了大量各式各样的OEM字符集。不同的OEM字符集导致人们无法跨机器交流各种文档。例如职员甲发了一封简历résumés给职员乙，结果职员乙看到的却是r?sum?s，因为é字符在职员甲机器上的OEM字符集中对应的字节是0x82，而在职员乙的机器上，由于使用的OEM字符集不同，对0x82字节解码后得到的字符却是?。</p><p><strong>多字节字符集（MBCS）和中文字符集</strong></p><p>上面我们提到的字符集都是基于单字节编码，也就是说，一个字节翻译成一个字符。这对于拉丁语系国家来说可能没有什么问题，因为他们通过扩展第8个比特，就可以得到256个字符了，足够用了。但是对于亚洲国家来说，256个字符是远远不够用的。因此这些国家的人为了用上电脑，又要保持和ASCII字符集的兼容，就发明了多字节编码方式，相应的字符集就称为多字节字符集（Muilti-Bytes Charecter Set）。例如中国使用的就是双字节字符集编码。</p><p>例如目前最常用的中文字符集GB2312，涵盖了所有简体字符以及一部分其他字符；GBK（K代表扩展的意思）则在GB2312的基础上加入了对繁体字符等其他非简体字符。这两个字符集的字符都是使用1-2个字节来表示。Windows系统采用936代码页来实现对GBK字符集的编解码。在解析字节流的时候，如果遇到字节的最高位是0的话，那么就使用936代码页中的第1张码表进行解码，这就和单字节字符集的编解码方式一致了。如果遇到字节的最高位是1的话，那么就表示需要两个字节值才能对应一个字符。</p><p><img src='img/1563199557136.png' alt='1563199557136' referrerPolicy='no-referrer' /></p><p><strong>ANSI标准、国家标准、ISO标准</strong></p><p>不同ASCII衍生字符集的出现，让文档交流变得非常困难，因此各种组织都陆续进行了标准化流程。例如美国ANSI组织制定了ANSI标准字符编码（注意，我们现在通常说到ANSI编码，通常指的是平台的默认编码，例如英文操作系统中是ISO-8859-1，中文系统是GBK），ISO组织制定的各种ISO标准字符编码，还有各国也会制定一些国家标准字符集，例如中国的GBK，GB2312和GB18030。</p><p>操作系统在发布的时候，通常会往机器里预装这些标准的字符集还有平台专用的字符集，这样只要你的文档是使用标准字符集编写的，通用性就比较高了。例如你用GB2312字符集编写的文档，在中国大陆内的任何机器上都能正确显示。同时，我们也可以在一台机器上阅读多个国家不同语言的文档了，前提是本机必须安装该文档使用的字符集。</p><p><strong>Unicode的出现</strong></p><p>虽然通过使用不同字符集，我们可以在一台机器上查阅不同语言的文档，但是我们仍然<strong>无法解决一个问题：如果一份文档中含有不同国家的不同语言的字符，那么无法在一份文档中显示所有字符</strong>。为了解决这个问题，我们需要一个全人类达成共识的巨大的字符集，这就是Unicode字符集。</p><p>Unicode字符集涵盖了目前人类使用的所有字符，并为每个字符进行统一编号，分配唯一的字符码（Code Point）。Unicode字符集将所有字符按照使用上的频繁度划分为17个层面（Plane），每个层面上有216=65536个字符码空间。其中第0个层面BMP，基本涵盖了当今世界用到的所有字符。其他的层面要么是用来表示一些远古时期的文字，要么是留作扩展。我们平常用到的Unicode字符，一般都是位于BMP层面上的。目前Unicode字符集中尚有大量字符空间未使用。</p><p>Unicode同样也不完美，这里就有三个的问题，一个是，我们已经知道，英文字母只用一个字节表示就够了，第二个问题是如何才能区别Unicode和ASCII？计算机怎么知道两个字节表示一个符号，而不是分别表示两个符号呢？第三个，如果和GBK等双字节编码方式一样，用最高位是1或0表示两个字节和一个字节，就少了很多值无法用于表示字符，不够表示所有字符。Unicode在很长一段时间内无法推广，直到互联网的出现，为解决Unicode如何在网络上传输的问题，于是面向传输的众多 UTF（UCS Transfer Format）标准出现了，顾名思义，UTF-8就是每次8个位传输数据，而UTF-16就是每次16个位。UTF-8就是在互联网上使用最广的一种Unicode的实现方式，这是为传输而设计的编码，并使编码无国界，这样就可以显示全世界上所有文化的字符了。</p><p>UTF-8最大的一个特点，就是它是一种变长的编码方式。它可以使用1~4个字节表示一个符号。从unicode到uft-8并不是直接的对应，而是要过一些算法和规则来转换（<strong>即Uncidoe字符集≠UTF-8编码方式</strong>）。</p><p>Unicode符号范围         | UTF-8编码方式</p><p>(十六进制)                      |        （二进制）</p><p>—————————————————————–</p><p>0000 0000-0000 007F | 0xxxxxxx（兼容原来的ASCII）</p><p>0000 0080-0000 07FF | 110xxxxx 10xxxxxx</p><p>0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx</p><p>0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</p><p><img src='imgs09/1563199860263.png' alt='1563199860263' referrerPolicy='no-referrer' /></p><p>因此，Unicode只是定义了一个庞大的、全球通用的字符集，并为每个字符规定了唯一确定的编号，具体存储成什么样的字节流，取决于字符编码方案。推荐的Unicode编码是UTF-16和UTF-8。</p><p>早期字符编码、字符集和代码页等概念都是表达同一个意思。例如GB2312字符集、GB2312编码，936代码页，实际上说的是同个东西。</p><p>但是对于Unicode则不同，Unicode字符集只是定义了字符的集合和唯一编号，Unicode编码，则是对UTF-8、UCS-2/UTF-16等具体编码方案的统称而已，并不是具体的编码方案。所以当需要用到字符编码的时候，你可以写gb2312，codepage936，utf-8，utf-16，但请不要写Unicode。</p><h4><a name='header-n147' class='md-header-anchor '></a>6、系列6：开头与结尾</h4><p>（26）boolean startsWith(xx)：是否以xx开头</p><p>（27）boolean endsWith(xx)：是否以xx结尾</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n150" mdtype="fences" style="break-inside: unset;">	@Test
+	public void test2(){
+		String name = "张三";
+		System.out.println(name.startsWith("张"));
+	}
+	
+	@Test
+	public void test(){
+		String file = "Hello.txt";
+		if(file.endsWith(".java")){
+			System.out.println("Java源文件");
+		}else if(file.endsWith(".class")){
+			System.out.println("Java字节码文件");
+		}else{
+			System.out.println("其他文件");
+		}
+	}
+</pre><h4><a name='header-n151' class='md-header-anchor '></a>7、系列7：正则匹配（不讲）</h4><p>（28）boolean matchs(正则表达式)：判断当前字符串是否匹配某个正则表达式</p><p><strong>常用正则表达式：(暂)</strong></p><p><strong>字符类</strong></p><p><code>[abc]</code>：<code>a</code>、<code>b</code> 或 <code>c</code>（简单类）</p><p><code>[^abc]</code>：任何字符，除了 <code>a</code>、<code>b</code> 或 <code>c</code>（否定）</p><p><code>[a-zA-Z]</code>：<code>a</code> 到 <code>z</code> 或 <code>A</code> 到 <code>Z</code>，两头的字母包括在内（范围）</p><p><strong>预定义字符类</strong></p><p><code>.</code>：任何字符（与<a href='#lt'>行结束符</a>可能匹配也可能不匹配）</p><p><code>\d</code>：数字：<code>[0-9]</code></p><p><code>\D</code>：非数字： <code>[^0-9]</code></p><p><code>\s</code>：空白字符：<code>[ \t\n\x0B\f\r]</code></p><p><code>\S</code>：非空白字符：<code>[^\s]</code></p><p><code>\w</code>：单词字符：<code>[a-zA-Z_0-9]</code></p><p><code>\W</code>：非单词字符：<code>[^\w]</code></p><p><strong>POSIX 字符类（仅 US-ASCII）</strong></p><p><code>\p{Lower}</code>小写字母字符：[a-z] </p><p><code>\p{Upper}</code>大写字母字符：[A-Z] </p><p><code>\p{ASCII}</code>所有 ASCII：[\x00-\x7F] </p><p><code>\p{Alpha}</code>字母字符：[\p{Lower}\p{Upper}] </p><p><code>\p{Digit}</code> 十进制数字：[0-9] </p><p><code>\p{Alnum}</code>字母数字字符：[\p{Alpha}\p{Digit}] </p><p><code>\p{Punct}</code> 标点符号：!&quot;#$%&amp;&#39;()*+,-./:;&lt;=&gt;?@[]^_`{|}~ </p><p><code>\p{Blank}</code> 空格或制表符：[ \t] </p><p><strong>边界匹配器</strong></p><p><code>^</code>：行的开头</p><p><code>$</code>：行的结尾</p><p><strong>Greedy 数量词</strong></p><p><em>X</em><code>?</code>：<em>X</em>，一次或一次也没有</p><p><em>X</em><code>*</code>：<em>X</em>，零次或多次</p><p><em>X</em><code>+</code>：<em>X</em>，一次或多次</p><p><em>X</em><code>{</code><em>n</em><code>}</code>：<em>X</em>，恰好 <em>n</em> 次</p><p><em>X</em><code>{</code><em>n</em><code>,}</code>：<em>X</em>，至少 <em>n</em> 次</p><p><em>X</em><code>{</code><em>n</em><code>,</code><em>m</em><code>}</code>：<em>X</em>，至少 <em>n</em> 次，但是不超过 <em>m</em> 次</p><p><strong>Logical 运算符</strong></p><p><em>XY</em>：<em>X</em> 后跟 <em>Y</em></p><p><em>X</em><code>|</code><em>Y</em>：<em>X</em> 或 <em>Y</em></p><p><code>(</code><em>X</em><code>)</code>：X，作为捕获组</p><p><strong>特殊构造（非捕获）</strong> </p><p>(?:X) X，作为非捕获组 </p><p>(?=X) X，通过零宽度的正 lookahead </p><p>(?!X) X，通过零宽度的负 lookahead </p><p>(?&lt;=X) X，通过零宽度的正 lookbehind </p><p>(?&lt;!X) X，通过零宽度的负 lookbehind </p><p>(?&gt;X) X，作为独立的非捕获组 </p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n196" mdtype="fences" style="break-inside: unset;">	@Test
+	public void test1(){
+		//简单判断是否全部是数字，这个数字可以是1~n位
+		String str = "12a345";
+		
+		//正则不是Java的语法，它是独立与Java的规则
+		//在正则中\是表示转义，
+		//同时在Java中\也是转义
+		boolean flag = str.matches("\\d+");
+		System.out.println(flag);
+	}
+	
+	@Test
+	public void test2(){
+		String str = "123456789";
+		
+		//判断它是否全部由数字组成，并且第1位不能是0，长度为9位
+		//第一位不能是0，那么数字[1-9]
+		//接下来8位的数字，那么[0-9]{8}+
+		boolean flag = str.matches("[1-9][0-9]{8}+");
+		System.out.println(flag);
+	}
+
+	@Test
+    public void test03(){
+        //密码要求：必须有大写字母，小写字母，数字组成，6位
+        System.out.println("Cly892".matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]{6}$"));//true
+        System.out.println("1A2c45".matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]{6}$"));//true
+        System.out.println("Clyyyy".matches("^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{6}$"));//false
+    }
+</pre><p>1.验证用户名和密码，要求第一个字必须为字母，一共6~16位字母数字下划线组成：（^[a-zA-Z]\w{5,15}$）</p><p>2.验证电话号码：xxx/xxxx-xxxxxxx/xxxxxxxx：（^(\d{3,4}-)\d{7,8}$）</p><p>3.验证手机号码：( ^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$ )</p><p>4.验证身份证号： (^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$) </p><p>5.验证Email地址：(^\w+([-+.]\w+)<em>@\w+([-.]\w+)</em>.\w+([-.]\w+)*$)</p><p>6.只能输入由数字和26个英文字母组成的字符串：(^[A-Za-z0-9]+$)</p><p>7.整数或者小数：(^[0-9]+(.[0-9]+){0,1}$)</p><p>8.中文字符的正则表达式：([\u4e00-\u9fa5])</p><p>9.金额校验(非零开头的最多带两位小数的数字)：(^([1-9][0-9]*)+(.[0-9]{1,2})?$)</p><p>10.IPV4地址：(((\d{1,2})|(1\d{1,2})|(2[0-4]\d)|(25[0-5]))\.){3}((\d{1,2})|(1\d{1,2})|(2[0-4]\d)|(25[0-5]))</p><p>&nbsp;</p><h4><a name='header-n208' class='md-header-anchor '></a>8、系列8：替换</h4><p>（29）String replace(xx,xx)：不支持正则</p><p>（30）String replaceFirst(正则，value)：替换第一个匹配部分</p><p>（31）String repalceAll(正则， value)：替换所有匹配部分</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n212" mdtype="fences">	@Test
+	public void test4(){
+		String str = "hello244world.java;887";
+		//把其中的非字母去掉
+		str = str.replaceAll("[^a-zA-Z]", "");
+		System.out.println(str);
+	}
+</pre><h4><a name='header-n213' class='md-header-anchor '></a>9、系列9：拆分</h4><p>（32）String[] split(正则)：按照某种规则进行拆分</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n215" mdtype="fences" style="break-inside: unset;">	@Test
+	public void test4(){
+		String str = "张三.23|李四.24|王五.25";
+		//|在正则中是有特殊意义，我这里要把它当做普通的|
+		String[] all = str.split("\\|");
+		
+		//转成一个一个学生对象
+		Student[] students = new Student[all.length];
+		for (int i = 0; i &lt; students.length; i++) {
+			//.在正则中是特殊意义，我这里想要表示普通的.
+			String[] strings = all[i].split("\\.");//张三,  23
+			String name = strings[0];
+			int age = Integer.parseInt(strings[1]);
+			students[i] = new Student(name,age);
+		}
+		
+		for (int i = 0; i &lt; students.length; i++) {
+			System.out.println(students[i]);
+		}
+		
+	}
+	
+	@Test
+	public void test3(){
+		String str = "1Hello2World3java4atguigu5";
+		str = str.replaceAll("^\\d|\\d$", "");
+		String[] all = str.split("\\d");
+		for (int i = 0; i &lt; all.length; i++) {
+			System.out.println(all[i]);
+		}
+	}
+	
+	@Test
+	public void test2(){
+		String str = "1Hello2World3java4atguigu";
+		str = str.replaceFirst("\\d", "");
+		System.out.println(str);
+		String[] all = str.split("\\d");
+		for (int i = 0; i &lt; all.length; i++) {
+			System.out.println(all[i]);
+		}
+	}
+	
+	
+	@Test
+	public void test1(){
+		String str = "Hello World java atguigu";
+		String[] all = str.split(" ");
+		for (int i = 0; i &lt; all.length; i++) {
+			System.out.println(all[i]);
+		}
+	}
+</pre><h3><a name='header-n216' class='md-header-anchor '></a>10.1.4 字符串对象的内存分析</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n217" mdtype="fences" style="break-inside: unset;">	@Test
+    public void test1(){
+        String s1 = "hello";
+        String s2 = "hello";
+        String s3 = new String("hello");
+        
+    }
+	@Test
+	public void test02(){
+		String s1 = "hello";
+		String s2 = "world";
+		String s3 = "helloworld";
+		
+		String s4 = s1 + "world";//s4字符串内容也helloworld，s1是变量，"world"常量，变量 + 常量的结果在堆中
+		String s5 = s1 + s2;//s5字符串内容也helloworld，s1和s2都是变量，变量 + 变量的结果在堆中
+		String s6 = "hello" + "world";//常量+常量，编译期经过优化，跟s3完全相同的情况。
+		
+		System.out.println(s3 == s4);//false
+		System.out.println(s3 == s5);//false
+		System.out.println(s3 == s6);//true
+	}	
+	
+	@Test
+	public void test03(){
+		final String s1 = "hello";
+		final String s2 = "world";
+		String s3 = "helloworld";
+		
+		String s4 = s1 + "world";//s4字符串内容也helloworld，s1是常量，"world"常量，常量+ 常量 结果在常量池中
+		String s5 = s1 + s2;//s5字符串内容也helloworld，s1和s2都是常量，常量+ 常量 结果在常量池中
+		String s6 = "hello" + "world";//常量+ 常量 结果在常量池中，因为编译期间就可以确定结果
+		
+		System.out.println(s3 == s4);//true
+		System.out.println(s3 == s5);//true
+		System.out.println(s3 == s6);//true
+	}
+	
+	@Test
+	public void test04(){
+		String s1 = "hello";
+		String s2 = "world";
+		String s3 = "helloworld";
+		
+		String s4 = (s1 + "world").intern();//如果常量池已经有“helloworld”，直接返回，否则把拼接结果的引用放到常量池中
+		String s5 = (s1 + s2).intern();
+		
+		System.out.println(s3 == s4);//true
+		System.out.println(s3 == s5);//true
+	}
+</pre><p><img src='imgs09/1562946547647.png' alt='1562946547647' referrerPolicy='no-referrer' /></p><p><img src='imgs09/1562946558630.png' alt='1562946558630' referrerPolicy='no-referrer' /></p><p><strong>结论：</strong></p><ul><li>常量+常量：结果是常量池</li><li>常量与变量 或 变量与变量：结果是堆</li><li>intern方法有jvm版本的区别，这里不再深入分析，jdk8中执行原理是如果字符串常量池有内容相同的字符串则直接返回，否则把堆中创建的字符串引用放入字符串常量池，返回此引用，总之所有版本都是通过字符串常量池返回的内容。</li></ul><h3><a name='header-n228' class='md-header-anchor '></a>10.1.5 字符串相关面试题</h3><h4><a name='header-n229' class='md-header-anchor '></a>1、字符串特点相关</h4><ol start='' ><li><h3><a name='header-n232' class='md-header-anchor '></a>面试题：字符串的length和数组的length有什么不同？</h3><p>字符串的length()，数组的length属性</p></li><li><h3><a name='header-n235' class='md-header-anchor '></a>字符串对象不可变</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n236" mdtype="fences" style="break-inside: unset;">class TEXT{
+	public int num;
+	public String str;
+	
+	public TEXT(int num, String str){
+		this.num = num;
+		this.str = str;
+	}
+}
+public class Class4 {
+    //tIn是传对象的地址，修改形参的属性，会影响实参
+    //intIn是传数据，基本数据类型的形参修改和实参无关
+    //Integer和String对象不可变
+	public static void f1(TEXT tIn, int intIn, Integer integerIn, String strIn){
+		tIn.num =200;
+		tIn.str = "bcd";//形参和实参指向的是同一个TEXT的对象，修改了属性，就相当于修改实参对象的属性
+		intIn = 200;//基本数据类型的形参是实参的“副本”，无论怎么修改和实参都没关系
+		integerIn = 200;//Integer对象和String对象一样都是不可变，一旦修改都是新对象，和实参无关
+		strIn = "bcd";
+	}
+	public static void main(String[] args) {
+		TEXT tIn = new TEXT(100, "abc");//tIn.num = 100, tIn.str="abc"
+		int intIn = 100;
+		Integer integerIn = 100;
+		String strIn = "abc";
+		
+		f1(tIn,intIn,integerIn,strIn);
+		
+		System.out.println(tIn.num + tIn.str + intIn + integerIn + strIn);
+		//200 + bcd + 100 + 100 + abc
+	}
+}
+</pre><p><img src='imgs09/1572834610162.png' alt='1572834610162' referrerPolicy='no-referrer' /></p></li><li><h3><a name='header-n239' class='md-header-anchor '></a>字符串对象个数</h3><p><img src='imgs09/1572834413234.png' alt='1572834413234' referrerPolicy='no-referrer' /></p><p><img src='imgs09/1572835014847.png' alt='1572835014847' referrerPolicy='no-referrer' /></p></li><li><h3><a name='header-n243' class='md-header-anchor '></a>字符串对象比较</h3><p><img src='imgs09/1572834430257.png' alt='1572834430257' referrerPolicy='no-referrer' /></p><p><img src='imgs09/1572834653725.png' alt='1572834653725' referrerPolicy='no-referrer' /></p><p><img src='imgs09/1572834908977.png' alt='1572834908977' referrerPolicy='no-referrer' /></p></li><li><h3><a name='header-n248' class='md-header-anchor '></a>空字符串</h3><p><img src='imgs09/1572834804165.png' alt='1572834804165' referrerPolicy='no-referrer' /></p><p>&nbsp;</p></li></ol><h4><a name='header-n251' class='md-header-anchor '></a>2、字符串算法相关</h4><ol start='' ><li><h3><a name='header-n254' class='md-header-anchor '></a>编程题</h3><p>在字符串中找出连续最长数字串，返回这个串的长度，并打印这个最长数字串。</p><p>例如：abcd12345cd125se123456789，返回9，打印出123456789</p><p><img src='imgs09/1573715990196.png' alt='1573715990196' referrerPolicy='no-referrer' /></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n258" mdtype="fences" style="break-inside: unset;">public class TestExer1 {
+	public static void main(String[] args) {
+		String str = "abcd12345cd125se123456789";
+		
+		//去掉最前和最后的字母
+		str =	str.replaceAll("^[a-zA-Z]+", "");
+		
+		//[a-zA-Z]：表示字母范围
+		//+：一次或多次
+		String[] strings = str.split("[a-zA-Z]+");
+		
+		String max = "";
+		for (String string : strings) {
+			if(string.length() &gt; max.length()) {
+				max = string;
+			}
+		}
+		System.out.println("最长的数字串：" + max + "，它的长度为：" + max.length());
+	}
+}
+</pre><p>&nbsp;</p></li><li><h3><a name='header-n261' class='md-header-anchor '></a>编程题</h3><p>不能使用trim()，实现去除字符串两端的空格。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n263" mdtype="fences" style="break-inside: unset;">	public static void main(String[] args) {
+		String str ="    he   llo   ";
+		System.out.println(myTrim(str));
+		System.out.println(myTrim2(str));
+		System.out.println(myTrim3(str));
+	}
+	
+	public static String myTrim3(String str){
+		//利用正则表达式
+		//^表示开头    \s表示  空白符   *表示0次或多次     |表示或者    $表示结尾
+		return str.replaceAll("(^\\s*)|(\\s*$)", "");
+	}
+	
+	public static String myTrim2(String str){
+		while(str.startsWith(" ")){
+			str = str.replaceFirst(" ", "");
+		}
+		while(str.endsWith(" ")){
+			str = str.substring(0, str.length()-1);
+		}
+		return str;
+	}
+	
+	public static String myTrim(String str){
+		char[] array = str.toCharArray();
+		int start =0;
+		for(int i=0;i&lt;array.length;i++){
+			if(array[i] == ' '){
+				start++;
+			}else{
+				break;
+			}
+		}
+		int end = array.length-1;
+		for(int i=end;i&gt;=0;i--){
+			if(array[i] == ' '){
+				end--;
+			}else{
+				break;
+			}
+		}
+		
+		String result = str.substring(start,end+1);
+		
+		return result;
+	}
+</pre></li><li><h3><a name='header-n265' class='md-header-anchor '></a>编程题</h3><p>将字符串中指定部分进行反转。比如将“abcdefgho”反转为”abfedcgho”</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n267" mdtype="fences" style="break-inside: unset;">	public static void main(String[] args) {
+		String str ="abcdefgho";
+		System.out.println(str);
+		System.out.println(reverse(str,2,5));
+
+	}
+	
+	//从第start个字符，到第end个字符
+	public static String reverse(String str,int start,int end){
+		char[] array = str.toCharArray();
+		for(int i = start,j=end;i&lt; j;i++,j--){
+			char temp =array[i];
+			array[i]=array[j];
+			array[j]=temp;
+		}
+		String s = new String(array);
+		return s;
+	}
+
+	//从第start个字符，到第end个字符
+	public static String reverse(String str,int start,int end){
+        String left = str.substring(0,start);
+		String middle = str.substring(start,end+1);
+        String left = str.substring(end+1);
+		return left+new StringBuilder(middle).reverse()+right;
+	}
+</pre><p>&nbsp;</p></li><li><h3><a name='header-n270' class='md-header-anchor '></a>编程题</h3><p>获取一个字符串在另一个字符串中出现的次数。</p><p>     比如：获取&quot;ab&quot;在 “abababkkcadkabkebfkabkskab”中出现的次数</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n273" mdtype="fences" style="break-inside: unset;">	public static void main(String[] args) {
+		String str1="ab";
+		String str2="abababkkcadkabkebfkabkskab";
+		System.out.println(count(str1,str2));
+	}
+	
+	public static int count(String str1,String str2){
+		int count =0;
+		do{
+			int index = str2.indexOf(str1);
+			if(index !=-1){
+				count++;
+				str2 = str2.substring(index + str1.length());
+			}else{
+				break;
+			}
+			
+		}while(true);
+		return count;
+	}
+</pre></li><li><h3><a name='header-n275' class='md-header-anchor '></a>编程题</h3><p>获取两个字符串中最大相同子串。</p><p>比如：str1 = &quot;abcwerthelloyuiodef“;str2 = &quot;cvhellobnm&quot;</p><p>   提示：将短的那个串进行长度依次递减的子串与较长的串比较。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n279" mdtype="fences" style="break-inside: unset;">	public static void main(String[] args) {
+		String str=findMaxSubString("abcwerthelloyuiodef","cvhellobnm");
+		System.out.println(str);
+	}
+	
+	//提示：将短的那个串进行长度依次递减的子串与较长的串比较。
+	public static String findMaxSubString(String str1,String str2){
+		String result="";
+		
+		String mixStr = str1.length()&lt;str2.length()?str1:str2;
+		String maxStr = str1.length()&gt;str2.length()?str1:str2;
+		
+		//外循环控制从左到右的下标，内循环控制从右到左的下标
+		for(int i=0;i&lt;mixStr.length();i++){
+			for(int j=mixStr.length();j&gt;=i;j--){
+				String str=mixStr.substring(i, j);
+				if(maxStr.contains(str)){
+					//找出最大相同子串
+					if(result.length()&lt;str.length()){
+						result = str;
+					}
+				}
+			}
+		}
+		return result;
+	}
+</pre></li><li><h3><a name='header-n281' class='md-header-anchor '></a>编程题</h3><p>编写代码完成如下功能</p><p>public static String replace(String text, String target, String replace){</p><p>....</p><p>}</p><p>示例：replace(“aabbccbb”, “bb”, “dd”);  结果：aaddccdd</p><p>注意：不能使用String及StringBuffer等类的replace等现成的替换API方法。</p><p><img src='imgs09/1573716569424.png' alt='1573716569424' referrerPolicy='no-referrer' /></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n289" mdtype="fences" style="break-inside: unset;">	public static void main(String[] args) {
+		System.out.println(replace("aabbcbcbb","bb","dd"));
+	}
+	public static String replace(String text, String target, String replace){
+		while(true) {
+			int index = text.indexOf(target);
+			if(index!=-1) {
+				text = text.substring(0,index) + replace + text.substring(index+target.length());
+			}else {
+				break;
+			}
+		}
+		return text;
+	}
+</pre></li><li><h3><a name='header-n291' class='md-header-anchor '></a>编程题</h3><p>1个字符串中可能包含a-z中的多个字符，字符也可能重复，例如：String data = “aabcexmkduyruieiopxzkkkkasdfjxjdsds”;写一个程序，对于给定一个这样的字符串求出字符串出现次数最多的那个字母以及出现的次数（若次数最多的字母有多个，则全部求出）</p><p><img src='imgs09/1574169374414.png' alt='1574169374414' referrerPolicy='no-referrer' /></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n294" mdtype="fences" style="break-inside: unset;">	public static void main(String[] args) {
+		String str = "aabbyolhljlhlxxmnbwyteuhfhjloiqqbhrg";
+		
+		//统计每个字母的次数
+		int[] counts = new int[26];
+		char[] letters = str.toCharArray();
+		for (int i = 0; i &lt; letters.length; i++) {
+			counts[letters[i]-97]++;
+		}
+		
+		//找出最多次数值
+		int max = counts[0];
+		for (int i = 1; i &lt; counts.length; i++) {
+			if(max &lt; counts[i]) {
+				max = counts[i];
+			}
+		}
+		//找出所有最多次数字母
+		for (int i = 0; i &lt; counts.length; i++) {
+			if(counts[i] == max) {
+				System.out.println((char)(i+97));
+			}
+		}
+	}
+</pre><blockquote><p>如果学习完集合之后，该题还可以使用Map集合写出不同的答案</p></blockquote></li><li><h3><a name='header-n298' class='md-header-anchor '></a>编程题</h3><p>假设日期段用两个6位长度的正整数表示，例如：(201401，201406)用来表示2014年1月到2014年6月，求两个日期段的重叠月份数。例如：输入：时间段1：201401和201406，时间段2：201403和201409，输出：4</p><p>解释：重叠月份：3,4,5,6月共4个月</p><p>情形1：两个时间段都是同一年内的，实现代码如下：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n302" mdtype="fences" style="break-inside: unset;">	public static void main(String[] args) {
+		String date1Start = "201401";
+		String date1End = "201406";
+		
+		String date2Start = "201403";
+		String date2End = "201409";
+		
+		int date1StartMonth = Integer.parseInt(date1Start.substring(4));
+		int date1EndMonth = Integer.parseInt(date1End.substring(4));
+		
+		int date2StartMonth = Integer.parseInt(date2Start.substring(4));
+		int date2EndMonth = Integer.parseInt(date2End.substring(4));
+		
+		int start = date1StartMonth &gt;= date2StartMonth ? date1StartMonth : date2StartMonth;
+		int end = date1EndMonth &lt;= date2EndMonth ? date1EndMonth : date2EndMonth;
+        System.out.println("重叠月份数："+(end-start+1));
+        
+		System.out.println("重叠的月份有：");
+		for (int i = start; i &lt;= end; i++) {
+			System.out.println(i);
+		}        
+	}
+</pre><p>情形2：两个时间段可能不在同一年内的，实现代码如下：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n304" mdtype="fences" style="break-inside: unset;">	public static void main(String[] args) {
+		String date1Start = "201401";
+		String date1End = "201506";
+		
+		String date2Start = "201403";
+		String date2End = "201505";
+		
+		String date1 = handleDate(date1Start,date1End);
+		String date2 = handleDate(date2Start,date2End);
+		System.out.println(date1);
+		System.out.println(date2);
+		
+		String sameDate = findMaxSubString(date1,date2);
+
+		System.out.println("重叠的月份数：" + sameDate.length()/6);
+		if (!"".equals(sameDate)) {
+			System.out.println("重叠的月份有：");
+			while (sameDate.length() &gt; 0) {
+				String sameMonth = sameDate.substring(0, 6);
+				System.out.println(sameMonth);
+				sameDate = sameDate.substring(6);
+			}
+			
+		}
+	}
+	
+	public static String findMaxSubString(String str1,String str2){
+		String result="";
+		
+		String mixStr = str1.length()&lt;str2.length()?str1:str2;
+		String maxStr = str1.length()&gt;str2.length()?str1:str2;
+		
+		//外循环控制从左到右的下标，内循环控制从右到左的下标
+		for(int i=0;i&lt;mixStr.length();i++){
+			for(int j=mixStr.length();j&gt;=i;j--){
+				String str=mixStr.substring(i, j);
+				if(maxStr.contains(str)){
+					//找出最大相同子串
+					if(result.length()&lt;str.length()){
+						result = str;
+					}
+				}
+			}
+		}
+		return result;
+	}
+	
+	public static String handleDate(String dateStart, String dateEnd) {
+		int dateStartYear = Integer.parseInt(dateStart.substring(0,4));
+		int dateEndYear = Integer.parseInt(dateEnd.substring(0,4));
+		int dateStartMonth = Integer.parseInt(dateStart.substring(4));
+		int dateEndMonth = Integer.parseInt(dateEnd.substring(4));
+		
+		String date = "";
+		if(dateStartYear == dateEndYear) {//一年之内
+			for (int i = dateStartMonth; i &lt;=dateEndMonth; i++) {
+				if(i&lt;10) {
+					date += dateStartYear+"0"+i;
+				}else {
+					date += dateStartYear+""+i;
+				}
+			}
+		}else {//跨年
+			for (int i = dateStartMonth; i &lt;=12; i++) {//date1StartYear起始年
+				if(i&lt;10) {
+					date += dateStartYear+"0"+i;
+				}else {
+					date += dateStartYear+""+i;
+				}
+			}
+			for (int i = dateStartYear+1; i &lt; dateEndYear; i++) {//中间间隔年
+				for (int j = 1; j &lt;= 12; j++) {
+					if(j&lt;10) {
+						date += i+"0"+j;
+					}else {
+						date += i+""+j;
+					}
+				}
+			}
+			for (int i = 1; i &lt;= dateEndMonth; i++) {//date1EndYear结束年
+				if(i&lt;10) {
+					date += dateEndYear+"0"+i;
+				}else {
+					date += dateEndYear+""+i;
+				}
+			}
+		}
+		return date;
+	}
+}
+</pre><p>&nbsp;</p></li></ol><h2><a name='header-n306' class='md-header-anchor '></a>10.2 StringBuilder&amp;StringBuffer</h2><h3><a name='header-n307' class='md-header-anchor '></a>10.2.1 与String区别</h3><p>因为String对象是不可变对象，虽然可以共享常量对象，但是对于频繁字符串的修改和拼接操作，效率极低。因此，JDK又在java.lang包提供了可变字符序列StringBuilder和StringBuffer类型。</p><p><strong>StringBuffer：</strong>老的，线程安全的（因为它的方法有synchronized修饰），效率低</p><p><strong>StringBuilder：</strong>线程不安全的，效率高</p><h3><a name='header-n311' class='md-header-anchor '></a>10.2.2 常用API</h3><p>常用的API，StringBuilder、StringBuffer的API是完全一致的</p><p>（1）StringBuffer append(xx)：拼接，追加</p><p>（2）StringBuffer insert(int index, xx)：在[index]位置插入xx</p><p>（3）StringBuffer delete(int start, int end)：删除[start,end)之间字符</p><p>StringBuffer deleteCharAt(int index)：删除[index]位置字符</p><p>（4）void setCharAt(int index, xx)：替换[index]位置字符</p><p>（5）StringBuffer reverse()：反转</p><p>（6）void setLength(int newLength) ：设置当前字符序列长度为newLength</p><p>（7）StringBuffer replace(int start, int end, String str)：替换[start,end)范围的字符序列为str</p><p>（8）int indexOf(String str)：在当前字符序列中查询str的第一次出现下标</p><p>          int indexOf(String str, int fromIndex)：在当前字符序列[fromIndex,最后]中查询str的第一次出现下标</p><p>         int lastIndexOf(String str)：在当前字符序列中查询str的最后一次出现下标</p><p>         int lastIndexOf(String str, int fromIndex)：在当前字符序列[fromIndex,最后]中查询str的最后一次出现下标</p><p>（9）String substring(int start)：截取当前字符序列[start,最后]</p><p>（10）String substring(int start, int end)：截取当前字符序列[start,end)</p><p>（11）String toString()：返回此序列中数据的字符串表示形式</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n328" mdtype="fences" style="break-inside: unset;">	@Test
+	public void test6(){
+		StringBuilder s = new StringBuilder("helloworld");
+		s.setLength(30);
+		System.out.println(s);
+	}
+	@Test
+	public void test5(){
+		StringBuilder s = new StringBuilder("helloworld");
+		s.setCharAt(2, 'a');
+		System.out.println(s);
+	}
+	
+	
+	@Test
+	public void test4(){
+		StringBuilder s = new StringBuilder("helloworld");
+		s.reverse();
+		System.out.println(s);
+	}
+	
+	@Test
+	public void test3(){
+		StringBuilder s = new StringBuilder("helloworld");
+		s.delete(1, 3);
+		s.deleteCharAt(4);
+		System.out.println(s);
+	}
+	
+	
+	@Test
+	public void test2(){
+		StringBuilder s = new StringBuilder("helloworld");
+		s.insert(5, "java");
+		s.insert(5, "chailinyan");
+		System.out.println(s);
+	}
+	
+	@Test
+	public void test1(){
+		StringBuilder s = new StringBuilder();
+		s.append("hello").append(true).append('a').append(12).append("atguigu");
+		System.out.println(s);
+		System.out.println(s.length());
+	}
+</pre><h3><a name='header-n329' class='md-header-anchor '></a>10.2.3 效率测试</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n330" mdtype="fences" style="break-inside: unset;">/*
+ * Runtime：JVM运行时环境
+ * Runtime是一个单例的实现
+ */
+public class TestTime {
+	public static void main(String[] args) {
+//		testStringBuilder();
+		testStringBuffer();
+//		testString();
+	}
+	public static void testString(){
+		long start = System.currentTimeMillis();
+		String s = new String("0");
+		for(int i=1;i&lt;=10000;i++){
+			s += i;
+		}
+		long end = System.currentTimeMillis();
+		System.out.println("String拼接+用时："+(end-start));//444
+		
+	}
+	public static void testStringBuilder(){
+		long start = System.currentTimeMillis();
+		StringBuilder s = new StringBuilder("0");
+		for(int i=1;i&lt;=10000;i++){
+			s.append(i);
+		}
+		long end = System.currentTimeMillis();
+		System.out.println("StringBuilder拼接+用时："+(end-start));//4
+
+	}
+	public static void testStringBuffer(){
+		long start = System.currentTimeMillis();
+		StringBuffer s = new StringBuffer("0");
+		for(int i=1;i&lt;=10000;i++){
+			s.append(i);
+		}
+		long end = System.currentTimeMillis();
+		System.out.println("StringBuffer拼接+用时："+(end-start));//7
+
+	}
+}
+</pre><p>&nbsp;</p><h2><a name='header-n332' class='md-header-anchor '></a>10.3 和数学相关的类</h2><h3><a name='header-n333' class='md-header-anchor '></a>10.3.1 Math类</h3><p><code>java.lang.Math</code> 类包含用于执行基本数学运算的方法，如初等指数、对数、平方根和三角函数。类似这样的工具类，其所有方法均为静态方法，并且不会创建对象，调用起来非常简单。</p><ul><li>public static final double PI：返回圆周率</li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n338" mdtype="fences">double pi = Math.PI;
+</pre><ul><li><code>public static double abs(double a)</code> ：返回 double 值的绝对值。 </li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n342" mdtype="fences">double d1 = Math.abs(-5); //d1的值为5
+double d2 = Math.abs(5); //d2的值为5
+</pre><ul><li><code>public static double ceil(double a)</code> ：返回大于等于参数的最小的整数。</li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n346" mdtype="fences">double d1 = Math.ceil(3.3); //d1的值为 4.0
+double d2 = Math.ceil(-3.3); //d2的值为 -3.0
+double d3 = Math.ceil(5.1); //d3的值为 6.0
+</pre><ul><li><code>public static double floor(double a)</code> ：返回小于等于参数最大的整数。</li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n350" mdtype="fences">double d1 = Math.floor(3.3); //d1的值为3.0
+double d2 = Math.floor(-3.3); //d2的值为-4.0
+double d3 = Math.floor(5.1); //d3的值为 5.0
+</pre><ul><li><code>public static long round(double a)</code> ：返回最接近参数的 long。(相当于四舍五入方法)  </li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n354" mdtype="fences">long d1 = Math.round(5.5); //d1的值为6.0
+long d2 = Math.round(5.4); //d2的值为5.0
+</pre><ul><li>public static double pow(double a,double b)：返回a的b幂次方法</li><li>public static double sqrt(double a)：返回a的平方根</li><li>public static double random()：返回[0,1)的随机值</li><li>public static double max(double x, double y)：返回x,y中的最大值</li><li>public static double min(double x, double y)：返回x,y中的最小值</li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n366" mdtype="fences">double result = Math.pow(2,31);
+double sqrt = Math.sqrt(256);
+double rand = Math.random();
+</pre><p><strong>练习</strong> </p><p>请使用<code>Math</code> 相关的API，计算在 <code>-10.8</code>  到<code>5.9</code>  之间，绝对值大于<code>6</code>  或者小于<code>2.1</code> 的整数有多少个？</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n369" mdtype="fences" style="break-inside: unset;">public class MathTest {
+  public static void main(String[] args) {
+    // 定义最小值
+    double min = -10.8;
+    // 定义最大值
+    double max = 5.9;
+    // 定义变量计数
+    int count = 0;
+    // 范围内循环
+    for (double i = Math.ceil(min); i &lt;= max; i++) {
+      // 获取绝对值并判断
+      if (Math.abs(i) &gt; 6 || Math.abs(i) &lt; 2.1) {
+        // 计数
+        count++;
+      }
+    }
+    System.out.println("个数为: " + count + " 个");
+  }
+}
+</pre><h3><a name='header-n370' class='md-header-anchor '></a>10.3.2 java.util.Random</h3><p>用于产生随机数</p><ul><li>public Random():创建一个新的随机数生成器。此构造方法将随机数生成器的种子设置为某个值，该值与此构造方法的所有其他调用所用的值完全不同。(没有真正的随机数，需要种子产生随机数，同一个种子产生的伪随机数序列相同)</li><li>public Random(long seed):使用单个 long 种子创建一个新的随机数生成器。该种子是伪随机数生成器的内部状态的初始值，该生成器可通过方法 next(int) 维护。 </li></ul><ul><li>boolean nextBoolean():返回下一个伪随机数，它是取自此随机数生成器序列的均匀分布的 boolean 值。 </li><li>void nextBytes(byte[] bytes):生成随机字节并将其置于用户提供的 byte 数组中。 </li><li>double nextDouble():返回下一个伪随机数，它是取自此随机数生成器序列的、在 0.0 和 1.0 之间均匀分布的 double 值。 </li><li>float nextFloat():返回下一个伪随机数，它是取自此随机数生成器序列的、在 0.0 和 1.0 之间均匀分布的 float 值。 </li><li>double nextGaussian():返回下一个伪随机数，它是取自此随机数生成器序列的、呈高斯（“正态”）分布的 double 值，其平均值是 0.0，标准差是 1.0。 </li><li>int nextInt():返回下一个伪随机数，它是此随机数生成器的序列中均匀分布的 int 值。 </li><li>int nextInt(int n):返回一个伪随机数，它是取自此随机数生成器序列的、在 0（包括）和指定值（不包括）之间均匀分布的 int 值。 </li><li>long nextLong():返回下一个伪随机数，它是取自此随机数生成器序列的均匀分布的 long 值。 </li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n394" mdtype="fences">	@Test
+	public void test03(){
+		Random r = new Random();
+		System.out.println("随机整数：" + r.nextInt());
+		System.out.println("随机小数：" + r.nextDouble());
+		System.out.println("随机布尔值：" + r.nextBoolean());
+	}
+</pre><p>&nbsp;</p><h3><a name='header-n396' class='md-header-anchor '></a>10.3.3 BigInteger</h3><p>不可变的任意精度的整数。</p><ul><li>BigInteger(String val) </li><li>BigInteger add(BigInteger val)  </li><li>BigInteger subtract(BigInteger val)</li><li>BigInteger multiply(BigInteger val) </li><li>BigInteger divide(BigInteger val) </li><li>BigInteger remainder(BigInteger val)</li><li>int intValue():将此 BigInteger 转换为 int。 </li><li>long longValue():将此 BigInteger 转换为 long。 </li><li>float floatValue():将此 BigInteger 转换为 float。 </li><li>....</li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n419" mdtype="fences" style="break-inside: unset;">	@Test
+	public void test01(){
+//		long bigNum = 123456789123456789123456789L;
+		
+		BigInteger b1 = new BigInteger("123456789123456789123456789");
+		BigInteger b2 = new BigInteger("78923456789123456789123456789");
+		
+//		System.out.println("和：" + (b1+b2));//错误的，无法直接使用+进行求和
+		
+		System.out.println("和：" + b1.add(b2));
+		System.out.println("减：" + b1.subtract(b2));
+		System.out.println("乘：" + b1.multiply(b2));
+		System.out.println("除：" + b2.divide(b1));
+		System.out.println("余：" + b2.remainder(b1));
+	}
+</pre><h3><a name='header-n420' class='md-header-anchor '></a>10.3.4 BigDecimal</h3><p>不可变的、任意精度的有符号十进制数。</p><ul><li>BigDecimal(String val) </li><li>BigDecimal add(BigDecimal val) </li><li>BigDecimal subtract(BigDecimal val)</li><li>BigDecimal multiply(BigDecimal val) </li><li>BigDecimal divide(BigDecimal val) </li><li>BigDecimal divide(BigDecimal divisor, int roundingMode) </li><li>BigDecimal divide(BigDecimal divisor, int scale, RoundingMode roundingMode) </li><li>BigDecimal remainder(BigDecimal val) </li><li>double doubleValue():将此 BigDecimal 转换为 double。 </li><li>....</li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n443" mdtype="fences" style="break-inside: unset;">	@Test
+	public void test02(){
+		/*double big = 12.123456789123456789123456789;
+		System.out.println("big = " + big);*/
+		
+		BigDecimal b1 = new BigDecimal("123.45678912345678912345678912345678");
+		BigDecimal b2 = new BigDecimal("7.8923456789123456789123456789998898888");
+		
+//		System.out.println("和：" + (b1+b2));//错误的，无法直接使用+进行求和
+		
+		System.out.println("和：" + b1.add(b2));
+		System.out.println("减：" + b1.subtract(b2));
+		System.out.println("乘：" + b1.multiply(b2));
+		System.out.println("除：" + b1.divide(b2,20,RoundingMode.UP));//divide(BigDecimal divisor, int scale, int roundingMode)
+		System.out.println("除：" + b1.divide(b2,20,RoundingMode.DOWN));//divide(BigDecimal divisor, int scale, int roundingMode)
+		System.out.println("余：" + b1.remainder(b2));
+	}
+	//保留两位小数的方式：
+	@Test
+	public void test02(){
+        double f = 111231.5585;
+		BigDecimal bg = new BigDecimal(f);
+		double f1 = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+		System.out.println(f1);
+    }
+</pre><h2><a name='header-n444' class='md-header-anchor '></a>10.4 日期时间API</h2><h3><a name='header-n445' class='md-header-anchor '></a>10.4.1 java.util.Date</h3><p>new  Date()：当前系统时间</p><p>long  getTime()：返回该日期时间对象距离1970-1-1 0.0.0 0毫秒之间的毫秒值</p><p>new Date(long 毫秒)：把该毫秒值换算成日期时间对象</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n449" mdtype="fences" style="break-inside: unset;">	@Test
+	public void test5(){
+		long time = Long.MAX_VALUE;
+		Date d = new Date(time);
+		System.out.println(d);
+	}
+	
+	@Test
+	public void test4(){
+		long time = 1559807047979L;
+		Date d = new Date(time);
+		System.out.println(d);
+	}
+	@Test
+	public void test3(){
+		Date d = new Date();
+		long time = d.getTime();
+		System.out.println(time);//1559807047979
+	}
+	
+	@Test
+	public void test2(){
+		long time = System.currentTimeMillis();
+		System.out.println(time);//1559806982971
+		//当前系统时间距离1970-1-1 0:0:0 0毫秒的时间差，毫秒为单位
+	}
+	
+	@Test
+	public void test1(){
+		Date d = new Date();
+		System.out.println(d);
+	}
+</pre><p>&nbsp;</p><h3><a name='header-n451' class='md-header-anchor '></a>10.4.2 java.util.Calendar</h3><p><code>Calendar</code> 类是一个抽象类，它为特定瞬间与一组诸如  <code>YEAR</code>、<code>MONTH</code>、<code>DAY_OF_MONTH</code>、<code>HOUR</code>  等 <a href='../../java/util/Calendar.html#fields'><code>日历字段</code></a>之间的转换提供了一些方法，并为操作日历字段（例如获得下星期的日期）提供了一些方法。瞬间可用毫秒值来表示，它是距<em>历元</em>（即格林威治标准时间 1970 年 1 月 1 日的 00:00:00.000，格里高利历）的偏移量。与其他语言环境敏感类一样，<code>Calendar</code> 提供了一个类方法  <code>getInstance</code>，以获得此类型的一个通用的对象。</p><p>（1）getInstance()：得到Calendar的对象</p><p>（2）get(常量)</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n455" mdtype="fences" style="break-inside: unset;">	@Test
+	public void test6(){
+		Calendar c = Calendar.getInstance();
+		System.out.println(c);
+		
+		int year = c.get(Calendar.YEAR);
+		System.out.println(year);
+		
+		int month = c.get(Calendar.MONTH)+1;
+		System.out.println(month);
+		
+		//...
+	}
+
+	@Test
+	public void test7(){
+		TimeZone t = TimeZone.getTimeZone("America/Los_Angeles");
+		
+		//getInstance(TimeZone zone)
+		Calendar c = Calendar.getInstance(t);
+		System.out.println(c);
+	}
+</pre><h3><a name='header-n456' class='md-header-anchor '></a>10.4.3 java.text.SimpleDateFormat</h3><p>SimpleDateFormat用于日期时间的格式化。</p><p><img src='imgs09/1572599023197.png' alt='1572599023197' referrerPolicy='no-referrer' /></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n459" mdtype="fences" style="break-inside: unset;">	@Test
+	public void test10() throws ParseException{
+		String str = "2019年06月06日 16时03分14秒 545毫秒  星期四 +0800";
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒 SSS毫秒  E Z");
+		Date d = sf.parse(str);
+		System.out.println(d);
+	}
+	
+	@Test
+	public void test9(){
+		Date d = new Date();
+
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒 SSS毫秒  E Z");
+		//把Date日期转成字符串，按照指定的格式转
+		String str = sf.format(d);
+		System.out.println(str);
+	}
+</pre><h3><a name='header-n460' class='md-header-anchor '></a>10.2.2 JDK8后日期类</h3><p>Java1.0中包含了一个Date类，但是它的大多数方法已经在Java 1.1引入Calendar类之后被弃用了。而Calendar并不比Date好多少。它们面临的问题是：</p><ul><li>可变性：象日期和时间这样的类对象应该是不可变的。Calendar类中可以使用三种方法更改日历字段：set()、add() 和 roll()。</li><li>偏移性：Date中的年份是从1900开始的，而月份都是从0开始的。</li><li>格式化：格式化只对Date有用，Calendar则不行。</li><li>此外，它们也不是线程安全的等。</li></ul><p>可以说，对日期和时间的操作一直是Java程序员最痛苦的地方之一。第三次引入的API是成功的，并且java 8中引入的java.time API 已经纠正了过去的缺陷，将来很长一段时间内它都会为我们服务。</p><p>Java 8 吸收了 Joda-Time （第三方开发）的精华，以一个新的开始为 Java 创建优秀的 API。</p><ul><li>java.time – 包含值对象的基础包</li><li>java.time.chrono – 提供对不同的日历系统的访问。</li><li>java.time.format – 格式化和解析时间和日期</li><li>java.time.temporal – 包括底层框架和扩展特性</li><li>java.time.zone – 包含时区支持的类</li></ul><p>Java 8 吸收了 Joda-Time 的精华，以一个新的开始为 Java 创建优秀的 API。新的 java.time 中包含了所有关于时钟（Clock），本地日期（LocalDate）、本地时间（LocalTime）、本地日期时间（LocalDateTime）、时区（ZonedDateTime）和持续时间（Duration）的类。</p><h4><a name='header-n485' class='md-header-anchor '></a>1、LocalDate、LocalTime、LocalDateTime</h4><p>本地日期时间类</p><figure><table><thead><tr><th>方法</th><th><strong>描述</strong></th></tr></thead><tbody><tr><td><strong>now() / now(ZoneId zone)</strong></td><td>静态方法，根据当前时间创建对象/指定时区的对象</td></tr><tr><td><strong>of()</strong></td><td>静态方法，根据指定日期/时间创建对象</td></tr><tr><td>getDayOfMonth()/getDayOfYear()</td><td>获得月份天数(1-31) /获得年份天数(1-366)</td></tr><tr><td>getDayOfWeek()</td><td>获得星期几(返回一个 DayOfWeek 枚举值)</td></tr><tr><td>getMonth()</td><td>获得月份, 返回一个 Month 枚举值</td></tr><tr><td>getMonthValue() / getYear()</td><td>获得月份(1-12) /获得年份</td></tr><tr><td>getHours()/getMinute()/getSecond()</td><td>获得当前对象对应的小时、分钟、秒</td></tr><tr><td>withDayOfMonth()/withDayOfYear()/withMonth()/withYear()</td><td>将月份天数、年份天数、月份、年份修改为指定的值并返回新的对象</td></tr><tr><td>with(TemporalAdjuster  t)</td><td>将当前日期时间设置为校对器指定的日期时间</td></tr><tr><td>plusDays(), plusWeeks(), plusMonths(), plusYears(),plusHours()</td><td>向当前对象添加几天、几周、几个月、几年、几小时</td></tr><tr><td>minusMonths() / minusWeeks()/minusDays()/minusYears()/minusHours()</td><td>从当前对象减去几月、几周、几天、几年、几小时</td></tr><tr><td>plus(TemporalAmount t)/minus(TemporalAmount t)</td><td>添加或减少一个 Duration 或 Period</td></tr><tr><td>isBefore()/isAfter()</td><td>比较两个 LocalDate</td></tr><tr><td>isLeapYear()</td><td>判断是否是闰年（在LocalDate类中声明）</td></tr><tr><td><strong>format(DateTimeFormatter  t)</strong></td><td>格式化本地日期、时间，返回一个字符串</td></tr><tr><td><strong>parse(Charsequence text)</strong></td><td>将指定格式的字符串解析为日期、时间</td></tr></tbody></table></figure><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n539" mdtype="fences" style="break-inside: unset;">	@Test
+	public void test7(){
+		LocalDate now = LocalDate.now();
+		LocalDate before = now.minusDays(100);
+		System.out.println(before);//2019-02-26
+	}
+	
+	@Test
+	public void test06(){
+		LocalDate lai = LocalDate.of(2019, 5, 13);
+		LocalDate go = lai.plusDays(160);
+		System.out.println(go);//2019-10-20
+	}
+	
+	@Test
+	public void test05(){
+		LocalDate lai = LocalDate.of(2019, 5, 13);
+		System.out.println(lai.getDayOfYear());
+	}
+	
+	
+	@Test
+	public void test04(){
+		LocalDate lai = LocalDate.of(2019, 5, 13);
+		System.out.println(lai);
+	}
+	
+	@Test
+	public void test03(){
+		LocalDateTime now = LocalDateTime.now();
+		System.out.println(now);
+	}
+	
+	@Test
+	public void test02(){
+		LocalTime now = LocalTime.now();
+		System.out.println(now);
+	}
+	
+	@Test
+	public void test01(){
+		LocalDate now = LocalDate.now();
+		System.out.println(now);
+	}
+</pre><h4><a name='header-n540' class='md-header-anchor '></a>2、指定时区日期时间：ZonedDateTime</h4><p>常见时区ID：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n542" mdtype="fences">Asia/Shanghai
+UTC
+America/New_York
+</pre><p>&nbsp;</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n544" mdtype="fences">import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
+public class TestZonedDateTime {
+	public static void main(String[] args) {
+		ZonedDateTime t = ZonedDateTime.now();
+		System.out.println(t);
+		
+		ZonedDateTime t1 = ZonedDateTime.now(ZoneId.of("America/New_York"));
+		System.out.println(t1);
+	}
+}
+</pre><h4><a name='header-n545' class='md-header-anchor '></a>3、持续日期/时间：Period和Duration</h4><p>Period:用于计算两个“日期”间隔</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n547" mdtype="fences">public static void main(String[] args) {
+		LocalDate t1 = LocalDate.now();
+		LocalDate t2 = LocalDate.of(2018, 12, 31);
+		Period between = Period.between(t1, t2);
+		System.out.println(between);
+		
+		System.out.println("相差的年数："+between.getYears());//1年
+		System.out.println("相差的月数："+between.getMonths());//又7个月
+		System.out.println("相差的天数："+between.getDays());//零25天
+		System.out.println("相差的总数："+between.toTotalMonths());//总共19个月
+	}
+</pre><p>Duration:用于计算两个“时间”间隔</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n549" mdtype="fences" style="break-inside: unset;">	public static void main(String[] args) {
+		LocalDateTime t1 = LocalDateTime.now();
+		LocalDateTime t2 = LocalDateTime.of(2017, 8, 29, 0, 0, 0, 0);
+		Duration between = Duration.between(t1, t2);
+		System.out.println(between);
+		
+		System.out.println("相差的总天数："+between.toDays());
+		System.out.println("相差的总小时数："+between.toHours());
+		System.out.println("相差的总分钟数："+between.toMinutes());
+		System.out.println("相差的总秒数："+between.getSeconds());
+		System.out.println("相差的总毫秒数："+between.toMillis());
+		System.out.println("相差的总纳秒数："+between.toNanos());
+		System.out.println("不够一秒的纳秒数："+between.getNano());
+	}
+</pre><h4><a name='header-n550' class='md-header-anchor '></a>4、DateTimeFormatter：日期时间格式化</h4><p>该类提供了三种格式化方法：</p><p>预定义的标准格式。如：<code>DateTimeFormatter.ISO_DATE_TIME;</code><span>	</span><code>ISO_DATE</code></p><p>本地化相关的格式。如：<code>DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)</code></p><p>自定义的格式。如：<code>DateTimeFormatter.ofPattern(“yyyy-MM-dd hh:mm:ss”)</code></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n555" mdtype="fences" style="break-inside: unset;">	@Test
+	public void test(){
+		LocalDateTime now = LocalDateTime.now();
+		//预定义的标准格式
+		DateTimeFormatter df = DateTimeFormatter.ISO_DATE_TIME;//2019-06-06T16:38:23.756
+        //格式化操作
+		String str = df.format(now);
+		System.out.println(str);
+	}
+
+	@Test
+	public void test1(){
+		LocalDateTime now = LocalDateTime.now();
+		//本地化相关的格式
+//		DateTimeFormatter df = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG);//2019年6月6日 下午04时40分03秒
+		DateTimeFormatter df = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);//19-6-6 下午4:40
+        //格式化操作
+		String str = df.format(now);
+		System.out.println(str);
+	}
+
+	
+	@Test
+	public void test2(){
+		LocalDateTime now = LocalDateTime.now();
+		//自定义的格式
+		DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH时mm分ss秒  SSS毫秒  E 是这一年的D天");
+         //格式化操作
+		String str = df.format(now);
+		System.out.println(str);
+	}
+
+	//把字符串解析为日期对象
+    public void test3(){
+        //自定义的格式
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+        //解析操作
+        LocalDate parse = LocalDate.parse("2020.12.12", pattern);
+        System.out.println(parse);
+    }
+</pre><p>&nbsp;</p><h2><a name='header-n557' class='md-header-anchor '></a>10.5 系统相关类</h2><h3><a name='header-n558' class='md-header-anchor '></a>10.5.1 java.lang.System类</h3><p>系统类中很多好用的方法，其中几个如下：</p><ul><li>static long currentTimeMillis() ：返回当前系统时间距离1970-1-1 0:0:0的毫秒值</li><li>static void exit(int status) ：退出当前系统</li><li>static void gc() ：运行垃圾回收器。</li><li>static String getProperty(String key)：获取某个系统属性</li><li>...</li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n571" mdtype="fences">public class Test{
+    public static void main(String[] args){
+    	long time = System.currentTimeMillis();
+    	System.out.println("现在的系统时间距离1970年1月1日凌晨：" + time + "毫秒");
+    	
+    	System.exit(0);
+
+    	System.out.println("over");//不会执行
+    }
+}
+</pre><p>&nbsp;</p><h3><a name='header-n573' class='md-header-anchor '></a>10.5.2 java.lang.Runtime类</h3><p>每个 Java 应用程序都有一个 <code>Runtime</code> 类实例，使应用程序能够与其运行的环境相连接。可以通过  <code>getRuntime</code> 方法获取当前运行时。  应用程序不能创建自己的 Runtime 类实例。</p><p>public static Runtime getRuntime()： 返回与当前 Java 应用程序相关的运行时对象。</p><p>public long totalMemory()：返回 Java 虚拟机中的内存总量。此方法返回的值可能随时间的推移而变化，这取决于主机环境。</p><p>public long freeMemory()：回 Java 虚拟机中的空闲内存量。调用 gc 方法可能导致 freeMemory 返回值的增加。</p><p>public long maxMemory():   返回 Java 虚拟机试图使用的最大内存量。 </p><p>Process exec(String command):在单独的进程中执行指定的字符串命令。 </p><h2><a name='header-n580' class='md-header-anchor '></a>10.6 数组工具类</h2><p>java.util.Arrays数组工具类，提供了很多静态方法来对数组进行操作，而且如下每一个方法都有各种重载形式，以下只列出int[]类型的，其他类型的数组类推：</p><ul><li>static int binarySearch(int[] a, int key) ：要求数组有序，在数组中查找key是否存在，如果存在返回第一次找到的下标，不存在返回负数</li><li>static int[] copyOf(int[] original, int newLength)  ：根据original原数组复制一个长度为newLength的新数组，并返回新数组</li><li>static int[] copyOfRange(int[] original, int from, int to) ：复制original原数组的[from,to)构成新数组，并返回新数组</li><li>static boolean equals(int[] a, int[] a2) ：比较两个数组的长度、元素是否完全相同</li><li>static void fill(int[] a, int val) ：用val填充整个a数组</li><li>static void fill(int[] a, int fromIndex, int toIndex, int val)：将a数组[fromIndex,toIndex)部分填充为val </li><li>static void sort(int[] a) ：将a数组按照从小到大进行排序</li><li>static void sort(int[] a, int fromIndex, int toIndex) ：将a数组的[fromIndex, toIndex)部分按照升序排列</li><li>static String toString(int[] a) ：把a数组的元素，拼接为一个字符串，形式为：[元素1，元素2，元素3。。。]</li></ul><p>示例代码：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n602" mdtype="fences" style="break-inside: unset;">import java.util.Arrays;
+import java.util.Random;
+
+public class Test{
+    public static void main(String[] args){
+    	int[] arr = new int[5];
+        // 打印数组,输出地址值
+  		System.out.println(arr); // [I@2ac1fdc4
+  		// 数组内容转为字符串
+    	System.out.println("arr数组初始状态："+ Arrays.toString(arr));
+    	
+    	Arrays.fill(arr, 3);
+    	System.out.println("arr数组现在状态："+ Arrays.toString(arr));
+    	
+    	Random rand = new Random();
+    	for (int i = 0; i &lt; arr.length; i++) {
+			arr[i] = rand.nextInt(100);//赋值为100以内的随机整数
+		}
+    	System.out.println("arr数组现在状态："+ Arrays.toString(arr));
+    	
+    	int[] arr2 = Arrays.copyOf(arr, 10);
+    	System.out.println("新数组：" + Arrays.toString(arr2));
+    	
+    	System.out.println("两个数组的比较结果：" + Arrays.equals(arr, arr2));
+    	
+    	Arrays.sort(arr);
+    	System.out.println("arr数组现在状态："+ Arrays.toString(arr));
+    }
+}
+</pre><p>&nbsp;</p><h1><a name='header-n604' class='md-header-anchor '></a>数组的算法升华</h1><h3><a name='header-n605' class='md-header-anchor '></a>1. 数组的反转</h3><p>方法有两种：</p><p>1、借助一个新数组</p><p>2、首尾对应位置交换</p><p>第一种方式示例代码：</p><p><img src='imgs09/1572828418996.png' alt='1572828418996' referrerPolicy='no-referrer' /></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n611" mdtype="fences" style="break-inside: unset;">int[] arr = {1,2,3,4,5,6,7,8,9};
+
+//(1)先创建一个新数组
+int[] newArr = new int[arr.length];
+
+//(2)复制元素
+int len = arr.length;
+for(int i=0; i&lt;newArr.length; i++){
+    newArr[i] = arr[len -1 - i];
+}
+
+//(3)舍弃旧的，让arr指向新数组
+arr = newArr;//这里把新数组的首地址赋值给了arr
+
+//(4)遍历显示
+for(int i=0; i&lt;arr.length; i++){
+    System.out.println(arr[i]);
+}
+
+</pre><blockquote><p>缺点：需要借助一个数组，浪费额外空间，原数组需要垃圾回收</p></blockquote><p>第二种方式示例代码：</p><p><strong>实现思想：</strong>数组对称位置的元素互换。</p><p><img src='imgs09/1561469467316.png' alt='1561469467316' referrerPolicy='no-referrer' /></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n617" mdtype="fences" style="break-inside: unset;">int[] arr = {1,2,3,4,5,6,7,8,9};
+
+//(1)计算要交换的次数：  次数 = arr.length/2
+//(2)首尾对称位置交换
+for(int i=0; i&lt;arr.length/2; i++){//循环的次数就是交换的次数
+    int temp = arr[i];
+    arr[i] = arr[arr.length-1-i];
+	arr[arr.length-1-i] = temp;
+}
+
+//（3）遍历显示
+for(int i=0; i&lt;arr.length; i++){
+    System.out.println(arr[i]);
+}
+</pre><p>或</p><p><img src='imgs09/1561469087319.png' alt='1561469087319' referrerPolicy='no-referrer' /></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n620" mdtype="fences" style="break-inside: unset;">	public static void main(String[] args){
+		int[] arr = {1,2,3,4,5,6,7,8,9};
+
+		//左右对称位置交换
+		for(int left=0,right=arr.length-1; left&lt;right; left++,right--){
+		    //首  与  尾交换
+		    int temp = arr[left];
+		    arr[left] = arr[right];
+			arr[right] = temp;
+		}
+
+		//（3）遍历显示
+		for(int i=0; i&lt;arr.length; i++){
+		    System.out.println(arr[i]);
+		}
+	}
+</pre><p>&nbsp;</p><h3><a name='header-n622' class='md-header-anchor '></a>2. 数组的扩容</h3><p>示例：当原来的数组长度不够了需要扩容，例如需要新增位置来存储10</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n624" mdtype="fences" style="break-inside: unset;">int[] arr = {1,2,3,4,5,6,7,8,9};
+
+//如果要把arr数组扩容，增加1个位置
+//(1)先创建一个新数组，它的长度 = 旧数组的长度+1，或者也可以扩大为原来数组长度的1.5倍，2倍等
+int[] newArr = new int[arr.length + 1];
+
+//(2)复制元素
+//注意：i&lt;arr.length   因位arr比newArr短，避免下标越界
+for(int i=0; i&lt;arr.length; i++){
+    newArr[i] = arr[i];
+}
+
+//(3)把新元素添加到newArr的最后
+newArr[newArr.length-1] = 10;
+
+//(4)如果下面继续使用arr，可以让arr指向新数组
+arr = newArr;
+
+//(4)遍历显示
+for(int i=0; i&lt;arr.length; i++){
+    System.out.println(arr[i]);
+}
+</pre><blockquote><p>（1）至于新数组的长度定义多少合适，看实际情况，如果新增的元素个数确定，那么可以增加指定长度，如果新增元素个数不确定，那么可以扩容为原来的1.5倍、2倍等</p><p>（2）数组扩容太多会造成浪费，太少会导致频繁扩容，效率低下</p></blockquote><h3><a name='header-n628' class='md-header-anchor '></a>3. 数组元素的插入</h3><p>示例：在原数组的某个[index]插入一个元素</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n630" mdtype="fences" style="break-inside: unset;">//在索引index位置插入一个整数5
+int index=1;
+int[] arr={1,2,3,4};
+//创建新数组扩容
+int[] newArr=new int[5];
+//复制数组
+for (int i = 0; i &lt; arr.length; i++) {
+    newArr[i]=arr[i];
+}
+//向后移动插入位置之后的每个元素
+for (int i = newArr.length - 1; i &gt;= 0; i--) {
+    if(i&gt;index){
+        newArr[i]=newArr[i-1];
+    }
+}
+//插入新元素
+newArr[index]=5;
+arr=newArr;
+//遍历显示
+for(int i=0; i&lt;arr.length; i++){
+    System.out.println(arr[i]);
+}
+</pre><p>情形一：原数组未满（暂）</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n632" mdtype="fences">String[] arr = new String[5];
+arr[0]="张三";
+arr[1]="李四";
+arr[2]="王五";
+
+那么目前数组的长度是5，而数组的实际元素个数是3，如果此时需要在“张三”和“李四”之间插入一个“赵六”，即在[index=1]的位置插入“赵六”，需要怎么做呢？
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n633" mdtype="fences" style="break-inside: unset;">String[] arr = new String[5];
+arr[0]="张三";
+arr[1]="李四";
+arr[2]="王五";
+
+//（1）移动2个元素，需要移动的起始元素下标是[1]，它需要移动到[2]，一共一共2个
+System.arraycopy(arr,1,arr,2,2);
+//（2）插入新元素
+arr[1]="赵六";
+
+//(3)遍历显示
+for(int i=0; i&lt;arr.length; i++){
+    System.out.println(arr[i]);
+}
+</pre><p>情形二：原数组已满（暂）</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n635" mdtype="fences">String[] arr = new String[3];
+arr[0]="张三";
+arr[1]="李四";
+arr[2]="王五";
+
+那么目前数组的长度是3，而数组的实际元素个数是3，如果此时需要在“张三”和“李四”之间插入一个“赵六”，即在[index=1]的位置插入“赵六”，需要怎么做呢？
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n636" mdtype="fences" style="break-inside: unset;">String[] arr = new String[3];
+arr[0]="张三";
+arr[1]="李四";
+arr[2]="王五";
+
+//（1）先扩容
+String[] newArr = new String[4];
+for(int i=0; i&lt;arr.length; i++){
+	newArr[i] = arr[i];
+}
+arr=newArr;
+
+//（2）移动2个元素，需要移动的起始元素下标是[1]，它需要移动到[2]，一共2个
+System.arraycopy(arr,1,arr,2,2);
+//（3）插入新元素
+arr[1]="赵六";
+
+//(4)遍历显示
+for(int i=0; i&lt;arr.length; i++){
+    System.out.println(arr[i]);
+}
+</pre><h3><a name='header-n637' class='md-header-anchor '></a>4. 数组元素的删除</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n638" mdtype="fences" style="break-inside: unset;">//删除索引1位置的元素
+int[] arr={1,2,3,4,5};
+//把删除位置之后的每个元素向前移动
+for (int i = 0; i &lt; arr.length-1; i++) {
+    if(i&gt;=1){
+        arr[i]=arr[i+1];
+    }
+}
+//根据实际业务需求，把最后位置的元素修改为某个值
+arr[arr.length-1]=0;
+//遍历显示
+for(int i=0; i&lt;arr.length; i++){
+    System.out.println(arr[i]);
+}
+</pre><p>示例：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n640" mdtype="fences">String[] arr = new String[3];
+arr[0]="张三";
+arr[1]="李四";
+arr[2]="王五";
+
+现在需要删除“李四”，我们又不希望数组中间空着元素，该如何处理呢？
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n641" mdtype="fences">String[] arr = new String[3];
+arr[0]="张三";
+arr[1]="李四";
+arr[2]="王五";
+
+//（1）移动元素，需要移动元素的起始下标[2]，该元素需要移动到[1]，一共需要移动1个元素
+System.arraycopy(arr,2,arr,1,1);
+
+//（2）因为数组元素整体往左移动，这里本质上是复制，原来最后一个元素需要置空
+arr[2]=null;//使得垃圾回收尽快回收对应对象的内存
+</pre><p>&nbsp;</p><h3><a name='header-n643' class='md-header-anchor '></a>5. 数组的二分查找</h3><p>二分查找：折半查找，前提条件是有序的数组</p><p>要求：要求数组元素必须支持比较大小，并且数组中的元素已经按大小排好序</p><p>示例：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n647" mdtype="fences" style="break-inside: unset;">class Exam2{
+	public static void main(String[] args){
+		int[] arr = {2,5,7,8,10,15,18,20,22,25,28};//数组是有序的
+		int value = 18;
+		
+        int index = -1;
+		int left = 0;
+        int right = arr.length - 1;
+        int mid = (left + right)/2;
+        while(left&lt;=right){
+            //找到结束
+            if(value == arr[mid]){
+                index = mid;
+                break;
+            }//没找到
+            else if(value &gt; arr[mid]){//往右继续查找
+                //移动左边界，使得mid往右移动
+                left = mid + 1;
+            }else if(value &lt; arr[mid]){//往左边继续查找
+                right = mid - 1;
+            }
+            
+            mid = (left + right)/2;
+        }
+        
+        if(index==-1){
+    		System.out.println(value + "不存在");
+		}else{
+    		System.out.println(value + "的下标是" + index);
+		}
+        
+	}
+}
+</pre><p><img src='imgs09/1、二分查找图解（1）.png' alt='' referrerPolicy='no-referrer' /></p><p><img src='imgs09/2、二分查找图解（2）.png' alt='' referrerPolicy='no-referrer' /></p><h3><a name='header-n650' class='md-header-anchor '></a>6. 数组的直接选择排序</h3><p>示例代码：简单的直接选择排序</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n652" mdtype="fences" style="break-inside: unset;">int[] arr = {49,38,65,97,76,13,27,49};
+//比较轮数N-1
+for (int j = 0; j &lt;arr.length-1 ; j++) {
+    int min=j;//假如当前位置是最小的元素
+    //每轮比较次数N-j
+    for (int i = j; i &lt;arr.length-1; i++) {
+        if(arr[min]&gt;arr[i+1]){
+            //记录找到的最小元素下标
+            min=i+1;
+        }
+    }
+    if(min!=j) {
+        int temp = arr[j];
+        arr[j] = arr[min];
+        arr[min] = temp;
+    }
+}
+
+//显示结果
+for(int i=0; i&lt;arr.length; i++){
+    System.out.print(arr[i]);
+}
+
+}
+</pre><p>&nbsp;</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n654" mdtype="fences" style="break-inside: unset;">int[] arr = {49,38,65,97,76,13,27,49};
+
+for(int i=1; i&lt;arr.length; i++){//外循环的次数 = 轮数 = 数组的长度-1
+    //（1）找出本轮未排序元素中的最值
+    /*
+    未排序元素：
+    第1轮：i=1,未排序，[0,7]，本轮未排序元素第一个元素是[0]
+    第2轮：i=2,未排序，[1,7]，本轮未排序元素第一个元素是[1]
+    ...
+    第7轮：i=7,未排序，[6,7]，本轮未排序元素第一个元素是[6]
+    
+    每一轮未排序元素的起始下标：0,1,2,3,4,5,6，正好是i-1的
+    未排序的后面的元素依次：
+    第1轮：[1,7]  j=1,2,3,4,5,6,7
+    第2轮：[2,4]  j=2,3,4,5,6,7
+    。。。。
+    第7轮：[7]    j=7
+    j的起点是i，终点都是7
+    */
+    int max = arr[i-1];
+    int index = i-1;
+    for(int j=i; j&lt;arr.length; j++){
+        if(arr[j] &gt; max){
+            max = arr[j];
+            index = j;
+        }
+    }
+    
+    //（2）如果这个最值没有在它应该在的位置，就与这个位置的元素交换
+    /*
+    第1轮，最大值应该在[0]
+    第2轮，最大值应该在[1]
+    ....
+    第7轮，最大值应该在[6]
+    正好是i-1的值
+    */
+    if(index != i-1){
+        //交换arr[i-1]与arr[index]
+        int temp = arr[i-1];
+        arr[i-1] = arr[index];
+        arr[index] = temp;
+    }
+}
+
+//显示结果
+for(int i=0; i&lt;arr.length; i++){
+	System.out.print(arr[i]);
+}
+</pre><p><img src='imgs09/1561513135868.png' alt='1561513135868' referrerPolicy='no-referrer' /></p><p>&nbsp;</p><h2><a name='header-n657' class='md-header-anchor '></a>单例模式</h2><p>设计模式：经验的总结，大量业务开发实践中，针对某些需求，总结的一套开发经验。比如程序运行时，希望内存中只存在一个对象的实例（或考虑用于共享数据，或考虑实例多了浪费空间），针对这样的需求如何做到呢？经长期实践总结，有以下方式可以轻松做到，你记住了这种设计模式也就可以轻松完成这个需求，不需要再从头思考各种细节问题来完成。</p><p><strong>1.懒汉式</strong></p><p>有线程安全问题</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n661" mdtype="fences" style="break-inside: unset;">public class Singleton {
+    //私有的静态变量
+    private static Singleton instance = null;
+
+    //私有构造器
+    private Singleton() {
+    }
+
+    //静态的公共的方法获取实例
+    public static Singleton getInstance() {
+        if (instance == null)
+            instance = new Singleton();//第一次调用时创建对象
+        return instance;
+    }
+}
+</pre><p><strong>2. 饿汉式</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n663" mdtype="fences" style="break-inside: unset;">public class Student {
+    //3.创建一个静态属性，赋值一个实例
+    private final static Student  student=new Student();//只在类加载过程中执行一次，创建一个对象
+
+
+    //1.私有构造器
+    private Student() {
+    }
+
+    //2.提供公共的静态的方法返回一个此类的实例
+    public static Student getInstance() {
+        return student;//每次调用返回同一个对象
+    }
+}
+</pre><p>&nbsp;</p>
+	<figure>
+		<table>
+			<thead>
+			<tr>
+				<th style='text-align:right;'><a href='../javaSE.html'>回目录</a></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td style='text-align:right;'>教程版本：1.2 更新日期：2019年1月3日</td>
+			</tr>
+			</tbody>
+		</table>
+	</figure>
+</div>
+</body>
+</html>

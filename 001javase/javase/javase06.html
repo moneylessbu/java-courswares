@@ -1,0 +1,2918 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>JavaSE_第6章 面向对象基础（中）</title><link href='https://fonts.loli.net/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:first-child { margin-top: -20px; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 2; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px !important; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 32px; padding-right: 32px; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="mermaid"] svg, [lang="flow"] svg { max-width: 100%; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; word-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { word-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+:root { --active-file-bg-color: rgba(32, 43, 51, 0.63); --active-file-text-color: white; --bg-color: #f3f2ee; --text-color: #1f0909; --control-text-color: #444; --rawblock-edit-panel-bd: #e5e5e5; --select-text-bg-color: rgba(32, 43, 51, 0.63); --select-text-font-color: white; }
+pre { --select-text-bg-color: #36284e; --select-text-font-color: #fff; }
+html { font-size: 16px; }
+html, body { background-color: rgb(243, 242, 238); font-family: "PT Serif", "Times New Roman", Times, serif; color: rgb(31, 9, 9); line-height: 1.5em; }
+#write { max-width: 40em; }
+ol li { list-style-type: decimal; list-style-position: outside; }
+ul li { list-style-type: disc; list-style-position: outside; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote::before, blockquote::after, q::before, q::after { content: none; }
+table { border-collapse: collapse; border-spacing: 0px; }
+h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+h1 { font-size: 1.875em; line-height: 1.6em; margin-top: 2em; }
+h2, h3 { font-size: 1.3125em; line-height: 1.15; margin-top: 2.28571em; margin-bottom: 1.15em; }
+h3 { font-weight: normal; }
+h4 { font-size: 1.125em; margin-top: 2.67em; }
+h5, h6 { font-size: 1em; }
+h1 { border-bottom: 1px solid; margin-bottom: 1.875em; padding-bottom: 0.8125em; }
+a { text-decoration: none; color: rgb(6, 85, 136); }
+a:hover, a:active { text-decoration: underline; }
+p, blockquote, .md-fences { margin-bottom: 1.5em; }
+h1, h2, h3, h4, h5, h6 { margin-bottom: 1.5em; }
+blockquote { font-style: italic; border-left: 5px solid; margin-left: 2em; padding-left: 1em; }
+ul, ol { margin: 0px 0px 1.5em 1.5em; }
+.md-meta, .md-before, .md-after { color: rgb(153, 153, 153); }
+table { margin-bottom: 1.5em; font-size: 1em; }
+thead th, tfoot th { padding: 0.25em 0.25em 0.25em 0.4em; text-transform: uppercase; }
+th { text-align: left; }
+td { vertical-align: top; padding: 0.25em 0.25em 0.25em 0.4em; }
+code, .md-fences { background-color: rgb(218, 218, 218); }
+code { padding-left: 2px; padding-right: 2px; }
+.md-fences { margin-left: 2em; margin-bottom: 3em; padding-left: 1ch; padding-right: 1ch; }
+pre, code, tt { font-size: 0.875em; line-height: 1.71429em; }
+h1 { line-height: 1.3em; font-weight: normal; margin-bottom: 0.5em; }
+p + ul, p + ol { margin-top: 0.5em; }
+h3 + ul, h4 + ul, h5 + ul, h6 + ul, h3 + ol, h4 + ol, h5 + ol, h6 + ol { margin-top: 0.5em; }
+li > ul, li > ol { margin-top: inherit; margin-bottom: 0px; }
+li ol > li { list-style-type: lower-alpha; }
+li li ol > li { list-style-type: lower-roman; }
+h2, h3 { margin-bottom: 0.75em; }
+hr { border-top: none; border-right: none; border-bottom: 1px solid; border-left: none; }
+h1 { border-color: rgb(197, 197, 197); }
+blockquote { border-color: rgb(186, 186, 186); color: rgb(101, 101, 101); }
+blockquote ul, blockquote ol { margin-left: 0px; }
+.ty-table-edit { background-color: transparent; }
+thead { background-color: rgb(218, 218, 218); }
+tr:nth-child(2n) { background: rgb(232, 231, 231); }
+hr { border-color: rgb(197, 197, 197); }
+.task-list { padding-left: 1rem; }
+.md-task-list-item { padding-left: 1.5rem; list-style-type: none; }
+.md-task-list-item > input::before { content: "√"; display: inline-block; width: 1.25rem; height: 1.6rem; vertical-align: middle; text-align: center; color: rgb(221, 221, 221); background-color: rgb(243, 242, 238); }
+.md-task-list-item > input:checked::before, .md-task-list-item > input[checked]::before { color: inherit; }
+#write pre.md-meta-block { min-height: 1.875rem; color: rgb(85, 85, 85); border: 0px; background: transparent; margin-left: 1em; margin-top: 1em; }
+.md-image > .md-meta { color: rgb(155, 81, 70); }
+.md-image > .md-meta { font-family: Menlo, "Ubuntu Mono", Consolas, "Courier New", "Microsoft Yahei", "Hiragino Sans GB", "WenQuanYi Micro Hei", serif; }
+#write > h3.md-focus::before { left: -1.5rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+#write > h4.md-focus::before { left: -1.5rem; top: 0.25rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+#write > h5.md-focus::before { left: -1.5rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+#write > h6.md-focus::before { left: -1.5rem; top: 0.3125rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+.md-toc:focus .md-toc-content { margin-top: 19px; }
+.md-toc-content:empty::before { color: rgb(6, 85, 136); }
+.md-toc-item { color: rgb(6, 85, 136); }
+#write div.md-toc-tooltip { background-color: rgb(243, 242, 238); }
+#typora-sidebar { background-color: rgb(243, 242, 238); box-shadow: rgba(0, 0, 0, 0.376) 0px 6px 12px; }
+.pin-outline #typora-sidebar { background: inherit; box-shadow: none; border-right: 1px dashed; }
+.pin-outline #typora-sidebar:hover .outline-title-wrapper { border-left: 1px dashed; }
+.outline-item:hover { background-color: rgb(218, 218, 218); border-left: 28px solid rgb(218, 218, 218); border-right: 18px solid rgb(218, 218, 218); }
+.typora-node .outline-item:hover { border-right: 28px solid rgb(218, 218, 218); }
+.outline-expander::before { content: ""; font-family: FontAwesome; font-size: 14px; top: 1px; }
+.outline-expander:hover::before, .outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.modal-content { background-color: rgb(243, 242, 238); }
+.auto-suggest-container ul li { list-style-type: none; }
+.megamenu-menu, #top-titlebar, #top-titlebar *, .megamenu-content { background: rgb(243, 242, 238); color: rgb(31, 9, 9); }
+.megamenu-menu-header { border-bottom: 1px dashed rgb(32, 43, 51); }
+.megamenu-menu { box-shadow: none; border-right: 1px dashed; }
+header, .context-menu, .megamenu-content, footer { font-family: "PT Serif", "Times New Roman", Times, serif; color: rgb(31, 9, 9); }
+#megamenu-back-btn { color: rgb(31, 9, 9); border-color: rgb(31, 9, 9); }
+.megamenu-menu-header #megamenu-menu-header-title::before { color: rgb(31, 9, 9); }
+.megamenu-menu-list li a:hover, .megamenu-menu-list li a.active { color: inherit; background-color: rgb(232, 231, 223); }
+.long-btn:hover { background-color: rgb(232, 231, 223); }
+#recent-file-panel tbody tr:nth-child(2n-1) { background-color: transparent !important; }
+.megamenu-menu-panel tbody tr:hover td:nth-child(2) { color: inherit; }
+.megamenu-menu-panel .btn { background-color: rgb(210, 209, 209); }
+.btn-default { background-color: transparent; }
+.typora-sourceview-on #toggle-sourceview-btn, .ty-show-word-count #footer-word-count { background: rgb(199, 197, 197); }
+#typora-quick-open { background-color: inherit; }
+.md-diagram-panel { margin-top: 8px; }
+.file-list-item-file-name { font-weight: initial; }
+.file-list-item-summary { opacity: 1; }
+.file-list-item { color: rgb(119, 119, 119); }
+.file-list-item.active { background-color: inherit; color: black; }
+.ty-side-sort-btn.active { background-color: inherit; }
+.file-list-item.active .file-list-item-file-name { font-weight: bold; }
+.file-list-item { opacity: 1 !important; }
+.file-library-node.active > .file-node-background { background-color: var(--active-file-bg-color); }
+.file-tree-node.active > .file-node-content { color: var(--active-file-text-color); }
+.md-task-list-item > input { margin-left: -1.6em; margin-top: calc(1rem - 12px); }
+input { border: 1px solid rgb(170, 170, 170); }
+.megamenu-menu-header #megamenu-menu-header-title, .megamenu-menu-header:hover, .megamenu-menu-header:focus { color: inherit; }
+.dropdown-menu .divider { border-color: rgb(229, 229, 229); }
+.os-windows-7 strong, .os-windows-7 strong { font-weight: 760; }
+
+
+
+
+
+ .typora-export li, .typora-export p, .typora-export,  .footnote-line {white-space: normal;} 
+</style>
+</head>
+<body class='typora-export os-windows' >
+<div  id='write'  class = 'is-node'><p>第6章【面向对象基础--中】</p><h2><a name='header-n2' class='md-header-anchor '></a>教学目标</h2><ul><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>理解封装的概念</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>掌握权限修饰符的使用</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>掌握成员变量的私有化</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>掌握构造器的声明与使用</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>会声明标准的JavaBean</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够写出类的继承格式</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够说出继承的特点</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够说出方法重写的概念以及和重载的区别</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够使用this关键字解决问题</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够使用super关键字解决问题</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够分析类初始化过程（为面试服务）</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够分析实例初始化过程（为面试服务）</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够应用多态解决问题</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>理解向上转型与向下转型</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够使用instanceof关键字判断对象类型</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>了解native关键字</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>掌握final关键字</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>了解Object类的常用方法</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>会重写Object的常用方法</p></li></ul><h1><a name='header-n42' class='md-header-anchor '></a>第六章 面向对象基础--中</h1><h2><a name='header-n43' class='md-header-anchor '></a>6.1 封装encapsulation</h2><p>面向对象三大特征：封装、继承、多态</p><h3><a name='header-n45' class='md-header-anchor '></a>6.1.1 为什么需要封装？</h3><ul><li>我要用洗衣机，只需要按一下开关和洗涤模式就可以了。有必要了解洗衣机内部的结构吗？有必要碰电动机吗？</li><li>我们使用的电脑，内部有CPU、硬盘、键盘、鼠标等等，每一个部件通过某种连接方式一起工作，但是各个部件之间又是独立的</li><li>现实生活中，每一个个体与个体之间是有边界的，每一个团体与团体之间是有边界的，而同一个个体、团体内部的信息是互通的，只是对外有所隐瞒。</li></ul><p>面向对象编程语言是对客观世界的模拟，客观世界里每一个事物的内部信息都是隐藏在对象内部的，外界无法直接操作和修改，只能通过指定的方式进行访问和修改。封装可以被认为是一个保护屏障，防止该类的代码和数据被其他类随意访问。适当的封装可以让代码更容易理解与维护，也加强了代码的安全性。</p><p>随着我们系统越来越复杂，类会越来越多，那么类之间的访问边界必须把握好，面向对象的开发原则要遵循“高内聚、低耦合”，而“高内聚，低耦合”的体现之一：</p><ul><li>高内聚：类的内部数据操作细节自己完成，不允许外部干涉；</li><li>低耦合：仅对外暴露少量的方法用于使用</li></ul><p>隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的讲，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。</p><p><strong>通俗的讲，封装就是把该隐藏的隐藏起来，该暴露的暴露出来。</strong>那么暴露的程度如何控制呢？就是依赖<strong>访问控制修饰符</strong>，也称为<strong>权限修饰符</strong>来控制。</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang=""><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">便于使用者正确使用系统，防止错误修改属性</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">有助于系统之间的松耦合，提高系统独立性</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">提高软件的可重用性</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">降低了构建大型系统的风险</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 99px;"></div><div class="CodeMirror-gutters" style="display: none; height: 99px;"></div></div></div></pre><h3><a name='header-n63' class='md-header-anchor '></a><strong>6.1.2 权限修饰符</strong></h3><p>权限修饰符共有4种，分别为public，protected、缺省、private；权限修饰符可以使得数据在一定范围内可见或者隐藏。</p><figure><table><thead><tr><th>修饰符</th><th>本类</th><th>本包</th><th>其他包子类</th><th>任意位置</th></tr></thead><tbody><tr><td><strong>private</strong></td><td>√</td><td>×</td><td>×</td><td>×</td></tr><tr><td><strong>缺省</strong></td><td>√</td><td>√</td><td>×</td><td>×</td></tr><tr><td><strong>protected</strong></td><td>√</td><td>√</td><td>√</td><td>×</td></tr><tr><td><strong>public</strong></td><td>√</td><td>√</td><td>√</td><td>√</td></tr></tbody></table></figure><p>权限修饰符可以修饰：</p><p>外部类：public和缺省</p><p>成员变量、成员方法、构造器、成员内部类：public,protected,缺省,private</p><ol start='' ><li><p><strong>示例一：本包非子类与子类</strong></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">package</span> <span class="cm-def">com</span>.<span class="cm-variable">atguigu</span>.<span class="cm-variable">test01</span>.<span class="cm-variable">access1</span>;</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span class="cm-def">Father</span> {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-variable-3">int</span> <span class="cm-variable">a</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">protected</span> <span class="cm-variable-3">int</span> <span class="cm-variable">b</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable-3">int</span> <span class="cm-variable">c</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">private</span> <span class="cm-variable-3">int</span> <span class="cm-variable">d</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-keyword">static</span> <span class="cm-variable-3">int</span> <span class="cm-variable">e</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">protected</span> <span class="cm-keyword">static</span> <span class="cm-variable-3">int</span> <span class="cm-variable">f</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">static</span> <span class="cm-variable-3">int</span> <span class="cm-variable">g</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">private</span> <span class="cm-keyword">static</span> <span class="cm-variable-3">int</span> <span class="cm-variable">h</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">class</span> <span class="cm-def">Mother</span>{</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-variable">Mother</span>(){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 469px;"></div><div class="CodeMirror-gutters" style="display: none; height: 469px;"></div></div></div></pre><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">package</span> <span class="cm-def">com</span>.<span class="cm-variable">atguigu</span>.<span class="cm-variable">test01</span>.<span class="cm-variable">access1</span>;</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">//本包非子类中</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span class="cm-def">Other</span> {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-keyword">static</span> <span class="cm-variable-3">void</span> <span class="cm-variable">method</span>(){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">Father</span> <span class="cm-variable">obj</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">Father</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">obj</span>.<span class="cm-variable">a</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">obj</span>.<span class="cm-variable">b</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">obj</span>.<span class="cm-variable">c</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(obj.d);//跨类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">Father</span>.<span class="cm-variable">e</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">Father</span>.<span class="cm-variable">f</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">Father</span>.<span class="cm-variable">g</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(h);//跨类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-variable-3">void</span> <span class="cm-variable">fun</span>(){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">Father</span> <span class="cm-variable">obj</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">Father</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">obj</span>.<span class="cm-variable">a</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">obj</span>.<span class="cm-variable">b</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">obj</span>.<span class="cm-variable">c</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(obj.d);//跨类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">Father</span>.<span class="cm-variable">e</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">Father</span>.<span class="cm-variable">f</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">Father</span>.<span class="cm-variable">g</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(h);//跨类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 765px;"></div><div class="CodeMirror-gutters" style="display: none; height: 765px;"></div></div></div></pre><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">package</span> <span class="cm-def">com</span>.<span class="cm-variable">atguigu</span>.<span class="cm-variable">test01</span>.<span class="cm-variable">access1</span>;</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">//本包子类中</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span class="cm-def">Sub</span> <span class="cm-keyword">extends</span> <span class="cm-variable">Father</span>{</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-keyword">static</span> <span class="cm-variable-3">void</span> <span class="cm-variable">method</span>(){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">//静态直接访问非静态都不行</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">/*<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(a);</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">System.out.println(b);</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">System.out.println(c);</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">System.out.println(d);*/</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">Father</span> <span class="cm-variable">obj</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">Father</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">obj</span>.<span class="cm-variable">a</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">obj</span>.<span class="cm-variable">b</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">obj</span>.<span class="cm-variable">c</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(obj.d);//跨类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">e</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">f</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">g</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(h);//跨类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-variable-3">void</span> <span class="cm-variable">fun</span>(){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">a</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">b</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">c</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(d);//跨类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">e</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">f</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">g</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(h);//跨类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 863px;"></div><div class="CodeMirror-gutters" style="display: none; height: 863px;"></div></div></div></pre><p><img src='imgs06/image-20200304104635023.png' alt='image-20200304104635023' referrerPolicy='no-referrer' /></p></li><li><p><strong>示例二：跨包子类和非子类</strong></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">package</span> <span class="cm-def">com</span>.<span class="cm-variable">atguigu</span>.<span class="cm-variable">test01</span>.<span class="cm-variable">access1</span>;</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span class="cm-def">Father</span> {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-variable-3">int</span> <span class="cm-variable">a</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">protected</span> <span class="cm-variable-3">int</span> <span class="cm-variable">b</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable-3">int</span> <span class="cm-variable">c</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">private</span> <span class="cm-variable-3">int</span> <span class="cm-variable">d</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-keyword">static</span> <span class="cm-variable-3">int</span> <span class="cm-variable">e</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">protected</span> <span class="cm-keyword">static</span> <span class="cm-variable-3">int</span> <span class="cm-variable">f</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">static</span> <span class="cm-variable-3">int</span> <span class="cm-variable">g</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">private</span> <span class="cm-keyword">static</span> <span class="cm-variable-3">int</span> <span class="cm-variable">h</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 345px;"></div><div class="CodeMirror-gutters" style="display: none; height: 345px;"></div></div></div></pre><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">package</span> <span class="cm-def">com</span>.<span class="cm-variable">atguigu</span>.<span class="cm-variable">test01</span>.<span class="cm-variable">other</span>;</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">import</span> <span class="cm-variable">com</span>.<span class="cm-variable">atguigu</span>.<span class="cm-variable">test01</span>.<span class="cm-variable">access1</span>.<span class="cm-variable">Father</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span class="cm-def">Another</span> {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-keyword">static</span> <span class="cm-variable-3">void</span> <span class="cm-variable">method</span>(){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">Father</span> <span class="cm-variable">obj</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">Father</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">obj</span>.<span class="cm-variable">a</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(obj.b);//跨包非子类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(obj.c);//跨包不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(obj.d);//跨类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">Father</span>.<span class="cm-variable">e</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(Father.f);//跨包非子类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(Father.g);//跨包不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(h);//跨类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-variable-3">void</span> <span class="cm-variable">fun</span>(){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">Father</span> <span class="cm-variable">obj</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">Father</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">obj</span>.<span class="cm-variable">a</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(obj.b);//跨包非子类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(obj.c);//跨包不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(obj.d);//跨类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">Father</span>.<span class="cm-variable">e</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(Father.f);//跨包非子类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(Father.g);//跨包不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(h);//跨类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 789px;"></div><div class="CodeMirror-gutters" style="display: none; height: 789px;"></div></div></div></pre><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">package</span> <span class="cm-def">com</span>.<span class="cm-variable">atguigu</span>.<span class="cm-variable">test01</span>.<span class="cm-variable">other</span>;</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">import</span> <span class="cm-variable">com</span>.<span class="cm-variable">atguigu</span>.<span class="cm-variable">test01</span>.<span class="cm-variable">access1</span>.<span class="cm-variable">Father</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span class="cm-def">Son</span> <span class="cm-keyword">extends</span> <span class="cm-variable">Father</span>{</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-keyword">static</span> <span class="cm-variable-3">void</span> <span class="cm-variable">method</span>(){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">//静态直接访问非静态都不行</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">/*<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(a);</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">System.out.println(b);</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">System.out.println(c);</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">System.out.println(d);*/</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">Father</span> <span class="cm-variable">obj</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">Father</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">obj</span>.<span class="cm-variable">a</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(obj.b);//跨包的静态成员</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">//不能访问非静态的protected</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(obj.c);//跨包不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(obj.d);//跨类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">e</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">f</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(g);//跨包不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(h);//跨类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span class="cm-variable-3">void</span> <span class="cm-variable">fun</span>(){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">a</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">b</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(c);//跨包不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(d);//跨类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">e</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">f</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(g);//跨包不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span>System.out.println(h);//跨类不可见</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 913px;"></div><div class="CodeMirror-gutters" style="display: none; height: 913px;"></div></div></div></pre><p><img src='imgs06/image-20200304105258795.png' alt='image-20200304105258795' referrerPolicy='no-referrer' /></p></li><li><p><strong>示例三：缺省的类</strong></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">package</span> <span class="cm-def">com</span>.<span class="cm-variable">atguigu</span>.<span class="cm-variable">test01</span>.<span class="cm-variable">access1</span>;</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">class</span> <span class="cm-def">Mother</span> {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 123px;"></div><div class="CodeMirror-gutters" style="display: none; height: 123px;"></div></div></div></pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n115" mdtype="fences">package com.atguigu.test01.access1;
+
+public class Daughter extends Mother{
+
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n116" mdtype="fences">package com.atguigu.test01.other;
+
+//Mother类是缺省的，跨包不能使用
+public class Daughter extends Mother{
+
+}
+</pre><p><img src='imgs06/image-20200304105646328.png' alt='image-20200304105646328' referrerPolicy='no-referrer' /></p></li><li><p><strong>示例四：公共的类缺省的构造器，跨包使用问题</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n120" mdtype="fences">package com.atguigu.test01.access1;
+
+public class Fu {
+	Fu(){
+		
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n121" mdtype="fences">package com.atguigu.test01.access1;
+
+public class Zi extends Fu{
+
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n122" mdtype="fences">package com.atguigu.test01.other;
+
+import com.atguigu.test01.access1.Fu;
+
+public class Zi extends Fu{
+	Zi() {
+		super();
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n123" mdtype="fences">package com.atguigu.test01.access1;
+
+public class Neighbor {
+	public static void main(String[] args) {
+		Fu f = new Fu();
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n124" mdtype="fences">package com.atguigu.test01.other;
+
+import com.atguigu.test01.access1.Fu;
+
+public class AnotherNeighbor {
+	public static void main(String[] args) {
+		Fu f = new Fu();
+	}
+}
+</pre><p><img src='imgs06/image-20200304110742600.png' alt='image-20200304110742600' referrerPolicy='no-referrer' /></p><p>&nbsp;</p></li></ol><h3><a name='header-n127' class='md-header-anchor '></a>6.1.3 封装的实现</h3><p><strong>成员变量（field）私有化之后，提供标准的get/set方法，我们把这种成员变量也称为属性（property）。</strong>或者可以说只要能通过get/set操作的就是事物的属性，哪怕它没有对应的成员变量。</p><ol start='' ><li><h4><a name='header-n131' class='md-header-anchor '></a>成员变量封装的目的</h4><ul><li>隐藏类的实现细节</li><li>让使用者只能通过事先预定的方法来访问数据，从而可以在该方法里面加入控制逻辑，限制对成员变量的不合理访问。还可以进行数据检查，从而有利于保证对象信息的完整性。</li><li>便于修改，提高代码的可维护性。主要说的是隐藏的部分，在内部修改了，如果其对外可以的访问方式不变的话，外部根本感觉不到它的修改。例如：Java8-&gt;Java9，String从char[]转为byte[]内部实现，而对外的方法不变，我们使用者根本感觉不到它内部的修改。</li></ul></li><li><h4><a name='header-n140' class='md-header-anchor '></a>实现步骤</h4><ul><li><strong>使用 <code>private</code> 修饰成员变量</strong></li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n144" mdtype="fences">private 数据类型 变量名 ；
+</pre><p>代码如下：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n146" mdtype="fences">public class Chinese {
+    private static String country;
+    private String name;
+  	private int age;
+    private boolean marry;
+}
+</pre><ul><li><strong>提供 <code>getXxx</code>方法 / <code>setXxx</code> 方法，可以访问成员变量</strong>，代码如下：</li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n150" mdtype="fences" style="break-inside: unset;">public class Chinese {
+  	private static String country;
+    private String name;
+  	private int age;
+    private boolean marry;
+    
+    public static void setCountry(String c){
+        country = c;
+    }
+    
+    public static String getCountry(){
+        return country;
+    }
+
+	public void setName(String n) {
+		name = n;
+    }
+
+    public String getName() {
+        return name;
+	}
+
+    public void setAge(int a) {
+        age = a;
+    }
+
+    public int getAge() {
+        return age;
+    }
+    
+    public void setMarry(boolean m){
+        marry = m;
+    }
+    
+    public boolean isMarry(){
+        return marry;
+    }
+}
+</pre></li></ol><h3><a name='header-n152' class='md-header-anchor '></a>6.1.4初识this关键字</h3><p><strong>如何解决局部变量与成员变量同名问题？</strong></p><p>当局部变量与类变量（静态成员变量）同名时，在类变量前面加“类名.&quot;；</p><p>当局部变量与实例变量（非静态成员变量）同名时，在实例变量前面加“<strong>this.</strong>”</p><p><strong>this代表当前对象的引用，即当前被创建的对象</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n157" mdtype="fences" style="break-inside: unset;">public class Chinese {
+  	private static String country;
+    private String name;
+  	private int age;
+    
+    public static void setCountry(String country){
+        Chinese.country = country;
+    }
+    
+    public static String getCountry(){
+        return country;
+    }
+
+	public void setName(String name) {
+		this.name = name;
+    }
+
+    public String getName() {
+        return name;
+	}
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+</pre><h3><a name='header-n158' class='md-header-anchor '></a>6.1.5 封装练习</h3><p>（1）定义矩形类Rectangle，</p><p><span>	</span>声明静态变量sides，初始化为4，表示矩形边长的总数量；</p><p><span>	</span>声明实例变量长和宽</p><p><span>	</span>全部私有化，并提供相应的get/set方法</p><p>（2）在测试类中创建Rectangle对象，并调用相应的方法测试</p><h2><a name='header-n164' class='md-header-anchor '></a>6.2 构造器（Constructor)</h2><p>我们发现我们new完对象时，所有成员变量都是默认值，如果我们需要赋别的值，需要挨个为它们再赋值，太麻烦了。我们能不能在new对象时，直接为当前对象的某个或所有成员变量直接赋值呢。</p><p>可以，Java给我们提供了构造器。</p><h3><a name='header-n167' class='md-header-anchor '></a>6.2.1 构造器的作用</h3><p>用于创建并初始化对象</p><blockquote><p><strong>注意：构造器只为实例变量初始化，不为静态类变量初始化</strong></p></blockquote><h3><a name='header-n171' class='md-header-anchor '></a>6.2.2 构造器的语法格式</h3><p>构造器又称为构造方法或构造函数，那是因为它长的很像方法。但是和方法还有有所区别的。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n173" mdtype="fences">【修饰符】 构造器名(){
+    // 实例初始化代码
+}
+【修饰符】 构造器名(参数列表){
+	// 实例初始化代码
+}
+</pre><p>代码如下：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n175" mdtype="fences" style="break-inside: unset;">public class Student {
+	private String name;
+	private int age;
+	// 无参构造
+  	public Student() {} 
+ 	// 有参构造
+  	public Student(String name,int age) {
+		this.name = name;
+    	this.age = age; 
+	}
+  	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+}
+</pre><p><strong>注意事项：</strong></p><ol start='' ><li><strong>构造器名必须与它所在的类名必须相同。</strong></li><li><strong>它没有返回值，所以不需要返回值类型，甚至不需要void</strong></li><li>如果你不提供构造器，<strong>系统会给出默认无参数构造器</strong>，并且该构造器的修饰符默认与类的修饰符相同</li><li><strong>如果你提供了构造器，系统将不再提供无参数构造器</strong>，除非你自己定义。</li><li>构造器是可以重载的，既可以定义参数，也可以不定义参数。</li><li>构造器的修饰符只能是权限修饰符，不能被其他任何修饰</li></ol><h3><a name='header-n190' class='md-header-anchor '></a>6.2.3 构造器练习</h3><p>（1）声明一个员工类，</p><ul><li>包含属性：编号、姓名、薪资、性别，要求属性私有化，提供get/set，</li><li>提供无参构造器和有参构造器</li><li>提供getInfo()</li></ul><p>（2）在测试类的main中分别用无参构造和有参构造创建员工类对象，调用getInfo</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n200" mdtype="fences" style="break-inside: unset;">public class TestEmployee {
+	public static void main(String[] args){
+		//分别用无参构造和有参构造创建对象，调用getInfo
+		Employee e1 = new Employee();
+		System.out.println(e1.getInfo());
+		
+		Employee e2 = new Employee("1001","张三",110000,'男');
+		System.out.println(e2.getInfo());
+		
+		e2.setSalary(120000);
+		System.out.println(e2.getInfo());
+		
+		System.out.println("e1薪资：" + e1.getSalary());
+	}
+}
+class Employee{
+	private String id;
+	private String name;
+	private double salary;
+	private char gender;
+	
+	//提供无参构造器和有参构造器
+	public Employee(){
+		
+	}
+	public Employee(String id, String name){
+		this.id = id;
+		this.name = name;
+	}
+	public Employee(String id, String name, double salary, char gender){
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+		this.gender = gender;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	public char getGender() {
+		return gender;
+	}
+	public void setGender(char gender) {
+		this.gender = gender;
+	}
+	
+	//提供getInfo()
+	public String getInfo(){
+		return "编号：" + id + "，姓名：" + name + "，薪资：" + salary + "，性别：" +gender;
+	}
+}
+</pre><h3><a name='header-n201' class='md-header-anchor '></a>6.2.4 this调用构造器</h3><p>构造器重载时，可以在一个构造方法中调用另一构造方法，以简化代码。</p><p>格式：this（参数列表）;</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n204" mdtype="fences" style="break-inside: unset;">public Employee(){
+}
+
+public Employee(String id){
+	this.id=id;
+}
+
+public Employee(String id, String name){
+    this(id);//this调用一个参数的构造器
+    this.name = name;
+}
+public Employee(String id, String name, double salary, char gender){
+    this(id,name);//this调用2个参数的构造器
+    this.salary = salary;
+    this.gender = gender;
+}
+</pre><blockquote><p><strong>注意：</strong></p><p><strong>this调用构造器的语句，只能构造器中第一行位置。</strong></p></blockquote><p>&nbsp;</p><h2><a name='header-n209' class='md-header-anchor '></a>6.3 标准JavaBean</h2><p><code>JavaBean</code> 是 Java语言编写类的一种标准规范。符合<code>JavaBean</code> 的类，要求：</p><p>（1）类必须是具体的（非抽象）和公共的，</p><p>（2）并且具有无参数的构造方法，</p><p>（3）成员变量私有化，并提供用来操作成员变量的<code>set</code> 和<code>get</code> 方法。</p><p>（比较理解POJO : Plain Ordinary Java Object，主要承载数据，不涉及业务逻辑）</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n215" mdtype="fences">public class ClassName{
+  //成员变量
+    
+  //构造方法
+  	//无参构造方法【必须】
+  	//有参构造方法【建议】
+  	
+  //getXxx()
+  //setXxx()
+  //其他成员方法
+}
+</pre><p> 编写符合<code>JavaBean</code> 规范的类，以学生类为例，标准代码如下：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n217" mdtype="fences" style="break-inside: unset;">public class Student {
+	// 成员变量
+	private String name;
+	private int age;
+
+	// 构造方法
+	public Student() {
+	}
+
+	public Student(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
+
+	// get/set成员方法
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public int getAge() {
+		return age;
+	}
+    
+    //其他成员方法列表
+    public String getInfo(){
+        return "姓名：" + name + "，年龄：" + age;
+    }
+}
+</pre><p>测试类，代码如下：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n219" mdtype="fences" style="break-inside: unset;">public class TestStudent {
+	public static void main(String[] args) {
+		// 无参构造使用
+		Student s = new Student();
+		s.setName("柳岩");
+		s.setAge(18);
+		System.out.println(s.getName() + "---" + s.getAge());
+        System.out.println(s.getInfo());
+
+		// 带参构造使用
+		Student s2 = new Student("赵丽颖", 18);
+		System.out.println(s2.getName() + "---" + s2.getAge());
+        System.out.println(s2.getInfo());
+	}
+}
+</pre><h2><a name='header-n220' class='md-header-anchor '></a>6.4 继承inherit</h2><h3><a name='header-n221' class='md-header-anchor '></a>6.4.1 继承的概述</h3><p>面向对象的三大特征：封装、继承、多态</p><ol start='' ><li><h4><a name='header-n225' class='md-header-anchor '></a>生活中的继承</h4><p>父辈的东西可以被孩子继承</p><p>“子承父业”，“这孩子长得像妈妈”，“这个孩子跟爸爸一样有才华”</p></li><li><h4><a name='header-n229' class='md-header-anchor '></a>Java中的继承</h4><p>Java中有父类、子类的概念，类似生活中的父子关系，父类中的一些属性和方法可以被子类继承下来使用，不再需要重复定义。</p><p>如图所示：</p><p><img src='imgs06/猫狗继承1.jpg' alt='' referrerPolicy='no-referrer' /></p><p>多个类中存在相同属性和行为时，将这些内容抽取到单独一个类中，那么多个类中无需再定义这些属性和行为，只需要和抽取出来的类构成某种关系。如图所示：</p><p><img src='imgs06/猫狗继承2.jpg' alt='' referrerPolicy='no-referrer' /></p><p>其中，多个类可以称为<strong>子类</strong>，也叫<strong>派生类</strong>；多个类抽取出来的这个类称为<strong>父类</strong>、<strong>超类（superclass）</strong>或者<strong>基类</strong>。</p><p>继承描述的是事物之间的所属关系，这种关系是：<code>is-a</code> 的关系。例如，图中猫属于动物，狗也属于动物。可见，父类更通用，子类更具体。我们通过继承，可以使多种事物之间形成一种关系体系。</p></li><li><h4><a name='header-n238' class='md-header-anchor '></a>继承的好处</h4><ul><li>提高<strong>代码的复用性</strong>。</li><li>提高<strong>代码的扩展性</strong>。</li><li>类与类之间产生了关系，是学习<strong>多态的前提</strong>。</li></ul><blockquote><p>弊端：增加了类与类之间的耦合度</p></blockquote><p> </p></li></ol><h3><a name='header-n249' class='md-header-anchor '></a>6.4.2 继承的格式</h3><p>通过 <code>extends</code> 关键字，可以声明一个子类继承另外一个父类，定义格式如下：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n251" mdtype="fences">【修饰符】 class 父类 {
+	...
+}
+
+【修饰符】 class 子类 extends 父类 {
+	...
+}
+
+</pre><p>继承演示，代码如下：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n253" mdtype="fences" style="break-inside: unset;">/*
+ * 定义动物类Animal，做为父类
+ */
+class Animal {
+    // 定义name属性
+	String name; 
+    // 定义age属性
+    int age;
+	// 定义动物的吃东西方法
+	public void eat() {
+		System.out.println(age + "岁的" + name + "在吃东西");
+	}
+}
+
+/*
+ * 定义猫类Cat 继承 动物类Animal
+ */
+class Cat extends Animal {
+	// 定义一个猫抓老鼠的方法catchMouse
+	public void catchMouse() {
+		System.out.println("抓老鼠");
+	}
+}
+
+/*
+ * 定义测试类
+ */
+public class ExtendDemo01 {
+	public static void main(String[] args) {
+        // 创建一个猫类对象
+		Cat cat = new Cat()；
+      
+        // 为该猫类对象的name属性进行赋值
+		cat.name = "Tom";
+      
+      	// 为该猫类对象的age属性进行赋值
+		cat.age = 2;
+        
+        // 调用该猫的catchMouse()方法
+		cat.catchMouse();
+		
+      	// 调用该猫继承来的eat()方法
+      	cat.eat();
+	}
+}
+
+演示结果：
+抓老鼠
+2岁的Tom在吃东西
+</pre><h3><a name='header-n254' class='md-header-anchor '></a>6.4.3 继承中成员变量的特点</h3><p>子类可以继承父类的所有属性和方法，并直接使用（私有的例外）</p><ol start='' ><li><h4><a name='header-n258' class='md-header-anchor '></a>父类的私有属性（private）</h4><ul><li><p>子类继承父类的所有的属性，但是私有的属性不能直接访问（也可以理解为私有的属性不能被继承，<a href='https://docs.oracle.com/javase/tutorial/java/IandI/subclasses.html'>官方文档中的说法</a>）</p></li><li><p>子类不能直接进行访问父类的私有属性，但可以通过继承的getter/setter方法进行访问。如图所示：</p><p><span>	</span><img src='imgs06/继承私有成员1.jpg' alt='' referrerPolicy='no-referrer' /></p></li></ul><p>示例代码如下：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n266" mdtype="fences" style="break-inside: unset;">/*
+ * 定义动物类Animal，做为父类
+ */
+class Animal {
+    // 定义name属性
+	private String name; 
+    // 定义age属性
+    public int age;
+	// 定义动物的吃东西方法
+	public void eat() {
+		System.out.println(age + "岁的" + name + "在吃东西");
+	}
+}
+
+/*
+ * 定义猫类Cat 继承 动物类Animal
+ */
+class Cat extends Animal {
+	// 定义一个猫抓老鼠的方法catchMouse
+	public void catchMouse() {
+		System.out.println("抓老鼠");
+	}
+}
+
+/*
+ * 定义测试类
+ */
+public class ExtendDemo01 {
+	public static void main(String[] args) {
+        // 创建一个猫类对象
+		Cat cat = new Cat()；
+      
+        // 为该猫类对象的name属性进行赋值
+		//cat.name = "Tom";// 编译报错
+      
+      	// 为该猫类对象的age属性进行赋值
+		cat.age = 2;
+        
+        // 调用该猫的catchMouse()方法
+		cat.catchMouse();
+		
+      	// 调用该猫继承来的eat()方法
+      	cat.eat();
+	}
+}
+</pre><p>&nbsp;</p><p>idea中Debug查看对象成员变量值的情况截图如下：</p><p><img src='imgs06/1576579518956.png' alt='1576579518956' referrerPolicy='no-referrer' /></p><p>&nbsp;</p></li><li><h4><a name='header-n272' class='md-header-anchor '></a>父子类成员变量重名（初始super关键字）</h4><p>父类的成员变量会被子类继承，并可以直接使用，也可以在子类中定义同名的成员变量，这样会隐藏掉父类的成员变量（不建议）。</p><p>(也可以理解为就近访问-就近原则）。如果还想在子类中访问父类的成员变量，可以使用关键字<strong>super</strong>。</p><p><strong>super用于在当前类中访问其父类的成员</strong>，使用格式：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n276" mdtype="fences">super.父类成员变量名
+</pre><p>示例父类代码：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n278" mdtype="fences">public class Father {
+	public int i=1;
+	private int j=1;
+	public int k=1;
+	public int getJ() {
+		return j;
+	}
+	public void setJ(int j) {
+		this.j = j;
+	}
+}
+</pre><p>子类代码：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n280" mdtype="fences">public class Son extends Father{
+	public int i=2;
+	private int j=2;
+	public int m=2;
+}	
+</pre><p>现在想要在子类Son中声明一个test()方法，并打印这些所有变量的值，该如何实现？</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n282" mdtype="fences" style="break-inside: unset;">public class Son extends Father{
+	public int i=2;
+	private int j=2;
+	public int m=2;
+	
+	public void test() {
+		System.out.println("父类继承的i：" + super.i);
+		System.out.println("子类的i：" +i);
+//		System.out.println(super.j);
+		System.out.println("父类继承的j：" +getJ());
+		System.out.println("子类的j：" +j);
+		System.out.println("父类继承的k：" +k);
+		System.out.println("子类的m：" +m);
+	}	
+}	
+</pre><p>&nbsp;</p><p>以上test()调用结果：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n285" mdtype="fences">public class TestSon{
+	public static void main(String[] args){
+		Son s = new Son();
+		s.test();
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n286" mdtype="fences">父类继承的i：1
+子类的i：2
+父类继承的j：1
+子类的j：2
+父类继承的k：1
+子类的m：2
+</pre><p>&nbsp;</p><p>idea中Debug查看对象的成员变量的值截图如下：</p><p><img src='imgs06/1576579731205.png' alt='1576579731205' referrerPolicy='no-referrer' /></p><blockquote><p>说明：虽然我们可以区分父子类的重名成员变量，但是实际开发中，我们不建议这么干。</p></blockquote><p>&nbsp;</p></li></ol><h3><a name='header-n293' class='md-header-anchor '></a>6.4.4 方法重写（Override）</h3><p>当子类继承了父类的某个方法之后，发现这个方法并不能满足子类的实际需求，那么可以通过方法重写，覆盖父类的方法。</p><p><strong>方法重写：子类中定义与父类中相同的方法，一般方法体不同，用于改造并覆盖父类的方法。</strong></p><p><strong>具体要求：</strong></p><ol start='' ><li>必须保证父子类之间方法的名称相同，参数列表也相同。</li><li>子类方法的返回值类型必须与父类方法的返回值类型相同或者为父类方法返回值类型的子类类型。</li><li>子类方法的访问权限必须不能小于父类方法的访问权限。（public &gt; protected &gt; 缺省 &gt; private）</li><li>子类方法 抛出的异常不能大于父被重写的异常（异常后面再讲）</li></ol><p>比如新的手机增加来电显示头像的功能，代码如下：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n307" mdtype="fences" style="break-inside: unset;">class Phone {
+	public void sendMessage(){
+		System.out.println("发短信");
+	}
+	public void call(){
+		System.out.println("打电话");
+	}
+	public void showNum(){
+		System.out.println("来电显示号码");
+	}
+}
+
+//智能手机类
+class NewPhone extends Phone {
+	
+	//重写父类的来电显示号码功能，并增加自己的显示姓名和图片功能
+	public void showNum(){
+		//调用父类已经存在的功能使用super
+		super.showNum();
+		//增加自己特有显示姓名和图片功能
+		System.out.println("显示来电姓名");
+		System.out.println("显示头像");
+	}
+}
+
+public class ExtendsDemo06 {
+	public static void main(String[] args) {
+      	// 创建子类对象
+      	NewPhone np = new NewPhone()；
+        
+        // 调用父类继承而来的方法
+        np.call();
+      
+      	// 调用子类重写的方法
+      	np.showNum();
+
+	}
+}
+
+</pre><blockquote><p>小贴士：这里重写时，用到super.父类成员方法，表示调用父类的成员方法。</p></blockquote><p><strong>注意事项：</strong></p><ul><li>静态方法不能被重写，方法重写指的是实例方法重写，静态方法属于类的方法不能被重写，而是隐藏。</li><li>私有等在子类中不可见的方法不能被重写</li><li>final方法不能被重写</li></ul><h3><a name='header-n318' class='md-header-anchor '></a>6.4.5 继承中的构造方法</h3><p>当类之间产生了关系，其中各类中的构造方法，又产生了哪些影响呢？</p><p>首先我们要回忆两个事情，构造方法的定义格式和作用。</p><ol start='' ><li><p>构造方法的名字是与类名一致的。</p><p>所以子类是<strong>无法继承</strong>父类构造方法的。</p></li><li><p>构造方法的作用是初始化实例变量的，而子类又会从父类继承所有成员变量</p><p>所以子类的初始化过程中，<strong>必须</strong>先执行父类的初始化动作。子类的构造方法中默认有一个<code>super()</code> ，表示调用父类的实例初始化方法，父类成员变量初始化后，才可以给子类使用。代码如下：</p></li></ol><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n328" mdtype="fences" style="break-inside: unset;">class Fu {
+  private int n;
+  Fu(){
+    System.out.println("Fu()");
+  }
+}
+class Zi extends Fu {
+  Zi(){
+    // super（），调用父类构造方法
+    super();//默认隐藏
+    System.out.println("Zi（）");
+  }  
+}
+public class ExtendsDemo07{
+  public static void main (String args[]){
+    Zi zi = new Zi();
+  }
+}
+输出结果：
+Fu（）
+Zi（）
+</pre><p>如果父类没有无参构造怎么办？</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n330" mdtype="fences">public class Person {
+	private String name;
+	private int age;
+	public Person(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
+	//其他成员方法省略
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n331" mdtype="fences">public class Student extends Person{
+	private int score;
+}
+</pre><p>此时子类代码报错。</p><p>解决办法：在子类构造器中，用super(实参列表)，显示调用父类的有参构造解决。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n334" mdtype="fences">public class Student extends Person{
+	private int score;
+
+	public Student(String name, int age) {
+		super(name, age);
+	}
+	public Student(String name, int age, int score) {
+		super(name, age);
+		this.score = score;
+	}
+	
+	//其他成员方法省略
+}
+</pre><p><strong>结论：</strong></p><p>子类对象实例化过程中必须先完成从父类继承的成员变量的实例初始化，这个过程是通过调用父类的构造方法来完成的。</p><p><strong>也就是说子类的构造方法中至少有一个构造方法显示或隐式的通过super关键字调用了父类的某一个构造方法，否则编译失败。</strong></p><ul><li>super()：表示调用父类的无参实例初始化方法，要求父类必须有无参构造，而且可以省略不写；</li><li>super(实参列表)：表示调用父类的有参实例初始化方法，当父类没有无参构造时，子类的构造器首行必须写super(实参列表)来明确调用父类的哪个有参构造（其实是调用该构造器对应的实例初始方法）</li><li>super()和super(实参列表)都只能出现在子类构造器的首行</li></ul><p>形式一：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n346" mdtype="fences" style="break-inside: unset;">class A{
+
+}
+class B extends A{
+
+}
+
+class Test{
+    public static void main(String[] args){
+        B b = new B();
+        //A类和B类都是默认有一个无参构造，B类的默认无参构造中还会默认调用A类的默认无参构造
+        //但是因为都是默认的，没有打印语句，看不出来
+    }
+}
+</pre><p>形式二：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n348" mdtype="fences" style="break-inside: unset;">class A{
+	A(){
+		System.out.println("A类无参构造器");
+	}
+}
+class B extends A{
+
+}
+class Test{
+    public static void main(String[] args){
+        B b = new B();
+        //A类显示声明一个无参构造，
+		//B类默认有一个无参构造，
+		//B类的默认无参构造中会默认调用A类的无参构造
+        //可以看到会输出“A类无参构造器"
+    }
+}
+</pre><p>形式三：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n350" mdtype="fences" style="break-inside: unset;">class A{
+	A(){
+		System.out.println("A类无参构造器");
+	}
+}
+class B extends A{
+	B(){
+		System.out.println("B类无参构造器");
+	}
+}
+class Test{
+    public static void main(String[] args){
+        B b = new B();
+        //A类显示声明一个无参构造，
+		//B类显示声明一个无参构造，        
+		//B类的无参构造中虽然没有写super()，但是仍然会默认调用A类的无参构造
+        //可以看到会输出“A类无参构造器"和"B类无参构造器")
+    }
+}
+</pre><p>形式四：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n352" mdtype="fences" style="break-inside: unset;">class A{
+	A(){
+		System.out.println("A类无参构造器");
+	}
+}
+class B extends A{
+	B(){
+        super();
+		System.out.println("B类无参构造器");
+	}
+}
+class Test{
+    public static void main(String[] args){
+        B b = new B();
+        //A类显示声明一个无参构造，
+		//B类显示声明一个无参构造，        
+		//B类的无参构造中明确写了super()，表示调用A类的无参构造
+        //可以看到会输出“A类无参构造器"和"B类无参构造器")
+    }
+}
+</pre><p>形式五：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n354" mdtype="fences" style="break-inside: unset;">class A{
+	A(int a){
+		System.out.println("A类有参构造器");
+	}
+}
+class B extends A{
+	B(){
+		System.out.println("B类无参构造器");
+	}
+}
+class Test05{
+    public static void main(String[] args){
+        B b = new B();
+        //A类显示声明一个有参构造，没有写无参构造，那么A类就没有无参构造了
+		//B类显示声明一个无参构造，        
+		//B类的无参构造没有写super(...)，表示默认调用A类的无参构造
+        //编译报错，因为A类没有无参构造
+    }
+}
+</pre><p><img src='imgs06/image-20200227141228450.png' alt='image-20200227141228450' referrerPolicy='no-referrer' /></p><p><img src='imgs06/image-20200227141051954.png' alt='image-20200227141051954' referrerPolicy='no-referrer' /></p><p>&nbsp;</p><p>形式六：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n359" mdtype="fences" style="break-inside: unset;">class A{
+	A(int a){
+		System.out.println("A类有参构造器");
+	}
+}
+class B extends A{
+	B(){
+		super();
+		System.out.println("B类无参构造器");
+	}
+}
+class Test06{
+    public static void main(String[] args){
+        B b = new B();
+        //A类显示声明一个有参构造，没有写无参构造，那么A类就没有无参构造了
+		//B类显示声明一个无参构造，        
+		//B类的无参构造明确写super()，表示调用A类的无参构造
+        //编译报错，因为A类没有无参构造
+    }
+}
+</pre><p><img src='imgs06/image-20200303183542807.png' alt='image-20200303183542807' referrerPolicy='no-referrer' /></p><p>形式七：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n362" mdtype="fences" style="break-inside: unset;">class A{
+	A(int a){
+		System.out.println("A类有参构造器");
+	}
+}
+class B extends A{
+	B(int a){
+		super(a);
+		System.out.println("B类有参构造器");
+	}
+}
+class Test07{
+    public static void main(String[] args){
+        B b = new B(10);
+        //A类显示声明一个有参构造，没有写无参构造，那么A类就没有无参构造了
+		//B类显示声明一个有参构造，        
+		//B类的有参构造明确写super(a)，表示调用A类的有参构造
+        //会打印“A类有参构造器"和"B类有参构造器"
+    }
+}
+</pre><p>形式八：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n364" mdtype="fences" style="break-inside: unset;">class A{
+    A(){
+        System.out.println("A类无参构造器");
+    }
+	A(int a){
+		System.out.println("A类有参构造器");
+	}
+}
+class B extends A{
+    B（）{
+        super();//可以省略，调用父类的无参构造
+        System.out.println("B类无参构造器");
+    }
+	B(int a){
+		super(a);//调用父类有参构造
+		System.out.println("B类有参构造器");
+	}
+}
+class Test8{
+    public static void main(String[] args){
+        B b1 = new B();
+        B b2 = new B(10);
+    }
+}
+</pre><h3><a name='header-n365' class='md-header-anchor '></a>6.4.6 继承的单继承限制</h3><ol start='' ><li><p>Java类只支持单继承，不支持多继承。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n369" mdtype="fences">//一个类只能有一个父类，不可以有多个父类。
+class C extends A{} 	//ok
+class C extends A，B...	//error
+</pre></li><li><p>Java类支持多层继承(继承体系)。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n372" mdtype="fences">class A{}
+class B extends A{}
+class C extends B{}
+</pre><blockquote><p>顶层父类是Object类。所有的类默认继承Object，作为父类。</p></blockquote></li><li><p>子类和父类是一种相对的概念。</p><p>例如：B类对于A来说是子类，但是对于C类来说是父类</p></li><li><p>一个父类可以同时拥有多个子类</p></li></ol><h3><a name='header-n380' class='md-header-anchor '></a>6.4.7 继承练习</h3><p><strong>练习1</strong></p><p>（1）父类Graphic图形
+包含属性：name（图形名），属性私有化，不提供无参构造，只提供有参构造
+包含求面积getArea()：返回0.0
+求周长getPerimeter()方法：返回0.0
+显示信息getInfo()方法：返回图形名称、面积、周长</p><p>（2）子类Circle圆继承Graphic图形
+包含属性：radius
+重写求面积getArea()和求周长getPerimeter()方法，显示信息getInfo()加半径信息</p><p>（3）子类矩形Rectange继承Graphic图形
+包含属性：length、width
+重写求面积getArea()和求周长getPerimeter()方法</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n385" mdtype="fences" style="break-inside: unset;">public class Graphic {
+	private String name;
+
+	public Graphic(String name) {
+		super();
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public double getArea() {
+		return 0.0;
+	}
+
+	public double getPerimeter() {
+		return 0.0;
+	}
+
+	/*
+	 * this对象：调用当前方法的对象，如果是Graphic对象，那么就会执行Graphic的getArea()和getPerimeter()
+	 * this对象：调用当前方法的对象，如果是Circle对象，那么就会执行Circle的getArea()和getPerimeter()
+	 * this对象：调用当前方法的对象，如果是Rectangle对象，那么就会执行Rectangle的getArea()和getPerimeter()
+	 */
+	public String getInfo() {
+		return "图形：" + name + "，面积：" + getArea() + ",周长：" + getPerimeter();
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n386" mdtype="fences" style="break-inside: unset;">public class Circle extends Graphic {
+	private double radius;
+
+	public Circle(String name, double radius) {
+		super(name);
+		this.radius = radius;
+	}
+
+	public double getRadius() {
+		return radius;
+	}
+
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
+
+	@Override//表示这个方法是重写的方法
+	public double getArea() {
+		return Math.PI * radius * radius;
+	}
+
+	@Override//表示这个方法是重写的方法
+	public double getPerimeter() {
+		return Math.PI * radius * 2;
+	}
+
+	/*@Override//表示这个方法是重写的方法
+	public String getInfo() {
+		return super.getInfo() + "，半径：" + radius;
+	}*/
+	
+}
+
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n387" mdtype="fences" style="break-inside: unset;">public class Rectangle extends Graphic {
+	private double length;
+	private double width;
+	
+	public Rectangle(String name, double length, double width) {
+		super(name);
+		this.length = length;
+		this.width = width;
+	}
+
+	public double getLength() {
+		return length;
+	}
+
+	public void setLength(double length) {
+		this.length = length;
+	}
+
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	@Override
+	public double getArea() {
+		return length*width;
+	}
+
+	@Override
+	public double getPerimeter() {
+		return 2*(length + width);
+	}
+}
+
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n388" mdtype="fences">public class TestGraphicExer3 {
+	public static void main(String[] args) {
+		Graphic g = new Graphic("通用图形");
+		System.out.println(g.getInfo());
+		
+		Circle c = new Circle("圆", 1.2);
+		System.out.println(c.getInfo());//调用getInfo()方法的对象是c
+		
+		Rectangle r = new Rectangle("矩形", 3, 5);
+		System.out.println(r.getInfo());
+	}
+}
+</pre><p><strong>练习2</strong> </p><p>（1）声明一个银行储蓄卡类，</p><p><span>	</span>包含属性：账户id，余额</p><p><span>	</span>包含取款 public void withdraw(double money)</p><p><span>		</span>    存款 pubic void save(double money)</p><p>           获取账户信息： public String getInfo() 可以返回账户id和余额</p><p>（2）声明一个银行信用卡类，继承储蓄卡类</p><p><span>	</span>增加属性：可透支额度，最多可透支金额</p><p><span>	</span>重写存款 public void withdraw(double money)，可透支</p><p><span>	</span>       存款 pubic void save(double money)，需要恢复可透支额度</p><p>（3）在测试类中，分别创建两种卡对象，测试</p><p><strong>练习3</strong></p><p>1、声明父类：Person类
+包含属性：姓名，年龄，性别
+属性私有化，get/set
+包含getInfo()方法：例如：姓名：张三，年龄：23，性别：男</p><p>2、声明子类：Student类，继承Person类
+新增属性：score成绩
+属性私有化，get/set
+包含getInfo()方法：例如：姓名：张三，年龄：23，性别：男，成绩：89</p><p>3、声明子类：Teacher类，继承Person类
+新增属性：salary薪资
+属性私有化，get/set
+包含getInfo()方法：例如：姓名：张三，年龄：23，性别：男，薪资：10000</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n404" mdtype="fences" style="break-inside: unset;">public class Person {
+	private String name;
+	private int age;
+	private char gender;
+	public Person(String name, int age, char gender) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.gender = gender;
+	}
+	public Person() {
+		super();
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public char getGender() {
+		return gender;
+	}
+	public void setGender(char gender) {
+		this.gender = gender;
+	}
+	
+	//包含getInfo()方法：例如：姓名：张三，年龄：23，性别：男
+	public String getInfo(){
+		return "姓名：" + name + "，年龄：" + age +"，性别：" + gender;
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n405" mdtype="fences" style="break-inside: unset;">public class Student extends Person {
+	private int score;
+
+	public Student() {
+	}
+
+	public Student(String name, int age, char gender, int score) {
+		setName(name);
+		setAge(age);
+		setGender(gender);
+		this.score = score;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+	//包含getInfo()方法：例如：姓名：张三，年龄：23，性别：男，成绩：89
+	public String getInfo(){
+		//方式一：
+//		return "姓名：" + getName() + "，年龄：" + getAge() + "，成绩：" + score;
+		
+		//方法二：
+		return super.getInfo() + "，成绩：" + score;
+	}
+	
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n406" mdtype="fences" style="break-inside: unset;">public class Teacher extends Person {
+	private double salary;
+
+	public Teacher() {
+	}
+
+	public Teacher(String name, int age, char gender, double salary) {
+		setName(name);
+		setAge(age);
+		setGender(gender);
+		this.salary = salary;
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	
+	//包含getInfo()方法：例如：姓名：张三，年龄：23，性别：男，薪资：10000
+	public String getInfo(){
+		return super.getInfo() + "，薪资：" + salary;
+	}
+}
+
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n407" mdtype="fences">public class TestPersonExer2 {
+	public static void main(String[] args) {
+		Person p = new Person("张三", 23, '男');
+		System.out.println(p.getInfo());
+		
+		Student s = new Student("李四", 25, '男', 89);
+		System.out.println(s.getInfo());
+		
+		Teacher t = new Teacher("王五", 18, '男', 11111);
+		System.out.println(t.getInfo());
+	}
+}
+</pre><h2><a name='header-n408' class='md-header-anchor '></a>6.5 this和super关键字</h2><h3><a name='header-n409' class='md-header-anchor '></a>6.5.1 this关键字</h3><ol start='' ><li><h4><a name='header-n412' class='md-header-anchor '></a>this的含义</h4><ul><li>this代表当前对象的引用</li></ul></li><li><h4><a name='header-n417' class='md-header-anchor '></a>this使用位置</h4><ul><li>this在实例初始化相关的代码块和构造器中：表示正在创建的那个实例对象，即正在new谁，this就代表谁</li><li>this在非静态实例方法中：表示调用该方法的对象，即谁在调用，this就代表谁。</li><li>this不能出现在静态代码块和静态方法中</li></ul></li><li><h4><a name='header-n426' class='md-header-anchor '></a>this使用格式</h4><ul><li><p><strong>（1）this.成员变量名</strong></p><ul><li>当方法的局部变量与当前对象的成员变量重名时，就可以在成员变量前面加this.，如果没有重名问题，就可以省略this.</li><li>this.成员变量会先从本类声明的成员变量列表中查找，如果未找到，会去从父类继承的在子类中仍然可见的成员变量列表中查找</li></ul></li><li><p><strong>（2）this.成员方法</strong></p><ul><li>调用当前对象的成员方法时，都可以加&quot;this.&quot;，也可以省略，实际开发中都省略</li><li>当前对象的成员方法，先从本类声明的成员方法列表中查找，如果未找到，会去从父类继承的在子类中仍然可见的成员方法列表中查找</li></ul></li><li><p><strong>（3）this()或this(实参列表)</strong></p><ul><li><p>只能调用本类的其他构造器</p></li><li><p>必须在构造器的首行</p></li><li><p>如果一个类中声明了n个构造器，则最多有 n - 1个构造器中使用了&quot;this(【实参列表】)&quot;，否则会发生递归调用死循环</p><p>&nbsp;</p></li></ul></li></ul></li></ol><h3><a name='header-n452' class='md-header-anchor '></a>6.5.2  super关键字</h3><ol start='' ><li><h4><a name='header-n455' class='md-header-anchor '></a>super的含义</h4><ul><li>super是用于在当前类中访问父类的一个特殊关键字，不是对象的引用。（区别this ：super不能单独使用赋值给一个变量）</li></ul></li><li><h4><a name='header-n460' class='md-header-anchor '></a>super使用的前提</h4><ul><li>通过super引用父类的xx，都是在子类中仍然可见的</li><li>不能在静态代码块和静态方法中使用super</li></ul></li><li><h4><a name='header-n467' class='md-header-anchor '></a>super的使用格式</h4><ul><li><p><strong>（1）super.成员变量</strong></p><p>在子类中访问父类的成员变量，特别是当子类的成员变量与父类的成员变量重名时。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n472" mdtype="fences" style="break-inside: unset;">public class Person {
+	private String name;
+	private int age;
+	//其他代码省略
+}
+public class Student extends Person{
+	private int score;
+	//其他成员方法省略
+}
+public class Test{
+    public static void main(String[] args){
+    	Student stu = new Student();
+    }
+}
+</pre><p><img src='imgs06/1561984785190.png' alt='1561984785190' referrerPolicy='no-referrer' /></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n474" mdtype="fences" style="break-inside: unset;">public class Test{
+    public static void main(String[] args){
+    	Son s = new Son();
+    	s.test(30);
+    }
+}
+class Father{
+	int a = 10;
+}
+class Son extends Father{
+	int a = 20;
+	public void test(int a){
+		System.out.println(super.a);//10
+		System.out.println(this.a);//20
+		System.out.println(a);//30
+	}
+}
+</pre></li><li><p><strong>（2）super.成员方法</strong></p><p>在子类中调用父类的成员方法，特别是当子类重写了父类的成员方法时</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n478" mdtype="fences" style="break-inside: unset;">public class Test{
+    public static void main(String[] args){
+    	Son s = new Son();
+    	s.test();
+    }
+}
+class Father{
+	public void method(){
+		System.out.println("aa");
+	}
+}
+class Son extends Father{
+	public void method(){
+		System.out.println("bb");
+	}
+	public void test(){
+		method();//bb
+		this.method();//bb
+		super.method();//aa
+	}
+}
+</pre></li><li><p><strong>（3）super()或super(实参列表)</strong></p><p>在子类的构造器首行，用于表示调用父类的哪个实例初始化方法</p><blockquote><p>super() 和 this() 都必须是在构造方法的第一行，所以不能同时出现。</p></blockquote></li></ul></li></ol><h3><a name='header-n484' class='md-header-anchor '></a>6.5.3  就近原则和追根溯源原则</h3><p>在继承关系中，如果要访问变量或方法，通常遵循就近原则和追根溯源原则，即先在调用位置最近的位置查找变量或方法，如果没有则去父类找查找，找不到则报错。</p><p>1、找变量</p><ul><li><p><strong>没有super和this</strong></p><ul><li>在构造器、代码块、方法中如果出现使用某个变量，先查看是否是当前块声明的局部变量，</li><li>如果不是局部变量，先从当前执行代码的本类去找成员变量</li><li>如果从当前执行代码的本类中没有找到，会往上找父类的（非private，跨包还不能是缺省的）</li></ul></li><li><p><strong>this</strong> ：代表当前对象</p><ul><li>通过this找成员变量时，先从当前执行代码的本类中找，没有的会往上找父类的（非private，跨包还不能是缺省的）。</li></ul></li><li><p><strong>super</strong> ：代表父类的</p><ul><li>通过super找成员变量，直接从当前执行代码所在类的父类找</li><li>super()或super(实参列表)只能从直接父类找</li><li>通过super只能访问父类在子类中可见的（非private，跨包还不能是缺省的）</li></ul></li></ul><blockquote><p>注意：super和this都不能出现在静态方法和静态代码块中，因为super和this都是存在于<strong>对象</strong>中的</p></blockquote><p>2、找方法</p><ul><li><p>没有super和this</p><ul><li>先从当前对象（调用方法的对象）的本类找，如果没有，再从直接父类找，再没有，继续往上追溯</li></ul></li><li><p>this</p><ul><li>先从当前对象（调用方法的对象）的本类找，如果没有，再从父类继承的可见的方法列表中查找</li></ul></li><li><p>super</p><ul><li>直接从当前对象（调用方法的对象）的父类继承的可见的方法列表中查找</li></ul></li></ul><p>&nbsp;</p><h3><a name='header-n532' class='md-header-anchor '></a>6.5.4 练习</h3><ol start='' ><li><h5><a name='header-n535' class='md-header-anchor '></a>情形1:父类，子类及子类方法中存在同名变量时</h5><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n536" mdtype="fences" style="break-inside: unset;">class Father{
+	int a = 10;
+	int b = 11;
+}
+class Son extends Father{
+	int a = 20;
+	
+	public void test(){
+		//子类与父类的属性同名，子类对象中就有两个a
+		System.out.println("父类的a：" + super.a);//10    直接从父类局部变量找
+		System.out.println("子类的a：" + this.a);//20   先从本类成员变量找
+		System.out.println("子类的a：" + a);//20  先找局部变量找，没有再从本类成员变量找
+		
+		//子类与父类的属性不同名，是同一个b
+		System.out.println("b = " + b);//11  先找局部变量找，没有再从本类成员变量找，没有再从父类找
+		System.out.println("b = " + this.b);//11   先从本类成员变量找，没有再从父类找
+		System.out.println("b = " + super.b);//11  直接从父类局部变量找
+	}
+	
+	public void method(int a){
+		//子类与父类的属性同名，子类对象中就有两个成员变量a，此时方法中还有一个局部变量a
+		System.out.println("父类的a：" + super.a);//10  直接从父类局部变量找
+		System.out.println("子类的a：" + this.a);//20  先从本类成员变量找
+		System.out.println("局部变量的a：" + a);//30  先找局部变量
+	}
+    
+    public void fun(int b){
+        System.out.println("b = " + b);//13  先找局部变量
+		System.out.println("b = " + this.b);//11  先从本类成员变量找
+		System.out.println("b = " + super.b);//11  直接从父类局部变量找
+    }
+}
+public class TestInherite2 {
+	public static void main(String[] args) {
+		Son son = new Son();
+		System.out.println(son.a);//20
+		System.out.println(son.b);//11
+		
+		son.test();
+		
+		son.method(30);
+        
+        son.fun(13);
+	}
+}
+</pre></li><li><h5><a name='header-n538' class='md-header-anchor '></a>情形2：父子类中找方法</h5><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n539" mdtype="fences" style="break-inside: unset;">public class Test{
+    public static void main(String[] args){
+    	Son s = new Son();
+    	System.out.println(s.getNum());//10   没重写，先找本类，没有，找父类
+    	
+    	Daughter d = new Daughter();
+    	System.out.println(d.getNum());//20  重写了，先找本类
+    }
+}
+class Father{
+	protected int num = 10;
+	public int getNum(){
+		return num;
+	}
+}
+class Son extends Father{
+	private int num = 20;
+}
+class Daughter extends Father{
+	private int num = 20;
+	public int getNum(){
+		return num;
+	}
+}
+</pre></li><li><h5><a name='header-n541' class='md-header-anchor '></a>情形3：</h5><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n542" mdtype="fences" style="break-inside: unset;">public class Test{
+    public static void main(String[] args){
+    	Son s = new Son();
+    	s.test();
+    	
+    	Daughter d = new Daughter();
+    	d.test();
+    }
+}
+class Father{
+	protected int num = 10;
+	public int getNum(){
+		return num;
+	}
+}
+class Son extends Father{
+	private int num = 20;
+	public void test(){
+		System.out.println(getNum());//10  本类没有找父类
+		System.out.println(this.getNum());//10  本类没有找父类
+		System.out.println(super.getNum());//10  本类没有找父类
+	}
+}
+class Daughter extends Father{
+	private int num = 20;
+	public int getNum(){
+		return num;
+	}
+	public void test(){
+		System.out.println(getNum());//20  先找本类
+		System.out.println(this.getNum());//20  先找本类
+		System.out.println(super.getNum());//10  直接找父类
+	}
+}
+</pre></li></ol><h2><a name='header-n543' class='md-header-anchor '></a>6.6 成员变量初始化赋值</h2><h3><a name='header-n544' class='md-header-anchor '></a>6.6.1 成员变量初始化方式</h3><ol start='' ><li><h4><a name='header-n547' class='md-header-anchor '></a>成员变量有默认值</h4><figure><table><thead><tr><th>类别</th><th>具体类型</th><th>默认值</th></tr></thead><tbody><tr><td>基本类型</td><td>整数（byte，short，int，long）</td><td>0</td></tr><tr><td>&nbsp;</td><td>浮点数（float，double）</td><td>0.0</td></tr><tr><td>&nbsp;</td><td>字符（char）</td><td>0或&#39;\u0000&#39;</td></tr><tr><td>&nbsp;</td><td>布尔（boolean）</td><td>false</td></tr><tr><td>引用类型</td><td>数组，类，接口</td><td>null</td></tr></tbody></table></figure></li></ol><p>我们知道类中成员变量都有默认值，但是现在我们要为成员变量赋默认值以外的值，我们该怎么办呢？</p><ol start='2' ><li><h4><a name='header-n576' class='md-header-anchor '></a>显式赋值</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n577" mdtype="fences">public class Student{
+    public static final String COUNTRY = "中华人民共和国";
+	private static String school = "尚硅谷";
+	private String name;
+	private char gender = '男';
+}
+</pre><blockquote><p>显式赋值，一般都是赋常量值</p></blockquote></li><li><h4><a name='header-n581' class='md-header-anchor '></a>代码块</h4><p>如果成员变量想要初始化的值不是一个硬编码的常量值，而是需要通过复杂的计算或读取文件、或读取运行环境信息等方式才能获取的一些值，该怎么办呢？</p><ul><li><p><strong>静态初始化块：为静态变量初始化</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n586" mdtype="fences">【修饰符】 class 类名{
+    static{
+        静态初始化块
+    }
+}
+ 
+</pre><p>&nbsp;</p></li><li><p><strong>实例初始化块：为实例变量初始化</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n590" mdtype="fences">【修饰符】 class 类名{
+    {
+        实例初始化块
+    }
+}   
+    
+</pre><p>    <strong>静态初始化块：在类初始化时由类加载器调用执行，每一个类的静态初始化只会执行一次。</strong></p><p>    <strong>实例初始化块：每次new实例对象时自动执行，每new一个对象，执行一次。</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n593" mdtype="fences" style="break-inside: unset;">public class Student{
+    private static String school;
+    private String name;
+    private char gender;
+    static{
+        //获取系统属性，这里只是说明school的初始化过程可能比较复杂
+        school = System.getProperty("school");
+        if(school==null) {
+            school = "尚硅谷";
+        }
+    }
+    {
+        String info = System.getProperty("gender");
+        if(info==null) {
+            gender = '男';
+        }else {
+            gender = info.charAt(0);
+        }
+    }
+    public static String getSchool() {
+        return school;
+    }
+    public static void setSchool(String school) {
+        Student.school = school;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public char getGender() {
+        return gender;
+    }
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+}
+</pre></li></ul></li></ol><ol start='4' ><li><h4><a name='header-n597' class='md-header-anchor '></a>构造器</h4><p>我们发现，显式赋值和实例初始化块为每一个实例对象的实例变量初始化的都是相同的值，那么我们如果想要不同的实例对象初始化为不同的值，怎么办呢？此时我们可以考虑使用构造器，在new对象时由对象的创建者决定为当前对象的实例变量赋什么值。</p><blockquote><p><strong>注意：通常构造器只为实例变量初始化，不为静态类变量初始化</strong></p></blockquote><p>为实例变量初始化，再new对象时由对象的创建者决定为当前对象的实例变量赋什么值。</p><p>&nbsp;</p></li></ol><h3><a name='header-n603' class='md-header-anchor '></a>6.6.2 类变量初始化</h3><p>使用类前，需要先把类加载到内存进行数据初始化，整个类的加载过程大致分为三个阶段：加载-&gt; 链接-&gt;初始化-&gt;</p><p>类变量的初始化是在整个类的加载过程中完成，过程如下：</p><ol start='' ><li>静态变量初始化为默认值（链接阶段完成）</li><li>静态变量直接显示赋值语句执行（初始化阶段完成）</li><li>静态代码块中语句执行（初始化阶段完成）</li></ol><p>其中，2和3两部分代码是在类的初始化阶段完成，这两部分代码根据书写的先后顺序执行，即谁在前先执行谁。</p><p>整个类的初始化只会进行一次，如果子类初始化时，发现父类没有初始化，那么会先初始化父类。</p><blockquote><p>整个类的加载过程只执行一次，但并不一定一次执行完整个过程，比如加载和链接阶段执行完后，并不一定马上进行初始化阶段，Java虚拟机对类的加载时机（加载阶段）并没有强制约束，但是对类的初始化阶段何时执行进行了严格规定，6种对类的主动使用方式，才会导致类的初始化阶段执行。</p></blockquote><p><strong>示例代码1：单个类</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n618" mdtype="fences" style="break-inside: unset;">public class Test{
+    public static void main(String[] args){
+    	Father.test();
+    }
+}
+class Father{
+	private static int a = getNumber();//这里调用方法为a变量显式赋值的目的是为了看到这个过程
+	static{
+		System.out.println("Father(1)");
+	}
+	private static int b = getNumber();
+	static{
+		System.out.println("Father(2)");
+	}
+	
+	public static int getNumber(){
+		System.out.println("getNumber()");
+		return 1;
+	}
+	
+	public static void test(){
+		System.out.println("Father:test()");
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n619" mdtype="fences">运行结果：
+getNumber()
+Father(1)
+getNumber()
+Father(2)
+Father:test()
+</pre><p><strong>示例代码2：父子类</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n621" mdtype="fences" style="break-inside: unset;">public class Test{
+    public static void main(String[] args){
+    	Son.test();
+        System.out.println("-----------------------------");
+        Son.test();
+    }
+}
+class Father{
+	private static int a = getNumber();
+	static{
+		System.out.println("Father(1)");
+	}
+	private static int b = getNumber();
+	static{
+		System.out.println("Father(2)");
+	}
+	
+	public static int getNumber(){
+		System.out.println("Father:getNumber()");
+		return 1;
+	}
+}
+class Son extends Father{
+	private static int a = getNumber();
+	static{
+		System.out.println("Son(1)");
+	}
+	private static int b = getNumber();
+	static{
+		System.out.println("Son(2)");
+	}
+	
+	public static int getNumber(){
+		System.out.println("Son:getNumber()");
+		return 1;
+	}
+	
+	public static void test(){
+		System.out.println("Son:test()");
+	}	
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n622" mdtype="fences">运行结果：
+Father:getNumber()
+Father(1)
+Father:getNumber()
+Father(2)
+Son:getNumber()
+Son(1)
+Son:getNumber()
+Son(2)
+Son:test()
+-----------------------------
+Son:test()
+</pre><h3><a name='header-n623' class='md-header-anchor '></a>6.6.3 实例变量初始化</h3><p>实例变量的初始化是在实例初始化过程中完成的，每次通过调用构造器创建对象时都会执行一次实例初始化过程。</p><p>整个实例初始化执行过程：</p><ol start='' ><li>实例变量初始化为默认值</li><li>实例变量直接显示赋值语句执行</li><li>构造代码块中语句执行</li><li>构造器中代码执行</li></ol><p>其中2和3 两部分代码是按照书写的先后顺序执行的。</p><p>通过构造器创建并初始化子类对象时，一定会先通过super调用父类某个构造器完成父类的数据的初始化。</p><ol start='' ><li><h4><a name='header-n639' class='md-header-anchor '></a>示例代码1：单个类</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n640" mdtype="fences" style="break-inside: unset;">public class Test{
+    public static void main(String[] args){
+    	Father f1 = new Father();
+    	Father f2 = new Father("atguigu");
+    }
+}
+class Father{
+	private int a = getNumber();
+	private String info;
+	{
+		System.out.println("Father(1)");
+	}
+	Father(){
+		System.out.println("Father()无参构造");
+	}
+	Father(String info){
+		this.info = info;
+		System.out.println("Father(info)有参构造");
+	}
+	private int b = getNumber();
+	{
+		System.out.println("Father(2)");
+	}
+	
+	public int getNumber(){
+		System.out.println("Father:getNumber()");
+		return 1;
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n641" mdtype="fences">运行结果：
+Father:getNumber()
+Father(1)
+Father:getNumber()
+Father(2)
+Father()无参构造
+Father:getNumber()
+Father(1)
+Father:getNumber()
+Father(2)
+Father(info)有参构造
+</pre><p><img src='imgs06/1562072678317.png' alt='1562072678317' referrerPolicy='no-referrer' /></p></li><li><h4><a name='header-n644' class='md-header-anchor '></a>示例代码2：父子类</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n645" mdtype="fences" style="break-inside: unset;">public class Test{
+    public static void main(String[] args){
+    	Son s1 = new Son();
+        System.out.println("-----------------------------");
+    	Son s2 = new Son("atguigu");
+    }
+}
+class Father{
+	private int a = getNumber();
+	private String info;
+	{
+		System.out.println("Father(1)");
+	}
+	Father(){
+		System.out.println("Father()无参构造");
+	}
+	Father(String info){
+		this.info = info;
+		System.out.println("Father(info)有参构造");
+	}
+	private int b = getNumber();
+	{
+		System.out.println("Father(2)");
+	}
+	
+	public static int getNumber(){
+		System.out.println("Father:getNumber()");
+		return 1;
+	}
+}
+class Son extends Father{
+	private int a = getNumber();
+	{
+		System.out.println("Son(1)");
+	}
+	private int b = getNumber();
+	{
+		System.out.println("Son(2)");
+	}
+	public Son(){
+		System.out.println("Son()：无参构造");
+	}
+	public Son(String info){
+		super(info);
+		System.out.println("Son(info)：有参构造");
+	}
+	public static int getNumber(){
+		System.out.println("Son:getNumber()");
+		return 1;
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n646" mdtype="fences" style="break-inside: unset;">运行结果：
+Father:getNumber()
+Father(1)
+Father:getNumber()
+Father(2)
+Father()无参构造
+Son:getNumber()
+Son(1)
+Son:getNumber()
+Son(2)
+Son()：无参构造
+-----------------------------
+Father:getNumber()
+Father(1)
+Father:getNumber()
+Father(2)
+Father(info)有参构造
+Son:getNumber()
+Son(1)
+Son:getNumber()
+Son(2)
+Son(info)：有参构造
+</pre></li><li><h4><a name='header-n648' class='md-header-anchor '></a>示例代码3：父子类，方法有重写</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n649" mdtype="fences" style="break-inside: unset;">public class Test{
+    public static void main(String[] args){
+    	Son s1 = new Son();
+    	System.out.println("-----------------------------");
+    	Son s2 = new Son("atguigu");
+    }
+}
+class Father{
+	private int a = getNumber();
+	private String info;
+	{
+		System.out.println("Father(1)");
+	}
+	Father(){
+		System.out.println("Father()无参构造");
+	}
+	Father(String info){
+		this.info = info;
+		System.out.println("Father(info)有参构造");
+	}
+	private int b = getNumber();
+	{
+		System.out.println("Father(2)");
+	}
+	
+	public int getNumber(){
+		System.out.println("Father:getNumber()");
+		return 1;
+	}
+}
+class Son extends Father{
+	private int a = getNumber();
+	{
+		System.out.println("Son(1)");
+	}
+	private int b = getNumber();
+	{
+		System.out.println("Son(2)");
+	}
+	public Son(){
+		System.out.println("Son()：无参构造");
+	}
+	public Son(String info){
+		super(info);
+		System.out.println("Son(info)：有参构造");
+	}
+	public int getNumber(){
+		System.out.println("Son:getNumber()");
+		return 1;
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n650" mdtype="fences" style="break-inside: unset;">运行结果：
+Son:getNumber()  //子类重写getNumber()方法，那么创建子类的对象，就是调用子类的getNumber()方法，因为当前对象this是子类的对象。
+Father(1)
+Son:getNumber()
+Father(2)
+Father()无参构造
+Son:getNumber()
+Son(1)
+Son:getNumber()
+Son(2)
+Son()：无参构造
+-----------------------------
+Son:getNumber()
+Father(1)
+Son:getNumber()
+Father(2)
+Father(info)有参构造
+Son:getNumber()
+Son(1)
+Son:getNumber()
+Son(2)
+Son(info)：有参构造
+</pre></li></ol><h3><a name='header-n651' class='md-header-anchor '></a>6.6.4 类变量与实例变量初始化比较</h3><ul><li>类初始化肯定优先于实例初始化。</li></ul><ul><li>类初始化只做一次（静态代码块只执行一次）。</li></ul><ul><li><p>实例初始化是每次创建对象都要进行（构造代码块每次创建对象都会执行）。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n663" mdtype="fences" style="break-inside: unset;">public class Test{
+    public static void main(String[] args){
+    	Son s1 = new Son();
+    	System.out.println("----------------------------");
+    	Son s2 = new Son();
+    }
+}
+class Father{
+	static{
+		System.out.println("Father:static");
+	}
+	{
+		System.out.println("Father:not_static");
+	}
+	Father(){
+		System.out.println("Father()无参构造");
+	}
+}
+class Son extends Father{
+	static{
+		System.out.println("Son:static");
+	}
+	{
+		System.out.println("Son:not_static");
+	}
+	Son(){
+		System.out.println("Son()无参构造");
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n664" mdtype="fences">运行结果：
+Father:static
+Son:static
+Father:not_static
+Father()无参构造
+Son:not_static
+Son()无参构造
+----------------------------
+Father:not_static
+Father()无参构造
+Son:not_static
+Son()无参构造
+</pre><p>&nbsp;</p></li></ul><h2><a name='header-n666' class='md-header-anchor '></a>6.7 多态polymorphism</h2><h3><a name='header-n667' class='md-header-anchor '></a>6.7.1 案例引入</h3><p>多态是继封装、继承之后，面向对象的第三大特性。也是面向对象思想的核心。</p><p>我们通过代码先看一个案例，引入多态性这个重要特性。</p><p>定义一个Animal类</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n671" mdtype="fences">public class Animal {
+    //String name = "animal";
+    public void eat(){
+        System.out.println("动物吃饭");
+    }
+}
+</pre><p>定义一个Dog类</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n673" mdtype="fences">public class Dog extends Animal {//继承Animal类
+    //String name = "dog";
+    @Override
+    public void eat() {
+        System.out.println("狗啃骨头");
+    }
+
+}
+</pre><p>定义一个Person类</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n675" mdtype="fences">public class Person {
+    //喂狗吃饭
+   public void feed(Dog dog){
+        dog.eat();
+    }
+}
+</pre><p>测试类</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n677" mdtype="fences">public class Test1 {
+    public static void main(String[] args) {
+        Person p=new Person();
+        //测试人喂狗吃饭
+        p.feed(new Dog());
+    }
+}
+</pre><p>这时如果需要拓展功能，增加一个猫Cat类，让人喂Cat吃饭，应该如何做？</p><p>很简单，在Person类中增加喂猫的方法，那如果后期还要不断的增加新功能（新增各种动物类），就要不断增加Person类对应的方法。这里就出现了一个问题：违背了软件开发中的开闭原则（对修改关闭，对扩展开放），并且大量类同代码冗余，即每次新增的方法除了参数类型不同，其他都基本相同。</p><p>能不能用简单方式解决？可以。</p><p>只需要在Person类中定义一个类似的方法，参数为Animal，其他全舍去，这就是多态的应用。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n682" mdtype="fences">//修改后的Person类
+public class Person {
+    //喂动物吃饭
+   public void feed(Animal animal){
+        animal.eat();
+    }
+}
+</pre><p>再次测试，功能正常，增加新的动物类测试，发现不需要修改Person类，功能依然正常。</p><h3><a name='header-n684' class='md-header-anchor '></a>6.7.2 什么是多态</h3><p>生活中：一个事物在不同的条件下呈现不同的特征状态，如水在100度下呈液态，100度以上呈气态。</p><p>Java中的多态什么情况？</p><h4><a name='header-n687' class='md-header-anchor '></a>1、写法格式</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n688" mdtype="fences">父类类型 变量名 = 子类对象；
+Ainmal a=new Dog();
+</pre><blockquote><p>理解：编译期a是个动物，运行时a是个狗；new 个Dog，a就是狗，new个Cat，a就是猫</p></blockquote><p>例如：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n692" mdtype="fences" style="break-inside: unset;">public class Test2 {
+    public static void main(String[] args) {
+        Animal a=new Animal();
+        a.eat();
+        Dog d=new Dog();
+        d.eat();
+        System.out.println("----------------");
+        //多态写法：父类的引用指向子类的对象。
+        Animal a1=new Dog();//狗也是一个动物
+        a1.eat();//运行时动态的调用了Dog的eat方法
+        Animal a2=new Cat();//猫也是一个动物
+        a2.eat();//运行时调用Cat的eat方法
+    }
+}
+</pre><h4><a name='header-n693' class='md-header-anchor '></a>2、多态的理解</h4><p>引用类型变量在编译期呈现左边父类的行为特征，运行时呈现右边创建的不同子类对象的行为特征。</p><p>即：<strong>编译看左边，运行看右边</strong>。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n696" mdtype="fences" style="break-inside: unset;">public class Test {
+    public static void main(String[] args) {
+        // 多态形式，创建对象
+        Animal a1 = new Cat();  
+        // 调用的是 Cat 的 eat
+        a1.eat();    
+        //a1.catchMouse();//错误，遍看左边，catchMouse()是子类特有的方法，左边父类中没有，编译失败
+
+        // 多态形式，创建对象
+        Animal a2 = new Dog(); 
+        // 调用的是 Dog 的 eat
+        a2.eat();               
+    }  
+}
+</pre><h4><a name='header-n697' class='md-header-anchor '></a>3、多态的前提</h4><ol start='' ><li>有继承关系</li><li><strong>有方法重写</strong></li></ol><p>如果没有方法重写，运行时调用子类的方法，实际还是调用的从父类继承的方法，不具有多态性。</p><h4><a name='header-n704' class='md-header-anchor '></a>4、多态的好处</h4><ol start='' ><li>提高程序的扩展性（参考引入案例分析）</li><li>降低类与类直接耦合度（参考引入案例分析）</li></ol><h3><a name='header-n710' class='md-header-anchor '></a>6.7.3 多态的应用</h3><ol start='' ><li><h4><a name='header-n713' class='md-header-anchor '></a>多态应用在形参实参</h4><p>父类类型作为方法形式参数，子类对象为实参。</p><p>代码如下：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n716" mdtype="fences" style="break-inside: unset;">public class Test01 {
+	public static void main(String[] args) {
+		showAnimalEat(new Dog()); //形参 Animal a,实参new Dog() 
+								//实参给形参赋值   Animal a = new Dog()   多态引用
+		showAnimalEat(new Cat());//形参 Animal a,实参new Cat() 
+								//实参给形参赋值   Animal a = new Cat()   多态引用
+	}
+	
+	/*
+	 * 设计一个方法，可以查看所有动物的吃的行为
+	 * 关注的是所有动物的共同特征：eat()
+	 * 所以形参，设计为父类的类型
+	 * 	此时不关注子类特有的方法
+	 */
+	public static void showAnimalEat (Animal a){
+        a.eat();
+//        a.catchMouse();//错误，因为a现在编译时类型是Animal，只能看到父类中有的方法
+    }
+
+}
+</pre></li><li><h4><a name='header-n718' class='md-header-anchor '></a>多态应用在数组</h4><p>数组元素类型声明为父类类型，实际存储的是子类对象</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n720" mdtype="fences" style="break-inside: unset;">public class Test02 {
+	public static void main(String[] args) {
+		/*
+		 * 声明一个数组，可以装各种动物的对象，看它们吃东西的样子
+		 */
+		Animal[] arr = new Animal[2]; //此时不是new Animal的对象，而是new Animal[]的数组对象
+									//在堆中开辟了长度为5的数组空间，用来装Animal或它子类对象的地址
+		arr[0] = new Cat();//多态引用   左边arr[0] 是Animal类型，右边是new Cat()
+							//把Cat对象，赋值给Animal类型的变量
+		arr[1] = new Dog();
+		
+		for (int i = 0; i &lt; arr.length; i++) {
+			arr[i].eat();
+//			arr[i].catchMouse();错误，因为arr[i]现在编译时类型是Animal，只能看到父类中有的方法
+		}
+	}
+}
+</pre></li><li><h4><a name='header-n722' class='md-header-anchor '></a>多态应用在返回值</h4><p>方法的返回值类型声明为父类的类型，实际返回值是子类对象</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n724" mdtype="fences" style="break-inside: unset;">public class Test03 {
+	public static void main(String[] args) {
+		Animal c = buy("猫咪");
+		System.out.println(c.getClass());
+		c.eat();
+	}
+	/*
+	 * 设计一个方法，可以购买各种动物的对象，此时不确定是那种具体的动物
+	 * 
+	 * 返回值类型是父类的对象
+	 * 
+	 * 多态体现在   返回值类型  Animal ，实际返回的对象是子类的new Cat()，或new Dog()
+	 */
+	public static Animal buy(String name){
+        if("猫咪".equals(name)){
+            return new Cat();
+        }else if("小狗".equals(name)){
+            return new Dog();
+        }
+        return null;
+    }
+}
+</pre></li></ol><h3><a name='header-n725' class='md-header-anchor '></a>6.7.4 多态练习</h3><ol start='' ><li><h4><a name='header-n728' class='md-header-anchor '></a>练习1</h4><p>（1）声明父类Traffic，包含方法public void drive()
+（2）声明子类Car,Bicycle等，并重写drive方法
+（3）在测试类的main中创建一个数组，有各种交通工具，遍历调用drive()方法
+模拟马路上跑的各种交通工具</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n730" mdtype="fences">public class Traffic {
+	public void drive(){
+        System.out.println("~~~~");
+    }
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n731" mdtype="fences">public class Car extends Traffic {
+	@Override
+	public void drive() {
+		System.out.println("滴滴滴...");
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n732" mdtype="fences">public class Bicycle extends Traffic {
+	@Override
+	public void drive() {
+		System.out.println("蹬蹬蹬。。。");
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n733" mdtype="fences">public class TestExer1 {
+	public static void main(String[] args) {
+		//右边这些是用匿名对象，初始化数组
+		Traffic[] arr = {new Car(),new Bicycle(),new Car(),new Bicycle()};
+		for (int i = 0; i &lt; arr.length; i++) {
+			arr[i].drive();
+		}
+	}
+}
+</pre></li><li><h4><a name='header-n735' class='md-header-anchor '></a>练习2</h4><p>（1）声明一个父类Person类，public void toilet()</p><p>（2）声明一个子类Woman类，重写方法
+（3）声明一个子类Man类，重写方法
+（4）在测试类中声明一个方法，
+public static void goToToilet(Person p){
+<span>	</span>p.toilet();
+}
+在main中，创建不同子类对象，调用goToToilet方法进行测试</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n738" mdtype="fences">public class Person {
+	public void toilet(){
+        System.out.println("~~~");
+    }
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n739" mdtype="fences">public class Man extends Person {
+	@Override
+	public void toilet() {
+		System.out.println("站着..");
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n740" mdtype="fences">public class Woman extends Person {
+	@Override
+	public void toilet() {
+		System.out.println("坐着..");
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n741" mdtype="fences">public class TestPerson {
+	public static void main(String[] args) {
+		goToToilet(new Woman());//隐含了Person p = new Woman();
+		goToToilet(new Man());//隐含了Person p = new Man();
+	}
+	
+	public static void goToToilet(Person p){
+		p.toilet();
+	}
+}
+</pre></li><li><h4><a name='header-n743' class='md-header-anchor '></a>练习3</h4><p>1、声明一个父类Employee员工类型，有属性，姓名（String）
+有方法，public double earning() 用于返回实发工资，默认返回0
+<span>		</span>public String getInfo()：显示姓名和实发工资</p><p>2、声明一个子类SalaryEmployee正式工，继承父类Employee，增加属性，薪资，工作日天数，请假天数
+重写方法，public double earning()返回实发工资，实发工资 = 薪资 - 薪资/工作日天数 * 请假天数，</p><p>3、声明一个子类HourEmployee小时工，继承父类Employee
+有属性，工作小时数，每小时多少钱
+重写方法，public double earning()返回实发工资， 实发工资 = 每小时多少钱 * 小时数</p><p>4、声明一个子类Manager经理，继承SalaryEmployee，增加属性：奖金比例
+重写方法，public double earning()返回实发工资，实发工资 = (薪资 - 薪资/工作日天数 * 请假天数)*(1+奖金比例)</p><p>5、你现在是财务，需要查看每个人的实发工资，并查看工资总额。
+声明一个员工数组，存储各种员工，并遍历显示他们的姓名和实发工资，并计算所有员工的工资总额</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n749" mdtype="fences" style="break-inside: unset;">public class Employee {
+	private String name;
+
+	public Employee(String name) {
+		super();
+		this.name = name;
+	}
+
+	public Employee() {
+		super();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public double earning(){
+        return 0.0;
+    }
+
+	public String getInfo() {
+		return "姓名：" + name + "，实发工资：" + earning();
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n750" mdtype="fences" style="break-inside: unset;">public class SalaryEmployee extends Employee {
+	private double salary;
+	private int workingDays;//工作日天数，
+	private double offDays;//请假天数
+
+	public SalaryEmployee() {
+		super();
+	}
+
+	public SalaryEmployee(String name,  double salary, int workingDays, double offDays) {
+		super(name);
+		this.salary = salary;
+		this.workingDays = workingDays;
+		this.offDays = offDays;
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+
+	public int getWorkingDays() {
+		return workingDays;
+	}
+
+	public void setWorkingDays(int workingDays) {
+		this.workingDays = workingDays;
+	}
+
+	public double getOffDays() {
+		return offDays;
+	}
+
+	public void setOffDays(double offDays) {
+		this.offDays = offDays;
+	}
+
+	/*
+	 * 重写方法，public double earning()返回实发工资， 
+		实发工资 = 薪资 - 薪资/工作日天数 * 请假天数
+	 */
+	@Override
+	public double earning() {
+		return salary - salary/workingDays * offDays;
+	}
+
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n751" mdtype="fences" style="break-inside: unset;">public class HourEmployee extends Employee {
+	private double moneyPerHour;
+	private double hours;
+	
+	public HourEmployee() {
+		super();
+	}
+
+	public HourEmployee(String name, double moneyPerHour, double hours) {
+		super(name);
+		this.moneyPerHour = moneyPerHour;
+		this.hours = hours;
+	}
+
+	public double getMoneyPerHour() {
+		return moneyPerHour;
+	}
+
+	public void setMoneyPerHour(double moneyPerHour) {
+		this.moneyPerHour = moneyPerHour;
+	}
+
+	public double getHours() {
+		return hours;
+	}
+
+	public void setHours(double hours) {
+		this.hours = hours;
+	}
+
+	/*
+	 * 重写方法，public double earning()返回实发工资， 
+		实发工资 = 每小时多少钱 * 小时数	
+	 */
+	@Override
+	public double earning() {
+		return moneyPerHour * hours;
+	}
+
+}
+
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n752" mdtype="fences" style="break-inside: unset;">public class Manager extends SalaryEmployee {
+	private double commisionPer;
+
+	public Manager() {
+		super();
+	}
+
+	public Manager(String name,  double salary, int workingDays, double offDays, double commisionPer) {
+		super(name, salary, workingDays, offDays);
+		this.commisionPer = commisionPer;
+	}
+
+	public double getCommisionPer() {
+		return commisionPer;
+	}
+
+	public void setCommisionPer(double commisionPer) {
+		this.commisionPer = commisionPer;
+	}
+
+	@Override
+	public double earning() {
+		return super.earning() * (1+commisionPer);
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n753" mdtype="fences" style="break-inside: unset;">public class TestEmployee {
+	public static void main(String[] args) {
+		Employee[] all = new Employee[3];
+		
+		all[0] = new HourEmployee("张三", 50, 50);
+		all[1] = new SalaryEmployee("李四", 10000, 22, 1);
+		all[2] = new Manager("老王", 20000, 22, 0, 0.3);
+		
+		double sum = 0;
+		for (int i = 0; i &lt; all.length; i++) {
+			System.out.println(all[i].getInfo());
+			sum += all[i].earning();
+		}
+		System.out.println("总额：" + sum);
+	}
+}
+</pre><p>&nbsp;</p></li></ol><h3><a name='header-n755' class='md-header-anchor '></a>6.7.5 向上转型与向下转型</h3><p>首先，一个对象在new的时候创建是哪个类型的对象，它从头至尾都不会变。即这个对象的运行时类型，本质的类型用于不会变。这个和基本数据类型的转换是不同的。</p><p>但是，把这个对象赋值给不同类型的变量时，这些变量的编译时类型却不同。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n758" mdtype="fences" style="break-inside: unset;">class Animal {  
+    void eat(){
+        System.out.println("~~~"); 
+    } 
+}  
+
+class Cat extends Animal {  
+    public void eat() {  
+        System.out.println("吃鱼");  
+    }  
+    public void catchMouse() {  
+        System.out.println("抓老鼠");  
+    }  
+}  
+class Dog extends Animal {  
+    public void eat() {  
+        System.out.println("吃骨头");  
+    }  
+    public void watchHouse() {  
+        System.out.println("看家");  
+    }  
+}
+
+class Test{
+    public static void main(String[] args){
+        Cat a = new Cat();//a编译时类型是Cat
+        Animal b = a;//b编译时类型是Animal
+        Object c = a;//c编译时类型是Object
+        
+        //运行时类型
+        System.out.println(a.getClass());
+        System.out.println(b.getClass());
+        System.out.println(c.getClass());
+        //以上输出都一样，都是Cat类型
+        
+       	//a,b,c的编译时类型不同
+    	//通过a能调用Cat中所有方法，包括从父类继承的，包括自己扩展的
+    	//通过b只能调用Animal类及它的父类有的方法，不能调用Cat扩展的方法
+    	//通过c只能调用Object类才有的方法
+    }
+}
+</pre><p>为什么要类型转换呢？</p><p>因为多态，就一定会有把子类对象赋值给父类变量的时候，这个时候，<font color="red"><strong>在编译期间</strong></font>，就会出现类型转换的现象。</p><p>但是，使用父类变量接收了子类对象之后，我们就<strong>不能调用</strong>子类拥有的特有方法（非重写的方法）了。这也是多态给我们带来的一点&quot;小麻烦&quot;。所以，想要调用子类特有的方法，必须做类型转换。</p><ul><li><p><strong>向上转型</strong>：当左边的变量的类型（父类） &gt; 右边对象/变量的类型（子类），我们就称为向上转型</p><ul><li>此时，编译时按照左边变量的类型处理，就只能调用父类中有的变量和方法，不能调用子类特有的变量和方法了</li><li>但是，运行时，仍然是对象本身的类型</li><li>此时，一定是安全的，而且也是自动完成的</li></ul></li><li><p><strong>向下转型</strong>：当左边的变量的类型（子类）&lt;右边对象/变量的类型（父类），我们就称为向下转型</p><ul><li>此时，编译时按照左边变量的类型处理，就可以调用子类特有的变量和方法了</li><li>但是，运行时，仍然是对象本身的类型</li><li>此时，不一定是安全的，需要使用(类型)进行强制类型转换</li><li>不是所有通过编译的向下转型都是正确的，可能会发生ClassCastException，为了安全，可以通过isInstanceof关键字进行判断</li></ul></li></ul><p>示例代码：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n784" mdtype="fences" style="break-inside: unset;">public class Test {
+    public static void main(String[] args) {
+        // 向上转型  
+        Animal a = new Cat();  
+        a.eat(); 				// 调用的是 Cat 的 eat
+
+        // 向下转型  
+        Cat c = (Cat)a;       
+        c.catchMouse(); 		// 调用的是 Cat 的 catchMouse
+        
+        // 向下转型  
+        //Dog d = (Dog)a;     //这段代码可以通过编译，但是运行时，却报出了ClassCastException 
+        //这是因为，明明创建了Cat类型对象，运行时，当然不能转换成Dog对象的。这两个类型并没有任何继承关系，		//不符合类型转换的定义。
+        //d.watchHouse();        // 调用的是 Dog 的 watchHouse 
+        
+        Animal a2 = new Animal();
+       // Dog d2 = (Dog)a2;//这段代码可以通过编译，但是运行时，却报出了ClassCastException 
+       // d2.watchHouse(); // 调用的是 Dog 的 watchHouse
+    }  
+}
+</pre><p>为了避免ClassCastException的发生，Java提供了 <code>instanceof</code> 关键字，给引用变量做类型的校验，只要用instanceof判断返回true的，那么强转为该类型就一定是安全的，不会报ClassCastException异常。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n786" mdtype="fences">变量名/对象 instanceof 数据类型 
+</pre><p>所以，转换前，我们最好先做一个判断，代码如下：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n788" mdtype="fences" style="break-inside: unset;">public class Test {
+    public static void main(String[] args) {
+        // 向上转型  
+        Animal a = new Cat();  
+        a.eat();               // 调用的是 Cat 的 eat
+
+        // 向下转型  
+        if (a instanceof Cat){
+            Cat c = (Cat)a;       
+            c.catchMouse();        // 调用的是 Cat 的 catchMouse
+        } else if (a instanceof Dog){
+            Dog d = (Dog)a;       
+            d.watchHouse();       // 调用的是 Dog 的 watchHouse
+        }
+    }  
+}
+</pre><p>那么，哪些instanceof判断会返回true呢？</p><ul><li>对象/变量的编译时类型 与  instanceof后面数据类型是直系亲属关系才可以比较</li><li>对象/变量的运行时类型&lt;= instanceof后面数据类型，才为true</li></ul><p>示例代码：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n796" mdtype="fences">class Person{
+	//方法代码省略...
+}
+class Woman extends Person{
+    //方法代码省略...
+}
+class ChineseWoman extends Woman{
+	//方法代码省略...
+}
+class Man extends Person{
+    
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n797" mdtype="fences" style="break-inside: unset;">/*
+ * 1、instanceof 前面的对象与后面的类型有没有要求
+ * 	instanceof 前面的对象的编译时类型，必须与 instanceof后面的类型有直系关系
+ 
+ * 2、instanceof 什么时候返回true
+ * 	instanceof 前面的对象的运行时类型，确实 &lt;= instanceof后面的类型，直系关系
+ * 
+ */
+public class TestInstanceof {
+	public static void main(String[] args) {
+		Man m = new Man();
+//		System.out.println(m instanceof Woman);//错误  m的编译时类型是Man，它和Woman不是直系关系
+		
+		Person p1 = new Man();
+		System.out.println(p1 instanceof Woman);
+        //可以，p1的编译时类型是Person，它和Woman是直系关系
+		//但是p1的运行时类型是Man，返回false
+        
+		Person p2 = new Woman();
+		System.out.println(p2 instanceof Woman);
+        //p2的编译时类型是Person，它和Woman是直系关系
+		//p2的运行时类型是Woman，返回true
+        
+		Person p3 = new ChineseWoman();
+		System.out.println(p2 instanceof Woman);
+        //p3的编译时类型是Person，它和Woman是直系关系
+        //但是p3的运行时类型是ChineseWoman, ChineseWoman&lt;=Woman，所以返回true
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n798" mdtype="fences" style="break-inside: unset;"> public class Test{
+     public static void main(String[] args){
+        Person p1 = new Person();
+        Person p2 = new Woman();
+        Person p3 = new ChineseWoman();
+        Person p4 = new Man();
+        Object p5 = new Woman();
+        ChineseWoman p6 = new ChineseWoman();
+        
+        //因为p1的运行时类型是Person类型，编译时类型是Person
+        System.out.println(p1 instanceof Object);//true  Person &lt; Object类型
+        System.out.println(p1 instanceof Person);//true  Person = Person类型
+        System.out.println(p1 instanceof Woman);//false	 Person &gt; Woman类型
+        System.out.println(p1 instanceof ChineseWoman);//false Person &gt; ChineseWoman类型
+        System.out.println(p1 instanceof Man);//false  Person &gt; Man类型
+        System.out.println("------------------------");
+        
+      //因为p2的运行时类型是Woman类型，编译时类型是Person
+        System.out.println(p2 instanceof Object);//true Woman &lt; Object类型
+        System.out.println(p2 instanceof Person);//true Woman &lt; Person类型
+        System.out.println(p2 instanceof Woman);//true Woman = Woman类型
+        System.out.println(p2 instanceof ChineseWoman);//false Woman &gt; ChineseWoman类型
+        System.out.println(p2 instanceof Man);//false Woman 和Man 是平级关系，没有父子类关系
+        System.out.println("------------------------");
+        
+        //因为p3的运行时类型是ChineseWoman，编译时类型是Person
+        System.out.println(p3 instanceof Object);//true ChineseWoman &lt; Object类型
+        System.out.println(p3 instanceof Person);//true ChineseWoman &lt; Person类型
+        System.out.println(p3 instanceof Woman);//true ChineseWoman &lt; Woman类型
+        System.out.println(p3 instanceof ChineseWoman);//true ChineseWoman = ChineseWoman类型
+        System.out.println(p3 instanceof Man);//false ChineseWoman 和 Man 是叔侄挂心，不是父子类关系
+        System.out.println("------------------------");
+        
+        //因为p4的运行时类型是Man，编译时类型是Person
+        System.out.println(p4 instanceof Object);//true Man &lt; Object类型
+        System.out.println(p4 instanceof Person);//true Man &lt; Person类型
+        System.out.println(p4 instanceof Woman);//false Woman 和Man 是平级关系，没有父子类关系
+        System.out.println(p4 instanceof ChineseWoman);//false ChineseWoman 和 Man 是叔侄挂心，不是父子类关系
+        System.out.println(p4 instanceof Man);//true Man = Man类型
+        System.out.println("------------------------");
+        
+        //因为p5的运行时类型是Woman类型，编译时类型是Object
+        System.out.println(p5 instanceof Object);//true Woman &lt; Object类型
+        System.out.println(p5 instanceof Person);//true Woman &lt; Person类型
+        System.out.println(p5 instanceof Woman);//true Woman = Woman类型
+        System.out.println(p5 instanceof ChineseWoman);//false Woman &gt; ChineseWoman类型
+        System.out.println(p5 instanceof Man);//false Woman 和Man 是平级关系，没有父子类关系
+        System.out.println("------------------------");
+ 
+        //因为p6的运行时类型是ChineseWoman，编译时类型是ChineseWoman
+        System.out.println(p6 instanceof Object);//true ChineseWoman &lt; Object类型
+        System.out.println(p6 instanceof Person);//true ChineseWoman &lt; Person类型
+        System.out.println(p6 instanceof Woman);//true ChineseWoman &lt; Woman类型
+        System.out.println(p6 instanceof ChineseWoman);//true ChineseWoman = ChineseWoman类型
+//        System.out.println(p6 instanceof Man);//编译不通过，因为p6的编译时类型是ChineseWoman，和Man不是直系亲属关系
+        System.out.println("------------------------");
+    }
+ }
+</pre><h4><a name='header-n799' class='md-header-anchor '></a>练习题</h4><p>1、声明一个父类Employee员工类型，
+有属性，姓名（String），出生日期（MyDate类型，也是自定义的含年，月，日属性日期类型）
+有方法，public  double earning()
+<span>		</span>public String getInfo()：显示姓名和实发工资</p><p>2、声明一个子类SalaryEmployee正式工，继承父类Employee
+增加属性，薪资，工作日天数，请假天数
+重写方法，public double earning()返回实发工资， 实发工资 = 薪资 - 薪资/工作日天数 * 请假天数，
+重写方法，public String getInfo()：显示姓名和实发工资，月薪，工作日天数，请假天数<span>	</span></p><p>3、声明一个子类HourEmployee小时工，继承父类Employee
+有属性，工作小时数，每小时多少钱
+重写方法，public double earning()返回实发工资， 实发工资 = 每小时多少钱 * 小时数
+重写方法，public String getInfo()：显示姓名和实发工资，时薪，工作小时数
+增加方法，public void leave()：打印查看使用工具是否损坏，需要赔偿</p><p>4、声明一个子类Manager经理，继承SalaryEmployee
+增加属性：奖金，奖金比例
+重写方法，public double earning()返回实发工资， 实发工资 = (薪资 - 薪资/工作日天数 * 请假天数)*(1+奖金比例)
+重写方法，public String getInfo()：显示姓名和实发工资，月薪，工作日天数，请假天数，奖金比例</p><p>5、声明一个员工数组，存储各种员工，
+你现在是人事，从键盘输入当前的月份，需要查看每个人的详细信息。
+如果他是正式工（包括SalaryEmployee和Manager），并且是本月生日的，祝福生日快乐，通知领取生日礼物。如果是HourEmployee显示小时工，就进行完工检查，即调用leave方法</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n805" mdtype="fences" style="break-inside: unset;">public abstract class Employee {
+	private String name;
+	private MyDate birthday;
+	public Employee(String name, MyDate birthday) {
+		super();
+		this.name = name;
+		this.birthday = birthday;
+	}
+	public Employee(String name, int year, int month, int day) {
+		super();
+		this.name = name;
+		this.birthday = new MyDate(year, month, day);
+	}
+	public Employee() {
+		super();
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public MyDate getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(MyDate birthday) {
+		this.birthday = birthday;
+	}
+	
+	public abstract double earning();
+	
+	public String getInfo(){
+		return "姓名：" + name + "，生日：" + birthday.getInfo() +"，实发工资：" + earning();
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n806" mdtype="fences" style="break-inside: unset;">public class SalaryEmployee extends Employee {
+	private double salary;
+	private int workingDays;//工作日天数，
+	private double offDays;//请假天数
+
+	public SalaryEmployee() {
+		super();
+	}
+
+	public SalaryEmployee(String name, int year, int month, int day, double salary, int workingDays, double offDays) {
+		super(name, year, month, day);
+		this.salary = salary;
+		this.workingDays = workingDays;
+		this.offDays = offDays;
+	}
+
+	public SalaryEmployee(String name, MyDate birthday, double salary, int workingDays, double offDays) {
+		super(name, birthday);
+		this.salary = salary;
+		this.workingDays = workingDays;
+		this.offDays = offDays;
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+
+	public int getWorkingDays() {
+		return workingDays;
+	}
+
+	public void setWorkingDays(int workingDays) {
+		this.workingDays = workingDays;
+	}
+
+	public double getOffDays() {
+		return offDays;
+	}
+
+	public void setOffDays(double offDays) {
+		this.offDays = offDays;
+	}
+
+	/*
+	 * 重写方法，public double earning()返回实发工资， 
+		实发工资 = 薪资 - 薪资/工作日天数 * 请假天数
+	 */
+	@Override
+	public double earning() {
+		return salary - salary/workingDays * offDays;
+	}
+	
+	@Override
+	public String getInfo() {
+		return super.getInfo() + "，月薪：" + salary + "，工作日：" + workingDays +"，请假天数：" + offDays;
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n807" mdtype="fences" style="break-inside: unset;">public class HourEmployee extends Employee {
+	private double moneyPerHour;
+	private double hours;
+	
+	public HourEmployee() {
+		super();
+	}
+
+	public HourEmployee(String name, int year, int month, int day, double moneyPerHour, double hours) {
+		super(name, year, month, day);
+		this.moneyPerHour = moneyPerHour;
+		this.hours = hours;
+	}
+
+	public HourEmployee(String name, MyDate birthday, double moneyPerHour, double hours) {
+		super(name, birthday);
+		this.moneyPerHour = moneyPerHour;
+		this.hours = hours;
+	}
+
+	public double getMoneyPerHour() {
+		return moneyPerHour;
+	}
+
+	public void setMoneyPerHour(double moneyPerHour) {
+		this.moneyPerHour = moneyPerHour;
+	}
+
+	public double getHours() {
+		return hours;
+	}
+
+	public void setHours(double hours) {
+		this.hours = hours;
+	}
+
+	/*
+	 * 重写方法，public double earning()返回实发工资， 
+		实发工资 = 每小时多少钱 * 小时数	
+	 */
+	@Override
+	public double earning() {
+		return moneyPerHour * hours;
+	}
+
+	@Override
+	public String getInfo() {
+		return super.getInfo() + "，时薪：" + moneyPerHour + "，小时数：" + hours;
+	}
+
+	public void leave(){
+		System.out.println("小时工，查看使用工具是否损坏，需要赔偿，然后拿钱走人");
+	}
+}
+
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n808" mdtype="fences" style="break-inside: unset;">public class Manager extends SalaryEmployee {
+	private double commisionPer;
+
+	public Manager() {
+		super();
+	}
+
+	public Manager(String name, int year, int month, int day, double salary, int workingDays, double offDays,
+			double commisionPer) {
+		super(name, year, month, day, salary, workingDays, offDays);
+		this.commisionPer = commisionPer;
+	}
+
+	public Manager(String name, MyDate birthday, double salary, int workingDays, double offDays, double commisionPer) {
+		super(name, birthday, salary, workingDays, offDays);
+		this.commisionPer = commisionPer;
+	}
+
+	public double getCommisionPer() {
+		return commisionPer;
+	}
+
+	public void setCommisionPer(double commisionPer) {
+		this.commisionPer = commisionPer;
+	}
+
+	@Override
+	public double earning() {
+		return super.earning() * (1+commisionPer);
+	}
+	@Override
+	public String getInfo() {
+		return super.getInfo() + "，奖金比例：" + commisionPer;
+	}
+}
+
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n809" mdtype="fences" style="break-inside: unset;">public class TestEmployee {
+	public static void main(String[] args) {
+		Employee[] all = new Employee[3];
+		/*all[0] = new HourEmployee("张三", new MyDate(1990, 5, 1), 50, 50);
+		all[1] = new SalaryEmployee("李四", new MyDate(1991, 1, 1), 10000, 22, 1);
+		all[2] = new Manager("老王", new MyDate(1987, 12, 8), 20000, 22, 0, 0.3);*/
+		
+		all[0] = new HourEmployee("张三", 1990, 5, 1, 50, 50);
+		all[1] = new SalaryEmployee("李四", 1991, 1, 1, 10000, 22, 1);
+		all[2] = new Manager("老王", 1987, 12, 8, 20000, 22, 0, 0.3);
+		
+		//从键盘输入当前的月份
+		Scanner input = new Scanner(System.in);
+		System.out.print("请输入当前月份：");
+		int month;
+		while(true){
+			month = input.nextInt();
+			if(month&gt;=1 &amp;&amp; month&lt;=12){
+				break;
+			}
+		}
+		input.close();
+		
+		for (int i = 0; i &lt; all.length; i++) {
+			System.out.println(all[i].getInfo());
+			if(all[i] instanceof SalaryEmployee){
+				if(month == all[i].getBirthday().getMonth()){
+					System.out.println(all[i].getName() +"生日快乐，领取生日补助购物卡");
+				}
+			}else{
+				HourEmployee he = (HourEmployee) all[i];
+				he.leave();
+			}
+		}
+	}
+}
+</pre><h3><a name='header-n810' class='md-header-anchor '></a>6.7.6 多态引用时关于成员变量与成员方法引用的原则(了解)</h3><ol start='' ><li><h4><a name='header-n813' class='md-header-anchor '></a>成员变量：只看编译时类型</h4><p>如果直接访问成员变量，那么只看编译时类型</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n815" mdtype="fences" style="break-inside: unset;">package com.atguigu.test05;
+
+/*
+ * 成员变量没有重写，只看编译时类型
+ */
+public class TestExtends {
+	public static void main(String[] args) {
+		Son s = new Son();
+		System.out.println(s.a);//2，因为son的编译时类型是Son
+		System.out.println(((Father)s).a);//1    ((Father)son)编译时类型，就是Father
+		
+		Father s2 = new Son();
+		System.out.println(s2.a);//1 son2的编译时类型是Father
+		System.out.println(((Son)s2).a);//2  ((Son)son2)编译时类型，就是Son
+	}
+}
+class Father{
+	int a = 1;
+}
+class Son extends Father{
+	int a = 2;
+}
+</pre></li><li><h4><a name='header-n817' class='md-header-anchor '></a>非虚方法：只看编译时类型</h4><p>编译期就可以明确要调用的方法</p><p>在Java中的非虚方法有三种:</p><p> （1）由invokestatic指令调用的static方法，这种方法在编译时确定在运行时不会改变。</p><p> （2）由invokespecial指令调用的方法，这些方法包括私有方法，实例构造方法，这些方法也是在编译时已经确定，在运行时不会再改变的方法</p><p> （3）由final关键字修饰的方法。虽然final方法是由invokevirtual指令进行调用的，但是final修饰的方法不能够进行在子类中进行覆盖，所有final修饰的方法是不能够在运行期进行动态改变的。在java语言规范中明确规定final方法就是非虚方法。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n823" mdtype="fences" style="break-inside: unset;">package com.atguigu.test09;
+
+public class Test {
+
+	public static void main(String[] args) {
+		Father f = new Son();
+		f.test();//只看编译时类型
+        f.method();
+	}
+}
+class Father{
+	public static void test(){
+		System.out.println("Father.test");
+	}
+    public void method(){
+        System.out.println("Father.method");
+        fun();//看运行时类型
+        other();//看编译时类型
+    }
+    public void fun(){
+        System.out.println("Father.fun");
+    }
+    private void other(){
+        System.out.println("Father.other");
+    }
+}
+class Son extends Father{
+	public static void test(){
+		System.out.println("son");
+	}
+    public void fun(){
+        System.out.println("Son.fun");
+    }
+    private void other(){
+        System.out.println("Son.other");
+    }
+}
+</pre><blockquote><p>小贴士：</p><p>静态方法不能被重写</p><p>调用静态方法最好使用“类名.”</p></blockquote></li><li><h4><a name='header-n829' class='md-header-anchor '></a>虚方法：静态分派与动态绑定</h4><p>在Java中虚方法是指在编译阶段和类加载阶段都不能确定方法的调用入口地址，在运行阶段才能确定的方法，<strong>即可能被重写的方法。</strong></p><p>当我们通过“对象.方法”的形式，调用一个虚方法，我们要如何确定它具体执行哪个方法呢？</p><ul><li><strong>静态分派</strong>：先看这个对象的编译时类型，在这个对象的编译时类型中找到最匹配的方法,   最匹配的是指，实参的编译时类型与形参的类型最匹配</li><li><strong>动态绑定：</strong>再看这个对象的运行时类型，如果这个对象的运行时类重写了刚刚找到的那个最匹配的方法，那么执行重写的，否则仍然执行刚才编译时类型中的那个方法</li></ul><h5><a name='header-n837' class='md-header-anchor '></a>（1）示例一：没有重载有重写</h5><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n838" mdtype="fences" style="break-inside: unset;">abstract class Animal {  
+    public abstract void eat();  
+}  
+class Cat extends Animal {  
+    public void eat() {  
+        System.out.println("吃鱼");  
+    }  
+}  
+
+class Dog extends Animal {  
+    public void eat() {  
+        System.out.println("吃骨头");  
+    }  
+}
+
+public class Test{
+    public static void main(String[] args){
+        Animal a = new Cat();
+        a.eat();
+    }
+}
+</pre><p>如上代码在编译期间先进行静态分派：此时a的编译时类型是Animal类，所以去Animal类中搜索eat()方法，如果Animal类或它的父类中没有这个方法，将会报错。</p><p>而在运行期间动态的在进行动态绑定：a的运行时类型是Cat类，而子类重写了eat()方法，所以执行的是Cat类的eat方法。如果没有重写，那么还是执行Animal类在的eat()方法</p><h5><a name='header-n841' class='md-header-anchor '></a>（2）示例二：有重载没有重写</h5><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n842" mdtype="fences" style="break-inside: unset;">class MyClass{
+	public void method(Father f) {
+		System.out.println("father");
+	}
+	public void method(Son s) {
+		System.out.println("son");
+	}
+	public void method(Daughter f) {
+		System.out.println("daughter");
+	}
+}
+class Father{
+	
+}
+class Son extends Father{
+	
+}
+class Daughter extends Father{
+	
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n843" mdtype="fences">public class TestOverload {
+	public static void main(String[] args) {
+		Father f = new Father();
+		Father s = new Son();
+		Father d = new Daughter();
+        
+     MyClass my = new MyClass();
+		my.method(f);//father
+		my.method(s);//father
+		my.method(d);//father
+	}
+}
+</pre><p>如上代码在编译期间先进行静态分派：因为my是MyClass类型，那么在MyClass类型中寻找最匹配的method方法。</p><p>而在运行期间动态的在进行动态绑定：即确定执行的是MyClass类中的method(Father f)方法，因为my对象的运行时类型还是MyClass类型。</p><p><strong>有些同学会疑问，不是应该分别执行method(Father f)、method(Son s)、method(Daughter d)吗？</strong></p><p><strong>因为此时实参f,s,d编译时类型都是Father类型，因此method(Father f)是最合适的。</strong></p><h5><a name='header-n848' class='md-header-anchor '></a>（3）示例三：有重载没有重写</h5><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n849" mdtype="fences" style="break-inside: unset;">class MyClass{
+	public void method(Father f) {
+		System.out.println("father");
+	}
+	public void method(Son s) {
+		System.out.println("son");
+	}
+}
+class Father{
+	
+}
+class Son extends Father{
+	
+}
+class Daughter extends Father{
+	
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n850" mdtype="fences">public class TestOverload {
+	public static void main(String[] args) {
+		MyClass my = new MyClass();
+		Father f = new Father();
+		Son s = new Son();
+		Daughter d = new Daughter();
+		my.method(f);//father
+		my.method(s);//son
+		my.method(d);//father
+	}
+}
+</pre><p>如上代码在编译期间先进行静态分派：因为my是MyClass类型，那么在MyClass类型中寻找最匹配的method方法。</p><p>而在运行期间动态的在进行动态绑定：即确定执行的是MyClass类中的method(Father f)方法，因为my对象的运行时类型还是MyClass类型。</p><p><strong>有些同学会疑问，这次为什么分别执行method(Father f)、method(Son s)？</strong></p><p><strong>因为此时实参f,s,d编译时类型分别是Father、Son、Daughter，而Daughter只能与Father参数类型匹配</strong></p><h5><a name='header-n855' class='md-header-anchor '></a>（4）示例四：有重载没有重写</h5><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n856" mdtype="fences" style="break-inside: unset;">class MyClass{
+	public void method(Father f) {
+		System.out.println("father");
+	}
+	public void method(Son s) {
+		System.out.println("son");
+	}
+}
+class MySub extends MyClass{
+	public void method(Daughter d) {
+		System.out.println("daughter");
+	}
+}
+class Father{
+	
+}
+class Son extends Father{
+	
+}
+class Daughter extends Father{
+	
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n857" mdtype="fences">public class TestOverload {
+	public static void main(String[] args) {
+		MyClass my = new MySub();
+		Father f = new Father();
+		Son s = new Son();
+		Daughter d = new Daughter();
+		my.method(f);//father
+		my.method(s);//son
+		my.method(d);//father
+	}
+}
+</pre><p>如上代码在编译期间先进行静态分派：因为my是MyClass类型，那么在MyClass类型中寻找最匹配的method方法。</p><p>而在运行期间动态的在进行动态绑定：即确定执行的是MyClass类中的method(Father f)方法，因为my对象的运行时类型还是MyClass类型。</p><p><strong>有些同学会疑问，my对象不是MySub类型吗，而MySub类型中有method(Daughter d)方法，那么my.method(d)语句应该执行MySub类型中的method(Daughter d)方法？</strong></p><ul><li>my变量在编译时类型是MyClass类型，那么在MyClass类中，只有method(Father f)，method(Son s)方法，</li><li>f,s,d变量编译时类型分别是Father、Son、Daughter，而Daughter只能与Father参数类型匹配</li><li>而在MySub类中并没有重写method(Father f)方法，所以仍然执行MyClass类中的method(Father f)方法</li></ul><h5><a name='header-n868' class='md-header-anchor '></a>（5）示例五：有重载有重写</h5><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n869" mdtype="fences" style="break-inside: unset;">class MyClass{
+	public void method(Father f) {
+		System.out.println("father");
+	}
+	public void method(Son s) {
+		System.out.println("son");
+	}
+}
+class MySub extends MyClass{
+	public void method(Father d) {
+		System.out.println("sub--");
+	}
+    public void method(Daughter d) {
+		System.out.println("daughter");
+	}
+}
+class Father{
+	
+}
+class Son extends Father{
+	
+}
+class Daughter extends Father{
+	
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n870" mdtype="fences">public class TestOverloadOverride {
+	public static void main(String[] args) {
+		MyClass my = new MySub();
+		Father f = new Father();
+		Son s = new Son();
+		Daughter d = new Daughter();
+		my.method(f);//sub--
+		my.method(s);//son
+		my.method(d);//sub--
+	}
+}
+</pre><p>如上代码在编译期间先进行静态分派：因为my是MyClass类型，那么在MyClass类型中寻找最匹配的method方法。</p><p>而在运行期间动态的在进行动态绑定：即确定执行的是MyClass类中的method(Father f)方法，因为my对象的运行时类型还是MyClass类型。</p><p><strong>有些同学会疑问，my对象不是MySub类型吗，而MySub类型中有method(Daughter d)方法，那么my.method(d)语句应该执行MySub类型中的method(Daughter d)方法？</strong></p><ul><li>my变量在编译时类型是MyClass类型，那么在MyClass类中，只有method(Father f)，method(Son s)方法，</li><li>f,s,d变量编译时类型分别是Father、Son、Daughter，而Daughter只能与Father参数类型匹配</li><li>而在MySub类中重写method(Father f)方法，所以执行MySub类中的method(Father f)方法</li></ul><p>&nbsp;</p></li></ol><h2><a name='header-n882' class='md-header-anchor '></a>6.8 native关键字</h2><p>native：本地的，原生的
+用法：</p><p><span>	</span>只能修饰方法</p><p><span>	</span>表示这个方法的方法体代码不是用Java语言实现的，而是由C/C++语言编写的。</p><p><span>	</span>但是对于Java程序员来说，可以当做Java的方法一样去正常调用它，或者子类重写它。</p><p>JVM内存的管理：</p><p><img src='imgs06/1561465258546.png' alt='' referrerPolicy='no-referrer' /></p><figure><table><thead><tr><th>区域名称</th><th>作用</th></tr></thead><tbody><tr><td>程序计数器</td><td>程序计数器是CPU中的寄存器，它包含每一个线程下一条要执行的指令的地址</td></tr><tr><td>本地方法栈</td><td>当程序中调用了native的本地方法时，本地方法执行期间的内存区域</td></tr><tr><td>方法区</td><td>存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</td></tr><tr><td>堆内存</td><td>存储对象（包括数组对象），new来创建的，都存储在堆内存。</td></tr><tr><td>虚拟机栈</td><td>用于存储正在执行的每个Java方法的局部变量表等。局部变量表存放了编译期可知长度的各种基本数据类型、对象引用，方法执行完，自动释放。</td></tr></tbody></table></figure><p>&nbsp;</p><h2><a name='header-n909' class='md-header-anchor '></a>6.9 final关键字</h2><p>final：最终的，不可更改的，它的用法有：</p><ol start='' ><li><h3><a name='header-n913' class='md-header-anchor '></a>修饰类</h3><p>表示这个类不能被继承，没有子类</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n915" mdtype="fences">final class Eunuch{//太监类
+	
+}
+class Son extends Eunuch{//错误
+	
+}
+</pre></li><li><h3><a name='header-n917' class='md-header-anchor '></a>修饰方法</h3><p>表示这个方法不能被子类重写</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n919" mdtype="fences">class Father{
+	public final void method(){
+		System.out.println("father");
+	}
+}
+class Son extends Father{
+	public void method(){//错误
+		System.out.println("son");
+	}
+}
+</pre></li><li><h3><a name='header-n921' class='md-header-anchor '></a>声明常量</h3><p>final修饰某个变量（成员变量或局部变量），表示它的值就不能被修改，即常量，常量名建议使用大写字母。</p><blockquote><p>如果某个成员变量用final修饰后，没有set方法，并且必须初始化（可以显式赋值、或在初始化块赋值、实例变量还可以在构造器中赋值）</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n925" mdtype="fences" style="break-inside: unset;">public class Test{
+    public static void main(String[] args){
+    	final int MIN_SCORE = 0;
+    	final int MAX_SCORE = 100;
+    }
+}
+class Chinese{
+	public static final String COUNTRY = "中华人民共和国";	
+	private String name;
+	public Chinese( String name) {
+		super();
+		this.name = name;
+	}
+	public Chinese() {
+		super();
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	//final修饰的没有set方法
+	public static String getCountry() {
+		return COUNTRY;
+	}
+}
+</pre><p>&nbsp;</p></li></ol><h2><a name='header-n927' class='md-header-anchor '></a>6.10  Object根父类</h2><h3><a name='header-n928' class='md-header-anchor '></a>6.10.1 如何理解根父类</h3><p>类 <code>java.lang.Object</code>是类层次结构的根类，即所有类的父类。每个类都直接或间接继承Object类。</p><ul><li>Object类型的变量与除Object以外的任意引用数据类型的对象都多态引用</li><li>所有对象（包括数组）都实现这个类的方法。</li><li>如果一个类没有特别指定父类，那么默认则继承自Object类。例如：</li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n938" mdtype="fences">public class MyClass /*extends Object*/ {
+  	// ...
+}
+</pre><h3><a name='header-n939' class='md-header-anchor '></a>6.10.2 Object类的API</h3><p><span>	</span><strong>API(Application Programming Interface)</strong>，应用程序编程接口。Java API是一本程序员的<code>字典</code> ，是JDK中提供给我们使用的类的说明文档。所以我们可以通过查询API的方式，来学习Java提供的类，并得知如何使用它们。在API文档中是无法得知这些类具体是如何实现的，如果要查看具体实现代码，那么我们需要查看<strong>src源码</strong>。</p><p><span>	</span>根据JDK源代码及Object类的API文档，Object类当中包含的方法有11个。今天我们主要学习其中的5个：</p><h4><a name='header-n942' class='md-header-anchor '></a>（1）hashCode()</h4><p>public int hashCode()：返回每个对象的hash码值。根据对象内存地址换算得到的一个整数。</p><p>hashCode 的常规协定：</p><ul><li>如果两个对象的hash值是不同的，那么这两个对象一定不相等；</li><li>如果两个对象的hash值是相同的，那么这两个对象不一定相等。</li></ul><p>主要用于后面当对象存储到哈希表等容器中时，为了提高存储和查询性能用的。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n951" mdtype="fences">	public static void main(String[] args) {
+		System.out.println("Aa".hashCode());//2112
+		System.out.println("BB".hashCode());//2112
+	}
+</pre><h4><a name='header-n952' class='md-header-anchor '></a>（2）getClass()</h4><p>public final Class&lt;?&gt; getClass()：获取对象的运行时类型</p><blockquote><p>因为Java有多态现象，所以一个引用数据类型的变量的编译时类型与运行时类型可能不一致，因此如果需要查看这个变量实际指向的对象的类型，需要用getClass()方法</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n956" mdtype="fences">	public static void main(String[] args) {
+		Object obj = new String();
+		System.out.println(obj.getClass().getName());//运行时类型
+	}
+</pre><p>讲反射时还会讲的到它。</p><h4><a name='header-n958' class='md-header-anchor '></a>（3）toString()</h4><p>public String toString()</p><p>①默认情况下，toString()返回的是“对象的运行时类型名称 @ 对象的hashCode值的十六进制形式&quot;</p><p>②通常是建议重写</p><p>③如果我们直接System.out.println(对象)，默认会自动调用这个对象的toString()</p><blockquote><p>因为Java的引用数据类型的变量中存储的实际上是对象的内存地址，但是Java对程序员隐藏内存地址信息，所以不能直接将内存地址显示出来，所以当你打印对象时，JVM帮你调用了对象的toString()。</p></blockquote><p>例如自定义的Person类：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n966" mdtype="fences">public class Person {  
+    private String name;
+    private int age;
+
+    @Override
+    public String toString() {
+        return "Person{" + "name='" + name + '\'' + ", age=" + age + '}';
+    }
+
+    // 省略构造器与Getter Setter
+}
+</pre><h4><a name='header-n967' class='md-header-anchor '></a>（4）equals()</h4><p>public boolean equals(Object obj)：用于判断当前对象this与指定对象obj是否“相等”</p><p>①默认情况下，equals方法的实现等价于与“==”，比较的是对象的地址值</p><p>②我们一般选择重写，重写有些要求：</p><ul><li><p>如果重写equals，那么一定要一起重写hashCode()方法，因为规定：</p><ul><li><span>	</span>如果两个对象调用equals返回true，那么要求这两个对象的hashCode值一定是相等的；</li><li><span>	</span>如果两个对象的hashCode值不同的，那么要求这个两个对象调用equals方法一定是false；</li><li><span>	</span>如果两个对象的hashCode值相同的，那么这个两个对象调用equals可能是true，也可能是false</li></ul></li><li><p>如果重写equals，那么一定要遵循如下几个原则：</p><ul><li><span>	</span>自反性：x.equals(x)返回true</li><li><span>	</span>传递性：x.equals(y)为true, y.equals(z)为true，然后x.equals(z)也应该为true</li><li><span>	</span>一致性：只要参与equals比较的属性值没有修改，那么无论何时调用结果应该一致</li><li><span>	</span>对称性：x.equals(y)与y.equals(x)结果应该一样</li><li><span>	</span>非空对象与null的equals一定是false</li></ul></li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n994" mdtype="fences" style="break-inside: unset;">class User{
+	private String host;
+	private String username;
+	private String password;
+	public User(String host, String username, String password) {
+		super();
+		this.host = host;
+		this.username = username;
+		this.password = password;
+	}
+	public User() {
+		super();
+	}
+	public String getHost() {
+		return host;
+	}
+	public void setHost(String host) {
+		this.host = host;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	@Override
+	public String toString() {
+		return "User [host=" + host + ", username=" + username + ", password=" + password + "]";
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((host == null) ? 0 : host.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (host == null) {
+			if (other.host != null)
+				return false;
+		} else if (!host.equals(other.host))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
+	
+}
+</pre><p>&nbsp;</p><h4><a name='header-n996' class='md-header-anchor '></a>（5）finalize()</h4><p>protected void finalize()：用于最终清理内存的方法</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n998" mdtype="fences" style="break-inside: unset;">public class TestFinalize {
+	public static void main(String[] args) {
+		for (int i = 0; i &lt; 10; i++) {
+			MyData my = new MyData();
+		}
+		
+		System.gc();//通知垃圾回收器来回收垃圾
+		
+		try {
+			Thread.sleep(2000);//等待2秒再结束main，为了看效果
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+}
+class MyData{
+
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("轻轻的我走了...");
+	}
+	
+}
+</pre><p>面试题：对finalize()的理解？</p><ul><li>当对象被GC确定为要被回收的垃圾，在回收之前由GC帮你调用这个方法，不是由程序员手动调用。</li><li>这个方法与C语言的析构函数不同，C语言的析构函数被调用，那么对象一定被销毁，内存被回收，而finalize方法的调用不一定会销毁当前对象，因为可能在finalize()中出现了让当前对象“复活”的代码</li><li>每一个对象的finalize方法只会被调用一次。</li><li>子类可以选择重写，一般用于彻底释放一些资源对象，而且这些资源对象往往是通过C/C++等代码申请的资源内存</li></ul><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+</body>
+</html>

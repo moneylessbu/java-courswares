@@ -1,0 +1,3609 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width initial-scale=1'>
+    <title>JavaSE_第2章 Java基础语法</title>
+    <link href='https://fonts.loli.net/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext'
+          rel='stylesheet' type='text/css'/>
+    <style type='text/css'>html {
+        overflow-x: initial !important;
+    }
+
+    :root {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --select-text-bg-color: #B5D6FC;
+        --select-text-font-color: auto;
+        --monospace: "Lucida Console", Consolas, "Courier", monospace;
+    }
+
+    html {
+        font-size: 14px;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        margin: 0px;
+        padding: 0px;
+        height: auto;
+        bottom: 0px;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        font-size: 1rem;
+        line-height: 1.42857;
+        overflow-x: hidden;
+        background: inherit;
+    }
+
+    iframe {
+        margin: auto;
+    }
+
+    a.url {
+        word-break: break-all;
+    }
+
+    a:active, a:hover {
+        outline: 0px;
+    }
+
+    .in-text-selection, ::selection {
+        text-shadow: none;
+        background: var(--select-text-bg-color);
+        color: var(--select-text-font-color);
+    }
+
+    #write {
+        margin: 0px auto;
+        height: auto;
+        width: inherit;
+        word-break: normal;
+        word-wrap: break-word;
+        position: relative;
+        white-space: normal;
+        overflow-x: visible;
+        padding-top: 40px;
+    }
+
+    #write.first-line-indent p {
+        text-indent: 2em;
+    }
+
+    #write.first-line-indent li p, #write.first-line-indent p * {
+        text-indent: 0px;
+    }
+
+    #write.first-line-indent li {
+        margin-left: 2em;
+    }
+
+    .for-image #write {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    body.typora-export {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .typora-export .footnote-line, .typora-export li, .typora-export p {
+        white-space: pre-wrap;
+    }
+
+    @media screen and (max-width: 500px) {
+        body.typora-export {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        #write {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .CodeMirror-sizer {
+            margin-left: 0px !important;
+        }
+
+        .CodeMirror-gutters {
+            display: none !important;
+        }
+    }
+
+    #write li > figure:first-child {
+        margin-top: -20px;
+    }
+
+    #write ol, #write ul {
+        position: relative;
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    button, input, select, textarea {
+        color: inherit;
+        font-style: inherit;
+        font-variant: inherit;
+        font-weight: inherit;
+        font-stretch: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        font-family: inherit;
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+        line-height: normal;
+        padding: 0px;
+    }
+
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre {
+        width: inherit;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p {
+        position: relative;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        break-after: avoid-page;
+        break-inside: avoid;
+        orphans: 2;
+    }
+
+    p {
+        orphans: 4;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+    }
+
+    h4 {
+        font-size: 1.4rem;
+    }
+
+    h5 {
+        font-size: 1.2rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+    }
+
+    .md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .md-blockmeta {
+        color: rgb(204, 204, 204);
+        font-weight: 700;
+        font-style: italic;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    sup.md-footnote {
+        padding: 2px 4px;
+        background-color: rgba(238, 238, 238, 0.7);
+        color: rgb(85, 85, 85);
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    sup.md-footnote a, sup.md-footnote a:hover {
+        color: inherit;
+        text-transform: inherit;
+        text-decoration: inherit;
+    }
+
+    #write input[type="checkbox"] {
+        cursor: pointer;
+        width: inherit;
+        height: inherit;
+    }
+
+    figure {
+        overflow-x: auto;
+        margin: 1.2em 0px;
+        max-width: calc(100% + 16px);
+        padding: 0px;
+    }
+
+    figure > table {
+        margin: 0px !important;
+    }
+
+    tr {
+        break-inside: avoid;
+        break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+        width: 100%;
+        overflow: auto;
+        break-inside: auto;
+        text-align: left;
+    }
+
+    table.md-table td {
+        min-width: 32px;
+    }
+
+    .CodeMirror-gutters {
+        border-right: 0px;
+        background-color: inherit;
+    }
+
+    .CodeMirror {
+        text-align: left;
+    }
+
+    .CodeMirror-placeholder {
+        opacity: 0.3;
+    }
+
+    .CodeMirror pre {
+        padding: 0px 4px;
+    }
+
+    .CodeMirror-lines {
+        padding: 0px;
+    }
+
+    div.hr:focus {
+        cursor: none;
+    }
+
+    #write pre {
+        white-space: pre-wrap;
+    }
+
+    #write.fences-no-line-wrapping pre {
+        white-space: pre;
+    }
+
+    #write pre.ty-contain-cm {
+        white-space: normal;
+    }
+
+    .CodeMirror-gutters {
+        margin-right: 4px;
+    }
+
+    .md-fences {
+        font-size: 0.9rem;
+        display: block;
+        break-inside: avoid;
+        text-align: left;
+        overflow: visible;
+        white-space: pre;
+        background: inherit;
+        position: relative !important;
+    }
+
+    .md-diagram-panel {
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+        padding-top: 0px;
+        padding-bottom: 8px;
+        overflow-x: auto;
+    }
+
+    #write .md-fences.mock-cm {
+        white-space: pre-wrap;
+    }
+
+    .md-fences.md-fences-with-lineno {
+        padding-left: 0px;
+    }
+
+    #write.fences-no-line-wrapping .md-fences.mock-cm {
+        white-space: pre;
+        overflow-x: auto;
+    }
+
+    .md-fences.mock-cm.md-fences-with-lineno {
+        padding-left: 8px;
+    }
+
+    .CodeMirror-line, twitterwidget {
+        break-inside: avoid;
+    }
+
+    .footnotes {
+        opacity: 0.8;
+        font-size: 0.9rem;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .footnotes + .footnotes {
+        margin-top: 0px;
+    }
+
+    .md-reset {
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        outline: 0px;
+        vertical-align: top;
+        background: 0px 0px;
+        text-decoration: none;
+        text-shadow: none;
+        float: none;
+        position: static;
+        width: auto;
+        height: auto;
+        white-space: nowrap;
+        cursor: inherit;
+        -webkit-tap-highlight-color: transparent;
+        line-height: normal;
+        font-weight: 400;
+        text-align: left;
+        box-sizing: content-box;
+        direction: ltr;
+    }
+
+    li div {
+        padding-top: 0px;
+    }
+
+    blockquote {
+        margin: 1rem 0px;
+    }
+
+    li .mathjax-block, li p {
+        margin: 0.5rem 0px;
+    }
+
+    li {
+        margin: 0px;
+        position: relative;
+    }
+
+    blockquote > :last-child {
+        margin-bottom: 0px;
+    }
+
+    blockquote > :first-child, li > :first-child {
+        margin-top: 0px;
+    }
+
+    .footnotes-area {
+        color: rgb(136, 136, 136);
+        margin-top: 0.714rem;
+        padding-bottom: 0.143rem;
+        white-space: normal;
+    }
+
+    #write .footnote-line {
+        white-space: pre-wrap;
+    }
+
+    @media print {
+        body, html {
+            border: 1px solid transparent;
+            height: 99%;
+            break-after: avoid;
+            break-before: avoid;
+        }
+
+        #write {
+            margin-top: 0px;
+            padding-top: 0px;
+            border-color: transparent !important;
+        }
+
+        .typora-export * {
+            -webkit-print-color-adjust: exact;
+        }
+
+        html.blink-to-pdf {
+            font-size: 13px;
+        }
+
+        .typora-export #write {
+            padding-left: 32px;
+            padding-right: 32px;
+            padding-bottom: 0px;
+            break-after: avoid;
+        }
+
+        .typora-export #write::after {
+            height: 0px;
+        }
+
+        @page {
+            margin: 20mm 0px;
+        }
+    }
+
+    .footnote-line {
+        margin-top: 0.714em;
+        font-size: 0.7em;
+    }
+
+    a img, img a {
+        cursor: pointer;
+    }
+
+    pre.md-meta-block {
+        font-size: 0.8rem;
+        min-height: 0.8rem;
+        white-space: pre-wrap;
+        background: rgb(204, 204, 204);
+        display: block;
+        overflow-x: hidden;
+    }
+
+    p > .md-image:only-child:not(.md-img-error) img, p > img:only-child {
+        display: block;
+        margin: auto;
+    }
+
+    p > .md-image:only-child {
+        display: inline-block;
+        width: 100%;
+    }
+
+    #write .MathJax_Display {
+        margin: 0.8em 0px 0px;
+    }
+
+    .md-math-block {
+        width: 100%;
+    }
+
+    .md-math-block:not(:empty)::after {
+        display: none;
+    }
+
+    [contenteditable="true"]:active, [contenteditable="true"]:focus {
+        outline: 0px;
+        box-shadow: none;
+    }
+
+    .md-task-list-item {
+        position: relative;
+        list-style-type: none;
+    }
+
+    .task-list-item.md-task-list-item {
+        padding-left: 0px;
+    }
+
+    .md-task-list-item > input {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        margin-left: -1.2em;
+        margin-top: calc(1em - 10px);
+        border: none;
+    }
+
+    .math {
+        font-size: 1rem;
+    }
+
+    .md-toc {
+        min-height: 3.58rem;
+        position: relative;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .md-toc-content {
+        position: relative;
+        margin-left: 0px;
+    }
+
+    .md-toc-content::after, .md-toc::after {
+        display: none;
+    }
+
+    .md-toc-item {
+        display: block;
+        color: rgb(65, 131, 196);
+    }
+
+    .md-toc-item a {
+        text-decoration: none;
+    }
+
+    .md-toc-inner:hover {
+        text-decoration: underline;
+    }
+
+    .md-toc-inner {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .md-toc-h1 .md-toc-inner {
+        margin-left: 0px;
+        font-weight: 700;
+    }
+
+    .md-toc-h2 .md-toc-inner {
+        margin-left: 2em;
+    }
+
+    .md-toc-h3 .md-toc-inner {
+        margin-left: 4em;
+    }
+
+    .md-toc-h4 .md-toc-inner {
+        margin-left: 6em;
+    }
+
+    .md-toc-h5 .md-toc-inner {
+        margin-left: 8em;
+    }
+
+    .md-toc-h6 .md-toc-inner {
+        margin-left: 10em;
+    }
+
+    @media screen and (max-width: 48em) {
+        .md-toc-h3 .md-toc-inner {
+            margin-left: 3.5em;
+        }
+
+        .md-toc-h4 .md-toc-inner {
+            margin-left: 5em;
+        }
+
+        .md-toc-h5 .md-toc-inner {
+            margin-left: 6.5em;
+        }
+
+        .md-toc-h6 .md-toc-inner {
+            margin-left: 8em;
+        }
+    }
+
+    a.md-toc-inner {
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+
+    .footnote-line a:not(.reversefootnote) {
+        color: inherit;
+    }
+
+    .md-attr {
+        display: none;
+    }
+
+    .md-fn-count::after {
+        content: ".";
+    }
+
+    code, pre, samp, tt {
+        font-family: var(--monospace);
+    }
+
+    kbd {
+        margin: 0px 0.1em;
+        padding: 0.1em 0.6em;
+        font-size: 0.8em;
+        color: rgb(36, 39, 41);
+        background: rgb(255, 255, 255);
+        border: 1px solid rgb(173, 179, 185);
+        border-radius: 3px;
+        box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    .md-comment {
+        color: rgb(162, 127, 3);
+        opacity: 0.8;
+        font-family: var(--monospace);
+    }
+
+    code {
+        text-align: left;
+        vertical-align: initial;
+    }
+
+    a.md-print-anchor {
+        white-space: pre !important;
+        border-width: initial !important;
+        border-style: none !important;
+        border-color: initial !important;
+        display: inline-block !important;
+        position: absolute !important;
+        width: 1px !important;
+        right: 0px !important;
+        outline: 0px !important;
+        background: 0px 0px !important;
+        text-decoration: initial !important;
+        text-shadow: initial !important;
+    }
+
+    .md-inline-math .MathJax_SVG .noError {
+        display: none !important;
+    }
+
+    .html-for-mac .inline-math-svg .MathJax_SVG {
+        vertical-align: 0.2px;
+    }
+
+    .md-math-block .MathJax_SVG_Display {
+        text-align: center;
+        margin: 0px;
+        position: relative;
+        text-indent: 0px;
+        max-width: none;
+        max-height: none;
+        min-height: 0px;
+        min-width: 100%;
+        width: auto;
+        overflow-y: hidden;
+        display: block !important;
+    }
+
+    .MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display {
+        width: auto;
+        margin: inherit;
+        display: inline-block !important;
+    }
+
+    .MathJax_SVG .MJX-monospace {
+        font-family: var(--monospace);
+    }
+
+    .MathJax_SVG .MJX-sans-serif {
+        font-family: sans-serif;
+    }
+
+    .MathJax_SVG {
+        display: inline;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        zoom: 90%;
+        text-indent: 0px;
+        text-align: left;
+        text-transform: none;
+        letter-spacing: normal;
+        word-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        float: none;
+        direction: ltr;
+        max-width: none;
+        max-height: none;
+        min-width: 0px;
+        min-height: 0px;
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .MathJax_SVG * {
+        transition: none;
+    }
+
+    .MathJax_SVG_Display svg {
+        vertical-align: middle !important;
+        margin-bottom: 0px !important;
+    }
+
+    .os-windows.monocolor-emoji .md-emoji {
+        font-family: "Segoe UI Symbol", sans-serif;
+    }
+
+    .md-diagram-panel > svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] svg, [lang="flow"] svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] .node text {
+        font-size: 1rem;
+    }
+
+    table tr th {
+        border-bottom: 0px;
+    }
+
+    video {
+        max-width: 100%;
+        display: block;
+        margin: 0px auto;
+    }
+
+    iframe {
+        max-width: 100%;
+        width: 100%;
+        border: none;
+    }
+
+    .highlight td, .highlight tr {
+        border: 0px;
+    }
+
+
+    .CodeMirror {
+        height: auto;
+    }
+
+    .CodeMirror.cm-s-inner {
+        background: inherit;
+    }
+
+    .CodeMirror-scroll {
+        overflow-y: hidden;
+        overflow-x: auto;
+        z-index: 3;
+    }
+
+    .CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler {
+        background-color: rgb(255, 255, 255);
+    }
+
+    .CodeMirror-gutters {
+        border-right: 1px solid rgb(221, 221, 221);
+        background: inherit;
+        white-space: nowrap;
+    }
+
+    .CodeMirror-linenumber {
+        padding: 0px 3px 0px 5px;
+        text-align: right;
+        color: rgb(153, 153, 153);
+    }
+
+    .cm-s-inner .cm-keyword {
+        color: rgb(119, 0, 136);
+    }
+
+    .cm-s-inner .cm-atom, .cm-s-inner.cm-atom {
+        color: rgb(34, 17, 153);
+    }
+
+    .cm-s-inner .cm-number {
+        color: rgb(17, 102, 68);
+    }
+
+    .cm-s-inner .cm-def {
+        color: rgb(0, 0, 255);
+    }
+
+    .cm-s-inner .cm-variable {
+        color: rgb(0, 0, 0);
+    }
+
+    .cm-s-inner .cm-variable-2 {
+        color: rgb(0, 85, 170);
+    }
+
+    .cm-s-inner .cm-variable-3 {
+        color: rgb(0, 136, 85);
+    }
+
+    .cm-s-inner .cm-string {
+        color: rgb(170, 17, 17);
+    }
+
+    .cm-s-inner .cm-property {
+        color: rgb(0, 0, 0);
+    }
+
+    .cm-s-inner .cm-operator {
+        color: rgb(152, 26, 26);
+    }
+
+    .cm-s-inner .cm-comment, .cm-s-inner.cm-comment {
+        color: rgb(170, 85, 0);
+    }
+
+    .cm-s-inner .cm-string-2 {
+        color: rgb(255, 85, 0);
+    }
+
+    .cm-s-inner .cm-meta {
+        color: rgb(85, 85, 85);
+    }
+
+    .cm-s-inner .cm-qualifier {
+        color: rgb(85, 85, 85);
+    }
+
+    .cm-s-inner .cm-builtin {
+        color: rgb(51, 0, 170);
+    }
+
+    .cm-s-inner .cm-bracket {
+        color: rgb(153, 153, 119);
+    }
+
+    .cm-s-inner .cm-tag {
+        color: rgb(17, 119, 0);
+    }
+
+    .cm-s-inner .cm-attribute {
+        color: rgb(0, 0, 204);
+    }
+
+    .cm-s-inner .cm-header, .cm-s-inner.cm-header {
+        color: rgb(0, 0, 255);
+    }
+
+    .cm-s-inner .cm-quote, .cm-s-inner.cm-quote {
+        color: rgb(0, 153, 0);
+    }
+
+    .cm-s-inner .cm-hr, .cm-s-inner.cm-hr {
+        color: rgb(153, 153, 153);
+    }
+
+    .cm-s-inner .cm-link, .cm-s-inner.cm-link {
+        color: rgb(0, 0, 204);
+    }
+
+    .cm-negative {
+        color: rgb(221, 68, 68);
+    }
+
+    .cm-positive {
+        color: rgb(34, 153, 34);
+    }
+
+    .cm-header, .cm-strong {
+        font-weight: 700;
+    }
+
+    .cm-del {
+        text-decoration: line-through;
+    }
+
+    .cm-em {
+        font-style: italic;
+    }
+
+    .cm-link {
+        text-decoration: underline;
+    }
+
+    .cm-error {
+        color: red;
+    }
+
+    .cm-invalidchar {
+        color: red;
+    }
+
+    .cm-constant {
+        color: rgb(38, 139, 210);
+    }
+
+    .cm-defined {
+        color: rgb(181, 137, 0);
+    }
+
+    div.CodeMirror span.CodeMirror-matchingbracket {
+        color: rgb(0, 255, 0);
+    }
+
+    div.CodeMirror span.CodeMirror-nonmatchingbracket {
+        color: rgb(255, 34, 34);
+    }
+
+    .cm-s-inner .CodeMirror-activeline-background {
+        background: inherit;
+    }
+
+    .CodeMirror {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .CodeMirror-scroll {
+        height: 100%;
+        outline: 0px;
+        position: relative;
+        box-sizing: content-box;
+        background: inherit;
+    }
+
+    .CodeMirror-sizer {
+        position: relative;
+    }
+
+    .CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar {
+        position: absolute;
+        z-index: 6;
+        display: none;
+    }
+
+    .CodeMirror-vscrollbar {
+        right: 0px;
+        top: 0px;
+        overflow: hidden;
+    }
+
+    .CodeMirror-hscrollbar {
+        bottom: 0px;
+        left: 0px;
+        overflow: hidden;
+    }
+
+    .CodeMirror-scrollbar-filler {
+        right: 0px;
+        bottom: 0px;
+    }
+
+    .CodeMirror-gutter-filler {
+        left: 0px;
+        bottom: 0px;
+    }
+
+    .CodeMirror-gutters {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        padding-bottom: 30px;
+        z-index: 3;
+    }
+
+    .CodeMirror-gutter {
+        white-space: normal;
+        height: 100%;
+        box-sizing: content-box;
+        padding-bottom: 30px;
+        margin-bottom: -32px;
+        display: inline-block;
+    }
+
+    .CodeMirror-gutter-wrapper {
+        position: absolute;
+        z-index: 4;
+        background: 0px 0px !important;
+        border: none !important;
+    }
+
+    .CodeMirror-gutter-background {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        z-index: 4;
+    }
+
+    .CodeMirror-gutter-elt {
+        position: absolute;
+        cursor: default;
+        z-index: 4;
+    }
+
+    .CodeMirror-lines {
+        cursor: text;
+    }
+
+    .CodeMirror pre {
+        border-radius: 0px;
+        border-width: 0px;
+        background: 0px 0px;
+        font-family: inherit;
+        font-size: inherit;
+        margin: 0px;
+        white-space: pre;
+        word-wrap: normal;
+        color: inherit;
+        z-index: 2;
+        position: relative;
+        overflow: visible;
+    }
+
+    .CodeMirror-wrap pre {
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        word-break: normal;
+    }
+
+    .CodeMirror-code pre {
+        border-right: 30px solid transparent;
+        width: fit-content;
+    }
+
+    .CodeMirror-wrap .CodeMirror-code pre {
+        border-right: none;
+        width: auto;
+    }
+
+    .CodeMirror-linebackground {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        z-index: 0;
+    }
+
+    .CodeMirror-linewidget {
+        position: relative;
+        z-index: 2;
+        overflow: auto;
+    }
+
+    .CodeMirror-wrap .CodeMirror-scroll {
+        overflow-x: hidden;
+    }
+
+    .CodeMirror-measure {
+        position: absolute;
+        width: 100%;
+        height: 0px;
+        overflow: hidden;
+        visibility: hidden;
+    }
+
+    .CodeMirror-measure pre {
+        position: static;
+    }
+
+    .CodeMirror div.CodeMirror-cursor {
+        position: absolute;
+        visibility: hidden;
+        border-right: none;
+        width: 0px;
+    }
+
+    .CodeMirror div.CodeMirror-cursor {
+        visibility: hidden;
+    }
+
+    .CodeMirror-focused div.CodeMirror-cursor {
+        visibility: inherit;
+    }
+
+    .cm-searching {
+        background: rgba(255, 255, 0, 0.4);
+    }
+
+    @media print {
+        .CodeMirror div.CodeMirror-cursor {
+            visibility: hidden;
+        }
+    }
+
+
+    :root {
+        --active-file-bg-color: rgba(32, 43, 51, 0.63);
+        --active-file-text-color: white;
+        --bg-color: #f3f2ee;
+        --text-color: #1f0909;
+        --control-text-color: #444;
+        --rawblock-edit-panel-bd: #e5e5e5;
+        --select-text-bg-color: rgba(32, 43, 51, 0.63);
+        --select-text-font-color: white;
+    }
+
+    pre {
+        --select-text-bg-color: #36284e;
+        --select-text-font-color: #fff;
+    }
+
+    html {
+        font-size: 16px;
+    }
+
+    html, body {
+        background-color: rgb(243, 242, 238);
+        font-family: "PT Serif", "Times New Roman", Times, serif;
+        color: rgb(31, 9, 9);
+        line-height: 1.5em;
+    }
+
+    #write {
+        max-width: 40em;
+    }
+
+    ol li {
+        list-style-type: decimal;
+        list-style-position: outside;
+    }
+
+    ul li {
+        list-style-type: disc;
+        list-style-position: outside;
+    }
+
+    ol, ul {
+        list-style: none;
+    }
+
+    blockquote, q {
+        quotes: none;
+    }
+
+    blockquote::before, blockquote::after, q::before, q::after {
+        content: none;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 1.875em;
+        line-height: 1.6em;
+        margin-top: 2em;
+    }
+
+    h2, h3 {
+        font-size: 1.3125em;
+        line-height: 1.15;
+        margin-top: 2.28571em;
+        margin-bottom: 1.15em;
+    }
+
+    h3 {
+        font-weight: normal;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        margin-top: 2.67em;
+    }
+
+    h5, h6 {
+        font-size: 1em;
+    }
+
+    h1 {
+        border-bottom: 1px solid;
+        margin-bottom: 1.875em;
+        padding-bottom: 0.8125em;
+    }
+
+    a {
+        text-decoration: none;
+        color: rgb(6, 85, 136);
+    }
+
+    a:hover, a:active {
+        text-decoration: underline;
+    }
+
+    p, blockquote, .md-fences {
+        margin-bottom: 1.5em;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 1.5em;
+    }
+
+    blockquote {
+        font-style: italic;
+        border-left: 5px solid;
+        margin-left: 2em;
+        padding-left: 1em;
+    }
+
+    ul, ol {
+        margin: 0px 0px 1.5em 1.5em;
+    }
+
+    .md-meta, .md-before, .md-after {
+        color: rgb(153, 153, 153);
+    }
+
+    table {
+        margin-bottom: 1.5em;
+        font-size: 1em;
+    }
+
+    thead th, tfoot th {
+        padding: 0.25em 0.25em 0.25em 0.4em;
+        text-transform: uppercase;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    td {
+        vertical-align: top;
+        padding: 0.25em 0.25em 0.25em 0.4em;
+    }
+
+    code, .md-fences {
+        background-color: rgb(218, 218, 218);
+    }
+
+    code {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .md-fences {
+        margin-left: 2em;
+        margin-bottom: 3em;
+        padding-left: 1ch;
+        padding-right: 1ch;
+    }
+
+    pre, code, tt {
+        font-size: 0.875em;
+        line-height: 1.71429em;
+    }
+
+    h1 {
+        line-height: 1.3em;
+        font-weight: normal;
+        margin-bottom: 0.5em;
+    }
+
+    p + ul, p + ol {
+        margin-top: 0.5em;
+    }
+
+    h3 + ul, h4 + ul, h5 + ul, h6 + ul, h3 + ol, h4 + ol, h5 + ol, h6 + ol {
+        margin-top: 0.5em;
+    }
+
+    li > ul, li > ol {
+        margin-top: inherit;
+        margin-bottom: 0px;
+    }
+
+    li ol > li {
+        list-style-type: lower-alpha;
+    }
+
+    li li ol > li {
+        list-style-type: lower-roman;
+    }
+
+    h2, h3 {
+        margin-bottom: 0.75em;
+    }
+
+    hr {
+        border-top: none;
+        border-right: none;
+        border-bottom: 1px solid;
+        border-left: none;
+    }
+
+    h1 {
+        border-color: rgb(197, 197, 197);
+    }
+
+    blockquote {
+        border-color: rgb(186, 186, 186);
+        color: rgb(101, 101, 101);
+    }
+
+    blockquote ul, blockquote ol {
+        margin-left: 0px;
+    }
+
+    .ty-table-edit {
+        background-color: transparent;
+    }
+
+    thead {
+        background-color: rgb(218, 218, 218);
+    }
+
+    tr:nth-child(2n) {
+        background: rgb(232, 231, 231);
+    }
+
+    hr {
+        border-color: rgb(197, 197, 197);
+    }
+
+    .task-list {
+        padding-left: 1rem;
+    }
+
+    .md-task-list-item {
+        padding-left: 1.5rem;
+        list-style-type: none;
+    }
+
+    .md-task-list-item > input::before {
+        content: "√";
+        display: inline-block;
+        width: 1.25rem;
+        height: 1.6rem;
+        vertical-align: middle;
+        text-align: center;
+        color: rgb(221, 221, 221);
+        background-color: rgb(243, 242, 238);
+    }
+
+    .md-task-list-item > input:checked::before, .md-task-list-item > input[checked]::before {
+        color: inherit;
+    }
+
+    #write pre.md-meta-block {
+        min-height: 1.875rem;
+        color: rgb(85, 85, 85);
+        border: 0px;
+        background: transparent;
+        margin-left: 1em;
+        margin-top: 1em;
+    }
+
+    .md-image > .md-meta {
+        color: rgb(155, 81, 70);
+    }
+
+    .md-image > .md-meta {
+        font-family: Menlo, "Ubuntu Mono", Consolas, "Courier New", "Microsoft Yahei", "Hiragino Sans GB", "WenQuanYi Micro Hei", serif;
+    }
+
+    #write > h3.md-focus::before {
+        left: -1.5rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h4.md-focus::before {
+        left: -1.5rem;
+        top: 0.25rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h5.md-focus::before {
+        left: -1.5rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h6.md-focus::before {
+        left: -1.5rem;
+        top: 0.3125rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    .md-toc:focus .md-toc-content {
+        margin-top: 19px;
+    }
+
+    .md-toc-content:empty::before {
+        color: rgb(6, 85, 136);
+    }
+
+    .md-toc-item {
+        color: rgb(6, 85, 136);
+    }
+
+    #write div.md-toc-tooltip {
+        background-color: rgb(243, 242, 238);
+    }
+
+    #typora-sidebar {
+        background-color: rgb(243, 242, 238);
+        box-shadow: rgba(0, 0, 0, 0.376) 0px 6px 12px;
+    }
+
+    .pin-outline #typora-sidebar {
+        background: inherit;
+        box-shadow: none;
+        border-right: 1px dashed;
+    }
+
+    .pin-outline #typora-sidebar:hover .outline-title-wrapper {
+        border-left: 1px dashed;
+    }
+
+    .outline-item:hover {
+        background-color: rgb(218, 218, 218);
+        border-left: 28px solid rgb(218, 218, 218);
+        border-right: 18px solid rgb(218, 218, 218);
+    }
+
+    .typora-node .outline-item:hover {
+        border-right: 28px solid rgb(218, 218, 218);
+    }
+
+    .outline-expander::before {
+        content: "";
+        font-family: FontAwesome;
+        font-size: 14px;
+        top: 1px;
+    }
+
+    .outline-expander:hover::before, .outline-item-open > .outline-item > .outline-expander::before {
+        content: "";
+    }
+
+    .modal-content {
+        background-color: rgb(243, 242, 238);
+    }
+
+    .auto-suggest-container ul li {
+        list-style-type: none;
+    }
+
+    .megamenu-menu, #top-titlebar, #top-titlebar *, .megamenu-content {
+        background: rgb(243, 242, 238);
+        color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-header {
+        border-bottom: 1px dashed rgb(32, 43, 51);
+    }
+
+    .megamenu-menu {
+        box-shadow: none;
+        border-right: 1px dashed;
+    }
+
+    header, .context-menu, .megamenu-content, footer {
+        font-family: "PT Serif", "Times New Roman", Times, serif;
+        color: rgb(31, 9, 9);
+    }
+
+    #megamenu-back-btn {
+        color: rgb(31, 9, 9);
+        border-color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-header #megamenu-menu-header-title::before {
+        color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-list li a:hover, .megamenu-menu-list li a.active {
+        color: inherit;
+        background-color: rgb(232, 231, 223);
+    }
+
+    .long-btn:hover {
+        background-color: rgb(232, 231, 223);
+    }
+
+    #recent-file-panel tbody tr:nth-child(2n-1) {
+        background-color: transparent !important;
+    }
+
+    .megamenu-menu-panel tbody tr:hover td:nth-child(2) {
+        color: inherit;
+    }
+
+    .megamenu-menu-panel .btn {
+        background-color: rgb(210, 209, 209);
+    }
+
+    .btn-default {
+        background-color: transparent;
+    }
+
+    .typora-sourceview-on #toggle-sourceview-btn, .ty-show-word-count #footer-word-count {
+        background: rgb(199, 197, 197);
+    }
+
+    #typora-quick-open {
+        background-color: inherit;
+    }
+
+    .md-diagram-panel {
+        margin-top: 8px;
+    }
+
+    .file-list-item-file-name {
+        font-weight: initial;
+    }
+
+    .file-list-item-summary {
+        opacity: 1;
+    }
+
+    .file-list-item {
+        color: rgb(119, 119, 119);
+    }
+
+    .file-list-item.active {
+        background-color: inherit;
+        color: black;
+    }
+
+    .ty-side-sort-btn.active {
+        background-color: inherit;
+    }
+
+    .file-list-item.active .file-list-item-file-name {
+        font-weight: bold;
+    }
+
+    .file-list-item {
+        opacity: 1 !important;
+    }
+
+    .file-library-node.active > .file-node-background {
+        background-color: var(--active-file-bg-color);
+    }
+
+    .file-tree-node.active > .file-node-content {
+        color: var(--active-file-text-color);
+    }
+
+    .md-task-list-item > input {
+        margin-left: -1.6em;
+        margin-top: calc(1rem - 12px);
+    }
+
+    input {
+        border: 1px solid rgb(170, 170, 170);
+    }
+
+    .megamenu-menu-header #megamenu-menu-header-title, .megamenu-menu-header:hover, .megamenu-menu-header:focus {
+        color: inherit;
+    }
+
+    .dropdown-menu .divider {
+        border-color: rgb(229, 229, 229);
+    }
+
+    .os-windows-7 strong, .os-windows-7 strong {
+        font-weight: 760;
+    }
+
+
+    .typora-export li, .typora-export p, .typora-export, .footnote-line {
+        white-space: normal;
+    }
+    </style>
+</head>
+<body class='typora-export os-windows'>
+<div id='write' class='is-node'><h1><a name='header-n0' class='md-header-anchor '></a>JavaSE_第2章【Java基础语法】</h1>
+    <h2><a name='header-n2' class='md-header-anchor '></a>学习目标</h2>
+    <ul>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>会使用单行注释和多行注释</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够辨识关键字</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解标识符的含义</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解Java中的基本数据类型分类</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够理解常量的概念</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够定义8种基本数据集类型的变量</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够分清楚两种输出语句的区别</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>了解进制</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解基本数据类型的自动类型转换</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解基本数据类型的强制类型转换</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>了解ASCII编码表和Unicode编码表</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解int类型和char类型的运算原理</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解运算符++ --的运算方式</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解+符号在字符串中的作用</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>掌握算术运算符</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>掌握赋值运算符</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>掌握比较运算符</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解逻辑运算符</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>掌握三元运算符的格式和计算结果</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>了解位运算符</p></li>
+    </ul>
+    <h2><a name='header-n44' class='md-header-anchor '></a>2.1 注释（<em>annotation</em>）</h2>
+    <ul>
+        <li><p><strong>注释</strong>：就是对代码的解释和说明。其目的是让人们能够更加轻松地了解代码。为代码添加注释，是十分必须要的，它不影响程序的编译和运行。</p></li>
+        <li><p>Java中有<code>单行注释</code>、<code>多行注释</code>和<code>文档注释</code></p>
+            <ul>
+                <li><p>单行注释以 <code>//</code>开头，以<code>换行</code>结束，格式如下：</p>
+                    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+                            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                            class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                              tabindex="-1"><div
+                            class="CodeMirror-sizer"
+                            style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                            role="presentation" style="position: relative; outline: none;"><div
+                            class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div
+                            style="position: relative; z-index: 1;"></div><div class="CodeMirror-code"
+                                                                               role="presentation"><div
+                            class="CodeMirror-activeline" style="position: relative;"><div
+                            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                            style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line "
+                                                                      role="presentation"><span role="presentation"
+                                                                                                style="padding-right: 0.1px;"><span
+                            class="cm-comment">// 注释内容</span></span></pre></div></div></div></div></div></div><div
+                            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;"></div><div
+                            class="CodeMirror-gutters" style="display: none; height: 25px;"></div></div></div></pre>
+                </li>
+                <li><p>多行注释以 <code>/*</code>开头，以<code>*/</code>结束，格式如下：</p>
+                    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+                            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                            class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                              tabindex="-1"><div
+                            class="CodeMirror-sizer"
+                            style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                            role="presentation" style="position: relative; outline: none;"><div
+                            class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+                            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+                            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline"
+                                                                             style="position: relative;"><div
+                            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                            style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line "
+                                                                      role="presentation"><span role="presentation"
+                                                                                                style="padding-right: 0.1px;"><span
+                            class="cm-comment">/*</span></span></pre></div><pre class=" CodeMirror-line "
+                                                                                role="presentation"><span
+                            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                                    cm-text="	">    </span><span
+                            class="cm-comment">注释内容</span></span></pre><pre class=" CodeMirror-line "
+                                                                            role="presentation"><span
+                            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                                    cm-text="	">    </span><span
+                            class="cm-comment">注释内容</span></span></pre><pre class=" CodeMirror-line "
+                                                                            role="presentation"><span
+                            role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">*/</span></span></pre></div></div></div></div></div><div
+                            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 99px;"></div><div
+                            class="CodeMirror-gutters" style="display: none; height: 99px;"></div></div></div></pre>
+                </li>
+                <li><p>文档注释以<code>/**</code>开头，以<code>*/</code>结束 </p>
+                    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+                            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                            class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                              tabindex="-1"><div
+                            class="CodeMirror-sizer"
+                            style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                            role="presentation" style="position: relative; outline: none;"><div
+                            class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+                            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+                            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                                      style="position: relative;"><div
+                            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                            style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line "
+                                                                      role="presentation"><span role="presentation"
+                                                                                                style="padding-right: 0.1px;"><span
+                            class="cm-comment">/**</span></span></pre></div><pre class=" CodeMirror-line "
+                                                                                 role="presentation"><span
+                            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                                    cm-text="	">    </span><span
+                            class="cm-comment">注释内容</span></span></pre><pre class=" CodeMirror-line "
+                                                                            role="presentation"><span
+                            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                                    cm-text="	">    </span><span
+                            class="cm-comment">@author &nbsp; 可指定 java java程序的作者</span></span></pre><pre
+                            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                style="padding-right: 0.1px;"><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">@version  可指定源文件的版本</span></span></pre><pre
+                            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                style="padding-right: 0.1px;"><span
+                            class="cm-comment">*/</span></span></pre></div></div></div></div></div><div
+                            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 123px;"></div><div
+                            class="CodeMirror-gutters" style="display: none; height: 123px;"></div></div></div></pre>
+                    <p>文档注释可以被JDK提供的javadoc工具解析生成一套网页形式的说明文档，操作入下：</p>
+                    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="shell"><div
+                            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="shell"><div
+                            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                            class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                              tabindex="-1"><div
+                            class="CodeMirror-sizer"
+                            style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                            role="presentation" style="position: relative; outline: none;"><div
+                            class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+                            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+                            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline"
+                                                                             style="position: relative;"><div
+                            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                            style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line "
+                                                                      role="presentation"><span role="presentation"
+                                                                                                style="padding-right: 0.1px;">D:\&gt;javadoc <span
+                            class="cm-attribute">-d</span> mydoc <span class="cm-attribute">-author</span> <span
+                            class="cm-attribute">-version</span> Hello.java</span></pre></div></div></div></div></div></div><div
+                            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 49px;"></div><div
+                            class="CodeMirror-gutters" style="display: none; height: 49px;"></div></div></div></pre>
+                    <p>&nbsp;</p></li>
+            </ul>
+        </li>
+    </ul>
+    <h2><a name='header-n63' class='md-header-anchor '></a>2.2 关键字（<em>keyword</em>）</h2>
+    <ul>
+        <li><p><strong>什么是关键字</strong>：被java语言赋予了特殊含义的字符串（单词）。</p>
+            <p>例如HelloWorld案例中，出现的关键字有 <code>public</code> 、<code>class</code> 、 <code>static</code> 、 <code>void</code>
+                等，这些单词已经被Java定义，具有明确的含义。</p></li>
+        <li><p><strong>关键字的特点</strong>：全部都是<code>小写字母</code>。</p></li>
+        <li><p><strong>Java有哪些关键字：</strong></p></li>
+    </ul>
+    <p><img src='imgs02/关键字表.png' alt='1555209180504' referrerPolicy='no-referrer'/></p>
+    <blockquote><p><strong>关键字一共50个，其中const和goto是保留字。</strong></p></blockquote>
+    <blockquote><p><strong>true,false,null看起来像关键字，但从技术角度，它们是特殊的布尔值和空值。</strong></p></blockquote>
+    <p><em>建议：关键字比较多，不需要死记硬背，学到哪里记到哪里即可。</em></p>
+    <h2><a name='header-n78' class='md-header-anchor '></a>2.3 标识符( identifier)</h2>
+    <ul>
+        <li><p><strong>标识符概念：</strong>即给类、变量、方法、包等命名的字符序列，称为标识符。</p>
+            <p>简单的说，凡是程序员自己命名的部分都可以称为标识符。</p></li>
+        <li><p><strong>标识符的命名规则（必须遵守）</strong></p>
+            <p>（1）组成：英文大小写字母，数字，下划线_，美元符号$</p>
+            <p>（2）数字不能开头</p>
+            <p>（3）严格区分大小写</p>
+            <p>（4）不能使用Java的关键字（包含保留字）和特殊值</p></li>
+        <li><p><strong>标识符的命名规范（遭受鄙视）</strong></p>
+            <p>（1）见名知意</p>
+            <p>（2）类名、接口名等：每个单词的首字母都大写（大驼峰法则），形式：XxxYyyZzz，</p>
+            <p>例如：HelloWorld，String，System等</p>
+            <p>（3）变量、方法名等：从第二个单词开始首字母大写（小驼峰法则），其余字母小写，形式：xxxYyyZzz，</p>
+            <p>例如：age,name,bookName,main</p>
+            <p>（4）包名等：每一个单词都小写，单词之间使用点.分割，形式：xxx.yyy.zzz，</p>
+            <p>例如：java.lang</p>
+            <p>（5）常量名等：每一个单词都大写，单词之间使用下划线_分割，形式：XXX_YYY_ZZZ，</p>
+            <p>例如：MAX_VALUE,PI</p></li>
+    </ul>
+    <p><strong>练习：</strong>以下合法的标识符是？</p>
+    <p>flag_3
+        my code
+        discount%
+        234rate
+        $name
+        println</p>
+    <p>main</p>
+    <h2><a name='header-n103' class='md-header-anchor '></a>2.4 常量（<em>constant</em>）</h2>
+    <ul>
+        <li><p><strong>常量概念：</strong>在程序执行的过程中，其值不可以发生改变的量。例如 π的值3.1415926</p></li>
+        <li><p><strong>常量的分类</strong>：</p>
+            <ul>
+                <li><p>自定义常量：通过final关键字定义（后面在面向对象部分讲解）</p></li>
+                <li><p><strong>字面值常量：</strong></p>
+                    <figure>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th style='text-align:center;'>字面值常量</th>
+                                <th style='text-align:center;'>举例</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style='text-align:center;'>字符串常量</td>
+                                <td style='text-align:center;'>&quot;HelloWorld&quot;</td>
+                            </tr>
+                            <tr>
+                                <td style='text-align:center;'>整数常量</td>
+                                <td style='text-align:center;'>12，-23</td>
+                            </tr>
+                            <tr>
+                                <td style='text-align:center;'>浮点常量</td>
+                                <td style='text-align:center;'>12.34</td>
+                            </tr>
+                            <tr>
+                                <td style='text-align:center;'>字符常量</td>
+                                <td style='text-align:center;'>&#39;a&#39;，&#39;A&#39;，&#39;0&#39;，&#39;好&#39;</td>
+                            </tr>
+                            <tr>
+                                <td style='text-align:center;'>布尔常量</td>
+                                <td style='text-align:center;'>true，false</td>
+                            </tr>
+                            <tr>
+                                <td style='text-align:center;'>空常量</td>
+                                <td style='text-align:center;'>null</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </figure>
+                    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"
+                         style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                            class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                              tabindex="-1"><div
+                            class="CodeMirror-sizer"
+                            style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                            role="presentation" style="position: relative; outline: none;"><div
+                            class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+                            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+                            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                                      style="position: relative;"><div
+                            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                            style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line "
+                                                                      role="presentation"><span role="presentation"
+                                                                                                style="padding-right: 0.1px;"><span
+                            class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span class="cm-def">ConstantDemo</span> {</span></pre></div><pre
+                            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                style="padding-right: 0.1px;"><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span
+                            class="cm-keyword">public</span> <span class="cm-keyword">static</span> <span
+                            class="cm-variable-3">void</span> <span class="cm-variable">main</span>(<span
+                            class="cm-variable-3">String</span>[] <span class="cm-variable">args</span>) {</span></pre><pre
+                            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                style="padding-right: 0.1px;"><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                               role="presentation"
+                                                                                               cm-text="	">    </span><span
+                            class="cm-comment">//字符串常量</span></span></pre><pre class=" CodeMirror-line "
+                                                                               role="presentation"><span
+                            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                                    cm-text="	">    </span><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span
+                            class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                            class="cm-string">"HelloWorld"</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                                     role="presentation"><span
+                            role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                               role="presentation"
+                                                                                               cm-text="	">    </span></span></pre><pre
+                            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                style="padding-right: 0.1px;"><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                               role="presentation"
+                                                                                               cm-text="	">    </span><span
+                            class="cm-comment">//整数常量</span></span></pre><pre class=" CodeMirror-line "
+                                                                              role="presentation"><span
+                            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                                    cm-text="	">    </span><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span
+                            class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                            class="cm-number">12</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                           role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                               role="presentation"
+                                                                                               cm-text="	">    </span><span
+                            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+                            class="cm-variable">println</span>(<span class="cm-operator">-</span><span
+                            class="cm-number">23</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                           role="presentation"><span role="presentation"
+                                                                                                     class="cm-tab-wrap-hack"
+                                                                                                     style="padding-right: 0.1px;"><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                               role="presentation"
+                                                                                               cm-text="	">    </span></span></pre><pre
+                            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                style="padding-right: 0.1px;"><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                               role="presentation"
+                                                                                               cm-text="	">    </span><span
+                            class="cm-comment">//小数常量</span></span></pre><pre class=" CodeMirror-line "
+                                                                              role="presentation"><span
+                            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                                    cm-text="	">    </span><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span
+                            class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                            class="cm-number">12.34</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                              role="presentation"><span
+                            role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                               role="presentation"
+                                                                                               cm-text="	">    </span></span></pre><pre
+                            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                style="padding-right: 0.1px;"><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                               role="presentation"
+                                                                                               cm-text="	">    </span><span
+                            class="cm-comment">//字符常量</span></span></pre><pre class=" CodeMirror-line "
+                                                                              role="presentation"><span
+                            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                                    cm-text="	">    </span><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span
+                            class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                            class="cm-string">'a'</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                            role="presentation"><span
+                            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                                    cm-text="	">    </span><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span
+                            class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                            class="cm-string">'A'</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                            role="presentation"><span
+                            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+                            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+                            class="cm-variable">println</span>(<span class="cm-string">'0'</span>);</span></pre><pre
+                            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                class="cm-tab-wrap-hack"
+                                                                                style="padding-right: 0.1px;"><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                               role="presentation"
+                                                                                               cm-text="	">    </span></span></pre><pre
+                            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                style="padding-right: 0.1px;"><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                               role="presentation"
+                                                                                               cm-text="	">    </span><span
+                            class="cm-comment">//布尔常量</span></span></pre><pre class=" CodeMirror-line "
+                                                                              role="presentation"><span
+                            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                                    cm-text="	">    </span><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span
+                            class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                            class="cm-atom">true</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                           role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                               role="presentation"
+                                                                                               cm-text="	">    </span><span
+                            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+                            class="cm-variable">println</span>(<span class="cm-atom">false</span>);</span></pre><pre
+                            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                style="padding-right: 0.1px;"><span
+                            class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+                            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 543px;"></div><div
+                            class="CodeMirror-gutters" style="display: none; height: 543px;"></div></div></div></pre>
+                    <blockquote><p>注意事项：</p>
+                        <p><span>	</span>字符常量，单引号里面有且仅有一个字符</p>
+                        <p><span>	</span>空常量，不可以在输出语句中直接打印</p></blockquote>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <h2><a name='header-n141' class='md-header-anchor '></a>2.5 输出语句</h2>
+    <ul>
+        <li><p><strong>换行输出语句</strong>：输出内容，完毕后进行换行，格式如下：</p>
+            <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+                    class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                    style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                    autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                    style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                    class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                    class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                      tabindex="-1"><div
+                    class="CodeMirror-sizer"
+                    style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                    style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                    role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+                    class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+                    class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline"
+                                                                     style="position: relative;"><div
+                    class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                    class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                    style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">System</span>.<span
+                    class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">输出内容</span>);</span></pre></div></div></div></div></div></div><div
+                    style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;"></div><div
+                    class="CodeMirror-gutters" style="display: none; height: 25px;"></div></div></div></pre>
+        </li>
+        <li><p><strong>直接输出语句</strong>：输出内容，完毕后不做任何处理，格式如下</p>
+            <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+                    class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                    style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                    autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                    style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                    class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                    class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                      tabindex="-1"><div
+                    class="CodeMirror-sizer"
+                    style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                    style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                    role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+                    class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+                    class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline"
+                                                                     style="position: relative;"><div
+                    class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                    class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                    style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">System</span>.<span
+                    class="cm-variable">out</span>.<span class="cm-variable">print</span>(<span
+                    class="cm-variable">输出内容</span>);</span></pre></div></div></div></div></div></div><div
+                    style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;"></div><div
+                    class="CodeMirror-gutters" style="display: none; height: 25px;"></div></div></div></pre>
+        </li>
+    </ul>
+    <p><strong>示例代码：</strong></p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div
+            class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div
+            style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div
+            class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">对比如下两组代码：</span></span></pre></div><pre class=" CodeMirror-line "
+                                                                        role="presentation"><span role="presentation"
+                                                                                                  style="padding-right: 0.1px;"><span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">println</span>(<span class="cm-string">"tom"</span>);</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">println</span>(<span class="cm-number">18</span>);</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"><span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">print</span>(<span class="cm-string">"jack"</span>);</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">print</span>(<span class="cm-number">19</span>);</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-comment">//--------------------------</span></span></pre><pre class=" CodeMirror-line "
+                                                                                    role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">System</span>.<span
+            class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+            class="cm-string">"jack"</span><span class="cm-operator">+</span><span class="cm-number">19</span>);<span
+            class="cm-comment">//jack19</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">System</span>.<span
+            class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+            class="cm-number">100</span><span class="cm-operator">+</span><span class="cm-number">19</span><span
+            class="cm-operator">+</span><span class="cm-string">"jack"</span>);<span class="cm-comment">//119jack</span></span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 222px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 222px;"></div></div></div></pre>
+    <blockquote><p>注意事项：</p>
+        <p><span>	</span>换行输出语句，括号内可以什么都不写，只做换行处理</p>
+        <p><span>	</span>直接输出语句，括号内什么都不写的话，编译报错</p>
+        <p><span>	</span>不能同时输出多个数据，可以使用 + 把多个数据连接起来，变成为一个数据进行输出。</p></blockquote>
+    <p>&nbsp;</p>
+    <h2><a name='header-n158' class='md-header-anchor '></a>2.6 变量（<em>variable</em>）</h2>
+    <ul>
+        <li><p><strong>变量的概念:</strong></p>
+            <p>在程序执行的过程中，其值可以发生改变的量</p></li>
+        <li><p><strong>变量的作用:</strong></p>
+            <p>用来存储数据，代表内存的一块存储区域，<strong>这块内存中的值是可以改变的</strong>。</p>
+            <p><img src='imgs02\变量内存.png' alt='' referrerPolicy='no-referrer'/></p></li>
+        <li><p><strong>定义格式：</strong></p>
+            <ol start=''>
+                <li><p>声明变量，并同时赋值</p>
+                    <p><strong>数据类型 变量名=初始化值；</strong></p>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n173" mdtype="fences">//声明并同时赋值，存储一个整数的年龄
+int age = 18;
+//打印输出变量值
+System.out.println("age = " + age);//+号表示连接符，把""中的字符串与变量age中的数据连接进行输出
+</pre>
+                </li>
+                <li><p><strong>数据类型 变量名;</strong></p>
+                    <p><strong>变量名=初始值；</strong></p>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n177" mdtype="fences">//先声明，再赋值
+int age;
+age=18;
+//打印输出变量值
+System.out.println("age = " + age);//18
+</pre>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n178" mdtype="fences">//变量可以重新赋值
+age=19;
+System.out.println("age = " + age);//19
+</pre>
+                </li>
+                <li><p><strong>数据类型 变量名1=初始值，变量名2=初始值；</strong></p>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n181" mdtype="fences">//声明多个变量并同时赋值
+int a=11,b=22;
+//或者先声明再赋值
+int c,d;
+c=33;
+d=44;
+</pre>
+                    <p>&nbsp;</p></li>
+            </ol>
+        </li>
+        <li><p><strong>变量的使用注意事项</strong></p>
+            <ul>
+                <li><p>先声明后使用</p>
+                    <p><span>	</span>如果没有声明，会报“找不到符号”错误</p></li>
+                <li><p>在使用之前必须初始化<span>	</span></p>
+                    <p><span>	</span>如果没有初始化，会报“未初始化”错误</p></li>
+                <li><p>变量有作用域<span>	</span></p>
+                    <p><span>	</span>作用域为变量直接所属的{}范围内，如果超过作用域，也会报“找不到符号”错误</p></li>
+                <li><p>在同一个作用域中不能重名<span>	</span></p>
+                    <p><span>	</span>同一个{}，不能同时声明两个同名变量</p></li>
+            </ul>
+        </li>
+    </ul>
+    <h2><a name='header-n198' class='md-header-anchor '></a>2.7 计算机如何存储数据</h2>
+    <p>计算机世界中只有二进制。那么在计算机中存储和运算的所有数据都要转为二进制。包括数字、字符、图片、声音、视频等。</p>
+    <h3><a name='header-n200' class='md-header-anchor '></a>2.7.1 进制（了解）</h3>
+    <ol start=''>
+        <li><p><strong>进制分类与表示方式</strong></p>
+            <p>（1）十进制：
+                数字组成：0-9
+                进位规则：逢十进一</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n205" mdtype="fences">System.out.println(10);//10表示十进制的10，输出十进制结果10
+</pre>
+            <p>（2）二进制：
+                数字组成：0-1
+                进位规则：逢二进一</p>
+            <p>表示方式：以0b或0B开头</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n208" mdtype="fences">System.out.println(0B10);//0B10表示二进制的10，输出十进制结果2
+</pre>
+            <p>十进制的256，二进制：100000000，为了缩短二进制的表示，又要贴近二进制，在程序中引入八进制和十六进制</p>
+            <p>（3）八进制：很少使用
+                数字组成：0-7
+                进位规则：逢八进一</p>
+            <p>表示方式：以0开头</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n212" mdtype="fences">System.out.println(010);//010表示八进制的10，输出十进制结果8
+</pre>
+            <p>与二进制换算规则：每三位二进制是一位八进制值</p>
+            <p>（4）十六进制
+                数字组成：0-9，a-f或A-F
+                进位规则：逢十六进一</p>
+            <p>表示方式：以0x或0X开头</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n216" mdtype="fences">System.out.println(0X10);//0x10表示十六进制的10，输出十进制结果16
+</pre>
+            <p>与二进制换算规则：每四位二进制是一位十六进制值</p></li>
+        <li><p><strong>进制的转换</strong></p>
+            <figure>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>十进制</th>
+                        <th>二进制</th>
+                        <th>八进制</th>
+                        <th>十六进制</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>10</td>
+                        <td>2</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>11</td>
+                        <td>3</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>100</td>
+                        <td>4</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>101</td>
+                        <td>5</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>110</td>
+                        <td>6</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>111</td>
+                        <td>7</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>1000</td>
+                        <td>10</td>
+                        <td>8</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>1001</td>
+                        <td>11</td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>1010</td>
+                        <td>12</td>
+                        <td>a或A</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>1011</td>
+                        <td>13</td>
+                        <td>b或B</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>1100</td>
+                        <td>14</td>
+                        <td>c或C</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>1101</td>
+                        <td>15</td>
+                        <td>d或D</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>1110</td>
+                        <td>16</td>
+                        <td>e或E</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>1111</td>
+                        <td>17</td>
+                        <td>f或F</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>10000</td>
+                        <td>20</td>
+                        <td>10</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </figure>
+        </li>
+    </ol>
+    <ul>
+        <li><p><strong>任意进制转十进制</strong></p>
+            <p>十进制的本质：123=1*10^2+2*10^1+3*10^0</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n315"
+                 mdtype="fences">系数：就是每一个位上的数值。上例中的1,2,3
+基数：x进制的基数就是x。上例中的10
+权：对每一个位上的数据，从右到左，并且从0开始编号，对应的编号就是该数据的权。上例中的0,1,2
+</pre>
+            <p>任意进制转十进制：<strong>系数*基数^权次幂之和。</strong></p></li>
+        <li><p><strong>十进制转任意进制：</strong></p>
+            <p><strong>十进制数除以基数取余，直到商为0，余数反转。</strong></p>
+            <p>十进制转二进制：十进制整数6除以基数2，倒序取余数，结果为二进制数110
+                <img src='imgs02/十进制转二进制.jpg' alt='' referrerPolicy='no-referrer'/></p></li>
+        <li><p><strong>快速转换方法：</strong></p>
+            <ul>
+                <li><p><strong>二进制转十进制：</strong></p>
+                    <p><strong>8421码：</strong>从右边开始依次是2的0次，2的1次，2的2次。。。。</p>
+                    <p><img src='imgs02/二进制转十进制.jpg' alt='' referrerPolicy='no-referrer'/></p></li>
+                <li><p><strong>二进制数据转八进制数据</strong></p>
+                    <p>从右边开始，3位二进制对应1位八进制</p>
+                    <p><img src='imgs02/2、二进制与八进制转换.png' alt='' referrerPolicy='no-referrer'/></p></li>
+                <li><p><strong>二进制数据转十六进制数据</strong></p>
+                    <p>从右边开始，4位二进制对应1位十六进制</p>
+                    <p><img src='imgs02/3、二进制与十六进制转换.png' alt='' referrerPolicy='no-referrer'/></p></li>
+            </ul>
+            <p>&nbsp;</p></li>
+    </ul>
+    <h3><a name='header-n337' class='md-header-anchor '></a>2.7.2 计算机存储单位</h3>
+    <ul>
+        <li><p><strong>位（bit）：</strong>是数据存储的最小单位，也就是一个二进制位。其中8 bit 就称为1个字节(Byte)。</p></li>
+        <li><p><strong>字节（Byte）：</strong>是计算机信息技术用于计量存储容量的一种计量单位，1字节等于8bit。</p></li>
+        <li><p><strong>转换关系：</strong></p>
+            <ul>
+                <li>8 bit = 1 Byte</li>
+                <li>1024 Byte = 1 KB</li>
+                <li>1024 KB = 1 MB</li>
+                <li>1024 MB = 1 GB</li>
+                <li>1024 GB = 1 TB</li>
+            </ul>
+        </li>
+    </ul>
+    <h3><a name='header-n357' class='md-header-anchor '></a>2.7.3 二进制数据存储</h3>
+    <p>计算机底层都是使用二进制进行数据的存储的。不同类型的数据，存储方式也有不同。</p>
+    <ol start=''>
+        <li><p><strong>整数存储</strong></p>
+            <p>计算机底层存储整数并不是把整数转换为二进制直接存储，而是以二进制的补码形式进行存储。要了解补码还有知道原码和反码：</p>
+            <p><strong>原码</strong>：把十进制转为二进制，然后最高位设置为符号位，1是负数，0是正数。</p>
+            <p><strong>反码</strong>：正整数的反码与原码相同，负整数的反码在原码的基础上，符号位不变，其余位取反（0变1,1变0）</p>
+            <p><strong>补码</strong>：正整数的补码与原码相同，负整数的补码为其反码+1</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n366"
+                 mdtype="fences">例如：用1个字节的二进制表示一个数 //
+
+25 ==&gt; 原码  0001 1001 ==&gt; 反码  0001 1001 --&gt;补码  0001 1001
+-25 ==&gt;原码  1001 1001 ==&gt; 反码1110 0110 ==&gt;补码 1110 0111
+</pre>
+            <p><strong>一个字节可以存储的整数范围</strong></p>
+            <p>分为两种情况：</p>
+            <p>（1）无符号：不考虑正负数</p>
+            <p><span>		</span>0000 0000 ~ 1111 1111 ==&gt; 0~255</p>
+            <p>（2）有符号：-128~127</p>
+            <p><span>		</span>0000 0000 ~ 0111 111 ==&gt; 0~127</p>
+            <p><span>		</span>1000 0001 ~ 1111 1111 ==&gt; -127 ~ -1 （补码形式存储）</p>
+            <p><span>		</span>1000 0000 <span>					</span> ==&gt; -128 特殊值，最高位既是符号位，又是数值位</p></li>
+        <li><p><strong>如何存储小数（了解）</strong></p>
+            <ul>
+                <li>为什么float（4个字节）比long（8个字节）的存储范围大？</li>
+                <li>为什么double（8个字节）比float（4个字节）精度范围大？</li>
+                <li>为什么float和double不精确</li>
+            </ul>
+            <p>因为float、double底层也是二进制，先把小数转为二进制，然后把二进制表示为科学记数法，然后只保存：</p>
+            <p><strong>①符号位②指数位③尾数位</strong></p>
+            <p><img src='imgs02\小数二进制存储.png' alt='' referrerPolicy='no-referrer'/></p>
+            <blockquote><p>详见《<a
+                    href='float%E5%9E%8B%E5%92%8Cdouble%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F.docx'>float型和double型数据的存储方式.docx</a>》
+            </p></blockquote>
+        </li>
+        <li><p><strong>如何存储字符</strong></p>
+            <p>在计算机的内部都是二进制的0、1数据，如何让计算机可以直接识别人类文字的问题呢？就产生出了编码表的概念。</p>
+            <ul>
+                <li><p><strong>编码表</strong></p>
+                    <p>就是将人类的文字和一个十进制数进行对应起来组成一张表格。例如：</p>
+                    <figure>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th style='text-align:center;'>字符</th>
+                                <th style='text-align:center;'>十进制数值</th>
+                                <th style='text-align:center;'>二进制数值</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style='text-align:center;'>0</td>
+                                <td style='text-align:center;'>48</td>
+                                <td style='text-align:center;'>0011 0000</td>
+                            </tr>
+                            <tr>
+                                <td style='text-align:center;'>A</td>
+                                <td style='text-align:center;'>65</td>
+                                <td style='text-align:center;'>0100 0001</td>
+                            </tr>
+                            <tr>
+                                <td style='text-align:center;'>a</td>
+                                <td style='text-align:center;'>97</td>
+                                <td style='text-align:center;'>0110 0001</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </figure>
+                    <p>将所有的英文字母，数字，符号都和十进制进行了对应，因此产生了世界上第一张编码表<strong>ASCII</strong>（American Standard Code for
+                        Information Interchange 美国标准信息交换码）。</p>
+                    <p>Unicode(统一码、万国码、单一码)是计算机科学领域里的一项业界标准，包括字符集、编码方案等。Unicode
+                        是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。</p>
+                    <p><strong>Java中使用的字符集：Unicode编码集</strong></p>
+                    <blockquote><p>
+                        unicode使用2个字节存储一个字符，对于大量的英文字符（1个字节可以存储），无疑是浪费空间的，所以出现了UTF-8、UTF-16编码规则，UTF-8是以8位为一个编码单位的可变长编码规则。这时：</p>
+                        <p>英文字符：还是按照ASCII码表对应的数字进行存储（1个字节）</p>
+                        <p>中文字符：通常需要3个字节来存储</p></blockquote>
+                </li>
+                <li><p><strong>Java中字符常量的几种表示方式</strong></p>
+                    <p>（1）&#39;一个字符&#39;</p>
+                    <p><span>	</span>例如：&#39;A&#39;，&#39;0&#39;，&#39;尚&#39;</p>
+                    <p>（2）转义字符</p>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n425" mdtype="fences">\n：换行
+\r：回车
+\t：Tab键
+\\：\
+\"："
+\'：'
+\b：删除键Backspace
+
+System.out.println('\\');
+System.out.println("hello\tworld\njava");
+</pre>
+                    <p> （3）\u字符的Unicode编码值的十六进制型</p>
+                    <p> ​<span>	</span>例如：&#39;\u5C1A&#39;代表&#39;尚&#39;</p>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n428" mdtype="fences">char c = '\u5C1A';
+char c = '尚';
+String s = '尚';//错误的，哪怕是一个字符，也要使用双引号
+
+char c2 = '';//错误，单引号中有且只能有一个字符
+String s2 = "";//可以，双引号中可以没有其他字符，表示是空字符串
+</pre>
+                    <p>（4）直接给char类型变量赋值十进制的0~65535之间的Unicode编码值</p>
+                    <p>例如：&#39;尚&#39; 的编码值是23578</p>
+                    <p> &#39;a&#39;的编码值是97</p>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n432" mdtype="fences"> char c1 = 23578;
+ System.out.println(c1);//尚
+
+ char c2 = 97;
+ System.out.println(c2);//a
+</pre>
+                </li>
+            </ul>
+        </li>
+    </ol>
+    <h2><a name='header-n433' class='md-header-anchor '></a>2.8 数据类型(data type)</h2>
+    <h3><a name='header-n434' class='md-header-anchor '></a>2.8.1 数据类型分类</h3>
+    <p>Java是一种强类型的语言，针对每一种数据都定义了数据类型，不同类型的数据二进制表示方式或分配的空间大小有所不同，java数据类型主要分为两大类：（定义变量需要确定数据类型，即确定数据使用的空间大小和二进制表示形式）</p>
+    <ul>
+        <li><strong>基本数据类型</strong>：包括 <code>整数</code>、<code>浮点数</code>、<code>字符</code>、<code>布尔</code>。</li>
+        <li><strong>引用数据类型</strong>：包括 <code>类</code>、<code>数组</code>、<code>接口</code>。</li>
+    </ul>
+    <h3><a name='header-n441' class='md-header-anchor '></a>2.8.2 基本数据类型</h3>
+    <p>四类八种基本数据类型：</p>
+    <p><img src='imgs02/基本数据类型范围.jpg' alt='' referrerPolicy='no-referrer'/></p>
+    <blockquote><p>Java中的默认类型：整数类型是<code>int</code> 、浮点类型是<code>double</code> 。</p></blockquote>
+    <ul>
+        <li><p>常量整数值都是int类型，占用4个字节空间。</p>
+            <p>程序运行期间byte、short、char、boolean实际都是占用4个字节内存空间，
+                但在逻辑上：
+                ​<span>	</span>byte只有低8位有效空间。
+                ​<span>	</span>short只有低16位有效空间。
+                ​<span>	</span>所以，可以直接把一个byte范围内的整数常量值直接赋给byte类型变量。short同理。byte b=10;
+                赋值给int，只要在int范围即可。
+                赋值给long，在int范围内的，可以加也可以不用加L，会自动升级为long，如果数字超过int范围，必须加L。</p></li>
+        <li><p>小数常量值，无论多少，不加F，就是double类型。</p></li>
+    </ul>
+    <h3><a name='header-n452' class='md-header-anchor '></a>2.8.3 基本数据类型的存储范围</h3>
+    <ol start=''>
+        <li><h4><a name='header-n455' class='md-header-anchor '></a>整型系列</h4></li>
+    </ol>
+    <p>（1）byte：字节类型</p>
+    <p><span>	</span>占内存：1个字节</p>
+    <p><span>	</span>存储范围：-128~127</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n459"
+         mdtype="fences">   byte b=10;
+   byte b1=128//编译失败: 不兼容的类型: 从int转换到byte可能会有损失
+</pre>
+    <p> （2）short：短整型类型</p>
+    <p><span>	</span>占内存：2个字节</p>
+    <p><span>	</span>存储范围：-32768~32767</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n463"
+         mdtype="fences">   short s=10;
+   short s1=32768//编译失败: 不兼容的类型: 从int转换到short可能会有损失
+</pre>
+    <p> （3）int：整型</p>
+    <p><span>	</span>占内存：4个字节</p>
+    <p><span>	</span>存储范围：-2的31次方 ~ 2的31次方-1</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n467"
+         mdtype="fences">   int i=10;
+   int i1=12345678900;//编译错误: 过大的整数: 12345678900
+</pre>
+    <p> （4）long：整型</p>
+    <p><span>	</span>占内存：8个字节</p>
+    <p><span>	</span>存储范围：-2的63次方 ~ 2的63次方-1</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n471"
+         mdtype="fences">   long j=10;
+   long j1=12345678900L;
+</pre>
+    <blockquote><p>注意：如果要表示某个超过int范围的常量整数它是long类型，那么需要在数字后面加L</p></blockquote>
+    <ol start='2'>
+        <li><h4><a name='header-n476' class='md-header-anchor '></a>浮点型系列（小数）</h4></li>
+    </ol>
+    <p> （1）float：单精度浮点型</p>
+    <p> 占内存：4个字节</p>
+    <p> 精度：科学记数法的小数点后6~7位</p>
+    <blockquote><p>注意：如果要表示某个常量小数是float类型，那么需要在数字后面加F或f，否则就是double类型</p></blockquote>
+    <p> （2）double：双精度浮点型</p>
+    <p> 占内存：8个字节</p>
+    <p> 精度：科学记数法的小数点后15~16位</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n485"
+         mdtype="fences">   float f = 12.3F;//右边如果赋值小数常量值，那么必须加F或f
+   double d = 12.3;
+</pre>
+    <ol start='3'>
+        <li><h4><a name='header-n489' class='md-header-anchor '></a>单字符类型：char</h4>
+            <p>占内存：2个字节</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n491" mdtype="fences">char ch='a';
+</pre>
+            <blockquote><p><strong>char类型：使用单引号&#39;&#39;</strong></p></blockquote>
+        </li>
+        <li><h4><a name='header-n495' class='md-header-anchor '></a>布尔类型</h4></li>
+    </ol>
+    <p> boolean：只能存储true或false</p>
+    <blockquote><p>虽然计算机底层使用0和1表示false和true，但是在代码中不能给boolean类型的变量赋值0和1，只能赋值false和true</p></blockquote>
+    <h2><a name='header-n499' class='md-header-anchor '></a>2.9 基本数据类型转换（Conversion）</h2>
+    <p>
+        在Java程序中，不同的基本数据类型的值经常需要进行相互转换。Java语言所提供的<strong>七种数值类型</strong>之间可以相互转换，基本数据类型转换有两种转换方式：<strong>自动类型转换和强制类型转换</strong>。
+    </p>
+    <h3><a name='header-n501' class='md-header-anchor '></a>2.9.1 自动类型转换</h3>
+    <p>将<code>取值范围小的类型</code>自动提升为<code>取值范围大的类型</code> 。</p>
+    <p>基本数据类型按照取值范围从小到大的关系，如图所示：</p>
+    <p><img src='imgs02/自动类型转换图1.jpg' alt='' referrerPolicy='no-referrer'/></p>
+    <p>以下情况会发生自动类型转换（隐式类型转换）：</p>
+    <ol start=''>
+        <li>当把存储范围小的值（常量值、变量的值、表达式计算的结果值）赋值给了存储范围大的变量时，</li>
+    </ol>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n509"
+         mdtype="fences">int i = 'A';//char自动升级为int
+double d = 10;//int自动升级为double
+
+</pre>
+    <ol start='2'>
+        <li>当存储范围小的数据类型与存储范围大的数据类型一起混合运算时，会按照其中最大的类型运算</li>
+    </ol>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n514"
+         mdtype="fences">int i = 1;
+byte b = 1;
+double d = 1.0;
+
+double sum = i + b + d;//混合运算，升级为double
+</pre>
+    <ol start='3'>
+        <li>当byte,short,char数据类型进行算术运算时，按照int类型处理</li>
+    </ol>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n519"
+         mdtype="fences">byte b1 = 1;
+byte b2 = 2;
+byte b3 = b1 + b2;//编译报错，b1 + b2自动升级为int
+
+char c1 = '0';
+char c2 = 'A';
+System.out.println(c1 + c2);//113
+</pre>
+    <blockquote><p>boolean类型不参与</p></blockquote>
+    <h3><a name='header-n522' class='md-header-anchor '></a>2.9.2 强制类型转换</h3>
+    <p>将<code>取值范围大的类型</code>转换成<code>取值范围小的类型</code>时需要进行强制（显示）类型转换。</p>
+    <p>例如：将小数<code>1.5</code> 赋值到<code>int</code> 类型变量会发生什么？产生编译失败，肯定无法赋值。</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n525"
+         mdtype="fences">int i = 1.5; // 错误
+</pre>
+    <p>想要赋值成功，只有通过强制类型转换，将<code>double</code> 类型强制转换成<code>int</code> 类型才能赋值。</p>
+    <p><strong>转换格式：</strong></p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n528"
+         mdtype="fences">数据类型 变量名 = （数据类型）被强转数据值；
+</pre>
+    <p>（1）当把存储范围大的值（常量值、变量的值、表达式计算的结果值）赋值给了存储范围小的变量时，需要强制类型转换，提示：有风险，可能会损失精度或溢出</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n530"
+         mdtype="fences">int i = (int)3.14;//强制类型转换，损失精度
+
+double d = 1.2;
+int num = (int)d;//损失精度
+
+int i = 200;
+byte b = (byte)i;//溢出
+</pre>
+    <p>（2）当某个值想要提升数据类型时，也可以使用强制类型转换</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n532"
+         mdtype="fences">int i = 1;
+int j = 2;
+double shang = (double)i/j;
+</pre>
+    <p>提示：这个情况的强制类型转换是没有风险的。</p>
+    <h3><a name='header-n534' class='md-header-anchor '></a>2.9.3 特殊的数据类型转换</h3>
+    <p>任意数据类型的数据与String类型进行“+”运算时，结果一定是String类型</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n536"
+         mdtype="fences">System.out.println("" + 1 + 2);//12
+</pre>
+    <h3><a name='header-n537' class='md-header-anchor '></a>练习</h3>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n538"
+         mdtype="fences" style="break-inside: unset;">1、练习题：判断如下代码是否编译通过，如果能，结果是多少？
+short s1 = 120;
+short s2 = 8;
+short s3 = s1 + s2;
+
+2、练习题：判断如下代码是否编译通过，如果能，结果是多少？
+short s1 = 120;
+short s2 = 8;
+byte s3 = (byte)(s1 + s2);
+
+3、练习题：判断如下代码是否编译通过，如果能，结果是多少？
+char c1 = '0';
+char c2 = '1';
+char c3 = c1 + c2;
+
+4、练习题：判断如下代码是否编译通过，如果能，结果是多少？
+char c1 = '0';
+char c2 = '1';
+System.out.println(c1 + c2);
+
+5、练习题：判断如下代码是否编译通过，如果能，结果是多少？
+int i = 4;
+long j = 120; //因为右边120默认是int类型，int的值赋值给long类型是可以的，会自动类型转换，但是要求这个int值不能超过int的存储范围，如果超过int的存储范围必须加L.
+double d = 34;
+float f = 1.2f;//因为右边1.2默认是double类型，double的值是不能直接赋值给float的，要么加F要么使用强制类型转换。
+
+System.out.println(i + j + d + f);//最后是double
+
+6、练习题：判断如下代码是否编译通过，如果能，结果是多少？
+int i = 1;
+int j = 2;
+double d = i/j;
+System.out.println(d);
+</pre>
+    <h2><a name='header-n539' class='md-header-anchor '></a>2.10 运算符（Operator）</h2>
+    <ul>
+        <li><strong>运算符：</strong>是一种特殊的符号，用以表示数据的运算、赋值和比较等。</li>
+        <li><strong>表达式：</strong>用运算符连接起来的式子</li>
+    </ul>
+    <h3><a name='header-n545' class='md-header-anchor '></a>2.10.1 <strong>运算符的分类</strong></h3>
+    <ul>
+        <li><p>按照功能划分：</p>
+            <figure>
+                <table>
+                    <thead>
+                    <tr>
+                        <th style='text-align:center;'>分类</th>
+                        <th style='text-align:center;'>运算符</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style='text-align:center;'>算术运算符</td>
+                        <td style='text-align:center;'>
+                            <code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>、<code>%</code>、<code>++</code>、<code>--</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style='text-align:center;'>赋值运算符</td>
+                        <td style='text-align:center;'>
+                            <code>=</code>、<code>+=</code>、<code>-=</code>、<code>*=</code>、<code>/=</code>、<code>%=</code>等
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style='text-align:center;'>关系运算符</td>
+                        <td style='text-align:center;'><code>&gt;</code>、<code>&gt;=</code>、<code>&lt;</code>、<code>&lt;=</code>、<code>==</code>、<code>!=</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style='text-align:center;'>逻辑运算符</td>
+                        <td style='text-align:center;'>
+                            <code>&amp;</code>、<code>|</code>、<code>^</code>、<code>!</code>、<code>&amp;&amp;</code>、<code>||</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style='text-align:center;'>条件运算符</td>
+                        <td style='text-align:center;'><code>(条件表达式)?结果1:结果2；</code></td>
+                    </tr>
+                    <tr>
+                        <td style='text-align:center;'>位运算符（了解）</td>
+                        <td style='text-align:center;'>
+                            <code>&amp;</code>、<code>|</code>、<code>~</code>、<code>^</code>、<code>&lt;&lt;</code>、<code>&gt;&gt;</code>、<code>&gt;&gt;&gt;</code>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </figure>
+        </li>
+        <li><p>按照操作数个数划分：</p>
+            <figure>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>分类</th>
+                        <th>运算符</th>
+                        <th>例子</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>一元（单目）运算符</td>
+                        <td>++、--、！</td>
+                        <td>i++、--i</td>
+                    </tr>
+                    <tr>
+                        <td>二元（双目）运算符</td>
+                        <td>+、-、*、/、%、&gt;、&lt;=等</td>
+                        <td>a+b、10&gt;=9</td>
+                    </tr>
+                    <tr>
+                        <td>三元（三目）运算符</td>
+                        <td>表达式1?表达式2:表达式3</td>
+                        <td>age&gt;=18?&quot;成年&quot;:&quot;未成年&quot;</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </figure>
+        </li>
+    </ul>
+    <h3><a name='header-n590' class='md-header-anchor '></a>2.10.2 算术运算符</h3>
+    <figure>
+        <table>
+            <thead>
+            <tr>
+                <th style='text-align:center;'>算术运算符</th>
+                <th style='text-align:center;'>符号解释</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style='text-align:center;'><code>+</code></td>
+                <td style='text-align:center;'>加法运算，字符串连接运算，正号</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>-</code></td>
+                <td style='text-align:center;'>减法运算，负号</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>*</code></td>
+                <td style='text-align:center;'>乘法运算</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>/</code></td>
+                <td style='text-align:center;'>除法运算，整数/整数结果还是整数</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>%</code></td>
+                <td style='text-align:center;'>求余运算，余数的符号只看被除数</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>++</code> 、 <code>--</code></td>
+                <td style='text-align:center;'>自增自减运算</td>
+            </tr>
+            </tbody>
+        </table>
+    </figure>
+    <ol start=''>
+        <li><p><strong>加、减、乘、除、模</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n616" mdtype="fences" style="break-inside: unset;">public class OperatorDemo01 {
+	public static void main(String[] args) {
+		int a = 3;
+		int b = 4;
+
+		System.out.println(a + b);// 7
+		System.out.println(a - b);// -1
+		System.out.println(a * b);// 12
+		System.out.println(a / b);// 计算机结果是0，为什么不是0.75呢？
+		System.out.println(a % b);// 3
+
+        System.out.println(5%2);//1
+		System.out.println(5%-2);//1
+		System.out.println(-5%2);//-1
+		System.out.println(-5%-2);//-1
+		//商*除数 + 余数 = 被除数
+		//5%-2  ==&gt;商是-2，余数时1    (-2)*(-2)+1 = 5
+		//-5%2  ==&gt;商是-2，余数是-1   (-2)*2+(-1) = -4-1=-5
+	}
+}
+</pre>
+        </li>
+        <li><p><strong>“+”号的两种用法</strong></p>
+            <ul>
+                <li><p>第一种：对于<code>+</code>两边都是数值的话，<code>+</code>就是加法的意思</p></li>
+                <li><p>第二种：对于<code>+</code>两边至少有一边是字符串得话，<code>+</code>就是拼接的意思</p>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n624" mdtype="fences" style="break-inside: unset;">public class OperatorDemo02 {
+	public static void main(String[] args) {
+		// 字符串类型的变量基本使用
+		// 数据类型 变量名称 = 数据值;
+		String str1 = "Hello";
+		System.out.println(str1); // Hello
+
+		System.out.println("Hello" + "World"); // HelloWorld
+
+		String str2 = "Java";
+		// String + int --&gt; String
+		System.out.println(str2 + 520); // Java520
+		// String + int + int
+		// String		+ int
+		// String
+		System.out.println(str2 + 5 + 20); // Java520
+	}
+}
+</pre>
+                </li>
+            </ul>
+        </li>
+        <li><p><strong>自加自减运算</strong></p>
+            <p><strong>理解：</strong><code>++</code> <strong>运算，变量自己的值加1</strong>。反之，<code>--</code>
+                运算，变量自己的值减少1，用法与<code>++</code> 一致。</p>
+            <ul>
+                <li><p><strong>单独使用</strong></p>
+                    <ul>
+                        <li><p>变量在单独运算的时候，变量<code>前++</code>和变量<code>后++</code>，变量的是一样的；</p></li>
+                        <li><p>变量<code>前++</code> ：例如 <code>++a</code> 。</p></li>
+                        <li><p>变量<code>后++</code> ：例如 <code>a++</code> 。</p>
+                            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java"
+                                 contenteditable="false" cid="n638" mdtype="fences">public class OperatorDemo3 {
+	public static void main(String[] args) {
+		// 定义一个int类型的变量a
+		int a = 3;
+		//++a;
+		a++;
+        // 无论是变量前++还是变量后++，结果都是4
+		System.out.println(a);
+	}
+}
+</pre>
+                        </li>
+                    </ul>
+                </li>
+                <li><p><strong>复合使用</strong></p>
+                    <ul>
+                        <li><p>和<code>其他变量放在一起使用</code>或者和<code>输出语句放在一起使用</code>，<code>前++</code>和<code>后++</code>就产生了不同。
+                        </p></li>
+                        <li><p>变量<code>前++</code> ：变量先自身加1，然后再取值。</p></li>
+                        <li><p>变量<code>后++</code> ：变量先取值，然后再自身加1。</p>
+                            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java"
+                                 contenteditable="false" cid="n648" mdtype="fences" style="break-inside: unset;">public class OperatorDemo03 {
+	public static void main(String[] args) {
+		// 其他变量放在一起使用
+		int x = 3;
+		//int y = ++x; // y的值是4，x的值是4，
+		int y = x++; // y的值是3，x的值是4
+
+		System.out.println(x);
+		System.out.println(y);
+		System.out.println("==========");
+
+		// 和输出语句一起
+		int z = 5;
+		//System.out.println(++z);// 输出结果是6，z的值也是6
+		System.out.println(z++);// 输出结果是5，z的值是6
+		System.out.println(z);
+
+        int a = 1;
+        a = a++;//(1)先取a的值“1”放操作数栈(2)a再自增,a=2(3)再把操作数栈中的"1"赋值给a,a=1
+
+        int i = 1;
+        int j = i++ + ++i * i++;
+        /*
+        从左往右加载
+        (1)先算i++
+        ①取i的值“1”放操作数栈
+        ②i再自增 i=2
+        （2）再算++i
+        ①i先自增 i=3
+        ②再取i的值“3”放操作数栈
+        （3）再算i++
+        ①取i的值“3”放操作数栈
+        ②i再自增 i=4
+        （4）先算乘法
+        用操作数栈中3 * 3 = 9，并把9压会操作数栈
+        （5）再算求和
+        用操作数栈中的 1 + 9 = 10
+        （6）最后算赋值
+        j = 10
+        */
+	}
+}
+</pre>
+                        </li>
+                    </ul>
+                </li>
+                <li><p>小结：</p>
+                    <ul>
+                        <li><strong>++在前，先自加，后使用；</strong></li>
+                        <li><strong>++在后，先使用，后自加。</strong></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><p><strong>练习</strong></p>
+            <ul>
+                <li><p>（1）获取一个四位数的个位，十位，百位，千位</p>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n661" mdtype="fences" style="break-inside: unset;">public class Test01 {
+	public static void main (String [] args) {
+		//1.定义一个四位数，例如1234
+		int num = 1234;
+
+		//2.通过运算操作求出个位，十位，百位，千位
+		int ge = ？
+		int shi = ？
+		int bai = ？
+		int qian = ？
+
+		System.out.println(num + "这个四位数个位上的数字是：" + ge);
+		System.out.println(num + "这个四位数十位上的数字是：" + shi);
+		System.out.println(num + "这个四位数百位上的数字是：" + bai);
+		System.out.println(num + "这个四位数千位上的数字是：" + qian);
+	}
+}
+</pre>
+                </li>
+                <li><p>（2）自增自减练习</p>
+                    <p>判断如下代码的运行结果</p>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n665" mdtype="fences">	public static void main(String[] args){
+		int i = 1;
+		int j = i++;
+		int k = i++ * ++j + ++i * j++;
+
+		System.out.println("i = " + i);
+		System.out.println("j = " + j);
+		System.out.println("k = " + k);
+	}
+</pre>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n666" mdtype="fences">	public static void main(String[] args){
+		int i = 1;
+		int j = i++;
+		int k = i++ * ++j + --i * j--;
+
+		System.out.println("i = " + i);
+		System.out.println("j = " + j);
+		System.out.println("k = " + k);
+	}
+</pre>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n667" mdtype="fences">	public static void main(String[] args){
+		int i = 1;
+		int j = ++i + i++ * ++i + i++;
+
+		System.out.println("i = " + i);
+		System.out.println("j = " + j);
+	}
+</pre>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n668" mdtype="fences">public static void main(String[] args){
+	int i = 0;
+	int result = ++i/--i;
+	System.out.println("result="+result);
+}
+</pre>
+                </li>
+            </ul>
+        </li>
+    </ol>
+    <h3><a name='header-n670' class='md-header-anchor '></a>2.10.3 赋值运算符</h3>
+    <p>注意：所有的赋值运算符的=左边一定是一个变量</p>
+    <figure>
+        <table>
+            <thead>
+            <tr>
+                <th style='text-align:center;'>赋值运算符</th>
+                <th style='text-align:center;'>符号解释</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style='text-align:center;'><code>=</code></td>
+                <td style='text-align:center;'>将符号右边的值，赋值给左边的变量</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>+=</code></td>
+                <td style='text-align:center;'>将符号<strong><code>左边的值</code></strong>和<strong><code>右边的值</code></strong>进行相加操作，最后将结果<strong><code>赋值给左边的变量</code></strong>
+                </td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>-=</code></td>
+                <td style='text-align:center;'>将符号<strong><code>左边的值</code></strong>和<strong><code>右边的值</code></strong>进行相减操作，最后将结果<strong><code>赋值给左边的变量</code></strong>
+                </td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>*=</code></td>
+                <td style='text-align:center;'>将符号<strong><code>左边的值</code></strong>和<strong><code>右边的值</code></strong>进行相乘操作，最后将结果<strong><code>赋值给左边的变量</code></strong>
+                </td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>/=</code></td>
+                <td style='text-align:center;'>将符号<strong><code>左边的值</code></strong>和<strong><code>右边的值</code></strong>进行相除操作，最后将结果<strong><code>赋值给左边的变量</code></strong>
+                </td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>%=</code></td>
+                <td style='text-align:center;'>将符号<strong><code>左边的值</code></strong>和<strong><code>右边的值</code></strong>进行取余操作，最后将结果<strong><code>赋值给左边的变量</code></strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </figure>
+    <ol start=''>
+        <li>基本赋值运算符课堂案例</li>
+    </ol>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n698"
+         mdtype="fences">   public class OperatorDemo04 {
+   	public static void main(String[] args) {
+   		int a = 3;
+   		int b = 4;
+   		a = a + b;
+   		System.out.println(a); // 7
+   		System.out.println(b); // 4
+   	}
+   }
+</pre>
+    <ol start='2'>
+        <li><p>扩展赋值运算符课堂案例</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n702" mdtype="fences" style="break-inside: unset;">public class OperatorDemo04 {
+	public static void main(String[] args) {
+		int a = 3;
+		int b = 4;
+		b += a;// 相当于 b = b + a ;
+		System.out.println(a); // 3
+		System.out.println(b); // 7
+
+		short s = 3;
+		// s = s + 4; 代码编译报错，因为将int类型的结果赋值给short类型的变量s时，可能损失精度
+		s += 4; // 代码没有报错
+        //因为在得到int类型的结果后，JVM自动完成一步强制类型转换，将int类型强转成short
+		System.out.println(s);
+
+        int j = 1;
+		j += ++j * j++;//相当于  j = j + (++j * j++);
+		System.out.println(j);//5
+	}
+}
+</pre>
+            <p>扩展赋值运算符在<strong>将最后的结果赋值给左边的变量前，都做了一步强制类型转换</strong>。</p></li>
+        <li><p>练习</p>
+            <p>交换两个变量的值
+                int m = 1;
+                int n = 2;</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n707"
+                 mdtype="fences">int temp=m;
+m=n;
+n=temp;
+</pre>
+        </li>
+    </ol>
+    <h3><a name='header-n708' class='md-header-anchor '></a>2.10.4 关系运算符/比较运算符</h3>
+    <p>比较运算符，是两个数据之间进行比较的运算，运算结果一定是boolean值<code>true</code>或者<code>false</code> 。</p>
+    <figure>
+        <table>
+            <thead>
+            <tr>
+                <th style='text-align:center;'>关系运算符</th>
+                <th style='text-align:center;'>符号解释</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style='text-align:center;'><code>&lt;</code></td>
+                <td style='text-align:center;'>比较符号左边的数据是否小于右边的数据，如果小于结果是true。</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>&gt;</code></td>
+                <td style='text-align:center;'>比较符号左边的数据是否大于右边的数据，如果大于结果是true。</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>&lt;=</code></td>
+                <td style='text-align:center;'>比较符号左边的数据是否小于或者等于右边的数据，如果大于结果是false。</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>&gt;=</code></td>
+                <td style='text-align:center;'>比较符号左边的数据是否大于或者等于右边的数据，如果小于结果是false。</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>==</code></td>
+                <td style='text-align:center;'>比较符号两边数据是否相等，相等结果是true。</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>！=</code></td>
+                <td style='text-align:center;'>不等于符号 ，如果符号两边的数据不相等，结果是true。</td>
+            </tr>
+            </tbody>
+        </table>
+    </figure>
+    <ul>
+        <li><p>课堂案例</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n735" mdtype="fences">public class OperatorDemo05 {
+	public static void main(String[] args) {
+		int a = 3;
+		int b = 4;
+
+		System.out.println(a &lt; b); // true
+		System.out.println(a &gt; b); // false
+		System.out.println(a &lt;= b); // true
+		System.out.println(a &gt;= b); // false
+		System.out.println(a == b); // false
+		System.out.println(a != b); // true
+	}
+}
+</pre>
+        </li>
+        <li><p><span>	</span>练习：判断如下程序的运行结果</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n738" mdtype="fences" style="break-inside: unset;">public static void main(String[] args){
+	int a = 1;
+	int b = 2;
+	int c = 0;
+	boolean flag = false;
+	if(flag=true){
+		c = a++ + b;
+	}
+
+	if(flag=false){
+		c = ++a - b;
+	}
+	System.out.println("a = " + a);
+	System.out.println("b = " + b);
+	System.out.println("c = " + c);
+}
+</pre>
+        </li>
+    </ul>
+    <h3><a name='header-n739' class='md-header-anchor '></a>2.10.5 逻辑运算符</h3>
+    <p>逻辑运算符，是用来连接两个布尔类型结果的运算符（<code>!</code>除外），运算结果一定是boolean值<code>true</code>或者<code>false</code></p>
+    <figure>
+        <table>
+            <thead>
+            <tr>
+                <th style='text-align:center;'>逻辑运算符</th>
+                <th style='text-align:center;'>符号解释</th>
+                <th style='text-align:center;'>符号特点</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style='text-align:center;'><code>&amp;</code></td>
+                <td style='text-align:center;'>与，且</td>
+                <td style='text-align:center;'>有<code>false</code>则<code>false</code></td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>|</code></td>
+                <td style='text-align:center;'>或</td>
+                <td style='text-align:center;'>有<code>true</code>则<code>true</code></td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>^</code></td>
+                <td style='text-align:center;'>异或</td>
+                <td style='text-align:center;'>相同为<code>false</code>，不同为<code>true</code></td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>!</code></td>
+                <td style='text-align:center;'>非</td>
+                <td style='text-align:center;'>
+                    非<code>false</code>则<code>true</code>，非<code>true</code>则<code>false</code></td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>&amp;&amp;</code></td>
+                <td style='text-align:center;'>双与，短路与</td>
+                <td style='text-align:center;'>左边为false，则右边就不看</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>||</code></td>
+                <td style='text-align:center;'>双或，短路或</td>
+                <td style='text-align:center;'>左边为true，则右边就不看</td>
+            </tr>
+            </tbody>
+        </table>
+    </figure>
+    <ol start=''>
+        <li><p><strong>课堂案例</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n773" mdtype="fences" style="break-inside: unset;">public class OperatorDemo06 {
+	public static void main(String[] args) {
+		int a = 3;
+		int b = 4;
+		int c = 5;
+
+		// &amp; 与，且；有false则false
+		System.out.println((a &gt; b) &amp; (a &gt; c));
+		System.out.println((a &gt; b) &amp; (a &lt; c));
+		System.out.println((a &lt; b) &amp; (a &gt; c));
+		System.out.println((a &lt; b) &amp; (a &lt; c));
+		System.out.println("===============");
+		// | 或；有true则true
+		System.out.println((a &gt; b) | (a &gt; c));
+		System.out.println((a &gt; b) | (a &lt; c));
+		System.out.println((a &lt; b) | (a &gt; c));
+		System.out.println((a &lt; b) | (a &lt; c));
+		System.out.println("===============");
+		// ^ 异或；相同为false，不同为true
+		System.out.println((a &gt; b) ^ (a &gt; c));
+		System.out.println((a &gt; b) ^ (a &lt; c));
+		System.out.println((a &lt; b) ^ (a &gt; c));
+		System.out.println((a &lt; b) ^ (a &lt; c));
+		System.out.println("===============");
+		// ! 非；非false则true，非true则false
+		System.out.println(!false);
+		System.out.println(!true);
+	}
+}
+</pre>
+        </li>
+        <li><p><strong>&amp;&amp;和&amp;区别，||和|区别</strong></p>
+            <p>短路与，短路或运算符左边表达式结果可以确定最终结果，则运算符右边表达式不再进行运算，<strong>效率高</strong></p>
+            <ul>
+                <li><p><strong><code>&amp;&amp;</code>和<code>&amp;</code></strong>区别：</p>
+                    <p><code>&amp;&amp;</code>和<code>&amp;</code>结果一样，<code>&amp;&amp;</code>有短路效果，左边为false，右边不执行；<code>&amp;</code>左边无论是什么，右边都会执行。
+                    </p></li>
+                <li><p><strong><code>||</code>和<code>|</code></strong>区别：</p>
+                    <p><code>||</code>和<code>|</code>结果一样，<code>||</code>有短路效果，左边为true，右边不执行；<code>|</code>左边无论是什么，右边都会执行。
+                    </p></li>
+            </ul>
+        </li>
+        <li><p><strong>面试题1</strong></p>
+            <p><img src='imgs02/1561431178935.png' alt='1561431178935' referrerPolicy='no-referrer'/></p>
+            <p>&nbsp;</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n788" mdtype="fences" style="break-inside: unset;">public class LogicExer1{
+	public static void main(String[] args){
+		int x = 1;
+		int y = 1;
+
+		//x==2 ,x++  false  x = 2 左边为false
+		//右边继续
+		//++y  y==2  y=2  y==2成立  右边为true
+		//false &amp; true 结果false
+		if(x++==2 &amp; ++y==2){
+			x =7;
+		}
+		System.out.println("x="+x+",y="+y);//x=2,y=2
+	}
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n789" mdtype="fences">public class LogicExer2{
+	public static void main(String[] args){
+		int x = 1,y = 1;
+
+		//x==2,x++  左边条件为false，x=2
+		//因为短路与，右边不算
+		//false &amp;&amp; ? 结果是false
+		if(x++==2 &amp;&amp; ++y==2){
+			x =7;
+		}
+		System.out.println("x="+x+",y="+y);//x=2,y=1
+	}
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n790" mdtype="fences" style="break-inside: unset;">public class LogicExer3{
+	public static void main(String[] args){
+		int x = 1,y = 1;
+
+		//x==1,x++  左边为true，x=2
+		//因为是逻辑与,右边继续
+		//++y, y==1  y=2 右边为false
+		//条件true | false，最终为true
+		if(x++==1 | ++y==1){
+			x =7;
+		}
+		System.out.println("x="+x+",y="+y);//x=7,y=2
+	}
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n791" mdtype="fences" style="break-inside: unset;">public class LogicExer4{
+	public static void main(String[] args){
+		int x = 1,y = 1;
+
+		//x==1,x++  左边为true，x=2
+		//因为是短路或，左边为true，右边就不看了
+		//整个条件为true
+		if(x++==1 || ++y==1){
+			x =7;
+		}
+		System.out.println("x="+x+",y="+y);//x=7,y=1
+
+	}
+}
+</pre>
+            <p>&nbsp;</p></li>
+    </ol>
+    <ol start='4'>
+        <li><p><strong>面试题2</strong></p>
+            <p><img src='imgs02/1561431208735.png' alt='1561431208735' referrerPolicy='no-referrer'/></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n798" mdtype="fences" style="break-inside: unset;">public class LogicExer5{
+	public static void main (String []  args)  {
+		boolean x = true;
+		boolean y = false;
+		short z = 42;
+
+		//如果if((z++==42)&amp;&amp;(y==true))条件成立，执行z++，不成立，就不执行z++
+		//左边的条件：z==42,z++  z==42成立,z++变成43
+		//中间虽然是短路与，因为左边现在是true,右边还要看
+		//右边 y==true   不成立
+		//true &amp;&amp; false 结果为false
+		if((z++==42)&amp;&amp;(y==true))	z++;
+
+		//左边为x=false,赋值  结果就为false
+		//中间虽然为短路或，因为左边是false,右边继续看
+		//++z,z==45  ++z变成44，z==45是否成立，不成立
+		//false || false  结果为false
+		if((x=false) || (++z==45))  z++;
+
+		System. out.println("z="+z);//44
+	}
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n799" mdtype="fences" style="break-inside: unset;">class  Test4_2  {
+	public static void main (String []  args)  {
+		boolean x = true;
+		boolean y = false;
+		short z = 42;
+
+		//如果if(y=true)条件成立，接着判断if((z++==42)&amp;&amp;(y==true))	z++;
+		//如果不成立，if((z++==42)&amp;&amp;(y==true))	z++;	不看的
+		/*
+		if(y = true)
+
+		if((z++==42)&amp;&amp;(y==true))	z++;
+
+		if((x=false) || (++z==45))  z++;
+		*/
+
+		//标准
+		//y=true赋值，y就被修改为true,if(true)成立
+		if(y=true){
+			//左边：z==42,z++  成立,z变成43
+			//&amp;&amp;短路与，不满足短路的情况，右边继续
+			//y==true 成立
+			//true &amp;&amp; true，结果为true
+			if((z++==42)&amp;&amp;(y==true)){
+				//z++变成44
+				z++;
+			}
+		}
+		//左边：x=false不成立
+		//中间虽然是短路或，但是没满足短路的情况，右边继续
+		//++z,z==45  ++z变成45，z==45成立
+		if((x=false) || (++z==45)){
+			//z++，变成46
+			z++;
+		}
+		System. out.println("z="+z);//46
+	}
+}
+</pre>
+            <p>&nbsp;</p></li>
+    </ol>
+    <h3><a name='header-n801' class='md-header-anchor '></a>2.10.6 条件运算符</h3>
+    <ul>
+        <li>条件运算符格式：</li>
+    </ul>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n805"
+         mdtype="fences">条件表达式？结果1：结果2
+</pre>
+    <ul>
+        <li><p>条件运算符计算方式：</p>
+            <ul>
+                <li>条件判断的结果是true，条件运算符整体结果为结果1，赋值给变量。</li>
+                <li>判断条件的结果是false，条件运算符整体结果为结果2，赋值给变量。</li>
+            </ul>
+        </li>
+    </ul>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n814"
+         mdtype="fences">public static void main(String[] args) {
+    int i = (1==2 ? 100 : 200);
+    System.out.println(i);//200
+    int j = (3&lt;=4 ? 500 : 600);
+    System.out.println(j);//500
+}
+</pre>
+    <h4><a name='header-n815' class='md-header-anchor '></a>练习</h4>
+    <p>1、声明三个整型的变量,a,b,c,要求找出最大值
+        2、声明一个整型的变量，判断它是正数还是负数，还是0</p>
+    <h3><a name='header-n817' class='md-header-anchor '></a>2.10.7 位运算符（了解）</h3>
+    <figure>
+        <table>
+            <thead>
+            <tr>
+                <th style='text-align:center;'>位运算符</th>
+                <th style='text-align:center;'>符号解释</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style='text-align:center;'><code>&amp;</code></td>
+                <td style='text-align:center;'>按位与，当两位相同时为1时才返回1</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>|</code></td>
+                <td style='text-align:center;'>按位或，只要有一位为1即可返回1</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>~</code></td>
+                <td style='text-align:center;'>按位非，将操作数的每个位（包括符号位）全部取反</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>^</code></td>
+                <td style='text-align:center;'>按位异或。当两位相同时返回0，不同时返回1</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>&lt;&lt;</code></td>
+                <td style='text-align:center;'>左移运算符</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>&gt;&gt;</code></td>
+                <td style='text-align:center;'>右移运算符</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><code>&gt;&gt;&gt;</code></td>
+                <td style='text-align:center;'>无符号右移运算符</td>
+            </tr>
+            </tbody>
+        </table>
+    </figure>
+    <ul>
+        <li>位运算符的运算过程都是基于补码运算，但是看结果，我们得换成原码，再换成十进制看结果</li>
+        <li>从二进制到十进制都是基于原码</li>
+        <li>byte,short,char在计算时按照int类型处理</li>
+        <li>位运算直接对二进制进行位移操作实现数值运算，所以运算效率高</li>
+    </ul>
+    <blockquote><p>如何区分&amp;,|,^是逻辑运算符还是位运算符？</p>
+        <p>如果操作数是boolean类型，就是逻辑运算符，如果操作数是整数，那么就位运算符。</p></blockquote>
+    <ol start=''>
+        <li><h4><a name='header-n857' class='md-header-anchor '></a>左移：&lt;&lt;</h4></li>
+    </ol>
+    <p> 运算规则：左移几位就相当于乘以2的几次方</p>
+    <p><strong>注意：</strong>当左移的位数n超过该数据类型的总位数时，相当于左移（n-总位数）位</p>
+    <p> byte,short,char在计算时按照int类型处理</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n861"
+         mdtype="fences">   3&lt;&lt;4  类似于  3*2的4次= 3*16 = 48
+</pre>
+    <p><img src='imgs02/image-20200225113651675.png' alt='' referrerPolicy='no-referrer'/></p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n863"
+         mdtype="fences">   -3&lt;&lt;4  类似于  -3*2的4次= -3*16 = -48
+</pre>
+    <p><img src='imgs02/image-20200225114707524.png' alt='image-20200225114707524' referrerPolicy='no-referrer'/></p>
+    <p></p>
+    <ol start='2'>
+        <li><h4><a name='header-n868' class='md-header-anchor '></a>右移：&gt;&gt;</h4>
+            <p>快速运算：类似于除以2的n次，如果不能整除，<strong>向下取整</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n870" mdtype="fences">69&gt;&gt;4  类似于  69/2的4次 = 69/16 =4
+</pre>
+            <p><img src='imgs02/image-20200225115636844.png' alt='image-20200225115636844'
+                    referrerPolicy='no-referrer'/></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n872"
+                 mdtype="fences">-69&gt;&gt;4  类似于  -69/2的4次 = -69/16 = -5
+</pre>
+            <p><img src='imgs02/image-20200225120112188.png' alt='image-20200225120112188'
+                    referrerPolicy='no-referrer'/></p>
+            <p>&nbsp;</p></li>
+        <li><h4><a name='header-n876' class='md-header-anchor '></a>无符号右移：&gt;&gt;&gt;</h4></li>
+    </ol>
+    <p> 运算规则：往右移动后，左边空出来的位直接补0，不看符号位</p>
+    <p> 正数：和右移一样</p>
+    <p> 负数：右边移出去几位，左边补几个0，结果变为正数</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n880"
+         mdtype="fences">   69&gt;&gt;&gt;4  类似于  69/2的4次 = 69/16 =4
+</pre>
+    <p><img src='imgs02/image-20200225121104734.png' alt='image-20200225121104734' referrerPolicy='no-referrer'/></p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n882"
+         mdtype="fences">   -69&gt;&gt;&gt;4   结果：268435451
+</pre>
+    <p><img src='imgs02/image-20200225121244290.png' alt='image-20200225121244290' referrerPolicy='no-referrer'/></p>
+    <p></p>
+    <ol start='4'>
+        <li><h4><a name='header-n887' class='md-header-anchor '></a>按位与：&amp;</h4></li>
+    </ol>
+    <p> 运算规则：对应位都是1才为1</p>
+    <p> 1 &amp; 1 结果为1</p>
+    <p> 1 &amp; 0 结果为0</p>
+    <p> 0 &amp; 1 结果为0</p>
+    <p> 0 &amp; 0 结果为0</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n893"
+         mdtype="fences">   9&amp;7 = 1
+</pre>
+    <p><img src='imgs02/image-20200225122440953.png' alt='image-20200225122440953' referrerPolicy='no-referrer'/></p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n895"
+         mdtype="fences">   -9&amp;7 = 7
+</pre>
+    <p><img src='imgs02/image-20200225122221616.png' alt='image-20200225122221616' referrerPolicy='no-referrer'/></p>
+    <p></p>
+    <ol start='5'>
+        <li><h4><a name='header-n900' class='md-header-anchor '></a>按位或：|</h4></li>
+    </ol>
+    <p> 运算规则：对应位只要有1即为1</p>
+    <p> 1 | 1 结果为1</p>
+    <p> 1 | 0 结果为1</p>
+    <p> 0 | 1 结果为1</p>
+    <p> 0 &amp; 0 结果为0</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n906"
+         mdtype="fences">   9|7  结果： 15
+</pre>
+    <p><img src='imgs02/image-20200225122758851.png' alt='image-20200225122758851' referrerPolicy='no-referrer'/></p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n908"
+         mdtype="fences">   -9|7 结果： -9
+</pre>
+    <p><img src='imgs02/image-20200225123409130.png' alt='image-20200225123409130' referrerPolicy='no-referrer'/></p>
+    <p></p>
+    <ol start='6'>
+        <li><h4><a name='header-n913' class='md-header-anchor '></a>按位异或：^</h4></li>
+    </ol>
+    <p> 运算规则：对应位一个为1一个为0，才为1</p>
+    <p> 1 ^ 1 结果为0</p>
+    <p> 0 ^ 1 结果为1</p>
+    <p> 0 ^ 0 结果为0</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n918"
+         mdtype="fences">   9^7  结果为14
+</pre>
+    <p><img src='imgs02/image-20200225123445305.png' alt='image-20200225123445305' referrerPolicy='no-referrer'/></p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n920"
+         mdtype="fences">   -9^7 结果为-16
+</pre>
+    <p><img src='imgs02/image-20200225133145727.png' alt='image-20200225133145727' referrerPolicy='no-referrer'/></p>
+    <p></p>
+    <ol start='7'>
+        <li><h4><a name='header-n925' class='md-header-anchor '></a>按位取反</h4>
+            <p>运算规则：</p>
+            <p><span>	</span>~0就是1 </p>
+            <p><span>	</span>~1就是0</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n929" mdtype="fences">~9  结果：-10
+</pre>
+            <p><img src='imgs02/image-20200225124112662.png' alt='image-20200225124112662'
+                    referrerPolicy='no-referrer'/></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n931" mdtype="fences">~-9  结果：8
+</pre>
+            <p><img src='imgs02/image-20200225124156862.png' alt='image-20200225124156862'
+                    referrerPolicy='no-referrer'/></p>
+            <p>&nbsp;</p></li>
+    </ol>
+    <h3><a name='header-n934' class='md-header-anchor '></a>2.10.8 运算符优先级</h3>
+    <p><img src='imgs02/1553858424335.png' alt='1553858424335' referrerPolicy='no-referrer'/></p>
+    <p>提示说明：</p>
+    <p>（1）表达式不要太复杂</p>
+    <p>（2）先算的使用()</p>
+    <p>大体的排序：算术 &gt; 位 &gt; 比较 &gt; 逻辑 &gt; 三元 &gt; 赋值</p></div>
+<figure>
+    <table>
+        <thead>
+        <tr>
+            <th style='text-align:right;'><a href='../javaSE.html'>回目录</a></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td style='text-align:right;'>教程版本：1.2 更新日期：2019年1月3日</td>
+        </tr>
+        </tbody>
+    </table>
+</figure>
+</body>
+</html>

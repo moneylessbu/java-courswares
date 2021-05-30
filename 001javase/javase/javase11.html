@@ -1,0 +1,3266 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width initial-scale=1'>
+    <title>JavaSE_第11章 泛型</title>
+    <link href='https://fonts.loli.net/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext'
+          rel='stylesheet' type='text/css'/>
+    <style type='text/css'>html {
+        overflow-x: initial !important;
+    }
+
+    :root {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --select-text-bg-color: #B5D6FC;
+        --select-text-font-color: auto;
+        --monospace: "Lucida Console", Consolas, "Courier", monospace;
+    }
+
+    html {
+        font-size: 14px;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        margin: 0px;
+        padding: 0px;
+        height: auto;
+        bottom: 0px;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        font-size: 1rem;
+        line-height: 1.42857;
+        overflow-x: hidden;
+        background: inherit;
+    }
+
+    iframe {
+        margin: auto;
+    }
+
+    a.url {
+        word-break: break-all;
+    }
+
+    a:active, a:hover {
+        outline: 0px;
+    }
+
+    .in-text-selection, ::selection {
+        text-shadow: none;
+        background: var(--select-text-bg-color);
+        color: var(--select-text-font-color);
+    }
+
+    #write {
+        margin: 0px auto;
+        height: auto;
+        width: inherit;
+        word-break: normal;
+        word-wrap: break-word;
+        position: relative;
+        white-space: normal;
+        overflow-x: visible;
+        padding-top: 40px;
+    }
+
+    #write.first-line-indent p {
+        text-indent: 2em;
+    }
+
+    #write.first-line-indent li p, #write.first-line-indent p * {
+        text-indent: 0px;
+    }
+
+    #write.first-line-indent li {
+        margin-left: 2em;
+    }
+
+    .for-image #write {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    body.typora-export {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .typora-export .footnote-line, .typora-export li, .typora-export p {
+        white-space: pre-wrap;
+    }
+
+    @media screen and (max-width: 500px) {
+        body.typora-export {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        #write {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .CodeMirror-sizer {
+            margin-left: 0px !important;
+        }
+
+        .CodeMirror-gutters {
+            display: none !important;
+        }
+    }
+
+    #write li > figure:first-child {
+        margin-top: -20px;
+    }
+
+    #write ol, #write ul {
+        position: relative;
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    button, input, select, textarea {
+        color: inherit;
+        font-style: inherit;
+        font-variant: inherit;
+        font-weight: inherit;
+        font-stretch: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        font-family: inherit;
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+        line-height: normal;
+        padding: 0px;
+    }
+
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre {
+        width: inherit;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p {
+        position: relative;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        break-after: avoid-page;
+        break-inside: avoid;
+        orphans: 2;
+    }
+
+    p {
+        orphans: 4;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+    }
+
+    h4 {
+        font-size: 1.4rem;
+    }
+
+    h5 {
+        font-size: 1.2rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+    }
+
+    .md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .md-blockmeta {
+        color: rgb(204, 204, 204);
+        font-weight: 700;
+        font-style: italic;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    sup.md-footnote {
+        padding: 2px 4px;
+        background-color: rgba(238, 238, 238, 0.7);
+        color: rgb(85, 85, 85);
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    sup.md-footnote a, sup.md-footnote a:hover {
+        color: inherit;
+        text-transform: inherit;
+        text-decoration: inherit;
+    }
+
+    #write input[type="checkbox"] {
+        cursor: pointer;
+        width: inherit;
+        height: inherit;
+    }
+
+    figure {
+        overflow-x: auto;
+        margin: 1.2em 0px;
+        max-width: calc(100% + 16px);
+        padding: 0px;
+    }
+
+    figure > table {
+        margin: 0px !important;
+    }
+
+    tr {
+        break-inside: avoid;
+        break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+        width: 100%;
+        overflow: auto;
+        break-inside: auto;
+        text-align: left;
+    }
+
+    table.md-table td {
+        min-width: 32px;
+    }
+
+    .CodeMirror-gutters {
+        border-right: 0px;
+        background-color: inherit;
+    }
+
+    .CodeMirror {
+        text-align: left;
+    }
+
+    .CodeMirror-placeholder {
+        opacity: 0.3;
+    }
+
+    .CodeMirror pre {
+        padding: 0px 4px;
+    }
+
+    .CodeMirror-lines {
+        padding: 0px;
+    }
+
+    div.hr:focus {
+        cursor: none;
+    }
+
+    #write pre {
+        white-space: pre-wrap;
+    }
+
+    #write.fences-no-line-wrapping pre {
+        white-space: pre;
+    }
+
+    #write pre.ty-contain-cm {
+        white-space: normal;
+    }
+
+    .CodeMirror-gutters {
+        margin-right: 4px;
+    }
+
+    .md-fences {
+        font-size: 0.9rem;
+        display: block;
+        break-inside: avoid;
+        text-align: left;
+        overflow: visible;
+        white-space: pre;
+        background: inherit;
+        position: relative !important;
+    }
+
+    .md-diagram-panel {
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+        padding-top: 0px;
+        padding-bottom: 8px;
+        overflow-x: auto;
+    }
+
+    #write .md-fences.mock-cm {
+        white-space: pre-wrap;
+    }
+
+    .md-fences.md-fences-with-lineno {
+        padding-left: 0px;
+    }
+
+    #write.fences-no-line-wrapping .md-fences.mock-cm {
+        white-space: pre;
+        overflow-x: auto;
+    }
+
+    .md-fences.mock-cm.md-fences-with-lineno {
+        padding-left: 8px;
+    }
+
+    .CodeMirror-line, twitterwidget {
+        break-inside: avoid;
+    }
+
+    .footnotes {
+        opacity: 0.8;
+        font-size: 0.9rem;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .footnotes + .footnotes {
+        margin-top: 0px;
+    }
+
+    .md-reset {
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        outline: 0px;
+        vertical-align: top;
+        background: 0px 0px;
+        text-decoration: none;
+        text-shadow: none;
+        float: none;
+        position: static;
+        width: auto;
+        height: auto;
+        white-space: nowrap;
+        cursor: inherit;
+        -webkit-tap-highlight-color: transparent;
+        line-height: normal;
+        font-weight: 400;
+        text-align: left;
+        box-sizing: content-box;
+        direction: ltr;
+    }
+
+    li div {
+        padding-top: 0px;
+    }
+
+    blockquote {
+        margin: 1rem 0px;
+    }
+
+    li .mathjax-block, li p {
+        margin: 0.5rem 0px;
+    }
+
+    li {
+        margin: 0px;
+        position: relative;
+    }
+
+    blockquote > :last-child {
+        margin-bottom: 0px;
+    }
+
+    blockquote > :first-child, li > :first-child {
+        margin-top: 0px;
+    }
+
+    .footnotes-area {
+        color: rgb(136, 136, 136);
+        margin-top: 0.714rem;
+        padding-bottom: 0.143rem;
+        white-space: normal;
+    }
+
+    #write .footnote-line {
+        white-space: pre-wrap;
+    }
+
+    @media print {
+        body, html {
+            border: 1px solid transparent;
+            height: 99%;
+            break-after: avoid;
+            break-before: avoid;
+        }
+
+        #write {
+            margin-top: 0px;
+            padding-top: 0px;
+            border-color: transparent !important;
+        }
+
+        .typora-export * {
+            -webkit-print-color-adjust: exact;
+        }
+
+        html.blink-to-pdf {
+            font-size: 13px;
+        }
+
+        .typora-export #write {
+            padding-left: 32px;
+            padding-right: 32px;
+            padding-bottom: 0px;
+            break-after: avoid;
+        }
+
+        .typora-export #write::after {
+            height: 0px;
+        }
+
+        @page {
+            margin: 20mm 0px;
+        }
+    }
+
+    .footnote-line {
+        margin-top: 0.714em;
+        font-size: 0.7em;
+    }
+
+    a img, img a {
+        cursor: pointer;
+    }
+
+    pre.md-meta-block {
+        font-size: 0.8rem;
+        min-height: 0.8rem;
+        white-space: pre-wrap;
+        background: rgb(204, 204, 204);
+        display: block;
+        overflow-x: hidden;
+    }
+
+    p > .md-image:only-child:not(.md-img-error) img, p > img:only-child {
+        display: block;
+        margin: auto;
+    }
+
+    p > .md-image:only-child {
+        display: inline-block;
+        width: 100%;
+    }
+
+    #write .MathJax_Display {
+        margin: 0.8em 0px 0px;
+    }
+
+    .md-math-block {
+        width: 100%;
+    }
+
+    .md-math-block:not(:empty)::after {
+        display: none;
+    }
+
+    [contenteditable="true"]:active, [contenteditable="true"]:focus {
+        outline: 0px;
+        box-shadow: none;
+    }
+
+    .md-task-list-item {
+        position: relative;
+        list-style-type: none;
+    }
+
+    .task-list-item.md-task-list-item {
+        padding-left: 0px;
+    }
+
+    .md-task-list-item > input {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        margin-left: -1.2em;
+        margin-top: calc(1em - 10px);
+        border: none;
+    }
+
+    .math {
+        font-size: 1rem;
+    }
+
+    .md-toc {
+        min-height: 3.58rem;
+        position: relative;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .md-toc-content {
+        position: relative;
+        margin-left: 0px;
+    }
+
+    .md-toc-content::after, .md-toc::after {
+        display: none;
+    }
+
+    .md-toc-item {
+        display: block;
+        color: rgb(65, 131, 196);
+    }
+
+    .md-toc-item a {
+        text-decoration: none;
+    }
+
+    .md-toc-inner:hover {
+        text-decoration: underline;
+    }
+
+    .md-toc-inner {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .md-toc-h1 .md-toc-inner {
+        margin-left: 0px;
+        font-weight: 700;
+    }
+
+    .md-toc-h2 .md-toc-inner {
+        margin-left: 2em;
+    }
+
+    .md-toc-h3 .md-toc-inner {
+        margin-left: 4em;
+    }
+
+    .md-toc-h4 .md-toc-inner {
+        margin-left: 6em;
+    }
+
+    .md-toc-h5 .md-toc-inner {
+        margin-left: 8em;
+    }
+
+    .md-toc-h6 .md-toc-inner {
+        margin-left: 10em;
+    }
+
+    @media screen and (max-width: 48em) {
+        .md-toc-h3 .md-toc-inner {
+            margin-left: 3.5em;
+        }
+
+        .md-toc-h4 .md-toc-inner {
+            margin-left: 5em;
+        }
+
+        .md-toc-h5 .md-toc-inner {
+            margin-left: 6.5em;
+        }
+
+        .md-toc-h6 .md-toc-inner {
+            margin-left: 8em;
+        }
+    }
+
+    a.md-toc-inner {
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+
+    .footnote-line a:not(.reversefootnote) {
+        color: inherit;
+    }
+
+    .md-attr {
+        display: none;
+    }
+
+    .md-fn-count::after {
+        content: ".";
+    }
+
+    code, pre, samp, tt {
+        font-family: var(--monospace);
+    }
+
+    kbd {
+        margin: 0px 0.1em;
+        padding: 0.1em 0.6em;
+        font-size: 0.8em;
+        color: rgb(36, 39, 41);
+        background: rgb(255, 255, 255);
+        border: 1px solid rgb(173, 179, 185);
+        border-radius: 3px;
+        box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    .md-comment {
+        color: rgb(162, 127, 3);
+        opacity: 0.8;
+        font-family: var(--monospace);
+    }
+
+    code {
+        text-align: left;
+        vertical-align: initial;
+    }
+
+    a.md-print-anchor {
+        white-space: pre !important;
+        border-width: initial !important;
+        border-style: none !important;
+        border-color: initial !important;
+        display: inline-block !important;
+        position: absolute !important;
+        width: 1px !important;
+        right: 0px !important;
+        outline: 0px !important;
+        background: 0px 0px !important;
+        text-decoration: initial !important;
+        text-shadow: initial !important;
+    }
+
+    .md-inline-math .MathJax_SVG .noError {
+        display: none !important;
+    }
+
+    .html-for-mac .inline-math-svg .MathJax_SVG {
+        vertical-align: 0.2px;
+    }
+
+    .md-math-block .MathJax_SVG_Display {
+        text-align: center;
+        margin: 0px;
+        position: relative;
+        text-indent: 0px;
+        max-width: none;
+        max-height: none;
+        min-height: 0px;
+        min-width: 100%;
+        width: auto;
+        overflow-y: hidden;
+        display: block !important;
+    }
+
+    .MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display {
+        width: auto;
+        margin: inherit;
+        display: inline-block !important;
+    }
+
+    .MathJax_SVG .MJX-monospace {
+        font-family: var(--monospace);
+    }
+
+    .MathJax_SVG .MJX-sans-serif {
+        font-family: sans-serif;
+    }
+
+    .MathJax_SVG {
+        display: inline;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        zoom: 90%;
+        text-indent: 0px;
+        text-align: left;
+        text-transform: none;
+        letter-spacing: normal;
+        word-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        float: none;
+        direction: ltr;
+        max-width: none;
+        max-height: none;
+        min-width: 0px;
+        min-height: 0px;
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .MathJax_SVG * {
+        transition: none;
+    }
+
+    .MathJax_SVG_Display svg {
+        vertical-align: middle !important;
+        margin-bottom: 0px !important;
+    }
+
+    .os-windows.monocolor-emoji .md-emoji {
+        font-family: "Segoe UI Symbol", sans-serif;
+    }
+
+    .md-diagram-panel > svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] svg, [lang="flow"] svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] .node text {
+        font-size: 1rem;
+    }
+
+    table tr th {
+        border-bottom: 0px;
+    }
+
+    video {
+        max-width: 100%;
+        display: block;
+        margin: 0px auto;
+    }
+
+    iframe {
+        max-width: 100%;
+        width: 100%;
+        border: none;
+    }
+
+    .highlight td, .highlight tr {
+        border: 0px;
+    }
+
+
+    .CodeMirror {
+        height: auto;
+    }
+
+    .CodeMirror.cm-s-inner {
+        background: inherit;
+    }
+
+    .CodeMirror-scroll {
+        overflow-y: hidden;
+        overflow-x: auto;
+        z-index: 3;
+    }
+
+    .CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler {
+        background-color: rgb(255, 255, 255);
+    }
+
+    .CodeMirror-gutters {
+        border-right: 1px solid rgb(221, 221, 221);
+        background: inherit;
+        white-space: nowrap;
+    }
+
+    .CodeMirror-linenumber {
+        padding: 0px 3px 0px 5px;
+        text-align: right;
+        color: rgb(153, 153, 153);
+    }
+
+    .cm-s-inner .cm-keyword {
+        color: rgb(119, 0, 136);
+    }
+
+    .cm-s-inner .cm-atom, .cm-s-inner.cm-atom {
+        color: rgb(34, 17, 153);
+    }
+
+    .cm-s-inner .cm-number {
+        color: rgb(17, 102, 68);
+    }
+
+    .cm-s-inner .cm-def {
+        color: rgb(0, 0, 255);
+    }
+
+    .cm-s-inner .cm-variable {
+        color: rgb(0, 0, 0);
+    }
+
+    .cm-s-inner .cm-variable-2 {
+        color: rgb(0, 85, 170);
+    }
+
+    .cm-s-inner .cm-variable-3 {
+        color: rgb(0, 136, 85);
+    }
+
+    .cm-s-inner .cm-string {
+        color: rgb(170, 17, 17);
+    }
+
+    .cm-s-inner .cm-property {
+        color: rgb(0, 0, 0);
+    }
+
+    .cm-s-inner .cm-operator {
+        color: rgb(152, 26, 26);
+    }
+
+    .cm-s-inner .cm-comment, .cm-s-inner.cm-comment {
+        color: rgb(170, 85, 0);
+    }
+
+    .cm-s-inner .cm-string-2 {
+        color: rgb(255, 85, 0);
+    }
+
+    .cm-s-inner .cm-meta {
+        color: rgb(85, 85, 85);
+    }
+
+    .cm-s-inner .cm-qualifier {
+        color: rgb(85, 85, 85);
+    }
+
+    .cm-s-inner .cm-builtin {
+        color: rgb(51, 0, 170);
+    }
+
+    .cm-s-inner .cm-bracket {
+        color: rgb(153, 153, 119);
+    }
+
+    .cm-s-inner .cm-tag {
+        color: rgb(17, 119, 0);
+    }
+
+    .cm-s-inner .cm-attribute {
+        color: rgb(0, 0, 204);
+    }
+
+    .cm-s-inner .cm-header, .cm-s-inner.cm-header {
+        color: rgb(0, 0, 255);
+    }
+
+    .cm-s-inner .cm-quote, .cm-s-inner.cm-quote {
+        color: rgb(0, 153, 0);
+    }
+
+    .cm-s-inner .cm-hr, .cm-s-inner.cm-hr {
+        color: rgb(153, 153, 153);
+    }
+
+    .cm-s-inner .cm-link, .cm-s-inner.cm-link {
+        color: rgb(0, 0, 204);
+    }
+
+    .cm-negative {
+        color: rgb(221, 68, 68);
+    }
+
+    .cm-positive {
+        color: rgb(34, 153, 34);
+    }
+
+    .cm-header, .cm-strong {
+        font-weight: 700;
+    }
+
+    .cm-del {
+        text-decoration: line-through;
+    }
+
+    .cm-em {
+        font-style: italic;
+    }
+
+    .cm-link {
+        text-decoration: underline;
+    }
+
+    .cm-error {
+        color: red;
+    }
+
+    .cm-invalidchar {
+        color: red;
+    }
+
+    .cm-constant {
+        color: rgb(38, 139, 210);
+    }
+
+    .cm-defined {
+        color: rgb(181, 137, 0);
+    }
+
+    div.CodeMirror span.CodeMirror-matchingbracket {
+        color: rgb(0, 255, 0);
+    }
+
+    div.CodeMirror span.CodeMirror-nonmatchingbracket {
+        color: rgb(255, 34, 34);
+    }
+
+    .cm-s-inner .CodeMirror-activeline-background {
+        background: inherit;
+    }
+
+    .CodeMirror {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .CodeMirror-scroll {
+        height: 100%;
+        outline: 0px;
+        position: relative;
+        box-sizing: content-box;
+        background: inherit;
+    }
+
+    .CodeMirror-sizer {
+        position: relative;
+    }
+
+    .CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar {
+        position: absolute;
+        z-index: 6;
+        display: none;
+    }
+
+    .CodeMirror-vscrollbar {
+        right: 0px;
+        top: 0px;
+        overflow: hidden;
+    }
+
+    .CodeMirror-hscrollbar {
+        bottom: 0px;
+        left: 0px;
+        overflow: hidden;
+    }
+
+    .CodeMirror-scrollbar-filler {
+        right: 0px;
+        bottom: 0px;
+    }
+
+    .CodeMirror-gutter-filler {
+        left: 0px;
+        bottom: 0px;
+    }
+
+    .CodeMirror-gutters {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        padding-bottom: 30px;
+        z-index: 3;
+    }
+
+    .CodeMirror-gutter {
+        white-space: normal;
+        height: 100%;
+        box-sizing: content-box;
+        padding-bottom: 30px;
+        margin-bottom: -32px;
+        display: inline-block;
+    }
+
+    .CodeMirror-gutter-wrapper {
+        position: absolute;
+        z-index: 4;
+        background: 0px 0px !important;
+        border: none !important;
+    }
+
+    .CodeMirror-gutter-background {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        z-index: 4;
+    }
+
+    .CodeMirror-gutter-elt {
+        position: absolute;
+        cursor: default;
+        z-index: 4;
+    }
+
+    .CodeMirror-lines {
+        cursor: text;
+    }
+
+    .CodeMirror pre {
+        border-radius: 0px;
+        border-width: 0px;
+        background: 0px 0px;
+        font-family: inherit;
+        font-size: inherit;
+        margin: 0px;
+        white-space: pre;
+        word-wrap: normal;
+        color: inherit;
+        z-index: 2;
+        position: relative;
+        overflow: visible;
+    }
+
+    .CodeMirror-wrap pre {
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        word-break: normal;
+    }
+
+    .CodeMirror-code pre {
+        border-right: 30px solid transparent;
+        width: fit-content;
+    }
+
+    .CodeMirror-wrap .CodeMirror-code pre {
+        border-right: none;
+        width: auto;
+    }
+
+    .CodeMirror-linebackground {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        z-index: 0;
+    }
+
+    .CodeMirror-linewidget {
+        position: relative;
+        z-index: 2;
+        overflow: auto;
+    }
+
+    .CodeMirror-wrap .CodeMirror-scroll {
+        overflow-x: hidden;
+    }
+
+    .CodeMirror-measure {
+        position: absolute;
+        width: 100%;
+        height: 0px;
+        overflow: hidden;
+        visibility: hidden;
+    }
+
+    .CodeMirror-measure pre {
+        position: static;
+    }
+
+    .CodeMirror div.CodeMirror-cursor {
+        position: absolute;
+        visibility: hidden;
+        border-right: none;
+        width: 0px;
+    }
+
+    .CodeMirror div.CodeMirror-cursor {
+        visibility: hidden;
+    }
+
+    .CodeMirror-focused div.CodeMirror-cursor {
+        visibility: inherit;
+    }
+
+    .cm-searching {
+        background: rgba(255, 255, 0, 0.4);
+    }
+
+    @media print {
+        .CodeMirror div.CodeMirror-cursor {
+            visibility: hidden;
+        }
+    }
+
+
+    :root {
+        --active-file-bg-color: rgba(32, 43, 51, 0.63);
+        --active-file-text-color: white;
+        --bg-color: #f3f2ee;
+        --text-color: #1f0909;
+        --control-text-color: #444;
+        --rawblock-edit-panel-bd: #e5e5e5;
+        --select-text-bg-color: rgba(32, 43, 51, 0.63);
+        --select-text-font-color: white;
+    }
+
+    pre {
+        --select-text-bg-color: #36284e;
+        --select-text-font-color: #fff;
+    }
+
+    html {
+        font-size: 16px;
+    }
+
+    html, body {
+        background-color: rgb(243, 242, 238);
+        font-family: "PT Serif", "Times New Roman", Times, serif;
+        color: rgb(31, 9, 9);
+        line-height: 1.5em;
+    }
+
+    #write {
+        max-width: 40em;
+    }
+
+    ol li {
+        list-style-type: decimal;
+        list-style-position: outside;
+    }
+
+    ul li {
+        list-style-type: disc;
+        list-style-position: outside;
+    }
+
+    ol, ul {
+        list-style: none;
+    }
+
+    blockquote, q {
+        quotes: none;
+    }
+
+    blockquote::before, blockquote::after, q::before, q::after {
+        content: none;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 1.875em;
+        line-height: 1.6em;
+        margin-top: 2em;
+    }
+
+    h2, h3 {
+        font-size: 1.3125em;
+        line-height: 1.15;
+        margin-top: 2.28571em;
+        margin-bottom: 1.15em;
+    }
+
+    h3 {
+        font-weight: normal;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        margin-top: 2.67em;
+    }
+
+    h5, h6 {
+        font-size: 1em;
+    }
+
+    h1 {
+        border-bottom: 1px solid;
+        margin-bottom: 1.875em;
+        padding-bottom: 0.8125em;
+    }
+
+    a {
+        text-decoration: none;
+        color: rgb(6, 85, 136);
+    }
+
+    a:hover, a:active {
+        text-decoration: underline;
+    }
+
+    p, blockquote, .md-fences {
+        margin-bottom: 1.5em;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 1.5em;
+    }
+
+    blockquote {
+        font-style: italic;
+        border-left: 5px solid;
+        margin-left: 2em;
+        padding-left: 1em;
+    }
+
+    ul, ol {
+        margin: 0px 0px 1.5em 1.5em;
+    }
+
+    .md-meta, .md-before, .md-after {
+        color: rgb(153, 153, 153);
+    }
+
+    table {
+        margin-bottom: 1.5em;
+        font-size: 1em;
+    }
+
+    thead th, tfoot th {
+        padding: 0.25em 0.25em 0.25em 0.4em;
+        text-transform: uppercase;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    td {
+        vertical-align: top;
+        padding: 0.25em 0.25em 0.25em 0.4em;
+    }
+
+    code, .md-fences {
+        background-color: rgb(218, 218, 218);
+    }
+
+    code {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .md-fences {
+        margin-left: 2em;
+        margin-bottom: 3em;
+        padding-left: 1ch;
+        padding-right: 1ch;
+    }
+
+    pre, code, tt {
+        font-size: 0.875em;
+        line-height: 1.71429em;
+    }
+
+    h1 {
+        line-height: 1.3em;
+        font-weight: normal;
+        margin-bottom: 0.5em;
+    }
+
+    p + ul, p + ol {
+        margin-top: 0.5em;
+    }
+
+    h3 + ul, h4 + ul, h5 + ul, h6 + ul, h3 + ol, h4 + ol, h5 + ol, h6 + ol {
+        margin-top: 0.5em;
+    }
+
+    li > ul, li > ol {
+        margin-top: inherit;
+        margin-bottom: 0px;
+    }
+
+    li ol > li {
+        list-style-type: lower-alpha;
+    }
+
+    li li ol > li {
+        list-style-type: lower-roman;
+    }
+
+    h2, h3 {
+        margin-bottom: 0.75em;
+    }
+
+    hr {
+        border-top: none;
+        border-right: none;
+        border-bottom: 1px solid;
+        border-left: none;
+    }
+
+    h1 {
+        border-color: rgb(197, 197, 197);
+    }
+
+    blockquote {
+        border-color: rgb(186, 186, 186);
+        color: rgb(101, 101, 101);
+    }
+
+    blockquote ul, blockquote ol {
+        margin-left: 0px;
+    }
+
+    .ty-table-edit {
+        background-color: transparent;
+    }
+
+    thead {
+        background-color: rgb(218, 218, 218);
+    }
+
+    tr:nth-child(2n) {
+        background: rgb(232, 231, 231);
+    }
+
+    hr {
+        border-color: rgb(197, 197, 197);
+    }
+
+    .task-list {
+        padding-left: 1rem;
+    }
+
+    .md-task-list-item {
+        padding-left: 1.5rem;
+        list-style-type: none;
+    }
+
+    .md-task-list-item > input::before {
+        content: "√";
+        display: inline-block;
+        width: 1.25rem;
+        height: 1.6rem;
+        vertical-align: middle;
+        text-align: center;
+        color: rgb(221, 221, 221);
+        background-color: rgb(243, 242, 238);
+    }
+
+    .md-task-list-item > input:checked::before, .md-task-list-item > input[checked]::before {
+        color: inherit;
+    }
+
+    #write pre.md-meta-block {
+        min-height: 1.875rem;
+        color: rgb(85, 85, 85);
+        border: 0px;
+        background: transparent;
+        margin-left: 1em;
+        margin-top: 1em;
+    }
+
+    .md-image > .md-meta {
+        color: rgb(155, 81, 70);
+    }
+
+    .md-image > .md-meta {
+        font-family: Menlo, "Ubuntu Mono", Consolas, "Courier New", "Microsoft Yahei", "Hiragino Sans GB", "WenQuanYi Micro Hei", serif;
+    }
+
+    #write > h3.md-focus::before {
+        left: -1.5rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h4.md-focus::before {
+        left: -1.5rem;
+        top: 0.25rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h5.md-focus::before {
+        left: -1.5rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h6.md-focus::before {
+        left: -1.5rem;
+        top: 0.3125rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    .md-toc:focus .md-toc-content {
+        margin-top: 19px;
+    }
+
+    .md-toc-content:empty::before {
+        color: rgb(6, 85, 136);
+    }
+
+    .md-toc-item {
+        color: rgb(6, 85, 136);
+    }
+
+    #write div.md-toc-tooltip {
+        background-color: rgb(243, 242, 238);
+    }
+
+    #typora-sidebar {
+        background-color: rgb(243, 242, 238);
+        box-shadow: rgba(0, 0, 0, 0.376) 0px 6px 12px;
+    }
+
+    .pin-outline #typora-sidebar {
+        background: inherit;
+        box-shadow: none;
+        border-right: 1px dashed;
+    }
+
+    .pin-outline #typora-sidebar:hover .outline-title-wrapper {
+        border-left: 1px dashed;
+    }
+
+    .outline-item:hover {
+        background-color: rgb(218, 218, 218);
+        border-left: 28px solid rgb(218, 218, 218);
+        border-right: 18px solid rgb(218, 218, 218);
+    }
+
+    .typora-node .outline-item:hover {
+        border-right: 28px solid rgb(218, 218, 218);
+    }
+
+    .outline-expander::before {
+        content: "";
+        font-family: FontAwesome;
+        font-size: 14px;
+        top: 1px;
+    }
+
+    .outline-expander:hover::before, .outline-item-open > .outline-item > .outline-expander::before {
+        content: "";
+    }
+
+    .modal-content {
+        background-color: rgb(243, 242, 238);
+    }
+
+    .auto-suggest-container ul li {
+        list-style-type: none;
+    }
+
+    .megamenu-menu, #top-titlebar, #top-titlebar *, .megamenu-content {
+        background: rgb(243, 242, 238);
+        color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-header {
+        border-bottom: 1px dashed rgb(32, 43, 51);
+    }
+
+    .megamenu-menu {
+        box-shadow: none;
+        border-right: 1px dashed;
+    }
+
+    header, .context-menu, .megamenu-content, footer {
+        font-family: "PT Serif", "Times New Roman", Times, serif;
+        color: rgb(31, 9, 9);
+    }
+
+    #megamenu-back-btn {
+        color: rgb(31, 9, 9);
+        border-color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-header #megamenu-menu-header-title::before {
+        color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-list li a:hover, .megamenu-menu-list li a.active {
+        color: inherit;
+        background-color: rgb(232, 231, 223);
+    }
+
+    .long-btn:hover {
+        background-color: rgb(232, 231, 223);
+    }
+
+    #recent-file-panel tbody tr:nth-child(2n-1) {
+        background-color: transparent !important;
+    }
+
+    .megamenu-menu-panel tbody tr:hover td:nth-child(2) {
+        color: inherit;
+    }
+
+    .megamenu-menu-panel .btn {
+        background-color: rgb(210, 209, 209);
+    }
+
+    .btn-default {
+        background-color: transparent;
+    }
+
+    .typora-sourceview-on #toggle-sourceview-btn, .ty-show-word-count #footer-word-count {
+        background: rgb(199, 197, 197);
+    }
+
+    #typora-quick-open {
+        background-color: inherit;
+    }
+
+    .md-diagram-panel {
+        margin-top: 8px;
+    }
+
+    .file-list-item-file-name {
+        font-weight: initial;
+    }
+
+    .file-list-item-summary {
+        opacity: 1;
+    }
+
+    .file-list-item {
+        color: rgb(119, 119, 119);
+    }
+
+    .file-list-item.active {
+        background-color: inherit;
+        color: black;
+    }
+
+    .ty-side-sort-btn.active {
+        background-color: inherit;
+    }
+
+    .file-list-item.active .file-list-item-file-name {
+        font-weight: bold;
+    }
+
+    .file-list-item {
+        opacity: 1 !important;
+    }
+
+    .file-library-node.active > .file-node-background {
+        background-color: var(--active-file-bg-color);
+    }
+
+    .file-tree-node.active > .file-node-content {
+        color: var(--active-file-text-color);
+    }
+
+    .md-task-list-item > input {
+        margin-left: -1.6em;
+        margin-top: calc(1rem - 12px);
+    }
+
+    input {
+        border: 1px solid rgb(170, 170, 170);
+    }
+
+    .megamenu-menu-header #megamenu-menu-header-title, .megamenu-menu-header:hover, .megamenu-menu-header:focus {
+        color: inherit;
+    }
+
+    .dropdown-menu .divider {
+        border-color: rgb(229, 229, 229);
+    }
+
+    .os-windows-7 strong, .os-windows-7 strong {
+        font-weight: 760;
+    }
+
+
+    .typora-export li, .typora-export p, .typora-export, .footnote-line {
+        white-space: normal;
+    }
+    </style>
+</head>
+<body class='typora-export os-windows'>
+<div id='write' class='is-node'><h1><a name='header-n0' class='md-header-anchor '></a>第11章 泛型</h1>
+    <h2><a name='header-n2' class='md-header-anchor '></a>学习目标</h2>
+    <ul>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够使用泛型定义类、接口、方法</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够理解泛型上限</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够阐述泛型通配符的作用</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够识别通配符的上下限</p></li>
+    </ul>
+    <h1><a name='header-n12' class='md-header-anchor '></a>第十一章 泛型</h1>
+    <h2><a name='header-n13' class='md-header-anchor '></a>11.1 泛型的概念</h2>
+    <h3><a name='header-n14' class='md-header-anchor '></a>11.1.1 泛型的引入</h3>
+    <p><code>Gernerics</code> <code>/dʒəˈnɛrɪks/</code></p>
+    <p>例如：生产瓶子的厂家，一开始并不知道我们将来会用瓶子装什么，我们什么都可以装，但是有的时候，我们在使用时，想要限定某个瓶子只能用来装什么，这样我们不会装错，而用的时候也可以放心的使用，无需再三思量。我们生活中是<strong>在使用这个瓶子时在瓶子上“贴标签”</strong>，这样就轻松解决了问题。
+    </p>
+    <p><img src='imgs11\1563412556491.png' alt='1563412556491' referrerPolicy='no-referrer'/></p>
+    <p>
+        还有，在Java中我们在声明方法时，当在完成方法功能时如果有未知的数据需要参与，这些未知的数据需要在调用方法时才能确定，那么我们把这样的数据通过形参表示。那么在方法体中，用这个形参名来代表那个未知的数据，而调用者在调用时，对应的传入值就可以了。</p>
+    <p><img src='imgs11/1563414367674.png' alt='1563414367674' referrerPolicy='no-referrer'/></p>
+    <p>受以上两点启发，<strong>JDK1.5设计了泛型的概念。泛型即为“类型参数”，这个类型参数在声明它的类、接口或方法中，代表未知的通用的类型。</strong>例如：</p>
+    <p>
+        java.lang.Comparable接口和java.util.Comparator接口，是用于对象比较大小的规范接口，这两个接口只是限定了当一个对象大于另一个对象时返回正整数，小于返回负整数，等于返回0。但是并不确定是什么类型的对象比较大小，之前的时候只能用Object类型表示，使用时既麻烦又不安全，因此JDK1.5就给它们增加了泛型。</p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">public</span> <span class="cm-keyword">interface</span> <span
+            class="cm-def">Comparable</span><span class="cm-operator">&lt;</span><span class="cm-variable">T</span><span
+            class="cm-operator">&gt;</span>{</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable-3">int</span> <span
+            class="cm-variable">compareTo</span>(<span class="cm-variable">T</span> <span class="cm-variable">o</span>) ;</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 74px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 74px;"></div></div></div></pre>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">public</span> <span class="cm-keyword">interface</span> <span
+            class="cm-def">Comparator</span><span class="cm-operator">&lt;</span><span class="cm-variable">T</span><span
+            class="cm-operator">&gt;</span>{</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span
+            class="cm-variable-3">int</span> <span class="cm-variable">compare</span>(<span class="cm-variable">T</span> <span
+            class="cm-variable">o1</span>, <span class="cm-variable">T</span> <span
+            class="cm-variable">o2</span>) ;</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 74px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 74px;"></div></div></div></pre>
+    <p>其中
+        <T>就是类型参数，即泛型。
+    </p>
+    <h3><a name='header-n25' class='md-header-anchor '></a>11.1.2 泛型的好处</h3>
+    <p>示例代码：</p>
+    <p>JavaBean：圆类型</p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"
+         style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">class</span> <span class="cm-def">Circle</span>{</span></pre></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">private</span> <span
+            class="cm-variable-3">double</span> <span class="cm-variable">radius</span>;</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+            class="cm-variable">Circle</span>(<span class="cm-variable-3">double</span> <span
+            class="cm-variable">radius</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-keyword">super</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-keyword">this</span>.<span class="cm-variable">radius</span> <span
+            class="cm-operator">=</span> <span class="cm-variable">radius</span>;</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line "
+                                                                                            role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+            class="cm-variable-3">double</span> <span class="cm-variable">getRadius</span>() {</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation"
+                                                                               cm-text="	">    </span><span
+            class="cm-keyword">return</span> <span class="cm-variable">radius</span>;</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line "
+                                                                                            role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+            class="cm-variable-3">void</span> <span class="cm-variable">setRadius</span>(<span class="cm-variable-3">double</span> <span
+            class="cm-variable">radius</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-keyword">this</span>.<span class="cm-variable">radius</span> <span
+            class="cm-operator">=</span> <span class="cm-variable">radius</span>;</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line "
+                                                                                            role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span><span
+            class="cm-meta">@Override</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-keyword">public</span> <span
+            class="cm-variable-3">String</span> <span class="cm-variable">toString</span>() {</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation"
+                                                                               cm-text="	">    </span><span
+            class="cm-keyword">return</span> <span class="cm-string">"Circle [radius="</span> <span class="cm-operator">+</span> <span
+            class="cm-variable">radius</span> <span class="cm-operator">+</span> <span
+            class="cm-string">"]"</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span>}</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack"
+                                                                style="padding-right: 0.1px;"><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 543px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 543px;"></div></div></div></pre>
+    <p>比较器</p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">import</span> <span class="cm-variable">java</span>.<span class="cm-variable">util</span>.<span
+            class="cm-variable">Comparator</span>;</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span
+            class="cm-def">CircleComparator</span> <span class="cm-keyword">implements</span> <span class="cm-variable">Comparator</span>{</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span><span
+            class="cm-meta">@Override</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-keyword">public</span> <span
+            class="cm-variable-3">int</span> <span class="cm-variable">compare</span>(<span
+            class="cm-variable-3">Object</span> <span class="cm-variable">o1</span>, <span
+            class="cm-variable-3">Object</span> <span class="cm-variable">o2</span>) {</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation"
+                                                                               cm-text="	">    </span><span
+            class="cm-comment">//强制类型转换</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-variable">Circle</span> <span class="cm-variable">c1</span> <span
+            class="cm-operator">=</span> (<span class="cm-variable">Circle</span>) <span class="cm-variable">o1</span>;</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation"
+                                                                               cm-text="	">    </span><span
+            class="cm-variable">Circle</span> <span class="cm-variable">c2</span> <span
+            class="cm-operator">=</span> (<span class="cm-variable">Circle</span>) <span class="cm-variable">o2</span>;</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation"
+                                                                               cm-text="	">    </span><span
+            class="cm-keyword">return</span> <span class="cm-variable-3">Double</span>.<span
+            class="cm-variable">compare</span>(<span class="cm-variable">c1</span>.<span
+            class="cm-variable">getRadius</span>(), <span class="cm-variable">c2</span>.<span class="cm-variable">getRadius</span>());</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line "
+                                                                                            role="presentation"><span
+            role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab"
+                                                                                             role="presentation"
+                                                                                             cm-text="	">    </span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 345px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 345px;"></div></div></div></pre>
+    <p>测试类</p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span
+            class="cm-def">TestGeneric</span> {</span></pre></div><pre class=" CodeMirror-line "
+                                                                       role="presentation"><span role="presentation"
+                                                                                                 style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+            class="cm-keyword">static</span> <span class="cm-variable-3">void</span> <span
+            class="cm-variable">main</span>(<span class="cm-variable-3">String</span>[] <span
+            class="cm-variable">args</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-variable">CircleComparator</span> <span class="cm-variable">com</span> <span
+            class="cm-operator">=</span> <span class="cm-keyword">new</span> <span
+            class="cm-variable">CircleComparator</span>();</span></pre><pre class=" CodeMirror-line "
+                                                                            role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">println</span>(<span class="cm-variable">com</span>.<span
+            class="cm-variable">compare</span>(<span class="cm-keyword">new</span> <span
+            class="cm-variable">Circle</span>(<span class="cm-number">1</span>), <span
+            class="cm-keyword">new</span> <span class="cm-variable">Circle</span>(<span
+            class="cm-number">2</span>)));</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab"
+                                                                                             role="presentation"
+                                                                                             cm-text="	">    </span><span
+            class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line "
+                                                                                           role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">println</span>(<span class="cm-variable">com</span>.<span
+            class="cm-variable">compare</span>(<span class="cm-string">"圆1"</span>, <span class="cm-string">"圆2"</span>));<span
+            class="cm-comment">//运行时异常：ClassCastException</span></span></pre><pre class=" CodeMirror-line "
+                                                                                  role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span>}</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 247px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 247px;"></div></div></div></pre>
+    <p>那么我们在使用如上面这样的接口时，如果没有泛型或不指定泛型，很麻烦，而且有安全隐患。</p>
+    <p>
+        因为在设计（编译）Comparator接口时，不知道它会用于哪种类型的对象比较，因此只能将compare方法的形参设计为Object类型，而实际在compare方法中需要向下转型为Circle，才能调用Circle类的getRadius()获取半径值进行比较。</p>
+    <p>使用泛型：</p>
+    <p>比较器：</p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">class</span> <span class="cm-def">CircleComparator</span> <span class="cm-keyword">implements</span> <span
+            class="cm-variable">Comparator</span><span class="cm-operator">&lt;</span><span
+            class="cm-variable">Circle</span><span class="cm-operator">&gt;</span>{</span></pre></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span><span
+            class="cm-meta">@Override</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-keyword">public</span> <span
+            class="cm-variable-3">int</span> <span class="cm-variable">compare</span>(<span
+            class="cm-variable">Circle</span> <span class="cm-variable">o1</span>, <span
+            class="cm-variable">Circle</span> <span class="cm-variable">o2</span>) {</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation"
+                                                                               cm-text="	">    </span><span
+            class="cm-comment">//不再需要强制类型转换，代码更简洁</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-keyword">return</span> <span class="cm-variable-3">Double</span>.<span
+            class="cm-variable">compare</span>(<span class="cm-variable">o1</span>.<span
+            class="cm-variable">getRadius</span>(), <span class="cm-variable">o2</span>.<span class="cm-variable">getRadius</span>());</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line "
+                                                                                            role="presentation"><span
+            role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab"
+                                                                                             role="presentation"
+                                                                                             cm-text="	">    </span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 247px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 247px;"></div></div></div></pre>
+    <p>测试类</p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">import</span> <span class="cm-variable">java</span>.<span class="cm-variable">util</span>.<span
+            class="cm-variable">Comparator</span>;</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span
+            class="cm-def">TestGeneric</span> {</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-keyword">public</span> <span
+            class="cm-keyword">static</span> <span class="cm-variable-3">void</span> <span
+            class="cm-variable">main</span>(<span class="cm-variable-3">String</span>[] <span
+            class="cm-variable">args</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-variable">CircleComparator</span> <span class="cm-variable">com</span> <span
+            class="cm-operator">=</span> <span class="cm-keyword">new</span> <span
+            class="cm-variable">CircleComparator</span>();</span></pre><pre class=" CodeMirror-line "
+                                                                            role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">println</span>(<span class="cm-variable">com</span>.<span
+            class="cm-variable">compare</span>(<span class="cm-keyword">new</span> <span
+            class="cm-variable">Circle</span>(<span class="cm-number">1</span>), <span
+            class="cm-keyword">new</span> <span class="cm-variable">Circle</span>(<span
+            class="cm-number">2</span>)));</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab"
+                                                                                             role="presentation"
+                                                                                             cm-text="	">    </span><span
+            class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre class=" CodeMirror-line "
+                                                                                           role="presentation"><span
+            role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-comment">//<span
+            class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation"
+                                                                             cm-text="	">    </span>System.out.println(com.compare("圆1", "圆2"));//编译错误，因为"圆1", "圆2"不是Circle类型，是String类型，编译器提前报错，而不是冒着风险在运行时再报错</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre class=" CodeMirror-line "
+                                                                                            role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 321px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 321px;"></div></div></div></pre>
+    <p>如果有了泛型并使用泛型，那么既能保证安全，又能简化代码。</p>
+    <p>因为把不安全的因素在编译期间就排除了；既然通过了编译，那么类型一定是符合要求的，就避免了类型转换。</p>
+    <h3><a name='header-n42' class='md-header-anchor '></a>11.1.3 泛型的相关术语</h3>
+    <p><strong>&lt;数据类型&gt;</strong>这种语法形式就叫<strong>泛型</strong>。其中数据类型只能是引用数据类型。</p>
+    <ul>
+        <li><code>TypeVariable</code>：类型变量，例如：<code>ArrayList&lt;E&gt;</code>中的E，<code>Map&lt;K,V&gt;</code>中的K,V</li>
+        <li>
+            <code>ParameterizedType</code>：参数化类型，例如：<code>Comparator&lt;T&gt;</code>，<code>Comparator&lt;String&gt;</code>
+        </li>
+        <li><code>GenericArrayType</code>：泛化的数组类型，即<code>T[]</code></li>
+        <li><code>WildcardType</code>：通配符类型，例如：<code>Comparator&lt;?&gt;</code>等</li>
+    </ul>
+    <h3><a name='header-n53' class='md-header-anchor '></a>11.1.4 在哪里可以声明类型变量&lt;T&gt;</h3>
+    <ul>
+        <li>声明类或接口时，在类名或接口名后面声明类型变量，我们把这样的类或接口称为泛型类或泛型接口</li>
+    </ul>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">【修饰符】</span> <span class="cm-keyword">class</span> <span class="cm-def">类名</span><span
+            class="cm-operator">&lt;</span><span class="cm-variable">类型变量列表</span><span class="cm-operator">&gt;</span> <span
+            class="cm-variable">【extends</span> <span class="cm-variable">父类】</span> <span class="cm-variable">【implements</span> <span
+            class="cm-variable">父接口们】</span>{</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;</span></pre><pre class=" CodeMirror-line "
+                                                                                              role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line "
+                                                                                 role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">【修饰符】</span> <span
+            class="cm-keyword">interface</span> <span class="cm-def">接口名</span><span
+            class="cm-operator">&lt;</span><span class="cm-variable">类型变量列表</span><span class="cm-operator">&gt;</span> <span
+            class="cm-variable">【implements</span> <span class="cm-variable">父接口们】</span>{</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                style="padding-right: 0.1px;">}</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"><span
+            class="cm-variable">例如：</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span
+            class="cm-keyword">class</span> <span class="cm-def">ArrayList</span><span
+            class="cm-operator">&lt;</span><span class="cm-variable">E</span><span class="cm-operator">&gt;</span> &nbsp; &nbsp;</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">public</span> <span class="cm-keyword">interface</span> <span
+            class="cm-def">Map</span><span class="cm-operator">&lt;</span><span class="cm-variable">K</span>,<span
+            class="cm-variable">V</span><span class="cm-operator">&gt;</span>{</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  ....</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">} &nbsp; &nbsp;</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 321px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 321px;"></div></div></div></pre>
+    <ul>
+        <li>声明方法时，在【修饰符】与返回值类型之间声明类型变量，我们把声明（是<font color='red'><strong>声明</strong></font>不是单纯的使用）了类型变量的方法称为泛型方法</li>
+    </ul>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n61"
+         mdtype="fences">【修饰符】 &lt;类型变量列表&gt; 返回值类型 方法名(【形参列表】)【throws 异常列表】{
+    //...
+}
+
+例如：java.util.Arrays类中的
+public static &lt;T&gt; List&lt;T&gt; asList(T... a){
+    ....
+}
+</pre>
+    <p>&nbsp;</p>
+    <h2><a name='header-n63' class='md-header-anchor '></a>11.2 自定义泛型结构</h2>
+    <h3><a name='header-n64' class='md-header-anchor '></a>11.2.1 自定义泛型类和泛型接口</h3>
+    <p>当我们在声明类或接口时，类或接口中定义某个成员时，该成员有些类型是不确定的，而这个类型需要在使用这个类或接口时才可以确定，那么我们可以使用泛型。</p>
+    <ol start=''>
+        <li><p><strong>声明泛型类</strong></p>
+            <p>语法格式：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n70"
+                 mdtype="fences">【修饰符】 class 类名&lt;类型变量列表&gt; {
+	
+}
+</pre>
+            <p>注意：</p>
+            <ul>
+                <li>&lt;类型变量列表&gt;：可以是一个或多个类型变量，一般都是使用单个的大写字母表示。例如：<code>&lt;T&gt;</code>、<code>&lt;K,V&gt;</code> 等。
+                </li>
+                <li>当类或接口上声明了&lt;类型变量列表&gt;时，其中的类型变量不能用于静态成员上。</li>
+            </ul>
+        </li>
+    </ol>
+    <p>示例：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n78"
+         mdtype="fences">   public class GerClass&lt;T&gt; {
+    private T obj;//成员变量使用类上定义的类型变量T
+   
+       public T getObj() {//实例方法使用类上定义的类型变量T
+           return obj;
+       }
+   
+       public void setObj(T obj) {
+        this.obj = obj;
+       }
+       
+       //public static void test(T t){ }       //此时类型变量T不能用在静态成员上	
+   }
+</pre>
+    <ol start='2'>
+        <li><p><strong>声明泛型接口</strong></p>
+            <p>语法格式：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n83"
+                 mdtype="fences">【修饰符】 interface 接口名&lt;类型变量列表&gt; 【implements 父接口们】{
+    
+}
+</pre>
+            <p>示例：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n85"
+                 mdtype="fences">//泛型接口
+public interface GerInterface&lt;T&gt; {
+    void show(T t);
+}
+</pre>
+        </li>
+        <li><p><strong>泛型类和接口的子类或实现类</strong></p>
+            <p>泛型类和接口一样可以被继承或实现，一个类在继承父类或实现接口时分两种情况：</p>
+            <ul>
+                <li><p>子类或实现类明确泛型类的类型参数变量</p>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n92" mdtype="fences">//定义实现类时，明确接口中声明的类型参数，此时实现类不再是泛型类
+public class GerInterfaceImpl implements GerInterface&lt;String&gt; {
+
+    @Override
+    public void show(String t) {
+        System.out.println(t);
+    }
+
+}
+</pre>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n93" mdtype="fences">public class User implements Comparable&lt;User&gt;{
+    @Override
+    public int compareTo(User u){
+        
+        return 0;
+    }
+}
+</pre>
+                    <p>&nbsp;</p></li>
+                <li><p>子类不明确泛型类的类型参数变量</p>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n97" mdtype="fences">//定义实现类时，实现类不明确接口中声明的类型参数，实现类仍然是泛型类
+public class GerInterfaceImpl&lt;T&gt; implements GerInterface&lt;T&gt; {
+
+    @Override
+    public void show(T t) {
+        System.out.println(t);
+    }
+
+}
+</pre>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n98" mdtype="fences">//ArrayList类实现了泛型接口，未明确泛型类型参数，依然是泛型类
+public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
+    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable
+{
+}
+</pre>
+                    <p>&nbsp;</p></li>
+            </ul>
+        </li>
+        <li><p><strong>使用泛型类和接口</strong></p>
+            <ul>
+                <li><p>在使用这种参数化的类与接口创建对象时，我们需要指定泛型变量的实际类型参数(必须是引用数据类型)</p>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n105" mdtype="fences">   public static void main(String[] args) {
+       //使用泛型类或接口时，明确泛型参数类型为String
+       GerInterface&lt;String&gt; gi = new GerInterfaceImpl&lt;String&gt;();
+       //gi.show(123);//泛型确定了String，这里编译失败
+       gi.show("hello");
+   }
+</pre>
+                </li>
+                <li><p>指定泛型实参时，必须左右两边类型参数一致。JDK1.7后支持简写形式，右边类型参数可以省略：</p>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n108" mdtype="fences">GerInterface&lt;String&gt; gi = new GerInterfaceImpl&lt;&gt;();//省略右边泛型类型
+</pre>
+                </li>
+                <li><p>当使用参数化类型的类或接口时，如果没有指定泛型，即为泛型擦除，相当于Object类型。</p>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n111" mdtype="fences" style="break-inside: unset;">//实现类确定了泛型类型
+class Circle implements Comparable&lt;Circle&gt;{
+    private double radius;
+
+    public Circle(double radius) {
+        super();
+        this.radius = radius;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public String toString() {
+        return "Circle [radius=" + radius + "]";
+    }
+
+    @Override
+    public int compareTo(Circle c){//参数类型确定
+        return Double.compare(radius,c.radius);
+    }
+}
+</pre>
+                    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                         cid="n112" mdtype="fences">   //类型擦除：
+   public class CircleComparator implements Comparator{
+       @Override
+       public int compare(Object o1, Object o2) {
+           //未指定泛型类型，默认为Object，使用时还要强制类型转换
+           Circle c1 = (Circle) o1;
+           Circle c2 = (Circle) o2;
+           return Double.compare(c1.getRadius(), c2.getRadius());
+       }
+   }
+</pre>
+                    <p></p></li>
+            </ul>
+        </li>
+    </ol>
+    <p><strong>练习：</strong></p>
+    <p>我们要声明一个学生类，该学生包含姓名、成绩，而此时学生的成绩类型不确定，为什么呢，因为，语文老师希望成绩是“优秀”、“良好”、“及格”、“不及格”，数学老师希望成绩是89.5, 65.0，英语老师希望成绩是&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;,&#39;E&#39;。那么我们在设计这个学生类时，就可以使用泛型。</p>
+    <p>定义泛型类：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n117"
+         mdtype="fences" style="break-inside: unset;">   public class Student&lt;T&gt;{
+   	private String name;
+   	private T score;
+   	
+   	public Student() {
+   		super();
+   	}
+   	public Student(String name, T score) {
+   		super();
+   		this.name = name;
+   		this.score = score;
+   	}
+   	public String getName() {
+   		return name;
+   	}
+   	public void setName(String name) {
+   		this.name = name;
+   	}
+   	public T getScore() {
+   		return score;
+   	}
+   	public void setScore(T score) {
+   		this.score = score;
+   	}
+   	@Override
+   	public String toString() {
+   		return "姓名：" + name + ", 成绩：" + score;
+   	}
+   }
+</pre>
+    <p>使用泛型类：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n119"
+         mdtype="fences" style="break-inside: unset;">public class TestGeneric{
+    public static void main(String[] args) {
+        //语文老师使用时：
+        Student&lt;String&gt; stu1 = new Student&lt;String&gt;("张三", "良好");
+
+        //数学老师使用时：
+        //Student&lt;double&gt; stu2 = new Student&lt;double&gt;("张三", 90.5);//错误，必须是引用数据类型
+        Student&lt;Double&gt; stu2 = new Student&lt;Double&gt;("张三", 90.5);
+
+        //英语老师使用时：
+        Student&lt;Character&gt; stu3 = new Student&lt;Character&gt;("张三", 'C');
+
+        //错误的指定
+        //Student&lt;Object&gt; stu = new Student&lt;String&gt;();//错误的
+    }
+}
+</pre>
+    <p>继承泛型类并指定类型变量：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n121"
+         mdtype="fences">class ChineseStudent extends Student&lt;String&gt;{//继承时确定了泛型类型
+
+    public ChineseStudent() {
+        super();
+    }
+
+    public ChineseStudent(String name, String score) {
+        super(name, score);
+    }
+
+}
+</pre>
+    <p>使用泛型类的子类：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n123"
+         mdtype="fences">public class TestGeneric{
+    public static void main(String[] args) {
+        //语文老师使用时：
+        ChineseStudent stu = new ChineseStudent("张三", "良好");
+    }
+}
+   
+</pre>
+    <p>&nbsp;</p>
+    <h3><a name='header-n125' class='md-header-anchor '></a>11.2.2 自定义泛型方法</h3>
+    <p>前面介绍了在定义类、接口时可以声明&lt;类型变量&gt;，在该类的方法和属性定义、接口的方法定义中，这些&lt;类型变量&gt;可被当成普通类型来用。使用泛型时，如果外界只关心某个方法，而不关心类其他的成员，那么可以只在该方法上声明泛型，<strong>方法泛型化，称为泛型方法。</strong>
+    </p>
+    <p><strong>语法格式：</strong></p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n128"
+         mdtype="fences">【修饰符】 &lt;类型变量列表&gt; 返回值类型 方法名(【形参列表】)【throws 异常列表】{
+    //...
+}
+</pre>
+    <ul>
+        <li>&lt;类型变量列表&gt;：可以是一个或多个类型变量，一般都是使用单个的大写字母表示。例如：
+            <T>、<code>&lt;K,V&gt;</code>等。
+        </li>
+        <li>静态方法也可以单独泛型化。区别泛型类或接口中的静态方法（不能使用泛型类或接口定义的泛型变量）。</li>
+    </ul>
+    <p><strong>示例：</strong></p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n135"
+         mdtype="fences">public class GernericMethod {
+    //泛型方法
+    public  static &lt;T&gt;  T getMsg(T t){
+        return t;
+    }
+}
+</pre>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n136"
+         mdtype="fences">public static void main(String[] args) {
+    GernericMethod.getMsg("hello");
+}
+</pre>
+    <p><strong>练习：</strong></p>
+    <p>我们编写一个数组工具类，包含可以给任意对象数组进行从小到大排序，要求数组元素类型必须实现Comparable接口</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n139"
+         mdtype="fences" style="break-inside: unset;">//T表示继承了Comparable接口的任意类型
+public class MyArrays{
+	public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(T[] arr){
+		for (int i = 1; i &lt; arr.length; i++) {
+			for (int j = 0; j &lt; arr.length-i; j++) {
+				if(arr[j].compareTo(arr[j+1])&gt;0){
+					T temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+				}
+			}
+		}
+	}
+}
+</pre>
+    <p>测试类</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n141"
+         mdtype="fences" style="break-inside: unset;">public class TestGeneric{
+	public static void main(String[] args) {
+		int[] arr = {3,2,5,1,4};
+//		MyArrays.sort(arr);//错误的，因为int[]不是对象数组
+		
+		String[] strings = {"hello","java","chai"};
+		MyArrays.sort(strings);
+		System.out.println(Arrays.toString(strings));
+		
+		Circle[] circles = {new Circle(2.0),new Circle(1.2),new Circle(3.0)};
+		MyArrays.sort(circles);
+		System.out.println(Arrays.toString(circles));
+	}
+}
+</pre>
+    <h3><a name='header-n142' class='md-header-anchor '></a>练习</h3>
+    <ol start=''>
+        <li><h4><a name='header-n145' class='md-header-anchor '></a>练习1 </h4>
+            <p>1、声明一个坐标类Coordinate
+                <T>，它有两个属性：x,y，都为T类型
+                    2、在测试类中，创建两个不同的坐标类对象，
+                    分别指定T类型为String和Double，并为x,y赋值，打印对象
+            </p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n147" mdtype="fences" style="break-inside: unset;">public class TestExer1 {
+	public static void main(String[] args) {
+		Coordinate&lt;String&gt; c1 = new Coordinate&lt;&gt;("北纬38.6", "东经36.8");
+		System.out.println(c1);
+		
+//		Coordinate&lt;Double&gt; c2 = new Coordinate&lt;&gt;(38.6, 38);//自动装箱与拆箱只能与对应的类型 38是int，自动装为Integer
+		Coordinate&lt;Double&gt; c2 = new Coordinate&lt;&gt;(38.6, 36.8);
+		System.out.println(c2);
+	}
+}
+class Coordinate&lt;T&gt;{
+	private T x;
+	private T y;
+	public Coordinate(T x, T y) {
+		super();
+		this.x = x;
+		this.y = y;
+	}
+	public Coordinate() {
+		super();
+	}
+	public T getX() {
+		return x;
+	}
+	public void setX(T x) {
+		this.x = x;
+	}
+	public T getY() {
+		return y;
+	}
+	public void setY(T y) {
+		this.y = y;
+	}
+	@Override
+	public String toString() {
+		return "Coordinate [x=" + x + ", y=" + y + "]";
+	}
+	
+}
+</pre>
+        </li>
+        <li><h4><a name='header-n149' class='md-header-anchor '></a>练习2</h4>
+            <p>1、声明一个Person类，包含姓名和伴侣属性，其中姓名是String类型，而伴侣的类型不确定，
+                因为伴侣可以是Person，可以是Animal（例如：金刚），可以是Ghost鬼（例如：倩女幽魂），
+                可以是Demon妖（例如：白娘子），可以是Robot机器人（例如：剪刀手爱德华）。。。</p>
+            <p>2、在测试类中，创建Person对象，并为它指定伴侣，打印显示信息</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n152" mdtype="fences" style="break-inside: unset;">public class TestExer3 {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static void main(String[] args) {
+		Person&lt;Demon&gt; xu = new Person&lt;Demon&gt;("许仙",new Demon("白娘子"));
+		System.out.println(xu);
+		
+		Person&lt;Person&gt; xie = new Person&lt;Person&gt;("JACK",new Person("ROSE"));
+		Person fere = xie.getFere();
+		fere.setFere(xie);
+		System.out.println(xie);
+		System.out.println(fere);
+	}
+}
+class Demon{
+	private String name;
+
+	public Demon(String name) {
+		super();
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Demon [name=" + name + "]";
+	}
+}
+class Person&lt;T&gt;{
+	private String name;
+	private T fere;
+	public Person(String name, T fere) {
+		super();
+		this.name = name;
+		this.fere = fere;
+	}
+	public Person(String name) {
+		super();
+		this.name = name;
+	}
+
+	public Person() {
+		super();
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public T getFere() {
+		return fere;
+	}
+	public void setFere(T fere) {
+		this.fere = fere;
+	}
+	@SuppressWarnings("rawtypes")
+	@Override
+	public String toString() {
+		if(fere instanceof Person){
+			Person p = (Person) fere;
+			return "Person [name=" + name + ", fere=" + p.getName() + "]";
+		}
+		return "Person [name=" + name + ", fere=" + fere + "]";
+	}
+}
+</pre>
+        </li>
+        <li><h4><a name='header-n154' class='md-header-anchor '></a>练习3</h4>
+            <p>1、声明员工类型Employee，包含姓名（String），薪资（double），年龄（int）</p>
+            <p>2、员工类Employee实现java.lang.Comparable
+                <T>接口，指定T为Employee类型，重写抽象方法，按照薪资比较大小，薪资相同的按照姓名的自然顺序比较大小。
+            </p>
+            <p>3、在测试类中创建Employee数组，然后调用Arrays.sort(Object[] arr)方法进行排序，遍历显示员工信息</p>
+            <p>4、再次调用Arrays.sort(Object[] arr,Comparator
+                <T> c)方法进行按照年龄排序，年龄相同的安装姓名自然顺序比较大小，遍历显示员工信息
+            </p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n159" mdtype="fences" style="break-inside: unset;">public class TestExer3 {
+	@Test
+	public void test01() {
+		Employee[] arr = new Employee[3];
+		arr[0] = new Employee("Irene", 18000, 18);
+		arr[1] = new Employee("Jack", 14000, 28);
+		arr[2] = new Employee("Alice", 14000, 24);
+		
+		Arrays.sort(arr);
+		
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+	}
+	
+	@Test
+	public void test02() {
+		Employee[] arr = new Employee[3];
+		arr[0] = new Employee("Irene", 18000, 18);
+		arr[1] = new Employee("Jack", 14000, 28);
+		arr[2] = new Employee("Alice", 14000, 24);
+		
+		//Arrays.sort(T[] arr,Comparator&lt;T&gt; c)
+		Arrays.sort(arr, new Comparator&lt;Employee&gt;() {
+
+			//按照年龄排序，年龄相同的安装姓名自然顺序比较大小
+			@Override
+			public int compare(Employee o1, Employee o2) {
+				if(o1.getAge() != o2.getAge()) {
+					return o1.getAge() - o2.getAge();
+				}
+				return o1.getName().compareTo(o2.getName());
+			}
+			
+		});
+		
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+	}
+}
+class Employee implements Comparable&lt;Employee&gt;{
+	private String name;
+	private double salary;
+	private int age;
+	public Employee(String name, double salary, int age) {
+		super();
+		this.name = name;
+		this.salary = salary;
+		this.age = age;
+	}
+	public Employee() {
+		super();
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", salary=" + salary + ", age=" + age + "]";
+	}
+	
+	//重写抽象方法，按照薪资比较大小，薪资相同的按照姓名的自然顺序比较大小。
+	@Override
+	public int compareTo(Employee o) {
+		if(this.salary != o.salary) {
+			return Double.compare(this.salary, o.salary);
+		}
+		return this.name.compareTo(o.name);//name是String类型，有compareTo方法
+	}
+	
+}
+</pre>
+        </li>
+    </ol>
+    <p>&nbsp;</p>
+    <h2><a name='header-n162' class='md-header-anchor '></a>11.3 类型通配符</h2>
+    <p>当我们声明一个变量/形参时，这个变量/形参的类型是一个泛型类或泛型接口，例如：Comparator
+        <T>类型，但是我们仍然无法确定这个泛型类或泛型接口的类型变量<code>&lt;T&gt;</code>的具体类型，此时我们考虑使用类型通配符。
+    </p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n164"
+         mdtype="fences" style="break-inside: unset;"> public static void forList1(List&lt;?&gt; list){
+        for (Object o : list) {
+            System.out.println(o);
+        }
+    }
+	//表示此方法可以接受一个泛型是&lt;Animal&gt;或者List&lt;Animal的子类型&gt;的List集合
+    public static void forList2(List&lt;? extends Animal&gt; list){
+        for (Animal animal : list) {
+            System.out.println(animal);
+        }
+    }
+    public static &lt;T&gt; void forList3(List&lt;? extends T&gt; list){
+        for (T o : list) {
+            System.out.println(o);
+        }
+    }
+	public static &lt;T&gt; void forList3_1(List&lt;? extends T&gt; list,T t){
+        list.add(t);//错误，无法存入数据，因为传入的List集合泛型可以是T及子类类型，如果传入的List泛型是T的子类，那么T是放不进去这个集合的
+        for (T o : list) {
+            System.out.println(o);
+        }
+        return list.get(0);//可以取出T型元素
+    }
+	//表示此方法可以接受一个泛型是&lt;Animal&gt;或者List&lt;Animal的父类型&gt;的List集合
+    public static void forList4(List&lt;? super Animal&gt; list){
+        for (Object o : list) {
+            System.out.println(o);
+        }
+    }
+    public static&lt;T&gt; void forList5(List&lt;? super T&gt; list){
+        for (Object o : list) {
+            System.out.println(o);
+        }
+    }
+	public static &lt;T&gt; T forList5_1(List&lt;? super T&gt; list,T t){
+        list.add(t);//可以存入数据，因为传入的List集合泛型可以是T及父类类型，如果传入的List泛型是T的父类，T也可以放入这个集合中
+        for (T o : list) {
+            System.out.println(o);
+        }
+        //return list.get(0);//错误,返回值类型为T，传入的List泛型可能为T的父类型，也就可能是其中元素为T的父类的List，所以取出来元素不一定是T型
+        return null;
+    }
+</pre>
+    <p>例如：</p>
+    <p>这个学生类是一个参数化的泛型类，代码如下（详细请看$11.2.1中的示例说明）：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n167"
+         mdtype="fences" style="break-inside: unset;">public class Student&lt;T&gt;{
+	private String name;
+	private T score;
+	
+	public Student() {
+		super();
+	}
+	public Student(String name, T score) {
+		super();
+		this.name = name;
+		this.score = score;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public T getScore() {
+		return score;
+	}
+	public void setScore(T score) {
+		this.score = score;
+	}
+	@Override
+	public String toString() {
+		return "姓名：" + name + ", 成绩：" + score;
+	}
+}
+</pre>
+    <h3><a name='header-n168' class='md-header-anchor '></a>11.4.1 &lt;?&gt;任意类型</h3>
+    <p>例如：我们要声明一个学生管理类，这个管理类要包含一个方法，可以遍历学生数组。</p>
+    <p>学生管理类：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n171"
+         mdtype="fences">class StudentService {
+	public static void print(Student&lt;?&gt;[] arr) {
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+	}
+}
+</pre>
+    <p>测试类</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n173"
+         mdtype="fences" style="break-inside: unset;">public class TestGeneric {
+	public static void main(String[] args) {
+		// 语文老师使用时：
+		Student&lt;String&gt; stu1 = new Student&lt;String&gt;("张三", "良好");
+
+		// 数学老师使用时：
+		// Student&lt;double&gt; stu2 = new Student&lt;double&gt;("张三", 90.5);//错误，必须是引用数据类型
+		Student&lt;Double&gt; stu2 = new Student&lt;Double&gt;("张三", 90.5);
+
+		// 英语老师使用时：
+		Student&lt;Character&gt; stu3 = new Student&lt;Character&gt;("张三", 'C');
+
+		Student&lt;?&gt;[] arr = new Student[3];
+		arr[0] = stu1;
+		arr[1] = stu2;
+		arr[2] = stu3;
+
+		StudentService.print(arr);
+	}
+}
+</pre>
+    <h3><a name='header-n174' class='md-header-anchor '></a>11.4.2 &lt;? extends 上限&gt;</h3>
+    <p>用于设定通配符上限</p>
+    <p>例如：我们要声明一个学生管理类，这个管理类要包含一个方法，找出学生数组中成绩最高的学生对象。</p>
+    <p>要求学生的成绩的类型必须可比较大小，实现Comparable接口。</p>
+    <p>学生管理类：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n179"
+         mdtype="fences">class StudentService {
+    //分数score的类型必须是实现了Comparable接口的
+	public static Student&lt;? extends Comparable&gt; max(Student&lt;? extends Comparable&gt;[] arr){
+		Student&lt;? extends Comparable&gt; max = arr[0];
+		for (int i = 0; i &lt; arr.length; i++) {
+			if(arr[i].getScore().compareTo(max.getScore())&gt;0){
+				max = arr[i];
+			}
+		}
+		return max;
+	}
+}
+</pre>
+    <p>测试类</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n181"
+         mdtype="fences">public class TestGeneric {
+	public static void main(String[] args) {
+		Student&lt;? extends Double&gt;[] arr = new Student[3];
+		arr[0] = new Student&lt;Double&gt;("张三", 90.5);
+		arr[1] = new Student&lt;Double&gt;("李四", 80.5);
+		arr[2] = new Student&lt;Double&gt;("王五", 94.5);
+		
+		Student&lt;? extends Comparable&gt; max = StudentService.max(arr);
+		System.out.println(max);
+	}
+}
+</pre>
+    <h3><a name='header-n182' class='md-header-anchor '></a>11.4.3 &lt;? super 下限&gt;</h3>
+    <p>用于设定通配符下限</p>
+    <p>现在要声明一个数组工具类，包含可以给任意对象数组进行从小到大排序，只要你指定定制比较器对象，而且这个定制比较器对象可以是当前数组元素类型自己或其父类的定制比较器对象</p>
+    <p>数组工具类：</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n186"
+         mdtype="fences">class MyArrays{
+	public static &lt;T&gt; void sort(T[] arr, Comparator&lt;? super T&gt; c){
+		for (int i = 1; i &lt; arr.length; i++) {
+			for (int j = 0; j &lt; arr.length-i; j++) {
+				if(c.compare(arr[j], arr[j+1])&gt;0){
+					T temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+				}
+			}
+		}
+	}
+}
+</pre>
+    <p>例如：有如下JavaBean</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n188"
+         mdtype="fences" style="break-inside: unset;">class Person{
+	private String name;
+	private int age;
+	public Person(String name, int age) {
+		super();
+		this.name = name;
+		this.age = age;
+	}
+	public Person() {
+		super();
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "name=" + name + ", age=" + age;
+	}
+}
+class Student extends Person{
+	private int score;
+
+	public Student(String name, int age, int score) {
+		super(name, age);
+		this.score = score;
+	}
+
+	public Student() {
+		super();
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() + ",score=" + score;
+	}
+	
+}
+</pre>
+    <p>测试类</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n190"
+         mdtype="fences" style="break-inside: unset;">public class TestGeneric {
+	public static void main(String[] args) {
+		Student[] all = new Student[3];
+		all[0] = new Student("张三", 23, 89);
+		all[1] = new Student("李四", 22, 99);
+		all[2] = new Student("王五", 25, 67);
+		
+		MyArrays.sort(all, new Comparator&lt;Person&gt;() {
+
+			@Override
+			public int compare(Person o1, Person o2) {
+				return o1.getAge() - o2.getAge();
+			}
+		});
+		
+		System.out.println(Arrays.toString(all));
+		
+		MyArrays.sort(all, new Comparator&lt;Student&gt;() {
+
+			@Override
+			public int compare(Student o1, Student o2) {
+				return o1.getScore() - o2.getScore();
+			}
+		});
+		System.out.println(Arrays.toString(all));
+	}
+}
+</pre>
+    <p><strong>练习：</strong></p>
+    <p>在数组工具类中声明如下泛型方法：</p>
+    <p>（1）可以在任意类型的对象数组中，查找某个元素的下标，按照顺序查找，如果有重复的，就返回第一个找到的，如果没有返回-1</p>
+    <p>（2）可以在任意类型的对象数组中，查找最大值，要求元素必须实现Comparable接口</p>
+    <p>（3）可以在任意类型的对象数组中，查找最大值，按照指定定制比较器来比较元素大小</p>
+    <p>（4）可以给任意对象数组进行从小到大排序，要求数组元素类型必须实现Comparable接口</p>
+    <p>（5）可以给任意对象数组进行从小到大排序，只要你指定定制比较器对象，不要求数组元素实现Comparable接口</p>
+    <p>（6）可以将任意对象数组的元素拼接为一个字符串返回</p>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n199"
+         mdtype="fences" style="break-inside: unset;">public class MyArrays {
+	//可以在任意类型的对象数组中，查找某个元素的下标，按照顺序查找，如果有重复的，就返回第一个找到的，如果没有返回-1
+	public static &lt;T&gt; int find(T[] arr, T value) {
+		for (int i = 0; i &lt; arr.length; i++) {
+			if(arr[i].equals(value)) {//使用==比较太严格，使用equals方法，因为任意对象都有equals方法
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	//可以在任意类型的对象数组中，查找最大值，要求元素必须实现Comparable接口
+	public static &lt;T extends Comparable&lt;? super T&gt;&gt; T max(T[] arr) {
+		T max = arr[0];
+		for (int i = 0; i &lt; arr.length; i++) {
+			if(max.compareTo(arr[i])&lt;0) {//if(max &lt; arr[i]) {
+				max = arr[i];
+			}
+		}
+		return max;
+	}
+	
+	//可以在任意类型的对象数组中，查找最大值，按照指定定制比较器来比较元素大小
+	public static &lt;T&gt; T max(T[] arr, Comparator&lt;? super T&gt; c) {
+		T max = arr[0];
+		for (int i = 0; i &lt; arr.length; i++) {
+			if(c.compare(max, arr[i])&lt;0) {//if(max &lt; arr[i]) {
+				max = arr[i];
+			}
+		}
+		return max;
+	}
+	
+	//可以给任意对象数组进行从小到大排序，要求数组元素类型必须实现Comparable接口
+	public static &lt;T extends Comparable&lt;? super T&gt;&gt; void sort(T[] arr) {
+		for (int i = 0; i &lt; arr.length-1; i++) {
+			int minIndex = i;
+			for (int j = i+1; j &lt; arr.length; j++) {
+				if(arr[minIndex].compareTo(arr[j])&gt;0) {
+					minIndex = j;
+				}
+			}
+			if(minIndex!=i) {
+				T temp = arr[minIndex];
+				arr[minIndex] = arr[i];
+				arr[i] = temp;
+			}
+		}
+	}
+	
+	//可以给任意对象数组进行从小到大排序，只要你指定定制比较器对象，不要求数组元素实现Comparable接口
+	public static &lt;T&gt; void sort(T[] arr, Comparator&lt;? super T&gt; c) {
+		for (int i = 0; i &lt; arr.length-1; i++) {
+			int minIndex = i;
+			for (int j = i+1; j &lt; arr.length; j++) {
+				if(c.compare(arr[minIndex],arr[j])&gt;0) {
+					minIndex = j;
+				}
+			}
+			if(minIndex!=i) {
+				T temp = arr[minIndex];
+				arr[minIndex] = arr[i];
+				arr[i] = temp;
+			}
+		}
+	}
+	
+	//可以将任意对象数组的元素拼接为一个字符串返回
+	public static &lt;T&gt; String toString(T[] arr) {
+		String str = "[";
+		for (int i = 0; i &lt; arr.length; i++) {
+			if(i==0) {
+				str += arr[i];
+			}else {
+				str += "," + arr[i];
+			}
+		}
+		str += "]";
+		return str;
+	}
+}
+</pre>
+    <p>&nbsp;</p>
+    <hr/>
+    <p>通配符演示示例：</p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm md-focus" lang="java"
+         style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span
+            class="cm-def">TestWildcardType</span> {</span></pre></div><pre class=" CodeMirror-line "
+                                                                            role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-meta">@Test</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">public</span> <span
+            class="cm-variable-3">void</span> <span class="cm-variable">test1</span>() {</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">List</span><span class="cm-operator">&lt;</span><span
+            class="cm-variable-3">String</span><span class="cm-operator">&gt;</span> <span
+            class="cm-variable">list</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span
+            class="cm-variable">ArrayList</span><span class="cm-operator">&lt;&gt;</span>();</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-comment">//使用只能处理泛型参数为String的List集合的方法</span></span></pre><pre class=" CodeMirror-line "
+                                                                                     role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">handleStringList</span>(<span
+            class="cm-variable">list</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">List</span><span class="cm-operator">&lt;?&gt;</span> <span
+            class="cm-variable">list1</span> <span class="cm-operator">=</span> <span
+            class="cm-keyword">new</span> <span class="cm-variable">ArrayList</span><span
+            class="cm-operator">&lt;</span><span class="cm-variable-3">String</span><span
+            class="cm-operator">&gt;</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">List</span><span class="cm-operator">&lt;?&gt;</span> <span
+            class="cm-variable">list2</span> <span class="cm-operator">=</span> <span
+            class="cm-keyword">new</span> <span class="cm-variable">ArrayList</span><span
+            class="cm-operator">&lt;</span><span class="cm-variable-3">Integer</span><span
+            class="cm-operator">&gt;</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">List</span><span class="cm-operator">&lt;?&gt;</span> <span
+            class="cm-variable">list3</span> <span class="cm-operator">=</span> <span
+            class="cm-keyword">new</span> <span class="cm-variable">ArrayList</span><span
+            class="cm-operator">&lt;</span><span class="cm-variable-3">Object</span><span
+            class="cm-operator">&gt;</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-comment">//可以处理任意泛型参数的List集合</span></span></pre><pre class=" CodeMirror-line "
+                                                                           role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">handleList</span>(<span class="cm-variable">list1</span>);</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">handleList</span>(<span class="cm-variable">list2</span>);</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">handleList</span>(<span class="cm-variable">list3</span>);</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-comment">//定义一个方法，只能处理泛型参数为String的List集合</span></span></pre><pre class=" CodeMirror-line "
+                                                                                       role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">public</span> &nbsp;<span
+            class="cm-variable-3">void</span> <span class="cm-variable">handleStringList</span>(<span
+            class="cm-variable">List</span><span class="cm-operator">&lt;</span><span
+            class="cm-variable-3">String</span><span class="cm-operator">&gt;</span> <span
+            class="cm-variable">list</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-keyword">for</span> (<span class="cm-variable-3">int</span> <span
+            class="cm-variable">i</span> <span class="cm-operator">=</span> <span class="cm-number">0</span>; <span
+            class="cm-variable">i</span> <span class="cm-operator">&lt;</span> <span
+            class="cm-variable">list</span>.<span class="cm-variable">size</span>(); <span
+            class="cm-variable">i</span><span class="cm-operator">++</span>) {</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">println</span>(<span class="cm-variable">list</span>.<span
+            class="cm-variable">get</span>(<span class="cm-variable">i</span>));</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;  }</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-meta">@Test</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">public</span> <span
+            class="cm-variable-3">void</span> <span class="cm-variable">test2</span>() {</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-comment">//一、使用通配符?</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">List</span><span class="cm-operator">&lt;?&gt;</span> <span
+            class="cm-variable">list</span>;<span class="cm-comment">//泛型变量可以是任意类型</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">list</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span
+            class="cm-variable">ArrayList</span><span class="cm-operator">&lt;&gt;</span>();<span class="cm-comment">//泛型变量默认是Object类型的泛型</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">list</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span
+            class="cm-variable">ArrayList</span><span class="cm-operator">&lt;</span><span
+            class="cm-variable-3">Object</span><span class="cm-operator">&gt;</span>();</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">list</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span
+            class="cm-variable">ArrayList</span><span class="cm-operator">&lt;</span><span
+            class="cm-variable-3">String</span><span class="cm-operator">&gt;</span>();</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">list</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span
+            class="cm-variable">ArrayList</span><span class="cm-operator">&lt;</span><span
+            class="cm-variable-3">Number</span><span class="cm-operator">&gt;</span>();</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">list</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span
+            class="cm-variable">ArrayList</span><span class="cm-operator">&lt;</span><span
+            class="cm-variable-3">Integer</span><span class="cm-operator">&gt;</span>();</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"><span
+            class="cm-comment">// &nbsp; &nbsp; &nbsp;  list.add(1);//compile error 编译器无法确定要add的真实类型，可能是&lt;Character&gt;或&lt;Byte&gt;，那么add(0.5)不可以，只有在方法被调用时才能确定。</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable-3">Object</span> <span class="cm-variable">o</span> <span
+            class="cm-operator">=</span> <span class="cm-variable">list</span>.<span
+            class="cm-variable">get</span>(<span class="cm-number">0</span>);<span class="cm-comment">//无法确定元素类型，只能使用Object接收</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-comment">//二、设定通配符上限</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">List</span><span class="cm-operator">&lt;?</span> <span
+            class="cm-keyword">extends</span> <span class="cm-variable-3">Number</span><span
+            class="cm-operator">&gt;</span> <span class="cm-variable">list1</span>;<span class="cm-comment">//泛型变量必须是Number子类类型</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">list1</span> <span class="cm-operator">=</span> <span
+            class="cm-keyword">new</span> <span class="cm-variable">ArrayList</span><span
+            class="cm-operator">&lt;&gt;</span>();<span class="cm-comment">//泛型变量默认是 Number类型</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-comment">// &nbsp; &nbsp; &nbsp;  list1 = new ArrayList&lt;Object&gt;();//compile error</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">list1</span> <span class="cm-operator">=</span> <span
+            class="cm-keyword">new</span> <span class="cm-variable">ArrayList</span><span
+            class="cm-operator">&lt;</span><span class="cm-variable-3">Number</span><span
+            class="cm-operator">&gt;</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">list1</span> <span
+            class="cm-operator">=</span> <span class="cm-keyword">new</span> <span
+            class="cm-variable">ArrayList</span><span class="cm-operator">&lt;</span><span
+            class="cm-variable-3">Double</span><span class="cm-operator">&gt;</span>();</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"><span
+            class="cm-comment">// &nbsp; &nbsp; &nbsp;  list1.add(1);//compile error 编译器无法确定要add的真实类型，可能是&lt;Character&gt;或&lt;Byte&gt;，那么add(0.5)不可以，只有在方法被调用时才能确定。</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable-3">Number</span> <span class="cm-variable">number</span> <span
+            class="cm-operator">=</span> <span class="cm-variable">list1</span>.<span
+            class="cm-variable">get</span>(<span class="cm-number">0</span>);<span class="cm-comment">//可以使用Number接收，自动向上转型</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-comment">//所以设定了通配符上限，通常只能获取数据，即生产数据</span></span></pre><pre class=" CodeMirror-line "
+                                                                                   role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-comment">//三、设定通配符下限</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">List</span><span class="cm-operator">&lt;?</span> <span class="cm-keyword">super</span> <span
+            class="cm-variable-3">Number</span><span class="cm-operator">&gt;</span> <span
+            class="cm-variable">list2</span>;<span class="cm-comment">//泛型变量必须是Number父类类型</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">list2</span> <span class="cm-operator">=</span> <span
+            class="cm-keyword">new</span> <span class="cm-variable">ArrayList</span><span
+            class="cm-operator">&lt;&gt;</span>();<span class="cm-comment">//泛型变量默认是 Number类型，</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">list2</span> <span class="cm-operator">=</span> <span
+            class="cm-keyword">new</span> <span class="cm-variable">ArrayList</span><span
+            class="cm-operator">&lt;</span><span class="cm-variable-3">Object</span><span
+            class="cm-operator">&gt;</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">list2</span> <span
+            class="cm-operator">=</span> <span class="cm-keyword">new</span> <span
+            class="cm-variable">ArrayList</span><span class="cm-operator">&lt;</span><span
+            class="cm-variable-3">Number</span><span class="cm-operator">&gt;</span>();</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-comment">// &nbsp; &nbsp; &nbsp;  list2 = new ArrayList&lt;Integer&gt;();//compile error</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-comment">//</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">list2</span>.<span
+            class="cm-variable">add</span>(<span class="cm-number">1.2</span>);<span class="cm-comment">//编译器可以确定要add的真实类型一定是数值类型父类，那么add一个数值类型就不会有问题。</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable-3">Object</span> <span class="cm-variable">object</span> <span
+            class="cm-operator">=</span> <span class="cm-variable">list2</span>.<span
+            class="cm-variable">get</span>(<span class="cm-number">0</span>);<span class="cm-comment">//返回值类型只能确定是Number的超类，编译器不确定具体类型，只能使用Object接收</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-comment">//所以设定通配符下限，通常用于添加数据，修改数据等即消费数据</span></span></pre><pre class=" CodeMirror-line "
+                                                                                       role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre><pre class=" CodeMirror-line "
+                                                                                          role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-comment">//1.使用通配符，可以接收任意泛型的List集合</span></span></pre><pre class=" CodeMirror-line "
+                                                                                 role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">public</span> <span
+            class="cm-variable-3">void</span> <span class="cm-variable">handleList</span>(<span
+            class="cm-variable">List</span><span class="cm-operator">&lt;?&gt;</span> <span
+            class="cm-variable">list</span>){</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-keyword">for</span> (<span class="cm-variable-3">int</span> <span
+            class="cm-variable">i</span> <span class="cm-operator">=</span> <span class="cm-number">0</span>; <span
+            class="cm-variable">i</span> <span class="cm-operator">&lt;</span> <span
+            class="cm-variable">list</span>.<span class="cm-variable">size</span>(); <span
+            class="cm-variable">i</span><span class="cm-operator">++</span>) {</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">println</span>(<span class="cm-variable">list</span>.<span
+            class="cm-variable">get</span>(<span class="cm-number">0</span>));</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;  }</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-comment">//2.设定通配符上限</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">//定义一个方法，只能处理装有数值类型元素的List集合</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-keyword">public</span> <span class="cm-variable-3">void</span> <span class="cm-variable">handleNumberList</span>(<span
+            class="cm-variable">List</span><span class="cm-operator">&lt;?</span> <span
+            class="cm-keyword">extends</span> <span class="cm-variable-3">Number</span><span
+            class="cm-operator">&gt;</span> <span class="cm-variable">list</span>){</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable-3">double</span> <span class="cm-variable">sum</span><span
+            class="cm-operator">=</span><span class="cm-number">0</span>;</span></pre><pre class=" CodeMirror-line "
+                                                                                           role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-keyword">for</span> (<span class="cm-variable-3">Number</span> <span
+            class="cm-variable">number</span> : <span class="cm-variable">list</span>) {</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">sum</span> <span class="cm-operator">+=</span> <span
+            class="cm-variable">number</span>.<span class="cm-variable">doubleValue</span>();</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;  }</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">println</span>(<span class="cm-variable">sum</span>);</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-comment">//3.设定通配符下限</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">//定一个方法，需要一个比较器，只要能处理T类型数据的比较器就可以</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-comment">//比如要比较T[]的数组元素大小，那么就需要一个可以比较T类型元素或能比较T的父类型元素（一定能比较T）的比较器</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-keyword">public</span> <span class="cm-operator">&lt;</span><span
+            class="cm-variable">T</span><span class="cm-operator">&gt;</span> <span class="cm-variable-3">void</span> &nbsp;<span
+            class="cm-variable">handleComparator</span>(<span class="cm-variable">T</span>[] <span class="cm-variable">arr</span>,<span
+            class="cm-variable">Comparator</span><span class="cm-operator">&lt;?</span> <span
+            class="cm-keyword">super</span> <span class="cm-variable">T</span><span
+            class="cm-operator">&gt;</span> <span class="cm-variable">c</span>){</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"> &nbsp;  }</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-comment">//3.1设定通配符下限</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">//定义一个方法，可以向任意List集合中（泛型类型下限为T型的集合），添加T型元素（泛型类型下限为T型的集合一定可以添加T型元素）</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-keyword">public</span> <span class="cm-keyword">static</span> <span
+            class="cm-operator">&lt;</span><span class="cm-variable">T</span><span class="cm-operator">&gt;</span> <span
+            class="cm-variable-3">void</span> <span class="cm-variable">fill</span>(<span
+            class="cm-variable">List</span><span class="cm-operator">&lt;?</span> <span class="cm-keyword">super</span> <span
+            class="cm-variable">T</span><span class="cm-operator">&gt;</span> <span
+            class="cm-variable">list</span>,<span class="cm-variable">T</span> <span
+            class="cm-variable">obj</span>){</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-keyword">for</span> (<span class="cm-variable-3">int</span> <span
+            class="cm-variable">i</span> <span class="cm-operator">=</span> <span class="cm-number">0</span>; <span
+            class="cm-variable">i</span> <span class="cm-operator">&lt;</span> <span
+            class="cm-variable">list</span>.<span class="cm-variable">size</span>(); <span
+            class="cm-variable">i</span><span class="cm-operator">++</span>) {</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">list</span>.<span class="cm-variable">add</span>(<span class="cm-variable">obj</span>);</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;  }</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 2615px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 2615px;"></div></div></div></pre>
+    <figure>
+        <table>
+            <thead>
+            <tr>
+                <th style='text-align:right;'><a href='../javaSE.html'>回目录</a></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style='text-align:right;'>教程版本：1.2 更新日期：2019年1月3日</td>
+            </tr>
+            </tbody>
+        </table>
+    </figure>
+</div>
+</body>
+</html>

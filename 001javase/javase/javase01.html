@@ -1,0 +1,2142 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width initial-scale=1'>
+    <title>第1章 Java概述</title>
+    <link href='https://fonts.loli.net/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext'
+          rel='stylesheet' type='text/css'/>
+    <style type='text/css'>html {
+        overflow-x: initial !important;
+    }
+
+    :root {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --select-text-bg-color: #B5D6FC;
+        --select-text-font-color: auto;
+        --monospace: "Lucida Console", Consolas, "Courier", monospace;
+    }
+
+    html {
+        font-size: 14px;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        margin: 0px;
+        padding: 0px;
+        height: auto;
+        bottom: 0px;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        font-size: 1rem;
+        line-height: 1.42857;
+        overflow-x: hidden;
+        background: inherit;
+    }
+
+    iframe {
+        margin: auto;
+    }
+
+    a.url {
+        word-break: break-all;
+    }
+
+    a:active, a:hover {
+        outline: 0px;
+    }
+
+    .in-text-selection, ::selection {
+        text-shadow: none;
+        background: var(--select-text-bg-color);
+        color: var(--select-text-font-color);
+    }
+
+    #write {
+        margin: 0px auto;
+        height: auto;
+        width: inherit;
+        word-break: normal;
+        word-wrap: break-word;
+        position: relative;
+        white-space: normal;
+        overflow-x: visible;
+        padding-top: 40px;
+    }
+
+    #write.first-line-indent p {
+        text-indent: 2em;
+    }
+
+    #write.first-line-indent li p, #write.first-line-indent p * {
+        text-indent: 0px;
+    }
+
+    #write.first-line-indent li {
+        margin-left: 2em;
+    }
+
+    .for-image #write {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    body.typora-export {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .typora-export .footnote-line, .typora-export li, .typora-export p {
+        white-space: pre-wrap;
+    }
+
+    @media screen and (max-width: 500px) {
+        body.typora-export {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        #write {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .CodeMirror-sizer {
+            margin-left: 0px !important;
+        }
+
+        .CodeMirror-gutters {
+            display: none !important;
+        }
+    }
+
+    #write li > figure:first-child {
+        margin-top: -20px;
+    }
+
+    #write ol, #write ul {
+        position: relative;
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    button, input, select, textarea {
+        color: inherit;
+        font-style: inherit;
+        font-variant: inherit;
+        font-weight: inherit;
+        font-stretch: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        font-family: inherit;
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+        line-height: normal;
+        padding: 0px;
+    }
+
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre {
+        width: inherit;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p {
+        position: relative;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        break-after: avoid-page;
+        break-inside: avoid;
+        orphans: 2;
+    }
+
+    p {
+        orphans: 4;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+    }
+
+    h4 {
+        font-size: 1.4rem;
+    }
+
+    h5 {
+        font-size: 1.2rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+    }
+
+    .md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .md-blockmeta {
+        color: rgb(204, 204, 204);
+        font-weight: 700;
+        font-style: italic;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    sup.md-footnote {
+        padding: 2px 4px;
+        background-color: rgba(238, 238, 238, 0.7);
+        color: rgb(85, 85, 85);
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    sup.md-footnote a, sup.md-footnote a:hover {
+        color: inherit;
+        text-transform: inherit;
+        text-decoration: inherit;
+    }
+
+    #write input[type="checkbox"] {
+        cursor: pointer;
+        width: inherit;
+        height: inherit;
+    }
+
+    figure {
+        overflow-x: auto;
+        margin: 1.2em 0px;
+        max-width: calc(100% + 16px);
+        padding: 0px;
+    }
+
+    figure > table {
+        margin: 0px !important;
+    }
+
+    tr {
+        break-inside: avoid;
+        break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+        width: 100%;
+        overflow: auto;
+        break-inside: auto;
+        text-align: left;
+    }
+
+    table.md-table td {
+        min-width: 32px;
+    }
+
+    .CodeMirror-gutters {
+        border-right: 0px;
+        background-color: inherit;
+    }
+
+    .CodeMirror {
+        text-align: left;
+    }
+
+    .CodeMirror-placeholder {
+        opacity: 0.3;
+    }
+
+    .CodeMirror pre {
+        padding: 0px 4px;
+    }
+
+    .CodeMirror-lines {
+        padding: 0px;
+    }
+
+    div.hr:focus {
+        cursor: none;
+    }
+
+    #write pre {
+        white-space: pre-wrap;
+    }
+
+    #write.fences-no-line-wrapping pre {
+        white-space: pre;
+    }
+
+    #write pre.ty-contain-cm {
+        white-space: normal;
+    }
+
+    .CodeMirror-gutters {
+        margin-right: 4px;
+    }
+
+    .md-fences {
+        font-size: 0.9rem;
+        display: block;
+        break-inside: avoid;
+        text-align: left;
+        overflow: visible;
+        white-space: pre;
+        background: inherit;
+        position: relative !important;
+    }
+
+    .md-diagram-panel {
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+        padding-top: 0px;
+        padding-bottom: 8px;
+        overflow-x: auto;
+    }
+
+    #write .md-fences.mock-cm {
+        white-space: pre-wrap;
+    }
+
+    .md-fences.md-fences-with-lineno {
+        padding-left: 0px;
+    }
+
+    #write.fences-no-line-wrapping .md-fences.mock-cm {
+        white-space: pre;
+        overflow-x: auto;
+    }
+
+    .md-fences.mock-cm.md-fences-with-lineno {
+        padding-left: 8px;
+    }
+
+    .CodeMirror-line, twitterwidget {
+        break-inside: avoid;
+    }
+
+    .footnotes {
+        opacity: 0.8;
+        font-size: 0.9rem;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .footnotes + .footnotes {
+        margin-top: 0px;
+    }
+
+    .md-reset {
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        outline: 0px;
+        vertical-align: top;
+        background: 0px 0px;
+        text-decoration: none;
+        text-shadow: none;
+        float: none;
+        position: static;
+        width: auto;
+        height: auto;
+        white-space: nowrap;
+        cursor: inherit;
+        -webkit-tap-highlight-color: transparent;
+        line-height: normal;
+        font-weight: 400;
+        text-align: left;
+        box-sizing: content-box;
+        direction: ltr;
+    }
+
+    li div {
+        padding-top: 0px;
+    }
+
+    blockquote {
+        margin: 1rem 0px;
+    }
+
+    li .mathjax-block, li p {
+        margin: 0.5rem 0px;
+    }
+
+    li {
+        margin: 0px;
+        position: relative;
+    }
+
+    blockquote > :last-child {
+        margin-bottom: 0px;
+    }
+
+    blockquote > :first-child, li > :first-child {
+        margin-top: 0px;
+    }
+
+    .footnotes-area {
+        color: rgb(136, 136, 136);
+        margin-top: 0.714rem;
+        padding-bottom: 0.143rem;
+        white-space: normal;
+    }
+
+    #write .footnote-line {
+        white-space: pre-wrap;
+    }
+
+    @media print {
+        body, html {
+            border: 1px solid transparent;
+            height: 99%;
+            break-after: avoid;
+            break-before: avoid;
+        }
+
+        #write {
+            margin-top: 0px;
+            padding-top: 0px;
+            border-color: transparent !important;
+        }
+
+        .typora-export * {
+            -webkit-print-color-adjust: exact;
+        }
+
+        html.blink-to-pdf {
+            font-size: 13px;
+        }
+
+        .typora-export #write {
+            padding-left: 32px;
+            padding-right: 32px;
+            padding-bottom: 0px;
+            break-after: avoid;
+        }
+
+        .typora-export #write::after {
+            height: 0px;
+        }
+
+        @page {
+            margin: 20mm 0px;
+        }
+    }
+
+    .footnote-line {
+        margin-top: 0.714em;
+        font-size: 0.7em;
+    }
+
+    a img, img a {
+        cursor: pointer;
+    }
+
+    pre.md-meta-block {
+        font-size: 0.8rem;
+        min-height: 0.8rem;
+        white-space: pre-wrap;
+        background: rgb(204, 204, 204);
+        display: block;
+        overflow-x: hidden;
+    }
+
+    p > .md-image:only-child:not(.md-img-error) img, p > img:only-child {
+        display: block;
+        margin: auto;
+    }
+
+    p > .md-image:only-child {
+        display: inline-block;
+        width: 100%;
+    }
+
+    #write .MathJax_Display {
+        margin: 0.8em 0px 0px;
+    }
+
+    .md-math-block {
+        width: 100%;
+    }
+
+    .md-math-block:not(:empty)::after {
+        display: none;
+    }
+
+    [contenteditable="true"]:active, [contenteditable="true"]:focus {
+        outline: 0px;
+        box-shadow: none;
+    }
+
+    .md-task-list-item {
+        position: relative;
+        list-style-type: none;
+    }
+
+    .task-list-item.md-task-list-item {
+        padding-left: 0px;
+    }
+
+    .md-task-list-item > input {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        margin-left: -1.2em;
+        margin-top: calc(1em - 10px);
+        border: none;
+    }
+
+    .math {
+        font-size: 1rem;
+    }
+
+    .md-toc {
+        min-height: 3.58rem;
+        position: relative;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .md-toc-content {
+        position: relative;
+        margin-left: 0px;
+    }
+
+    .md-toc-content::after, .md-toc::after {
+        display: none;
+    }
+
+    .md-toc-item {
+        display: block;
+        color: rgb(65, 131, 196);
+    }
+
+    .md-toc-item a {
+        text-decoration: none;
+    }
+
+    .md-toc-inner:hover {
+        text-decoration: underline;
+    }
+
+    .md-toc-inner {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .md-toc-h1 .md-toc-inner {
+        margin-left: 0px;
+        font-weight: 700;
+    }
+
+    .md-toc-h2 .md-toc-inner {
+        margin-left: 2em;
+    }
+
+    .md-toc-h3 .md-toc-inner {
+        margin-left: 4em;
+    }
+
+    .md-toc-h4 .md-toc-inner {
+        margin-left: 6em;
+    }
+
+    .md-toc-h5 .md-toc-inner {
+        margin-left: 8em;
+    }
+
+    .md-toc-h6 .md-toc-inner {
+        margin-left: 10em;
+    }
+
+    @media screen and (max-width: 48em) {
+        .md-toc-h3 .md-toc-inner {
+            margin-left: 3.5em;
+        }
+
+        .md-toc-h4 .md-toc-inner {
+            margin-left: 5em;
+        }
+
+        .md-toc-h5 .md-toc-inner {
+            margin-left: 6.5em;
+        }
+
+        .md-toc-h6 .md-toc-inner {
+            margin-left: 8em;
+        }
+    }
+
+    a.md-toc-inner {
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+
+    .footnote-line a:not(.reversefootnote) {
+        color: inherit;
+    }
+
+    .md-attr {
+        display: none;
+    }
+
+    .md-fn-count::after {
+        content: ".";
+    }
+
+    code, pre, samp, tt {
+        font-family: var(--monospace);
+    }
+
+    kbd {
+        margin: 0px 0.1em;
+        padding: 0.1em 0.6em;
+        font-size: 0.8em;
+        color: rgb(36, 39, 41);
+        background: rgb(255, 255, 255);
+        border: 1px solid rgb(173, 179, 185);
+        border-radius: 3px;
+        box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    .md-comment {
+        color: rgb(162, 127, 3);
+        opacity: 0.8;
+        font-family: var(--monospace);
+    }
+
+    code {
+        text-align: left;
+        vertical-align: initial;
+    }
+
+    a.md-print-anchor {
+        white-space: pre !important;
+        border-width: initial !important;
+        border-style: none !important;
+        border-color: initial !important;
+        display: inline-block !important;
+        position: absolute !important;
+        width: 1px !important;
+        right: 0px !important;
+        outline: 0px !important;
+        background: 0px 0px !important;
+        text-decoration: initial !important;
+        text-shadow: initial !important;
+    }
+
+    .md-inline-math .MathJax_SVG .noError {
+        display: none !important;
+    }
+
+    .html-for-mac .inline-math-svg .MathJax_SVG {
+        vertical-align: 0.2px;
+    }
+
+    .md-math-block .MathJax_SVG_Display {
+        text-align: center;
+        margin: 0px;
+        position: relative;
+        text-indent: 0px;
+        max-width: none;
+        max-height: none;
+        min-height: 0px;
+        min-width: 100%;
+        width: auto;
+        overflow-y: hidden;
+        display: block !important;
+    }
+
+    .MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display {
+        width: auto;
+        margin: inherit;
+        display: inline-block !important;
+    }
+
+    .MathJax_SVG .MJX-monospace {
+        font-family: var(--monospace);
+    }
+
+    .MathJax_SVG .MJX-sans-serif {
+        font-family: sans-serif;
+    }
+
+    .MathJax_SVG {
+        display: inline;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        zoom: 90%;
+        text-indent: 0px;
+        text-align: left;
+        text-transform: none;
+        letter-spacing: normal;
+        word-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        float: none;
+        direction: ltr;
+        max-width: none;
+        max-height: none;
+        min-width: 0px;
+        min-height: 0px;
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .MathJax_SVG * {
+        transition: none;
+    }
+
+    .MathJax_SVG_Display svg {
+        vertical-align: middle !important;
+        margin-bottom: 0px !important;
+    }
+
+    .os-windows.monocolor-emoji .md-emoji {
+        font-family: "Segoe UI Symbol", sans-serif;
+    }
+
+    .md-diagram-panel > svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] svg, [lang="flow"] svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] .node text {
+        font-size: 1rem;
+    }
+
+    table tr th {
+        border-bottom: 0px;
+    }
+
+    video {
+        max-width: 100%;
+        display: block;
+        margin: 0px auto;
+    }
+
+    iframe {
+        max-width: 100%;
+        width: 100%;
+        border: none;
+    }
+
+    .highlight td, .highlight tr {
+        border: 0px;
+    }
+
+
+    .CodeMirror {
+        height: auto;
+    }
+
+    .CodeMirror.cm-s-inner {
+        background: inherit;
+    }
+
+    .CodeMirror-scroll {
+        overflow-y: hidden;
+        overflow-x: auto;
+        z-index: 3;
+    }
+
+    .CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler {
+        background-color: rgb(255, 255, 255);
+    }
+
+    .CodeMirror-gutters {
+        border-right: 1px solid rgb(221, 221, 221);
+        background: inherit;
+        white-space: nowrap;
+    }
+
+    .CodeMirror-linenumber {
+        padding: 0px 3px 0px 5px;
+        text-align: right;
+        color: rgb(153, 153, 153);
+    }
+
+    .cm-s-inner .cm-keyword {
+        color: rgb(119, 0, 136);
+    }
+
+    .cm-s-inner .cm-atom, .cm-s-inner.cm-atom {
+        color: rgb(34, 17, 153);
+    }
+
+    .cm-s-inner .cm-number {
+        color: rgb(17, 102, 68);
+    }
+
+    .cm-s-inner .cm-def {
+        color: rgb(0, 0, 255);
+    }
+
+    .cm-s-inner .cm-variable {
+        color: rgb(0, 0, 0);
+    }
+
+    .cm-s-inner .cm-variable-2 {
+        color: rgb(0, 85, 170);
+    }
+
+    .cm-s-inner .cm-variable-3 {
+        color: rgb(0, 136, 85);
+    }
+
+    .cm-s-inner .cm-string {
+        color: rgb(170, 17, 17);
+    }
+
+    .cm-s-inner .cm-property {
+        color: rgb(0, 0, 0);
+    }
+
+    .cm-s-inner .cm-operator {
+        color: rgb(152, 26, 26);
+    }
+
+    .cm-s-inner .cm-comment, .cm-s-inner.cm-comment {
+        color: rgb(170, 85, 0);
+    }
+
+    .cm-s-inner .cm-string-2 {
+        color: rgb(255, 85, 0);
+    }
+
+    .cm-s-inner .cm-meta {
+        color: rgb(85, 85, 85);
+    }
+
+    .cm-s-inner .cm-qualifier {
+        color: rgb(85, 85, 85);
+    }
+
+    .cm-s-inner .cm-builtin {
+        color: rgb(51, 0, 170);
+    }
+
+    .cm-s-inner .cm-bracket {
+        color: rgb(153, 153, 119);
+    }
+
+    .cm-s-inner .cm-tag {
+        color: rgb(17, 119, 0);
+    }
+
+    .cm-s-inner .cm-attribute {
+        color: rgb(0, 0, 204);
+    }
+
+    .cm-s-inner .cm-header, .cm-s-inner.cm-header {
+        color: rgb(0, 0, 255);
+    }
+
+    .cm-s-inner .cm-quote, .cm-s-inner.cm-quote {
+        color: rgb(0, 153, 0);
+    }
+
+    .cm-s-inner .cm-hr, .cm-s-inner.cm-hr {
+        color: rgb(153, 153, 153);
+    }
+
+    .cm-s-inner .cm-link, .cm-s-inner.cm-link {
+        color: rgb(0, 0, 204);
+    }
+
+    .cm-negative {
+        color: rgb(221, 68, 68);
+    }
+
+    .cm-positive {
+        color: rgb(34, 153, 34);
+    }
+
+    .cm-header, .cm-strong {
+        font-weight: 700;
+    }
+
+    .cm-del {
+        text-decoration: line-through;
+    }
+
+    .cm-em {
+        font-style: italic;
+    }
+
+    .cm-link {
+        text-decoration: underline;
+    }
+
+    .cm-error {
+        color: red;
+    }
+
+    .cm-invalidchar {
+        color: red;
+    }
+
+    .cm-constant {
+        color: rgb(38, 139, 210);
+    }
+
+    .cm-defined {
+        color: rgb(181, 137, 0);
+    }
+
+    div.CodeMirror span.CodeMirror-matchingbracket {
+        color: rgb(0, 255, 0);
+    }
+
+    div.CodeMirror span.CodeMirror-nonmatchingbracket {
+        color: rgb(255, 34, 34);
+    }
+
+    .cm-s-inner .CodeMirror-activeline-background {
+        background: inherit;
+    }
+
+    .CodeMirror {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .CodeMirror-scroll {
+        height: 100%;
+        outline: 0px;
+        position: relative;
+        box-sizing: content-box;
+        background: inherit;
+    }
+
+    .CodeMirror-sizer {
+        position: relative;
+    }
+
+    .CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar {
+        position: absolute;
+        z-index: 6;
+        display: none;
+    }
+
+    .CodeMirror-vscrollbar {
+        right: 0px;
+        top: 0px;
+        overflow: hidden;
+    }
+
+    .CodeMirror-hscrollbar {
+        bottom: 0px;
+        left: 0px;
+        overflow: hidden;
+    }
+
+    .CodeMirror-scrollbar-filler {
+        right: 0px;
+        bottom: 0px;
+    }
+
+    .CodeMirror-gutter-filler {
+        left: 0px;
+        bottom: 0px;
+    }
+
+    .CodeMirror-gutters {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        padding-bottom: 30px;
+        z-index: 3;
+    }
+
+    .CodeMirror-gutter {
+        white-space: normal;
+        height: 100%;
+        box-sizing: content-box;
+        padding-bottom: 30px;
+        margin-bottom: -32px;
+        display: inline-block;
+    }
+
+    .CodeMirror-gutter-wrapper {
+        position: absolute;
+        z-index: 4;
+        background: 0px 0px !important;
+        border: none !important;
+    }
+
+    .CodeMirror-gutter-background {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        z-index: 4;
+    }
+
+    .CodeMirror-gutter-elt {
+        position: absolute;
+        cursor: default;
+        z-index: 4;
+    }
+
+    .CodeMirror-lines {
+        cursor: text;
+    }
+
+    .CodeMirror pre {
+        border-radius: 0px;
+        border-width: 0px;
+        background: 0px 0px;
+        font-family: inherit;
+        font-size: inherit;
+        margin: 0px;
+        white-space: pre;
+        word-wrap: normal;
+        color: inherit;
+        z-index: 2;
+        position: relative;
+        overflow: visible;
+    }
+
+    .CodeMirror-wrap pre {
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        word-break: normal;
+    }
+
+    .CodeMirror-code pre {
+        border-right: 30px solid transparent;
+        width: fit-content;
+    }
+
+    .CodeMirror-wrap .CodeMirror-code pre {
+        border-right: none;
+        width: auto;
+    }
+
+    .CodeMirror-linebackground {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        z-index: 0;
+    }
+
+    .CodeMirror-linewidget {
+        position: relative;
+        z-index: 2;
+        overflow: auto;
+    }
+
+    .CodeMirror-wrap .CodeMirror-scroll {
+        overflow-x: hidden;
+    }
+
+    .CodeMirror-measure {
+        position: absolute;
+        width: 100%;
+        height: 0px;
+        overflow: hidden;
+        visibility: hidden;
+    }
+
+    .CodeMirror-measure pre {
+        position: static;
+    }
+
+    .CodeMirror div.CodeMirror-cursor {
+        position: absolute;
+        visibility: hidden;
+        border-right: none;
+        width: 0px;
+    }
+
+    .CodeMirror div.CodeMirror-cursor {
+        visibility: hidden;
+    }
+
+    .CodeMirror-focused div.CodeMirror-cursor {
+        visibility: inherit;
+    }
+
+    .cm-searching {
+        background: rgba(255, 255, 0, 0.4);
+    }
+
+    @media print {
+        .CodeMirror div.CodeMirror-cursor {
+            visibility: hidden;
+        }
+    }
+
+
+    :root {
+        --active-file-bg-color: rgba(32, 43, 51, 0.63);
+        --active-file-text-color: white;
+        --bg-color: #f3f2ee;
+        --text-color: #1f0909;
+        --control-text-color: #444;
+        --rawblock-edit-panel-bd: #e5e5e5;
+        --select-text-bg-color: rgba(32, 43, 51, 0.63);
+        --select-text-font-color: white;
+    }
+
+    pre {
+        --select-text-bg-color: #36284e;
+        --select-text-font-color: #fff;
+    }
+
+    html {
+        font-size: 16px;
+    }
+
+    html, body {
+        background-color: rgb(243, 242, 238);
+        font-family: "PT Serif", "Times New Roman", Times, serif;
+        color: rgb(31, 9, 9);
+        line-height: 1.5em;
+    }
+
+    #write {
+        max-width: 40em;
+    }
+
+    ol li {
+        list-style-type: decimal;
+        list-style-position: outside;
+    }
+
+    ul li {
+        list-style-type: disc;
+        list-style-position: outside;
+    }
+
+    ol, ul {
+        list-style: none;
+    }
+
+    blockquote, q {
+        quotes: none;
+    }
+
+    blockquote::before, blockquote::after, q::before, q::after {
+        content: none;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 1.875em;
+        line-height: 1.6em;
+        margin-top: 2em;
+    }
+
+    h2, h3 {
+        font-size: 1.3125em;
+        line-height: 1.15;
+        margin-top: 2.28571em;
+        margin-bottom: 1.15em;
+    }
+
+    h3 {
+        font-weight: normal;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        margin-top: 2.67em;
+    }
+
+    h5, h6 {
+        font-size: 1em;
+    }
+
+    h1 {
+        border-bottom: 1px solid;
+        margin-bottom: 1.875em;
+        padding-bottom: 0.8125em;
+    }
+
+    a {
+        text-decoration: none;
+        color: rgb(6, 85, 136);
+    }
+
+    a:hover, a:active {
+        text-decoration: underline;
+    }
+
+    p, blockquote, .md-fences {
+        margin-bottom: 1.5em;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 1.5em;
+    }
+
+    blockquote {
+        font-style: italic;
+        border-left: 5px solid;
+        margin-left: 2em;
+        padding-left: 1em;
+    }
+
+    ul, ol {
+        margin: 0px 0px 1.5em 1.5em;
+    }
+
+    .md-meta, .md-before, .md-after {
+        color: rgb(153, 153, 153);
+    }
+
+    table {
+        margin-bottom: 1.5em;
+        font-size: 1em;
+    }
+
+    thead th, tfoot th {
+        padding: 0.25em 0.25em 0.25em 0.4em;
+        text-transform: uppercase;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    td {
+        vertical-align: top;
+        padding: 0.25em 0.25em 0.25em 0.4em;
+    }
+
+    code, .md-fences {
+        background-color: rgb(218, 218, 218);
+    }
+
+    code {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .md-fences {
+        margin-left: 2em;
+        margin-bottom: 3em;
+        padding-left: 1ch;
+        padding-right: 1ch;
+    }
+
+    pre, code, tt {
+        font-size: 0.875em;
+        line-height: 1.71429em;
+    }
+
+    h1 {
+        line-height: 1.3em;
+        font-weight: normal;
+        margin-bottom: 0.5em;
+    }
+
+    p + ul, p + ol {
+        margin-top: 0.5em;
+    }
+
+    h3 + ul, h4 + ul, h5 + ul, h6 + ul, h3 + ol, h4 + ol, h5 + ol, h6 + ol {
+        margin-top: 0.5em;
+    }
+
+    li > ul, li > ol {
+        margin-top: inherit;
+        margin-bottom: 0px;
+    }
+
+    li ol > li {
+        list-style-type: lower-alpha;
+    }
+
+    li li ol > li {
+        list-style-type: lower-roman;
+    }
+
+    h2, h3 {
+        margin-bottom: 0.75em;
+    }
+
+    hr {
+        border-top: none;
+        border-right: none;
+        border-bottom: 1px solid;
+        border-left: none;
+    }
+
+    h1 {
+        border-color: rgb(197, 197, 197);
+    }
+
+    blockquote {
+        border-color: rgb(186, 186, 186);
+        color: rgb(101, 101, 101);
+    }
+
+    blockquote ul, blockquote ol {
+        margin-left: 0px;
+    }
+
+    .ty-table-edit {
+        background-color: transparent;
+    }
+
+    thead {
+        background-color: rgb(218, 218, 218);
+    }
+
+    tr:nth-child(2n) {
+        background: rgb(232, 231, 231);
+    }
+
+    hr {
+        border-color: rgb(197, 197, 197);
+    }
+
+    .task-list {
+        padding-left: 1rem;
+    }
+
+    .md-task-list-item {
+        padding-left: 1.5rem;
+        list-style-type: none;
+    }
+
+    .md-task-list-item > input::before {
+        content: "√";
+        display: inline-block;
+        width: 1.25rem;
+        height: 1.6rem;
+        vertical-align: middle;
+        text-align: center;
+        color: rgb(221, 221, 221);
+        background-color: rgb(243, 242, 238);
+    }
+
+    .md-task-list-item > input:checked::before, .md-task-list-item > input[checked]::before {
+        color: inherit;
+    }
+
+    #write pre.md-meta-block {
+        min-height: 1.875rem;
+        color: rgb(85, 85, 85);
+        border: 0px;
+        background: transparent;
+        margin-left: 1em;
+        margin-top: 1em;
+    }
+
+    .md-image > .md-meta {
+        color: rgb(155, 81, 70);
+    }
+
+    .md-image > .md-meta {
+        font-family: Menlo, "Ubuntu Mono", Consolas, "Courier New", "Microsoft Yahei", "Hiragino Sans GB", "WenQuanYi Micro Hei", serif;
+    }
+
+    #write > h3.md-focus::before {
+        left: -1.5rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h4.md-focus::before {
+        left: -1.5rem;
+        top: 0.25rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h5.md-focus::before {
+        left: -1.5rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h6.md-focus::before {
+        left: -1.5rem;
+        top: 0.3125rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    .md-toc:focus .md-toc-content {
+        margin-top: 19px;
+    }
+
+    .md-toc-content:empty::before {
+        color: rgb(6, 85, 136);
+    }
+
+    .md-toc-item {
+        color: rgb(6, 85, 136);
+    }
+
+    #write div.md-toc-tooltip {
+        background-color: rgb(243, 242, 238);
+    }
+
+    #typora-sidebar {
+        background-color: rgb(243, 242, 238);
+        box-shadow: rgba(0, 0, 0, 0.376) 0px 6px 12px;
+    }
+
+    .pin-outline #typora-sidebar {
+        background: inherit;
+        box-shadow: none;
+        border-right: 1px dashed;
+    }
+
+    .pin-outline #typora-sidebar:hover .outline-title-wrapper {
+        border-left: 1px dashed;
+    }
+
+    .outline-item:hover {
+        background-color: rgb(218, 218, 218);
+        border-left: 28px solid rgb(218, 218, 218);
+        border-right: 18px solid rgb(218, 218, 218);
+    }
+
+    .typora-node .outline-item:hover {
+        border-right: 28px solid rgb(218, 218, 218);
+    }
+
+    .outline-expander::before {
+        content: "";
+        font-family: FontAwesome;
+        font-size: 14px;
+        top: 1px;
+    }
+
+    .outline-expander:hover::before, .outline-item-open > .outline-item > .outline-expander::before {
+        content: "";
+    }
+
+    .modal-content {
+        background-color: rgb(243, 242, 238);
+    }
+
+    .auto-suggest-container ul li {
+        list-style-type: none;
+    }
+
+    .megamenu-menu, #top-titlebar, #top-titlebar *, .megamenu-content {
+        background: rgb(243, 242, 238);
+        color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-header {
+        border-bottom: 1px dashed rgb(32, 43, 51);
+    }
+
+    .megamenu-menu {
+        box-shadow: none;
+        border-right: 1px dashed;
+    }
+
+    header, .context-menu, .megamenu-content, footer {
+        font-family: "PT Serif", "Times New Roman", Times, serif;
+        color: rgb(31, 9, 9);
+    }
+
+    #megamenu-back-btn {
+        color: rgb(31, 9, 9);
+        border-color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-header #megamenu-menu-header-title::before {
+        color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-list li a:hover, .megamenu-menu-list li a.active {
+        color: inherit;
+        background-color: rgb(232, 231, 223);
+    }
+
+    .long-btn:hover {
+        background-color: rgb(232, 231, 223);
+    }
+
+    #recent-file-panel tbody tr:nth-child(2n-1) {
+        background-color: transparent !important;
+    }
+
+    .megamenu-menu-panel tbody tr:hover td:nth-child(2) {
+        color: inherit;
+    }
+
+    .megamenu-menu-panel .btn {
+        background-color: rgb(210, 209, 209);
+    }
+
+    .btn-default {
+        background-color: transparent;
+    }
+
+    .typora-sourceview-on #toggle-sourceview-btn, .ty-show-word-count #footer-word-count {
+        background: rgb(199, 197, 197);
+    }
+
+    #typora-quick-open {
+        background-color: inherit;
+    }
+
+    .md-diagram-panel {
+        margin-top: 8px;
+    }
+
+    .file-list-item-file-name {
+        font-weight: initial;
+    }
+
+    .file-list-item-summary {
+        opacity: 1;
+    }
+
+    .file-list-item {
+        color: rgb(119, 119, 119);
+    }
+
+    .file-list-item.active {
+        background-color: inherit;
+        color: black;
+    }
+
+    .ty-side-sort-btn.active {
+        background-color: inherit;
+    }
+
+    .file-list-item.active .file-list-item-file-name {
+        font-weight: bold;
+    }
+
+    .file-list-item {
+        opacity: 1 !important;
+    }
+
+    .file-library-node.active > .file-node-background {
+        background-color: var(--active-file-bg-color);
+    }
+
+    .file-tree-node.active > .file-node-content {
+        color: var(--active-file-text-color);
+    }
+
+    .md-task-list-item > input {
+        margin-left: -1.6em;
+        margin-top: calc(1rem - 12px);
+    }
+
+    input {
+        border: 1px solid rgb(170, 170, 170);
+    }
+
+    .megamenu-menu-header #megamenu-menu-header-title, .megamenu-menu-header:hover, .megamenu-menu-header:focus {
+        color: inherit;
+    }
+
+    .dropdown-menu .divider {
+        border-color: rgb(229, 229, 229);
+    }
+
+    .os-windows-7 strong, .os-windows-7 strong {
+        font-weight: 760;
+    }
+
+
+    .typora-export li, .typora-export p, .typora-export, .footnote-line {
+        white-space: normal;
+    }
+    </style>
+</head>
+<body class='typora-export os-windows'>
+<div id='write' class='is-node'><h1><a name='header-n0' class='md-header-anchor '>
+
+</a>JavaSE_第1章 Java概述</h1>
+    <h2><a name='header-n2' class='md-header-anchor '>
+
+    </a>学习目标</h2>
+    <ul>
+        <li class='md-task-list-item task-list-item task-list-not-done'>
+            <input type='checkbox' disabled='disabled'/>
+            <p>理解Java语言的跨平台实现原理</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解JDK/JRE/JVM的组成和作用</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够配置环境变量JAVA_HOME（会参照笔记配置）</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>能够编写HelloWorld程序编译并执行</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>会使用单行注释和多行注释</p></li>
+    </ul>
+    <h2><a name='header-n14' class='md-header-anchor '></a>1.1 JavaSE课程体系介绍</h2>
+    <p>JavaSE知识图解</p>
+    <p><img src='imgs01/JavaSE课程内容介绍.png' alt='1561379629326' referrerPolicy='no-referrer'/></p>
+    <p>JavaSE知识模块介绍</p>
+    <ul>
+        <li><strong>第一部分：计算机编程语言核心结构：</strong><code>数据类型</code>、<code>运算符</code>、<code>流程控制</code>、<code>数组</code>、…
+        </li>
+        <li><strong>第二部分：Java面向对象核心逻辑：</strong><code>类和对象</code>、<code>封装</code>、<code>继承</code>、<code>多态</code>、<code>抽象</code>、<code>接口</code>、…
+        </li>
+        <li>
+            <strong>第三部分：JavaSE核心高级应用：</strong><code>集合</code>、<code>I/O</code>、<code>多线程</code>、<code>网络编程</code>、<code>反射机制</code>、…
+        </li>
+        <li><strong>第四部分：Java新特性：</strong><code>Lambda表达式</code>、<code>函数式编程</code>、<code>新Date/Time API</code>、<code>接口的默认、静态和私有方法</code>、…
+        </li>
+        <li>
+            第五部分：MySQL/JDBC核心技术：<code>SQL语句</code>、<code>数据库连接池</code>、<code>DBUtils</code>、<code>事务管理</code>、<code>批处理</code>、…
+        </li>
+    </ul>
+    <h2><a name='header-n29' class='md-header-anchor '></a>1.2 计算机语言介绍（了解）</h2>
+    <p><strong>计算机程序</strong>（Computer program），也称为<strong>软件</strong>（software），简称程序（英语：Program），是指一组指示计算机或其他具有信息处理能力装置执行动作或做出判断的指令，通常用某种<strong>计算机编程语言</strong>编写，运行于某种目标计算机体系结构上。
+    </p>
+    <p><strong>计算机语言是什么</strong></p>
+    <p>所谓计算机编程语言，即人与计算机交流的语言，人们可以使用编程语言对计算机下达命令，让计算机完成人们需要的功能。</p>
+    <p><strong>计算机语言发展</strong></p>
+    <ul>
+        <li><p>第一代：机器语言</p>
+            <ul>
+                <li>指令以二进制形式存在 ： 1000100111011000</li>
+            </ul>
+        </li>
+        <li><p>第二代：汇编语言</p>
+            <ul>
+                <li>使用助记符表示一条计算机指令： MOV AX, BX</li>
+            </ul>
+        </li>
+        <li><p>第三代：高级语言</p>
+            <ul>
+                <li><p>接近人类自然语言，使程序员更容易编写，更容易读懂。相反低级语言更接近底层，效率高，难于理解。</p>
+                    <ul>
+                        <li>Java、C（接近汇编）、C++、Python等</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <p><strong>计算机语言排行榜</strong></p>
+    <p><img src='imgs01\TIOBE语言排行.png'
+            alt='Annotation 2020-02-19 171725' referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <p><strong>计算机语言走势</strong></p>
+    <p><img src='imgs01/TIOBE社区语言发展指数.png' alt='1561382254180' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n58' class='md-header-anchor '></a>1.3 Java语言概述（了解）</h2>
+    <h3><a name='header-n59' class='md-header-anchor '></a>1.3.1 Java生态圈</h3>
+    <p><strong>Java是目前应用最为广泛的软件开发平台之一。</strong>随着Java以及Java社区的不断壮大，Java 也早已不再是简简单单的一门计算机语言了，它更是一个平台、一种文化、一个社区。</p>
+    <p><strong>作为一个平台，</strong>Java虚拟机扮演着举足轻重的作用。除了 Java语言，任何一种能够被编译成字节码的计算机语言都属于Java这个平台。Groovy、Scala、
+        JRuby、Kotlin等都是Java平台的一部分，它们依赖于Java虚拟机，同时，Java平台也因为它们变得更加丰富多彩。</p>
+    <p><strong>作为一种文化，</strong>Java几乎成为了 “开源”的代名词。在Java程序中，有着数不清的开源软件和框架。如Tomcat、Struts, Hibernate,
+        Spring等。就连JDK和JVM自身也有不少开源的实现，如OpenJDK、Apache Harmony。可以说，“共享”的精神在Java世界里体现得淋漓尽致。</p>
+    <p><strong>作为一个社区，</strong>Java拥有全世界最多的技术拥护者和开源社区支持，有数不清的论坛和资料。从桌面应用软件、嵌入式开发到企业级应用、后台服务器、中间件，都可以看到Java的身影。其应用形式之复杂、参与人数之众多也令人咋舌。可以说，Java社区已经俨然成为了一个良好而庞大的生态系统。<strong>其实这才是Java最大的优势和财富。</strong>
+    </p>
+    <h3><a name='header-n64' class='md-header-anchor '></a>1.3.2 Java 是最好的语言吗？</h3>
+    <p>不是，因为在每个领域都有更合适的编程语言。</p>
+    <ul>
+        <li>C 语言在现代计算机软件编程语言中具有非常重要的地位，几乎所有的操作系统都是 C 语言写成的。C++ 是面向对象的 C 语言，一直在不断的改进。C#由微软开发，以C为基础，面向对象，增加垃圾回收，更像Java。
+        </li>
+    </ul>
+    <ul>
+        <li>JavaScript 是能运行在浏览器中的语言，丰富的前端界面离不开 Javascript 的功劳。近年来的 Node.js 又在后端占有一席之地。</li>
+        <li>Python 用于系统管理，并通过高性能预编译的库，提供 API 来进行科学计算，文本处理等，是 Linux 必选的解释性语言。</li>
+        <li>Ruby 强于 DSL（领域特定语言），程序员可以定义丰富的语义来充分表达自己的思想。</li>
+        <li>Erlang 就是为分布式计算设计的，能保证在大规模并发访问的情况下，保持强壮和稳定性。</li>
+        <li>Go 语言内置了并发能力，可以编译成本地代码。当前新的网络相关项目，很大比例是由 Go 语言编写的，如 Docker、Kubernetes 等。</li>
+        <li>编写网页用 PHP，函数式编程有 Lisp，编写 iOS 程序有 Swift/Objective-C。</li>
+        <li>R的思想是：它可以提供一些集成的统计工具，但更大量的是它提供各种数学计算、统计计算的<a href='https://baike.baidu.com/item/%E5%87%BD%E6%95%B0/301912'>函数</a>，从而使使用者能灵活机动的进行数据分析，甚至创造出符合需要的新的统计计算方法
+        </li>
+        <li>SQL 是用于访问和处理数据库的标准的计算机语言，这类数据库包括：MySQL，Oracle, Sybase, SQL Server, DB2, Access 等等</li>
+    </ul>
+    <p>一句话概括，<strong>能留在排行榜之上的语言，都是好的语言，在其所在的领域能做到最好。</strong></p>
+    <h3><a name='header-n88' class='md-header-anchor '></a><strong>1.3.3 Java语言发展历史</strong></h3>
+    <p>Java诞生于1995年，由SUN公司（Sun Microsystems）推出，09年SUN被Oracle（甲骨文）收购。</p>
+    <p><img src="imgs01\java.jpg" style="zoom:50%;"/></p>
+    <hr/>
+    <p><img src="imgs01\sun.jpg" style="zoom:50%;"/></p>
+    <hr/>
+    <p><img src='imgs01\oracle.jpg' alt='' referrerPolicy='no-referrer'/></p>
+    <hr/>
+    <p>Java之父是詹姆斯.高斯林(James Gosling)。</p>
+    <p><img src='imgs01\James Gosling.jpg' alt='' referrerPolicy='no-referrer'/></p>
+    <p><strong>版本历史：</strong></p>
+    <figure>
+        <table>
+            <thead>
+            <tr>
+                <th style='text-align:center;'>发行版本</th>
+                <th style='text-align:center;'>发行时间</th>
+                <th style='text-align:center;'>备注</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style='text-align:center;'>Java</td>
+                <td style='text-align:center;'>1995.05.23</td>
+                <td style='text-align:center;'>Sun公司在Sun world会议上正式发布Java和HotJava浏览器</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'>Java 1.0</td>
+                <td style='text-align:center;'>1996.01.23</td>
+                <td style='text-align:center;'>Sun公司发布了Java的第一个开发工具包</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'>Java 1.1</td>
+                <td style='text-align:center;'>1997.02.19</td>
+                <td style='text-align:center;'>&nbsp;</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'>Java 1.2</td>
+                <td style='text-align:center;'>1998.12.08</td>
+                <td style='text-align:center;'>拆分成：J2SE（标准版）、J2EE（企业版）、J2ME（小型版）</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'>Java 1.3</td>
+                <td style='text-align:center;'>2000.05.08</td>
+                <td style='text-align:center;'>&nbsp;</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'>Java1.4</td>
+                <td style='text-align:center;'>2004.02.06</td>
+                <td style='text-align:center;'>&nbsp;</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'>Java 5.0</td>
+                <td style='text-align:center;'>2004.09.30</td>
+                <td style='text-align:center;'>①版本号从1.5改为5.0；②平台更名为JavaSE、JavaEE、JavaME</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'>Java 6.0</td>
+                <td style='text-align:center;'>2006.12.11</td>
+                <td style='text-align:center;'>2009.04.20 Oracle宣布收购SUN公司，收购价74亿美金</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'>Java 7</td>
+                <td style='text-align:center;'>2011.07.02</td>
+                <td style='text-align:center;'>&nbsp;</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><strong>Java 8</strong></td>
+                <td style='text-align:center;'>2014.03.18</td>
+                <td style='text-align:center;'>5.0版本以来最大变化的版本，长期支持版</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'>Java 9</td>
+                <td style='text-align:center;'>2017.09.22</td>
+                <td style='text-align:center;'>①每半年更新一次；②Java 9开始不再支持windows 32位系统</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'>Java 10</td>
+                <td style='text-align:center;'>2018.03.21</td>
+                <td style='text-align:center;'>&nbsp;</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'>Java 11</td>
+                <td style='text-align:center;'>2018.09.25</td>
+                <td style='text-align:center;'>JDK安装包取消独立JRE安装包，长期支持版</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'>Java 12</td>
+                <td style='text-align:center;'>2019.03.19</td>
+                <td style='text-align:center;'>&nbsp;</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'>Java 13</td>
+                <td style='text-align:center;'>2019.9.18</td>
+                <td style='text-align:center;'>&nbsp;</td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'>Java 14</td>
+                <td style='text-align:center;'>2020.3.17</td>
+                <td style='text-align:center;'>&nbsp;</td>
+            </tr>
+            </tbody>
+        </table>
+    </figure>
+    <h3><a name='header-n168' class='md-header-anchor '></a>1.3.4 Java技术体系平台</h3>
+    <ul>
+        <li><p><strong>JavaSE</strong>（Java Platform, Standard
+            Edition标准版）：允许您在桌面和服务器上开发和部署Java应用程序。Java提供了丰富的用户界面、性能、多功能性、可移植性和当今应用程序所需的安全性。</p></li>
+        <li><p><strong>JavaEE</strong>（Java Platform, Enterprise Edition企业版）：是为开发企业环境下的应用程序提供的一套解决方案，主要针对于Web应用程序开发。</p>
+        </li>
+        <li><p>JavaME（Java Platform, Micro Edition
+            小型版）：为互联网上的嵌入式和移动设备上运行的应用提供了一个健壮、灵活的环境：微控制器、传感器、网关、移动电话、个人数字助理（PDA）、电视机顶盒、打印机等等。JavaME包括灵活的用户界面、健壮的安全性、内置的网络协议，以及支持动态下载的网络和离线应用程序。基于JavaME的应用程序在许多设备上都是可移植的，但是利用了每个设备的本机功能。</p>
+            <ul>
+                <li><em>Java Embedded: 用于解锁物联网的智能设备的价值：</em>
+                    <em>通过远程市场更新和刷新功能延长产品生命周期和价值；</em>
+                    <em>利用Java的可伸缩性、健壮性、可移植性和全套功能，提高生产效率，降低成本，缩短上市时间；</em>
+                    <em>在边缘启用快速数据功能；</em></li>
+                <li><em>Java Card：使安全元件（如智能卡和其他防篡改安全芯片）能够承载采用Java技术的应用程序。Java
+                    card提供了一个安全的、可互操作的执行平台，它可以在一个资源受限的设备上存储和更新多个应用程序，同时保持最高的认证级别和与标准的兼容性。</em></li>
+                <li><em>Java TV：是一种基于JavaME的技术，它为开发在tv和机顶盒设备上运行的java应用程序提供了一个性能良好、安全且易于实现的解决方案。使用Java
+                    TV运行时，开发人员可以轻松创建应用程序，例如电子节目指南（EPG）、视频点播（VOD）客户端、游戏和教育应用程序、用于访问Internet数据的应用程序（例如天气、新闻播报器、社交网络）以及大多数蓝光光盘标题上的用户界面和奖金内容。</em>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <h3><a name='header-n183' class='md-header-anchor '></a>1.3.5 Java的主要应用领域</h3>
+    <ul>
+        <li><strong>企业级应用</strong> ：主要指复杂的大企业软件系统、各种类型网站后台系统。 Java的安全机制以及它的跨平台优势，使在分布式系统领域开发中有广泛应用。包括金融、电信、交通电子商务等。</li>
+        <li><strong>大数据平台开发</strong> ：各类框架有 Hadoop，spark ，storm，flink 等，就这类技术生态圈来讲，还有各种中间件如 flume ，kafka ，sqoop
+            等，这些框架以及工具大多数是用 Java 编写而成，但提供诸如 Java，scala ，Python，R等各种语言API供编程。
+        </li>
+        <li><strong>Android 移动平台应用</strong> ：Android应用程序使Java语言编写。Android开发水平的高低很大程度上取决于 Java语言核心能力是否扎实 。</li>
+    </ul>
+    <h3><a name='header-n191' class='md-header-anchor '></a>1.3.6 <strong>Java语言的特点</strong></h3>
+    <ul>
+        <li><p><strong>完全面向对象：</strong>Java语言支持封装、继承、多态，面向对象编程，让程序更好达到<strong>高内聚，低耦合</strong>的标准。</p></li>
+        <li><p><strong>支持分布式：</strong>Java语言支持Internet应用的开发，在基本的Java应用编程接口中有一个网络应用编程接口（java
+            net），它提供了用于网络应用编程的类库，包括URL、URLConnection、Socket、ServerSocket等。Java的RMI（远程方法激活）机制也是开发分布式应用的重要手段。</p></li>
+        <li><p><strong>健壮型：</strong>Java的强类型机制、异常处理 等是Java程序健壮性的重要保证。对指针的丢弃是Java的明智选择。</p></li>
+        <li><p><strong>安全：</strong>Java通常被用在网络环境中，为此，Java提供了一个安全机制以防恶意代码的攻击。如：安全防范机制（类ClassLoader），如分配不同的名字空间以防替代本地的同名类、字节代码检查。
+        </p></li>
+        <li><p><strong>跨平台性：</strong>Java程序（后缀为java的文件）在Java平台上被编译为体系结构中立的字节码格式（后缀为class的文件），然后可以在实现这个Java平台的任何系统中运行。
+        </p>
+            <p>&nbsp;</p></li>
+    </ul>
+    <h2><a name='header-n204' class='md-header-anchor '></a>1.4 Java语言跨平台原理</h2>
+    <ul>
+        <li><strong>跨平台</strong>：任何软件的运行，都必须要运行在操作系统之上，而我们用Java编写的软件可以运行在任何的操作系统上，这个特性称为<strong>Java语言的跨平台特性</strong>。该特性是由JVM实现的，我们编写的程序运行在JVM上，而JVM运行在操作系统上。
+        </li>
+        <li><strong>JVM</strong>（Java Virtual Machine ）：Java虚拟机，简称JVM，是运行所有Java程序的虚拟计算机，是Java程序的运行环境之一，也是Java
+            最具吸引力的特性之一。我们编写的Java代码，都运行在<strong>JVM</strong> 之上。
+        </li>
+    </ul>
+    <p><img src='imgs01/跨平台.png' alt='' referrerPolicy='no-referrer'/></p>
+    <p>如图所示，Java的虚拟机本身是不具备跨平台功能的，每个操作系统下都有不同版本的虚拟机。</p>
+    <ul>
+        <li><strong>JRE </strong> (Java Runtime Environment) ：是Java程序的运行时环境，包含<code>JVM</code> 和运行时所需要的<code>核心类库</code>。
+        </li>
+        <li><strong>JDK</strong> (Java Development Kit)：是Java程序开发工具包，包含<code>JRE</code> 和开发人员使用的工具。</li>
+    </ul>
+    <p>我们想要运行一个已有的Java程序，那么只需安装<code>JRE</code> 即可。</p>
+    <p>我们想要开发一个全新的Java程序，那么必须安装<code>JDK</code> ，其内部包含<code>JRE</code>。</p>
+    <p><img src='imgs01/JDKJRE.jpg' alt='' referrerPolicy='no-referrer'/></p>
+    <p><strong>JDK、JR与JVM之间的关系</strong></p>
+    <p><img src="imgs01/JDKJREJVM.png" alt="1561383524152" style="zoom:150%;"/></p>
+    <h2><a name='header-n222' class='md-header-anchor '></a>1.5 搭建开发环境</h2>
+    <ol start=''>
+        <li><p>下载JDK</p>
+            <p>官网地址：<a href='http://www.oracle.com' target='_blank' class='url'>www.oracle.com</a></p>
+            <p>详细地址：<a href='https://www.oracle.com/java/technologies/oracle-java-archive-downloads.html'
+                       target='_blank' class='url'>https://www.oracle.com/java/technologies/oracle-java-archive-downloads.html</a>
+            </p></li>
+        <li><p>安装JDK</p>
+            <p>“傻瓜式”安装，下一步即可。安装选项中可以取消公共jre，因为jdk中包含jre。</p></li>
+        <li><p>配置环境变量</p>
+            <p>
+                开发工具javac.exe等安装到了指定目录jdk\bin，使用时需要切换到指定目录bin下，配置环境变量可以在任意目录使用javac.exe等工具。后期也有一些基于java相关软件默认会通过环境变量配置寻找java。</p>
+            <p>&nbsp;</p>
+            <p><strong>详细步骤参考文档</strong>：<a
+                    href='JDK%E7%9A%84%E4%B8%8B%E8%BD%BD%E3%80%81%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE.md'>JDK的下载、安装与配置</a>
+            </p></li>
+    </ol>
+    <h2><a name='header-n236' class='md-header-anchor '></a>1.6 入门程序</h2>
+    <h3><a name='header-n237' class='md-header-anchor '></a>1.6.1 Java程序开发三步骤</h3>
+    <ol start=''>
+        <li>编写源代码，即编写java代码，保存为.java文件</li>
+        <li>执行javac命令，把java源文件编译生成.class字节码文件</li>
+        <li>执行java命令，运行生成的.class文件，得到程序结果</li>
+    </ol>
+    <p><img src='imgs01/开发步骤.png' alt='开发步骤' referrerPolicy='no-referrer'/></p>
+    <h3><a name='header-n246' class='md-header-anchor '></a>1.6.2 编写HelloWorld入门程序</h3>
+    <ol start=''>
+        <li><h4><a name='header-n249' class='md-header-anchor '></a>编写Java源程序</h4></li>
+    </ol>
+    <p> ​<span>	</span>1)打开最简单文本编辑器：记事本，键入以下java代码（全英文字符，区分大小写）：</p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; <span
+            class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span
+            class="cm-def">Hello</span> {</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-tab" role="presentation"
+                                                                                   cm-text="	">   </span><span
+            class="cm-keyword">public</span> <span class="cm-keyword">static</span> <span
+            class="cm-variable-3">void</span> <span class="cm-variable">main</span>(<span
+            class="cm-variable-3">String</span>[] <span class="cm-variable">args</span>) {</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; <span
+            class="cm-tab" role="presentation" cm-text="	"> </span><span class="cm-variable">System</span>.<span
+            class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-string">"Hello World"</span>);</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span
+            class="cm-tab" role="presentation" cm-text="	">   </span>}</span></pre><pre class=" CodeMirror-line "
+                                                                                           role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; }</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 123px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 123px;"></div></div></div></pre>
+    <p> ​<span>	</span>2)保存文件路径为<code>D:\</code> ，保存的完整的文件名修改为<code>Hello.java</code>（注意确认系统中文件有没有默认隐藏后缀）。</p>
+    <ol start='2'>
+        <li><h4><a name='header-n255' class='md-header-anchor '></a>编译Java源文件</h4></li>
+    </ol>
+    <p> 在DOS命令行中，<strong>进入</strong><code>D:\</code><strong>目录</strong>，使用<code>javac</code> 命令编译源文件。</p>
+    <p><img src='imgs01\编译.png' alt='' referrerPolicy='no-referrer'/></p>
+    <p> 命令行没有任何提示，表示编译成功。</p>
+    <p> 成功后再<code>D:\</code>目录，产生了一个新的文件 <code>Hello.class</code>，该文件就是可以运行的<strong>字节码文件</strong></p>
+    <ol start='3'>
+        <li><h4><a name='header-n262' class='md-header-anchor '></a>运行Java程序</h4></li>
+    </ol>
+    <p> 在DOS命令行中，<strong>进入Java源文件的目录</strong><code>D:\</code>，使用<code>java</code> 命令进行运行。</p>
+    <p><img src='imgs01\HelloWorld运行结果.png' alt='' referrerPolicy='no-referrer'/></p>
+    <blockquote><p>友情提示：java Hello 不要写 不要写 不要写 .class</p></blockquote>
+    <h3><a name='header-n267' class='md-header-anchor '></a>1.6.3 程序简单说明</h3>
+    <ul>
+        <li><p><strong>Java程序的结构：</strong></p>
+            <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+                    class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                    style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                    autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                    style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                    class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                    class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                      tabindex="-1"><div
+                    class="CodeMirror-sizer"
+                    style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                    style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                    role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+                    class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+                    class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                              style="position: relative;"><div
+                    class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                    class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                    style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span
+                    class="cm-variable">类</span>{</span></pre></div><pre class=" CodeMirror-line "
+                                                                         role="presentation"><span role="presentation"
+                                                                                                   style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+                    class="cm-variable">方法</span>{</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+                    class="cm-variable">语句</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+                    style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 123px;"></div><div
+                    class="CodeMirror-gutters" style="display: none; height: 123px;"></div></div></div></pre>
+            <p><em>注意：1.类{}是一个可执行程序的最小单元。2.括号都是成对出现的。</em></p></li>
+        <li><p><strong>Java程序的入口：</strong></p>
+            <p>Java程序执行需要有个起始点或入口，即<strong>main方法</strong></p>
+            <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+                    class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                    style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                    autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                    style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                    class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                    class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                      tabindex="-1"><div
+                    class="CodeMirror-sizer"
+                    style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                    style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                    role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+                    class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+                    class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline"
+                                                                     style="position: relative;"><div
+                    class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                    class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                    style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span
+                    class="cm-keyword">static</span> <span class="cm-variable-3">void</span> <span
+                    class="cm-def">main</span>(<span class="cm-variable-3">String</span>[] <span class="cm-variable">args</span>){ &nbsp; </span></pre></div><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+                    style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 49px;"></div><div
+                    class="CodeMirror-gutters" style="display: none; height: 49px;"></div></div></div></pre>
+            <p><em>注意：如果拼写错误会导致<strong>找不到主方法</strong></em></p></li>
+        <li><p><strong>输出语句：</strong></p>
+            <p>如果想要跟计算机来个互动，比如让他输出一句话：</p>
+            <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+                    class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                    style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                    autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                    style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                    class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                    class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                      tabindex="-1"><div
+                    class="CodeMirror-sizer"
+                    style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                    style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                    role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+                    class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+                    class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline"
+                                                                     style="position: relative;"><div
+                    class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                    class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                    style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">System</span>.<span
+                    class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-string">"Hello World"</span>);</span></pre></div></div></div></div></div></div><div
+                    style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;"></div><div
+                    class="CodeMirror-gutters" style="display: none; height: 25px;"></div></div></div></pre>
+            <p>此行代码表示，在控制台打印输出一句话，即双引号内部的内容，可以自己尝试修改看看。</p></li>
+    </ul>
+    <h2><a name='header-n283' class='md-header-anchor '></a>1.7 常见问题及解决</h2>
+    <h3><a name='header-n284' class='md-header-anchor '></a>1. 代码拼写错误</h3>
+    <ul>
+        <li><p>单词拼写问题，Java语言是一门严格区分大小写的语言</p>
+            <ul>
+                <li>正确：class<span>		</span>错误：Class</li>
+                <li>正确：String 错误：string</li>
+                <li>正确：System 错误：system</li>
+                <li>正确：main<span>		</span> 错误：mian</li>
+            </ul>
+        </li>
+        <li><p>标点符号使用问题</p>
+            <ul>
+                <li>不能用中文符号，英文半角的标点符号（正确）</li>
+                <li>括号问题，要成对出现</li>
+            </ul>
+        </li>
+    </ul>
+    <h3><a name='header-n304' class='md-header-anchor '></a>2. 源文件名问题</h3>
+    <p>源文件名有问题会导致编译时<strong>找不到文件</strong></p>
+    <p>可能的原因：</p>
+    <ul>
+        <li><span>	</span>文件路径错误</li>
+        <li><span>	</span>文件名拼写错误</li>
+        <li><span>	</span>文件名后缀不是.java</li>
+        <li> 类名声明为public时，要与文件名相同</li>
+    </ul>
+    <blockquote><p><strong>注意：</strong>一个源文件中可以有多个类，编译后会生成多个.class字节码文件。但是一个源文件只能有一个public的类。如果这个类是public，那么要求源文件名必须与类名一致。
+    </p></blockquote>
+    <h3><a name='header-n318' class='md-header-anchor '></a>3. 字符编码问题</h3>
+    <p>（比如使用notepad编辑器时）</p>
+    <p>当cmd命令行窗口的字符编码与.java源文件的字符编码不一致（cmd命令行窗口默认GBK，nopad默认utf-8），如何解决？</p>
+    <p><img src='imgs01/命令行编译乱码.png' alt='1557881223916' referrerPolicy='no-referrer'/></p>
+    <p>解决方案一：</p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang=""><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">在Notepad++等编辑器中，修改源文件的字符编码</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 25px;"></div></div></div></pre>
+    <p><img src='imgs01/Notepad修改源文件字符编码.png' alt='1557881271819' referrerPolicy='no-referrer'/></p>
+    <p>解决方案二：</p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang=""><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">在使用javac命令式，可以指定源文件的字符编码</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 25px;"></div></div></div></pre>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="cmd"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="cmd"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-identifier">javac</span> <span class="cm-operator">-</span><span
+            class="cm-identifier">encoding</span> <span class="cm-identifier">utf-8</span> <span class="cm-identifier">Review01</span><span
+            class="cm-punctuation">.</span><span class="cm-identifier">java</span></span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 25px;"></div></div></div></pre>
+    <p><strong>练习</strong></p>
+    <p>&nbsp;</p></div>
+</p>
+<figure>
+    <table>
+        <thead>
+        <tr>
+            <th style='text-align:right;'><a href='../javaSE.html'>回目录</a></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td style='text-align:right;'>教程版本：1.2 更新日期：2019年1月3日</td>
+        </tr>
+        </tbody>
+    </table>
+</figure>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,3892 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width initial-scale=1'>
+    <title>JavaSE_第三章 流程控制</title>
+    <link href='https://fonts.loli.net/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext'
+          rel='stylesheet' type='text/css'/>
+    <style type='text/css'>html {
+        overflow-x: initial !important;
+    }
+
+    :root {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --select-text-bg-color: #B5D6FC;
+        --select-text-font-color: auto;
+        --monospace: "Lucida Console", Consolas, "Courier", monospace;
+    }
+
+    html {
+        font-size: 14px;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        margin: 0px;
+        padding: 0px;
+        height: auto;
+        bottom: 0px;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        font-size: 1rem;
+        line-height: 1.42857;
+        overflow-x: hidden;
+        background: inherit;
+    }
+
+    iframe {
+        margin: auto;
+    }
+
+    a.url {
+        word-break: break-all;
+    }
+
+    a:active, a:hover {
+        outline: 0px;
+    }
+
+    .in-text-selection, ::selection {
+        text-shadow: none;
+        background: var(--select-text-bg-color);
+        color: var(--select-text-font-color);
+    }
+
+    #write {
+        margin: 0px auto;
+        height: auto;
+        width: inherit;
+        word-break: normal;
+        word-wrap: break-word;
+        position: relative;
+        white-space: normal;
+        overflow-x: visible;
+        padding-top: 40px;
+    }
+
+    #write.first-line-indent p {
+        text-indent: 2em;
+    }
+
+    #write.first-line-indent li p, #write.first-line-indent p * {
+        text-indent: 0px;
+    }
+
+    #write.first-line-indent li {
+        margin-left: 2em;
+    }
+
+    .for-image #write {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    body.typora-export {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .typora-export .footnote-line, .typora-export li, .typora-export p {
+        white-space: pre-wrap;
+    }
+
+    @media screen and (max-width: 500px) {
+        body.typora-export {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        #write {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .CodeMirror-sizer {
+            margin-left: 0px !important;
+        }
+
+        .CodeMirror-gutters {
+            display: none !important;
+        }
+    }
+
+    #write li > figure:first-child {
+        margin-top: -20px;
+    }
+
+    #write ol, #write ul {
+        position: relative;
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    button, input, select, textarea {
+        color: inherit;
+        font-style: inherit;
+        font-variant: inherit;
+        font-weight: inherit;
+        font-stretch: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        font-family: inherit;
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+        line-height: normal;
+        padding: 0px;
+    }
+
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre {
+        width: inherit;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p {
+        position: relative;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        break-after: avoid-page;
+        break-inside: avoid;
+        orphans: 2;
+    }
+
+    p {
+        orphans: 4;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+    }
+
+    h4 {
+        font-size: 1.4rem;
+    }
+
+    h5 {
+        font-size: 1.2rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+    }
+
+    .md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .md-blockmeta {
+        color: rgb(204, 204, 204);
+        font-weight: 700;
+        font-style: italic;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    sup.md-footnote {
+        padding: 2px 4px;
+        background-color: rgba(238, 238, 238, 0.7);
+        color: rgb(85, 85, 85);
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    sup.md-footnote a, sup.md-footnote a:hover {
+        color: inherit;
+        text-transform: inherit;
+        text-decoration: inherit;
+    }
+
+    #write input[type="checkbox"] {
+        cursor: pointer;
+        width: inherit;
+        height: inherit;
+    }
+
+    figure {
+        overflow-x: auto;
+        margin: 1.2em 0px;
+        max-width: calc(100% + 16px);
+        padding: 0px;
+    }
+
+    figure > table {
+        margin: 0px !important;
+    }
+
+    tr {
+        break-inside: avoid;
+        break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+        width: 100%;
+        overflow: auto;
+        break-inside: auto;
+        text-align: left;
+    }
+
+    table.md-table td {
+        min-width: 32px;
+    }
+
+    .CodeMirror-gutters {
+        border-right: 0px;
+        background-color: inherit;
+    }
+
+    .CodeMirror {
+        text-align: left;
+    }
+
+    .CodeMirror-placeholder {
+        opacity: 0.3;
+    }
+
+    .CodeMirror pre {
+        padding: 0px 4px;
+    }
+
+    .CodeMirror-lines {
+        padding: 0px;
+    }
+
+    div.hr:focus {
+        cursor: none;
+    }
+
+    #write pre {
+        white-space: pre-wrap;
+    }
+
+    #write.fences-no-line-wrapping pre {
+        white-space: pre;
+    }
+
+    #write pre.ty-contain-cm {
+        white-space: normal;
+    }
+
+    .CodeMirror-gutters {
+        margin-right: 4px;
+    }
+
+    .md-fences {
+        font-size: 0.9rem;
+        display: block;
+        break-inside: avoid;
+        text-align: left;
+        overflow: visible;
+        white-space: pre;
+        background: inherit;
+        position: relative !important;
+    }
+
+    .md-diagram-panel {
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+        padding-top: 0px;
+        padding-bottom: 8px;
+        overflow-x: auto;
+    }
+
+    #write .md-fences.mock-cm {
+        white-space: pre-wrap;
+    }
+
+    .md-fences.md-fences-with-lineno {
+        padding-left: 0px;
+    }
+
+    #write.fences-no-line-wrapping .md-fences.mock-cm {
+        white-space: pre;
+        overflow-x: auto;
+    }
+
+    .md-fences.mock-cm.md-fences-with-lineno {
+        padding-left: 8px;
+    }
+
+    .CodeMirror-line, twitterwidget {
+        break-inside: avoid;
+    }
+
+    .footnotes {
+        opacity: 0.8;
+        font-size: 0.9rem;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .footnotes + .footnotes {
+        margin-top: 0px;
+    }
+
+    .md-reset {
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        outline: 0px;
+        vertical-align: top;
+        background: 0px 0px;
+        text-decoration: none;
+        text-shadow: none;
+        float: none;
+        position: static;
+        width: auto;
+        height: auto;
+        white-space: nowrap;
+        cursor: inherit;
+        -webkit-tap-highlight-color: transparent;
+        line-height: normal;
+        font-weight: 400;
+        text-align: left;
+        box-sizing: content-box;
+        direction: ltr;
+    }
+
+    li div {
+        padding-top: 0px;
+    }
+
+    blockquote {
+        margin: 1rem 0px;
+    }
+
+    li .mathjax-block, li p {
+        margin: 0.5rem 0px;
+    }
+
+    li {
+        margin: 0px;
+        position: relative;
+    }
+
+    blockquote > :last-child {
+        margin-bottom: 0px;
+    }
+
+    blockquote > :first-child, li > :first-child {
+        margin-top: 0px;
+    }
+
+    .footnotes-area {
+        color: rgb(136, 136, 136);
+        margin-top: 0.714rem;
+        padding-bottom: 0.143rem;
+        white-space: normal;
+    }
+
+    #write .footnote-line {
+        white-space: pre-wrap;
+    }
+
+    @media print {
+        body, html {
+            border: 1px solid transparent;
+            height: 99%;
+            break-after: avoid;
+            break-before: avoid;
+        }
+
+        #write {
+            margin-top: 0px;
+            padding-top: 0px;
+            border-color: transparent !important;
+        }
+
+        .typora-export * {
+            -webkit-print-color-adjust: exact;
+        }
+
+        html.blink-to-pdf {
+            font-size: 13px;
+        }
+
+        .typora-export #write {
+            padding-left: 32px;
+            padding-right: 32px;
+            padding-bottom: 0px;
+            break-after: avoid;
+        }
+
+        .typora-export #write::after {
+            height: 0px;
+        }
+
+        @page {
+            margin: 20mm 0px;
+        }
+    }
+
+    .footnote-line {
+        margin-top: 0.714em;
+        font-size: 0.7em;
+    }
+
+    a img, img a {
+        cursor: pointer;
+    }
+
+    pre.md-meta-block {
+        font-size: 0.8rem;
+        min-height: 0.8rem;
+        white-space: pre-wrap;
+        background: rgb(204, 204, 204);
+        display: block;
+        overflow-x: hidden;
+    }
+
+    p > .md-image:only-child:not(.md-img-error) img, p > img:only-child {
+        display: block;
+        margin: auto;
+    }
+
+    p > .md-image:only-child {
+        display: inline-block;
+        width: 100%;
+    }
+
+    #write .MathJax_Display {
+        margin: 0.8em 0px 0px;
+    }
+
+    .md-math-block {
+        width: 100%;
+    }
+
+    .md-math-block:not(:empty)::after {
+        display: none;
+    }
+
+    [contenteditable="true"]:active, [contenteditable="true"]:focus {
+        outline: 0px;
+        box-shadow: none;
+    }
+
+    .md-task-list-item {
+        position: relative;
+        list-style-type: none;
+    }
+
+    .task-list-item.md-task-list-item {
+        padding-left: 0px;
+    }
+
+    .md-task-list-item > input {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        margin-left: -1.2em;
+        margin-top: calc(1em - 10px);
+        border: none;
+    }
+
+    .math {
+        font-size: 1rem;
+    }
+
+    .md-toc {
+        min-height: 3.58rem;
+        position: relative;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .md-toc-content {
+        position: relative;
+        margin-left: 0px;
+    }
+
+    .md-toc-content::after, .md-toc::after {
+        display: none;
+    }
+
+    .md-toc-item {
+        display: block;
+        color: rgb(65, 131, 196);
+    }
+
+    .md-toc-item a {
+        text-decoration: none;
+    }
+
+    .md-toc-inner:hover {
+        text-decoration: underline;
+    }
+
+    .md-toc-inner {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .md-toc-h1 .md-toc-inner {
+        margin-left: 0px;
+        font-weight: 700;
+    }
+
+    .md-toc-h2 .md-toc-inner {
+        margin-left: 2em;
+    }
+
+    .md-toc-h3 .md-toc-inner {
+        margin-left: 4em;
+    }
+
+    .md-toc-h4 .md-toc-inner {
+        margin-left: 6em;
+    }
+
+    .md-toc-h5 .md-toc-inner {
+        margin-left: 8em;
+    }
+
+    .md-toc-h6 .md-toc-inner {
+        margin-left: 10em;
+    }
+
+    @media screen and (max-width: 48em) {
+        .md-toc-h3 .md-toc-inner {
+            margin-left: 3.5em;
+        }
+
+        .md-toc-h4 .md-toc-inner {
+            margin-left: 5em;
+        }
+
+        .md-toc-h5 .md-toc-inner {
+            margin-left: 6.5em;
+        }
+
+        .md-toc-h6 .md-toc-inner {
+            margin-left: 8em;
+        }
+    }
+
+    a.md-toc-inner {
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+
+    .footnote-line a:not(.reversefootnote) {
+        color: inherit;
+    }
+
+    .md-attr {
+        display: none;
+    }
+
+    .md-fn-count::after {
+        content: ".";
+    }
+
+    code, pre, samp, tt {
+        font-family: var(--monospace);
+    }
+
+    kbd {
+        margin: 0px 0.1em;
+        padding: 0.1em 0.6em;
+        font-size: 0.8em;
+        color: rgb(36, 39, 41);
+        background: rgb(255, 255, 255);
+        border: 1px solid rgb(173, 179, 185);
+        border-radius: 3px;
+        box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    .md-comment {
+        color: rgb(162, 127, 3);
+        opacity: 0.8;
+        font-family: var(--monospace);
+    }
+
+    code {
+        text-align: left;
+        vertical-align: initial;
+    }
+
+    a.md-print-anchor {
+        white-space: pre !important;
+        border-width: initial !important;
+        border-style: none !important;
+        border-color: initial !important;
+        display: inline-block !important;
+        position: absolute !important;
+        width: 1px !important;
+        right: 0px !important;
+        outline: 0px !important;
+        background: 0px 0px !important;
+        text-decoration: initial !important;
+        text-shadow: initial !important;
+    }
+
+    .md-inline-math .MathJax_SVG .noError {
+        display: none !important;
+    }
+
+    .html-for-mac .inline-math-svg .MathJax_SVG {
+        vertical-align: 0.2px;
+    }
+
+    .md-math-block .MathJax_SVG_Display {
+        text-align: center;
+        margin: 0px;
+        position: relative;
+        text-indent: 0px;
+        max-width: none;
+        max-height: none;
+        min-height: 0px;
+        min-width: 100%;
+        width: auto;
+        overflow-y: hidden;
+        display: block !important;
+    }
+
+    .MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display {
+        width: auto;
+        margin: inherit;
+        display: inline-block !important;
+    }
+
+    .MathJax_SVG .MJX-monospace {
+        font-family: var(--monospace);
+    }
+
+    .MathJax_SVG .MJX-sans-serif {
+        font-family: sans-serif;
+    }
+
+    .MathJax_SVG {
+        display: inline;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        zoom: 90%;
+        text-indent: 0px;
+        text-align: left;
+        text-transform: none;
+        letter-spacing: normal;
+        word-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        float: none;
+        direction: ltr;
+        max-width: none;
+        max-height: none;
+        min-width: 0px;
+        min-height: 0px;
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .MathJax_SVG * {
+        transition: none;
+    }
+
+    .MathJax_SVG_Display svg {
+        vertical-align: middle !important;
+        margin-bottom: 0px !important;
+    }
+
+    .os-windows.monocolor-emoji .md-emoji {
+        font-family: "Segoe UI Symbol", sans-serif;
+    }
+
+    .md-diagram-panel > svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] svg, [lang="flow"] svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] .node text {
+        font-size: 1rem;
+    }
+
+    table tr th {
+        border-bottom: 0px;
+    }
+
+    video {
+        max-width: 100%;
+        display: block;
+        margin: 0px auto;
+    }
+
+    iframe {
+        max-width: 100%;
+        width: 100%;
+        border: none;
+    }
+
+    .highlight td, .highlight tr {
+        border: 0px;
+    }
+
+
+    .CodeMirror {
+        height: auto;
+    }
+
+    .CodeMirror.cm-s-inner {
+        background: inherit;
+    }
+
+    .CodeMirror-scroll {
+        overflow-y: hidden;
+        overflow-x: auto;
+        z-index: 3;
+    }
+
+    .CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler {
+        background-color: rgb(255, 255, 255);
+    }
+
+    .CodeMirror-gutters {
+        border-right: 1px solid rgb(221, 221, 221);
+        background: inherit;
+        white-space: nowrap;
+    }
+
+    .CodeMirror-linenumber {
+        padding: 0px 3px 0px 5px;
+        text-align: right;
+        color: rgb(153, 153, 153);
+    }
+
+    .cm-s-inner .cm-keyword {
+        color: rgb(119, 0, 136);
+    }
+
+    .cm-s-inner .cm-atom, .cm-s-inner.cm-atom {
+        color: rgb(34, 17, 153);
+    }
+
+    .cm-s-inner .cm-number {
+        color: rgb(17, 102, 68);
+    }
+
+    .cm-s-inner .cm-def {
+        color: rgb(0, 0, 255);
+    }
+
+    .cm-s-inner .cm-variable {
+        color: rgb(0, 0, 0);
+    }
+
+    .cm-s-inner .cm-variable-2 {
+        color: rgb(0, 85, 170);
+    }
+
+    .cm-s-inner .cm-variable-3 {
+        color: rgb(0, 136, 85);
+    }
+
+    .cm-s-inner .cm-string {
+        color: rgb(170, 17, 17);
+    }
+
+    .cm-s-inner .cm-property {
+        color: rgb(0, 0, 0);
+    }
+
+    .cm-s-inner .cm-operator {
+        color: rgb(152, 26, 26);
+    }
+
+    .cm-s-inner .cm-comment, .cm-s-inner.cm-comment {
+        color: rgb(170, 85, 0);
+    }
+
+    .cm-s-inner .cm-string-2 {
+        color: rgb(255, 85, 0);
+    }
+
+    .cm-s-inner .cm-meta {
+        color: rgb(85, 85, 85);
+    }
+
+    .cm-s-inner .cm-qualifier {
+        color: rgb(85, 85, 85);
+    }
+
+    .cm-s-inner .cm-builtin {
+        color: rgb(51, 0, 170);
+    }
+
+    .cm-s-inner .cm-bracket {
+        color: rgb(153, 153, 119);
+    }
+
+    .cm-s-inner .cm-tag {
+        color: rgb(17, 119, 0);
+    }
+
+    .cm-s-inner .cm-attribute {
+        color: rgb(0, 0, 204);
+    }
+
+    .cm-s-inner .cm-header, .cm-s-inner.cm-header {
+        color: rgb(0, 0, 255);
+    }
+
+    .cm-s-inner .cm-quote, .cm-s-inner.cm-quote {
+        color: rgb(0, 153, 0);
+    }
+
+    .cm-s-inner .cm-hr, .cm-s-inner.cm-hr {
+        color: rgb(153, 153, 153);
+    }
+
+    .cm-s-inner .cm-link, .cm-s-inner.cm-link {
+        color: rgb(0, 0, 204);
+    }
+
+    .cm-negative {
+        color: rgb(221, 68, 68);
+    }
+
+    .cm-positive {
+        color: rgb(34, 153, 34);
+    }
+
+    .cm-header, .cm-strong {
+        font-weight: 700;
+    }
+
+    .cm-del {
+        text-decoration: line-through;
+    }
+
+    .cm-em {
+        font-style: italic;
+    }
+
+    .cm-link {
+        text-decoration: underline;
+    }
+
+    .cm-error {
+        color: red;
+    }
+
+    .cm-invalidchar {
+        color: red;
+    }
+
+    .cm-constant {
+        color: rgb(38, 139, 210);
+    }
+
+    .cm-defined {
+        color: rgb(181, 137, 0);
+    }
+
+    div.CodeMirror span.CodeMirror-matchingbracket {
+        color: rgb(0, 255, 0);
+    }
+
+    div.CodeMirror span.CodeMirror-nonmatchingbracket {
+        color: rgb(255, 34, 34);
+    }
+
+    .cm-s-inner .CodeMirror-activeline-background {
+        background: inherit;
+    }
+
+    .CodeMirror {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .CodeMirror-scroll {
+        height: 100%;
+        outline: 0px;
+        position: relative;
+        box-sizing: content-box;
+        background: inherit;
+    }
+
+    .CodeMirror-sizer {
+        position: relative;
+    }
+
+    .CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar {
+        position: absolute;
+        z-index: 6;
+        display: none;
+    }
+
+    .CodeMirror-vscrollbar {
+        right: 0px;
+        top: 0px;
+        overflow: hidden;
+    }
+
+    .CodeMirror-hscrollbar {
+        bottom: 0px;
+        left: 0px;
+        overflow: hidden;
+    }
+
+    .CodeMirror-scrollbar-filler {
+        right: 0px;
+        bottom: 0px;
+    }
+
+    .CodeMirror-gutter-filler {
+        left: 0px;
+        bottom: 0px;
+    }
+
+    .CodeMirror-gutters {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        padding-bottom: 30px;
+        z-index: 3;
+    }
+
+    .CodeMirror-gutter {
+        white-space: normal;
+        height: 100%;
+        box-sizing: content-box;
+        padding-bottom: 30px;
+        margin-bottom: -32px;
+        display: inline-block;
+    }
+
+    .CodeMirror-gutter-wrapper {
+        position: absolute;
+        z-index: 4;
+        background: 0px 0px !important;
+        border: none !important;
+    }
+
+    .CodeMirror-gutter-background {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        z-index: 4;
+    }
+
+    .CodeMirror-gutter-elt {
+        position: absolute;
+        cursor: default;
+        z-index: 4;
+    }
+
+    .CodeMirror-lines {
+        cursor: text;
+    }
+
+    .CodeMirror pre {
+        border-radius: 0px;
+        border-width: 0px;
+        background: 0px 0px;
+        font-family: inherit;
+        font-size: inherit;
+        margin: 0px;
+        white-space: pre;
+        word-wrap: normal;
+        color: inherit;
+        z-index: 2;
+        position: relative;
+        overflow: visible;
+    }
+
+    .CodeMirror-wrap pre {
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        word-break: normal;
+    }
+
+    .CodeMirror-code pre {
+        border-right: 30px solid transparent;
+        width: fit-content;
+    }
+
+    .CodeMirror-wrap .CodeMirror-code pre {
+        border-right: none;
+        width: auto;
+    }
+
+    .CodeMirror-linebackground {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        z-index: 0;
+    }
+
+    .CodeMirror-linewidget {
+        position: relative;
+        z-index: 2;
+        overflow: auto;
+    }
+
+    .CodeMirror-wrap .CodeMirror-scroll {
+        overflow-x: hidden;
+    }
+
+    .CodeMirror-measure {
+        position: absolute;
+        width: 100%;
+        height: 0px;
+        overflow: hidden;
+        visibility: hidden;
+    }
+
+    .CodeMirror-measure pre {
+        position: static;
+    }
+
+    .CodeMirror div.CodeMirror-cursor {
+        position: absolute;
+        visibility: hidden;
+        border-right: none;
+        width: 0px;
+    }
+
+    .CodeMirror div.CodeMirror-cursor {
+        visibility: hidden;
+    }
+
+    .CodeMirror-focused div.CodeMirror-cursor {
+        visibility: inherit;
+    }
+
+    .cm-searching {
+        background: rgba(255, 255, 0, 0.4);
+    }
+
+    @media print {
+        .CodeMirror div.CodeMirror-cursor {
+            visibility: hidden;
+        }
+    }
+
+
+    :root {
+        --active-file-bg-color: rgba(32, 43, 51, 0.63);
+        --active-file-text-color: white;
+        --bg-color: #f3f2ee;
+        --text-color: #1f0909;
+        --control-text-color: #444;
+        --rawblock-edit-panel-bd: #e5e5e5;
+        --select-text-bg-color: rgba(32, 43, 51, 0.63);
+        --select-text-font-color: white;
+    }
+
+    pre {
+        --select-text-bg-color: #36284e;
+        --select-text-font-color: #fff;
+    }
+
+    html {
+        font-size: 16px;
+    }
+
+    html, body {
+        background-color: rgb(243, 242, 238);
+        font-family: "PT Serif", "Times New Roman", Times, serif;
+        color: rgb(31, 9, 9);
+        line-height: 1.5em;
+    }
+
+    #write {
+        max-width: 40em;
+    }
+
+    ol li {
+        list-style-type: decimal;
+        list-style-position: outside;
+    }
+
+    ul li {
+        list-style-type: disc;
+        list-style-position: outside;
+    }
+
+    ol, ul {
+        list-style: none;
+    }
+
+    blockquote, q {
+        quotes: none;
+    }
+
+    blockquote::before, blockquote::after, q::before, q::after {
+        content: none;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 1.875em;
+        line-height: 1.6em;
+        margin-top: 2em;
+    }
+
+    h2, h3 {
+        font-size: 1.3125em;
+        line-height: 1.15;
+        margin-top: 2.28571em;
+        margin-bottom: 1.15em;
+    }
+
+    h3 {
+        font-weight: normal;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        margin-top: 2.67em;
+    }
+
+    h5, h6 {
+        font-size: 1em;
+    }
+
+    h1 {
+        border-bottom: 1px solid;
+        margin-bottom: 1.875em;
+        padding-bottom: 0.8125em;
+    }
+
+    a {
+        text-decoration: none;
+        color: rgb(6, 85, 136);
+    }
+
+    a:hover, a:active {
+        text-decoration: underline;
+    }
+
+    p, blockquote, .md-fences {
+        margin-bottom: 1.5em;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 1.5em;
+    }
+
+    blockquote {
+        font-style: italic;
+        border-left: 5px solid;
+        margin-left: 2em;
+        padding-left: 1em;
+    }
+
+    ul, ol {
+        margin: 0px 0px 1.5em 1.5em;
+    }
+
+    .md-meta, .md-before, .md-after {
+        color: rgb(153, 153, 153);
+    }
+
+    table {
+        margin-bottom: 1.5em;
+        font-size: 1em;
+    }
+
+    thead th, tfoot th {
+        padding: 0.25em 0.25em 0.25em 0.4em;
+        text-transform: uppercase;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    td {
+        vertical-align: top;
+        padding: 0.25em 0.25em 0.25em 0.4em;
+    }
+
+    code, .md-fences {
+        background-color: rgb(218, 218, 218);
+    }
+
+    code {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .md-fences {
+        margin-left: 2em;
+        margin-bottom: 3em;
+        padding-left: 1ch;
+        padding-right: 1ch;
+    }
+
+    pre, code, tt {
+        font-size: 0.875em;
+        line-height: 1.71429em;
+    }
+
+    h1 {
+        line-height: 1.3em;
+        font-weight: normal;
+        margin-bottom: 0.5em;
+    }
+
+    p + ul, p + ol {
+        margin-top: 0.5em;
+    }
+
+    h3 + ul, h4 + ul, h5 + ul, h6 + ul, h3 + ol, h4 + ol, h5 + ol, h6 + ol {
+        margin-top: 0.5em;
+    }
+
+    li > ul, li > ol {
+        margin-top: inherit;
+        margin-bottom: 0px;
+    }
+
+    li ol > li {
+        list-style-type: lower-alpha;
+    }
+
+    li li ol > li {
+        list-style-type: lower-roman;
+    }
+
+    h2, h3 {
+        margin-bottom: 0.75em;
+    }
+
+    hr {
+        border-top: none;
+        border-right: none;
+        border-bottom: 1px solid;
+        border-left: none;
+    }
+
+    h1 {
+        border-color: rgb(197, 197, 197);
+    }
+
+    blockquote {
+        border-color: rgb(186, 186, 186);
+        color: rgb(101, 101, 101);
+    }
+
+    blockquote ul, blockquote ol {
+        margin-left: 0px;
+    }
+
+    .ty-table-edit {
+        background-color: transparent;
+    }
+
+    thead {
+        background-color: rgb(218, 218, 218);
+    }
+
+    tr:nth-child(2n) {
+        background: rgb(232, 231, 231);
+    }
+
+    hr {
+        border-color: rgb(197, 197, 197);
+    }
+
+    .task-list {
+        padding-left: 1rem;
+    }
+
+    .md-task-list-item {
+        padding-left: 1.5rem;
+        list-style-type: none;
+    }
+
+    .md-task-list-item > input::before {
+        content: "√";
+        display: inline-block;
+        width: 1.25rem;
+        height: 1.6rem;
+        vertical-align: middle;
+        text-align: center;
+        color: rgb(221, 221, 221);
+        background-color: rgb(243, 242, 238);
+    }
+
+    .md-task-list-item > input:checked::before, .md-task-list-item > input[checked]::before {
+        color: inherit;
+    }
+
+    #write pre.md-meta-block {
+        min-height: 1.875rem;
+        color: rgb(85, 85, 85);
+        border: 0px;
+        background: transparent;
+        margin-left: 1em;
+        margin-top: 1em;
+    }
+
+    .md-image > .md-meta {
+        color: rgb(155, 81, 70);
+    }
+
+    .md-image > .md-meta {
+        font-family: Menlo, "Ubuntu Mono", Consolas, "Courier New", "Microsoft Yahei", "Hiragino Sans GB", "WenQuanYi Micro Hei", serif;
+    }
+
+    #write > h3.md-focus::before {
+        left: -1.5rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h4.md-focus::before {
+        left: -1.5rem;
+        top: 0.25rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h5.md-focus::before {
+        left: -1.5rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h6.md-focus::before {
+        left: -1.5rem;
+        top: 0.3125rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    .md-toc:focus .md-toc-content {
+        margin-top: 19px;
+    }
+
+    .md-toc-content:empty::before {
+        color: rgb(6, 85, 136);
+    }
+
+    .md-toc-item {
+        color: rgb(6, 85, 136);
+    }
+
+    #write div.md-toc-tooltip {
+        background-color: rgb(243, 242, 238);
+    }
+
+    #typora-sidebar {
+        background-color: rgb(243, 242, 238);
+        box-shadow: rgba(0, 0, 0, 0.376) 0px 6px 12px;
+    }
+
+    .pin-outline #typora-sidebar {
+        background: inherit;
+        box-shadow: none;
+        border-right: 1px dashed;
+    }
+
+    .pin-outline #typora-sidebar:hover .outline-title-wrapper {
+        border-left: 1px dashed;
+    }
+
+    .outline-item:hover {
+        background-color: rgb(218, 218, 218);
+        border-left: 28px solid rgb(218, 218, 218);
+        border-right: 18px solid rgb(218, 218, 218);
+    }
+
+    .typora-node .outline-item:hover {
+        border-right: 28px solid rgb(218, 218, 218);
+    }
+
+    .outline-expander::before {
+        content: "";
+        font-family: FontAwesome;
+        font-size: 14px;
+        top: 1px;
+    }
+
+    .outline-expander:hover::before, .outline-item-open > .outline-item > .outline-expander::before {
+        content: "";
+    }
+
+    .modal-content {
+        background-color: rgb(243, 242, 238);
+    }
+
+    .auto-suggest-container ul li {
+        list-style-type: none;
+    }
+
+    .megamenu-menu, #top-titlebar, #top-titlebar *, .megamenu-content {
+        background: rgb(243, 242, 238);
+        color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-header {
+        border-bottom: 1px dashed rgb(32, 43, 51);
+    }
+
+    .megamenu-menu {
+        box-shadow: none;
+        border-right: 1px dashed;
+    }
+
+    header, .context-menu, .megamenu-content, footer {
+        font-family: "PT Serif", "Times New Roman", Times, serif;
+        color: rgb(31, 9, 9);
+    }
+
+    #megamenu-back-btn {
+        color: rgb(31, 9, 9);
+        border-color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-header #megamenu-menu-header-title::before {
+        color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-list li a:hover, .megamenu-menu-list li a.active {
+        color: inherit;
+        background-color: rgb(232, 231, 223);
+    }
+
+    .long-btn:hover {
+        background-color: rgb(232, 231, 223);
+    }
+
+    #recent-file-panel tbody tr:nth-child(2n-1) {
+        background-color: transparent !important;
+    }
+
+    .megamenu-menu-panel tbody tr:hover td:nth-child(2) {
+        color: inherit;
+    }
+
+    .megamenu-menu-panel .btn {
+        background-color: rgb(210, 209, 209);
+    }
+
+    .btn-default {
+        background-color: transparent;
+    }
+
+    .typora-sourceview-on #toggle-sourceview-btn, .ty-show-word-count #footer-word-count {
+        background: rgb(199, 197, 197);
+    }
+
+    #typora-quick-open {
+        background-color: inherit;
+    }
+
+    .md-diagram-panel {
+        margin-top: 8px;
+    }
+
+    .file-list-item-file-name {
+        font-weight: initial;
+    }
+
+    .file-list-item-summary {
+        opacity: 1;
+    }
+
+    .file-list-item {
+        color: rgb(119, 119, 119);
+    }
+
+    .file-list-item.active {
+        background-color: inherit;
+        color: black;
+    }
+
+    .ty-side-sort-btn.active {
+        background-color: inherit;
+    }
+
+    .file-list-item.active .file-list-item-file-name {
+        font-weight: bold;
+    }
+
+    .file-list-item {
+        opacity: 1 !important;
+    }
+
+    .file-library-node.active > .file-node-background {
+        background-color: var(--active-file-bg-color);
+    }
+
+    .file-tree-node.active > .file-node-content {
+        color: var(--active-file-text-color);
+    }
+
+    .md-task-list-item > input {
+        margin-left: -1.6em;
+        margin-top: calc(1rem - 12px);
+    }
+
+    input {
+        border: 1px solid rgb(170, 170, 170);
+    }
+
+    .megamenu-menu-header #megamenu-menu-header-title, .megamenu-menu-header:hover, .megamenu-menu-header:focus {
+        color: inherit;
+    }
+
+    .dropdown-menu .divider {
+        border-color: rgb(229, 229, 229);
+    }
+
+    .os-windows-7 strong, .os-windows-7 strong {
+        font-weight: 760;
+    }
+
+
+    .typora-export li, .typora-export p, .typora-export, .footnote-line {
+        white-space: normal;
+    }
+    </style>
+</head>
+<body class='typora-export os-windows'>
+<div id='write' class='is-node'><h2><a name='header-n0' class='md-header-anchor '></a>学习目标</h2>
+    <ul>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>掌握键盘输入各种数据类型的值</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解if语句的格式和执行流程</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解if...else语句的格式和执行流程</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解if...else if语句的格式和执行流程</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>了解if语句和三元运算符互换</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解switch选择语句的格式和执行流程</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>掌握switch选择语句接收的数据类型</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解case的穿透性</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>掌握break在switch中的使用</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>掌握default在switch中的使用</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>了解Math.random()和Math.sqrt(x)等的使用</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解for语句的格式和执行流程</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解while语句的格式和执行流程</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>了解do...while语句的格式和执行流程</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>了解跳出语句break，continue的意义</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解死循环的执行流程</p></li>
+        <li class='md-task-list-item task-list-item task-list-not-done'><input type='checkbox' disabled='disabled'/>
+            <p>理解循环嵌套的执行流程</p>
+            <p>&nbsp;</p></li>
+    </ul>
+    <h1><a name='header-n38' class='md-header-anchor '></a>第三章 流程控制</h1>
+    <p>不论哪一种编程语言，都会提供两种基本的流程控制结构：分支结构和循环结构。其中分支结构用于实现根据条件来选择性地执行某段代码，循环结构则用于实现根据循环条件重复执行某段代码。</p>
+    <p><strong>流程控制语句分类：</strong></p>
+    <ol start=''>
+        <li>顺序结构：从上而下顺序执行每一行代码</li>
+        <li>分支结构：或选择结构，根据条件选择执行不同的代码</li>
+        <li>循环结构：重复执行某一些代码</li>
+    </ol>
+    <h2><a name='header-n48' class='md-header-anchor '></a>3.1 顺序结构</h2>
+    <p>
+        任何编程语言中最常见的程序结构就是顺序结构。顺序结构就是程序从上到下逐行地执行，中间没有任何判断和跳转。如果main方法的多行代码之间没有任何流程控制，则程序总是从上向下依次执行，排在前面的代码先执行，排在后面的代码后执行。</p>
+    <p><strong>顺序结构代码执行流程图</strong>：</p>
+    <p><img src="imgs03\顺序结构执行流程.png" style="zoom:80%;"/></p>
+    <p><strong>顺序结构代码示例：</strong></p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">public</span> <span class="cm-keyword">static</span> <span
+            class="cm-variable-3">void</span> <span class="cm-def">main</span>(<span class="cm-variable-3">String</span>[] <span
+            class="cm-variable">args</span>){</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">//顺序执行，根据编写的顺序，从上到下运行</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  <span
+            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span
+            class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+            class="cm-string">"程序开始："</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-variable-3">int</span> <span class="cm-variable">a</span><span class="cm-operator">=</span><span
+            class="cm-number">10</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-variable-3">int</span> <span class="cm-variable">b</span><span class="cm-operator">=</span><span
+            class="cm-number">20</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-variable-3">int</span> <span class="cm-variable">sum</span><span class="cm-operator">=</span><span
+            class="cm-variable">a</span><span class="cm-operator">+</span><span
+            class="cm-variable">b</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">println</span>(<span class="cm-string">"sum="</span><span
+            class="cm-operator">+</span><span class="cm-variable">sum</span>);<span
+            class="cm-comment">//求两个数的和</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">println</span>(<span class="cm-string">"程序结束！"</span>);</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 222px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 222px;"></div></div></div></pre>
+    <h3><a name='header-n54' class='md-header-anchor '></a>键盘录入语句</h3>
+    <p>以上程序是个求和的程序，我想在运行程序的时候，根据实际的输入的两个数，进行求和，就跟计算器一样，任意给两个数，计算得出结果，如何做？</p>
+    <ol start=''>
+        <li><p><strong>完成键盘输入的代码步骤：</strong></p>
+            <ul>
+                <li>（1）准备一个键盘扫描器（先导包或直接使用包名+类名）</li>
+                <li>（2）提示要输入的信息</li>
+                <li>（3）接收输入内容</li>
+            </ul>
+            <p>示例代码：</p>
+            <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"
+                 style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                    style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                    autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                    style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                    class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                    class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                      tabindex="-1"><div
+                    class="CodeMirror-sizer"
+                    style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                    style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                    role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+                    class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+                    class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                              style="position: relative;"><div
+                    class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                    class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                    style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"> &nbsp; <span class="cm-comment">//1、准备Scanner类型的变量</span></span></pre></div><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"> &nbsp; <span
+                    class="cm-comment">//Scanner是一个引用数据类型，它的全名称是java.util.Scanner</span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"> &nbsp; <span
+                    class="cm-comment">//input就是一个引用数据类型的变量了，赋给它的值是一个对象</span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"> &nbsp; <span
+                    class="cm-variable">java</span>.<span class="cm-variable">util</span>.<span class="cm-variable">Scanner</span> <span
+                    class="cm-variable">input</span> <span class="cm-operator">=</span> <span
+                    class="cm-keyword">new</span> <span class="cm-variable">java</span>.<span
+                    class="cm-variable">util</span>.<span class="cm-variable">Scanner</span>(<span class="cm-variable">System</span>.<span
+                    class="cm-variable">in</span>);<span class="cm-comment">//System.in默认代表键盘输入</span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"> &nbsp; </span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"> &nbsp; <span
+                    class="cm-comment">//2、提示输入xx</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"> &nbsp; <span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">print</span>(<span
+                    class="cm-string">"请输入一个整数："</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                           role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"> &nbsp; </span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"> &nbsp; <span
+                    class="cm-comment">//3、接收输入内容</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"> &nbsp; <span
+                    class="cm-variable-3">int</span> <span class="cm-variable">num</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">input</span>.<span class="cm-variable">nextInt</span>();</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"> &nbsp; </span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"> &nbsp; <span
+                    class="cm-comment">//列出各种数据类型的输入</span></span></pre><pre class=" CodeMirror-line "
+                                                                             role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"> &nbsp; <span
+                    class="cm-variable-3">int</span> <span class="cm-variable">num</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">input</span>.<span class="cm-variable">nextInt</span>();</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"> &nbsp; <span
+                    class="cm-variable-3">long</span> <span class="cm-variable">bigNum</span> <span class="cm-operator">=</span> <span
+                    class="cm-variable">input</span>.<span class="cm-variable">nextLong</span>();</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"> &nbsp; <span
+                    class="cm-variable-3">double</span> <span class="cm-variable">d</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">input</span>.<span class="cm-variable">nextDouble</span>();</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"> &nbsp; <span
+                    class="cm-variable-3">boolean</span> <span class="cm-variable">b</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">input</span>.<span class="cm-variable">nextBoolean</span>();</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"> &nbsp; <span
+                    class="cm-variable-3">String</span> <span class="cm-variable">s</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">input</span>.<span
+                    class="cm-variable">next</span>();</span></pre><pre class=" CodeMirror-line "
+                                                                        role="presentation"><span role="presentation"
+                                                                                                  style="padding-right: 0.1px;"> &nbsp; <span
+                    class="cm-variable-3">char</span> <span class="cm-variable">c</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">input</span>.<span
+                    class="cm-variable">next</span>().<span class="cm-variable">charAt</span>(<span
+                    class="cm-number">0</span>);<span
+                    class="cm-comment">//先按照字符串接收，然后再取字符串的第一个字符（下标为0）</span></span></pre></div></div></div></div></div><div
+                    style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 543px;"></div><div
+                    class="CodeMirror-gutters" style="display: none; height: 543px;"></div></div></div></pre>
+        </li>
+        <li><p><strong>语法案例一：改造求和案例</strong></p>
+            <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"
+                 style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                    style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                    autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                    style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                    class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                    class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                      tabindex="-1"><div
+                    class="CodeMirror-sizer"
+                    style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                    style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                    role="presentation" style="position: relative; outline: none;"><div
+                    class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div
+                    style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"
+                                                                       style=""><div class="CodeMirror-activeline"
+                                                                                     style="position: relative;"><div
+                    class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                    class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                    style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span
+                    class="cm-keyword">static</span> <span class="cm-variable-3">void</span> <span
+                    class="cm-def">main</span>(<span class="cm-variable-3">String</span>[] <span class="cm-variable">args</span>){</span></pre></div><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-string">"程序开始："</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                        role="presentation"><span role="presentation"
+                                                                                                  style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+                    class="cm-comment">//创建一个扫描器</span></span></pre><pre class=" CodeMirror-line "
+                                                                         role="presentation"><span role="presentation"
+                                                                                                   style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+                    class="cm-variable">java</span>.<span class="cm-variable">util</span>.<span class="cm-variable">Scanner</span> <span
+                    class="cm-variable">sc</span><span class="cm-operator">=</span><span
+                    class="cm-keyword">new</span> <span class="cm-variable">java</span>.<span
+                    class="cm-variable">util</span>.<span class="cm-variable">Scanner</span>(<span class="cm-variable">System</span>.<span
+                    class="cm-variable">in</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-string">"请输入第一个整数："</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                            role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+                    class="cm-variable-3">int</span> <span class="cm-variable">a</span><span
+                    class="cm-operator">=</span><span class="cm-variable">sc</span>.<span
+                    class="cm-variable">nextInt</span>();<span class="cm-comment">//从键盘接收一个整数</span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-string">"请输入第二个整数："</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                            role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+                    class="cm-variable-3">int</span> <span class="cm-variable">b</span><span
+                    class="cm-operator">=</span><span class="cm-variable">sc</span>.<span
+                    class="cm-variable">nextInt</span>();<span class="cm-comment">//从键盘接收一个整数</span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+                    class="cm-variable-3">int</span> <span class="cm-variable">sum</span><span
+                    class="cm-operator">=</span><span class="cm-variable">a</span><span
+                    class="cm-operator">+</span><span class="cm-variable">b</span>;</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-string">"sum="</span><span class="cm-operator">+</span><span
+                    class="cm-variable">sum</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                      role="presentation"><span role="presentation"
+                                                                                                style="padding-right: 0.1px;"><span
+                    cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-string">"程序结束"</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                       role="presentation"><span role="presentation"
+                                                                                                 style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+                    style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 419px;"></div><div
+                    class="CodeMirror-gutters" style="display: none; height: 419px;"></div></div></div></pre>
+            <p>&nbsp;</p></li>
+        <li><p><strong>语法案例二：录入个人信息</strong></p>
+            <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"
+                 style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                    style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                    autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                    style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                    class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                    class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                      tabindex="-1"><div
+                    class="CodeMirror-sizer"
+                    style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                    style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                    role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+                    class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+                    class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                              style="position: relative;"><div
+                    class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                    class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                    style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">class</span> <span
+                    class="cm-def">Day03_Test02_Input</span>{</span></pre></div><pre class=" CodeMirror-line "
+                                                                                     role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-keyword">public</span> <span class="cm-keyword">static</span> <span class="cm-variable-3">void</span> <span
+                    class="cm-variable">main</span>(<span class="cm-variable-3">String</span>[] <span
+                    class="cm-variable">args</span>){</span></pre><pre class=" CodeMirror-line "
+                                                                       role="presentation"><span role="presentation"
+                                                                                                 style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-comment">//这里变量取什么名，下面就用什么.</span></span></pre><pre class=" CodeMirror-line "
+                                                                                  role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">//例如：这里取名input，下面就用input.</span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">java</span>.<span class="cm-variable">util</span>.<span class="cm-variable">Scanner</span> <span
+                    class="cm-variable">input</span> <span class="cm-operator">=</span> <span
+                    class="cm-keyword">new</span> <span class="cm-variable">java</span>.<span
+                    class="cm-variable">util</span>.<span class="cm-variable">Scanner</span>(<span class="cm-variable">System</span>.<span
+                    class="cm-variable">in</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab"
+                                                                                                     role="presentation"
+                                                                                                     cm-text="	">    </span><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">print</span>(<span
+                    class="cm-string">"请输入姓名："</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                         role="presentation"><span role="presentation"
+                                                                                                   style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable-3">String</span> <span class="cm-variable">name</span> <span class="cm-operator">=</span> <span
+                    class="cm-variable">input</span>.<span class="cm-variable">next</span>();</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">print</span>(<span
+                    class="cm-string">"请输入年龄："</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                         role="presentation"><span role="presentation"
+                                                                                                   style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable-3">int</span> <span class="cm-variable">age</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">input</span>.<span class="cm-variable">nextInt</span>();</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">print</span>(<span
+                    class="cm-string">"请输入性别："</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                         role="presentation"><span role="presentation"
+                                                                                                   style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-comment">//input.next()得到字符串，不管你输入几个字符，</span></span></pre><pre class=" CodeMirror-line "
+                                                                                              role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">//.charAt(0)：从字符串中取出一个字符，(0)表示取第一个字符，(1)表示取第二个字符</span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-comment">//charAt(index)：也是一个方法，从第二个单词开始首字母大写，所以A是大写</span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable-3">char</span> <span class="cm-variable">gender</span> <span class="cm-operator">=</span> <span
+                    class="cm-variable">input</span>.<span class="cm-variable">next</span>().<span class="cm-variable">charAt</span>(<span
+                    class="cm-number">0</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab"
+                                                                                                     role="presentation"
+                                                                                                     cm-text="	">    </span><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">print</span>(<span
+                    class="cm-string">"请输入体重："</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                         role="presentation"><span role="presentation"
+                                                                                                   style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable-3">double</span> <span class="cm-variable">weight</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">input</span>.<span class="cm-variable">nextDouble</span>();</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">print</span>(<span
+                    class="cm-string">"请输入是否已婚(true/false)："</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                                       role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span
+                    class="cm-variable-3">boolean</span> <span class="cm-variable">isMarry</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">input</span>.<span class="cm-variable">nextBoolean</span>();</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-string">"姓名："</span> <span class="cm-operator">+</span> <span
+                    class="cm-variable">name</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                       role="presentation"><span role="presentation"
+                                                                                                 style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-string">"年龄："</span> <span class="cm-operator">+</span> <span
+                    class="cm-variable">age</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                      role="presentation"><span role="presentation"
+                                                                                                style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-string">"性别："</span> <span class="cm-operator">+</span> <span
+                    class="cm-variable">gender</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                         role="presentation"><span role="presentation"
+                                                                                                   style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-string">"体重："</span> <span class="cm-operator">+</span> <span
+                    class="cm-variable">weight</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                         role="presentation"><span role="presentation"
+                                                                                                   style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-string">"婚否："</span> <span class="cm-operator">+</span> (<span
+                    class="cm-variable">isMarry</span><span class="cm-operator">?</span><span
+                    class="cm-string">"是"</span>:<span class="cm-string">"否"</span>));</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+                    style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 888px;"></div><div
+                    class="CodeMirror-gutters" style="display: none; height: 888px;"></div></div></div></pre>
+        </li>
+    </ol>
+    <ol start='3'>
+        <li><p><strong>语法案例三：</strong></p>
+            <p><strong>next()与nextLine()接收字符数据的区别</strong></p>
+            <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"
+                 style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                    style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                    autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                    style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                    class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                    class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                      tabindex="-1"><div
+                    class="CodeMirror-sizer"
+                    style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                    style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                    role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+                    class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+                    class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                              style="position: relative;"><div
+                    class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                    class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                    style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span
+                    class="cm-comment">/*</span></span></pre></div><pre class=" CodeMirror-line "
+                                                                        role="presentation"><span role="presentation"
+                                                                                                  style="padding-right: 0.1px;"><span
+                    class="cm-comment">next()方法：</span></span></pre><pre class=" CodeMirror-line "
+                                                                         role="presentation"><span role="presentation"
+                                                                                                   style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">遇到空格等空白符，就认为输入结束</span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-comment">nextLine()方法：</span></span></pre><pre class=" CodeMirror-line "
+                                                                             role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-comment">遇到回车换行，就认为输入结束</span></span></pre><pre class=" CodeMirror-line "
+                                                                              role="presentation"><span
+                    role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab"
+                                                                                                     role="presentation"
+                                                                                                     cm-text="	">    </span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-comment">如果你在键盘输入过程中，遇到java.util.InputMismatchException，</span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-comment">说明你输入的数据类型与接收数据的变量的类型不匹配</span></span></pre><pre class=" CodeMirror-line "
+                                                                                        role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">*/</span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-keyword">class</span> <span class="cm-def">Day03_Test04_Input2</span>{</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+                    class="cm-keyword">static</span> <span class="cm-variable-3">void</span> <span class="cm-variable">main</span>(<span
+                    class="cm-variable-3">String</span>[] <span class="cm-variable">args</span>){</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">java</span>.<span class="cm-variable">util</span>.<span class="cm-variable">Scanner</span> <span
+                    class="cm-variable">input</span> <span class="cm-operator">=</span> <span
+                    class="cm-keyword">new</span> <span class="cm-variable">java</span>.<span
+                    class="cm-variable">util</span>.<span class="cm-variable">Scanner</span>(<span class="cm-variable">System</span>.<span
+                    class="cm-variable">in</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" class="cm-tab-wrap-hack" style="padding-right: 0.1px;"><span class="cm-tab"
+                                                                                                     role="presentation"
+                                                                                                     cm-text="	">    </span><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">print</span>(<span
+                    class="cm-string">"请输入姓名："</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                         role="presentation"><span role="presentation"
+                                                                                                   style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-comment">//String name = input.next();//张 三  只能接收张，后面的空格和三无法接收，被下面的输入接收</span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable-3">String</span> <span class="cm-variable">name</span> <span class="cm-operator">=</span> <span
+                    class="cm-variable">input</span>.<span class="cm-variable">nextLine</span>();</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-string">"name = "</span> <span class="cm-operator">+</span> <span
+                    class="cm-variable">name</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                       role="presentation"><span role="presentation"
+                                                                                                 class="cm-tab-wrap-hack"
+                                                                                                 style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">print</span>(<span
+                    class="cm-string">"请输入年龄："</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                         role="presentation"><span role="presentation"
+                                                                                                   class="cm-tab-wrap-hack"
+                                                                                                   style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable-3">int</span> <span class="cm-variable">age</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">input</span>.<span class="cm-variable">nextInt</span>();<span
+                    class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment">//23回车换行  这里只接收23，回车换行被下面的输入接收<span
+                    class="cm-tab" role="presentation" cm-text="	">  </span></span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">input</span>.<span class="cm-variable">nextLine</span>();<span
+                    class="cm-comment">//读取23后面的回车换行，但是这个不需要接收，只有下面一个输入是nextLine()情况下才需要这样，如果下面的输入是next()或者是nextInt(),nextDouble()等就不需要这么干</span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-string">"age = "</span> <span class="cm-operator">+</span> <span
+                    class="cm-variable">age</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                      role="presentation"><span role="presentation"
+                                                                                                class="cm-tab-wrap-hack"
+                                                                                                style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">print</span>(<span
+                    class="cm-string">"请输入电话号码："</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                           role="presentation"><span role="presentation"
+                                                                                                     style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable-3">String</span> <span class="cm-variable">tel</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">input</span>.<span class="cm-variable">nextLine</span>();</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-string">"tel = "</span> <span class="cm-operator">+</span> <span
+                    class="cm-variable">tel</span>);</span></pre><pre class=" CodeMirror-line "
+                                                                      role="presentation"><span role="presentation"
+                                                                                                style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+                    style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 863px;"></div><div
+                    class="CodeMirror-gutters" style="display: none; height: 863px;"></div></div></div></pre>
+            <p><strong>练习：</strong></p>
+            <p>键盘录入两个数据，获取这两个数据中的最大值（使用三目运算符）</p>
+            <p>键盘录入三个数据，获取这三个数据中的最大值（使用三目运算符）</p>
+            <p>键盘录入两个数据，比较这两个数据是否相等（使用三目运算符）</p>
+            <p>&nbsp;</p></li>
+    </ol>
+    <h2><a name='header-n86' class='md-header-anchor '></a>3.2 分支结构（选择结构）</h2>
+    <h3><a name='header-n87' class='md-header-anchor '></a>3.2.1 分支结构：if语句第一种格式</h3>
+    <ol start=''>
+        <li><p><strong>if语句第一种格式：</strong> if</p>
+            <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+                    class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                    style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                    autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                    style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                    class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                    class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                      tabindex="-1"><div
+                    class="CodeMirror-sizer"
+                    style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                    style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                    role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+                    class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+                    class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline"
+                                                                     style="position: relative;"><div
+                    class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                    class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                    style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">if</span>(<span
+                    class="cm-variable">关系表达式</span>)<span class="cm-variable">｛</span></span></pre></div><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;">  <span
+                    class="cm-tab" role="presentation" cm-text="	">  </span><span
+                    class="cm-variable">语句体</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span
+                    class="cm-variable">｝</span></span></pre></div></div></div></div></div><div
+                    style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 74px;"></div><div
+                    class="CodeMirror-gutters" style="display: none; height: 74px;"></div></div></div></pre>
+        </li>
+    </ol>
+    <ol start='2'>
+        <li><p><strong>执行流程</strong></p>
+            <p>①首先判断条件表达式看其结果是true还是false</p>
+            <p>②如果是true就执行语句体</p>
+            <p>③如果是false就不执行语句体</p></li>
+    </ol>
+    <p><img src='imgs03\if.jpg' alt='' referrerPolicy='no-referrer'/></p>
+    <ol start='3'>
+        <li><strong>语法案例演示1：</strong></li>
+    </ol>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"
+         style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp;<span class="cm-keyword">public</span> <span
+            class="cm-keyword">static</span> <span class="cm-variable-3">void</span> <span
+            class="cm-def">main</span>(<span class="cm-variable-3">String</span>[] <span class="cm-variable">args</span>){</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">println</span>(<span class="cm-string">"开始"</span>);</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;<span
+            class="cm-comment">// 定义两个变量</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable-3">int</span> <span class="cm-variable">a</span> <span class="cm-operator">=</span> <span
+            class="cm-number">10</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable-3">int</span> <span class="cm-variable">b</span> <span class="cm-operator">=</span> <span
+            class="cm-number">20</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;<span
+            class="cm-comment">//变量使用if判断</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;<span
+            class="cm-keyword">if</span> (<span class="cm-variable">a</span> <span class="cm-operator">==</span> <span
+            class="cm-variable">b</span>){</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">println</span>(<span class="cm-string">"a等于b"</span>);</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;  }</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable-3">int</span> <span class="cm-variable">c</span> <span class="cm-operator">=</span> <span
+            class="cm-number">10</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;<span
+            class="cm-keyword">if</span>(<span class="cm-variable">a</span> <span class="cm-operator">==</span> <span
+            class="cm-variable">c</span>){</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">println</span>(<span class="cm-string">"a等于c"</span>);</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;  }</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">println</span>(<span class="cm-string">"结束"</span>);</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                style="padding-right: 0.1px;">  }</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 395px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 395px;"></div></div></div></pre>
+    <p></p>
+    <ol start='4'>
+        <li><p><strong>语法案例演示2</strong></p>
+            <p>案例：从键盘输入年份，请输出该年的2月份的总天数。闰年2月份29天，平年28天。</p>
+            <p>闰年条件：（1）能被4整除，不能被100整除（2）能被400整除</p>
+            <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"
+                 style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+                    style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+                    autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+                    style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+                    class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div
+                    class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll"
+                                                                                      tabindex="-1"><div
+                    class="CodeMirror-sizer"
+                    style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+                    style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+                    role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+                    class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+                    class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                              style="position: relative;"><div
+                    class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+                    class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+                    style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span
+                    class="cm-keyword">class</span> <span class="cm-def">Test</span> {</span></pre></div><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">public</span> <span
+                    class="cm-keyword">static</span> <span class="cm-variable-3">void</span> <span class="cm-variable">main</span>(<span
+                    class="cm-variable-3">String</span>[] <span class="cm-variable">args</span>) {</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">java</span>.<span class="cm-variable">util</span>.<span class="cm-variable">Scanner</span> <span
+                    class="cm-variable">input</span> <span class="cm-operator">=</span> <span
+                    class="cm-keyword">new</span> <span class="cm-variable">java</span>.<span
+                    class="cm-variable">util</span>.<span class="cm-variable">Scanner</span>(<span class="cm-variable">System</span>.<span
+                    class="cm-variable">in</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span
+                    class="cm-variable">out</span>.<span class="cm-variable">print</span>(<span class="cm-string">"请输入年份："</span>);</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable-3">int</span> <span class="cm-variable">year</span> <span
+                    class="cm-operator">=</span> <span class="cm-variable">input</span>.<span class="cm-variable">nextInt</span>();</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable-3">int</span> <span class="cm-variable">days</span> <span
+                    class="cm-operator">=</span> <span class="cm-number">28</span>;</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation" class="cm-tab-wrap-hack"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span></span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-keyword">if</span>(<span class="cm-variable">year</span><span class="cm-operator">%</span><span
+                    class="cm-number">4</span><span class="cm-operator">==</span><span class="cm-number">0</span> <span
+                    class="cm-operator">&amp;&amp;</span> <span class="cm-variable">year</span><span
+                    class="cm-operator">%</span><span class="cm-number">100</span><span
+                    class="cm-operator">!=</span><span class="cm-number">0</span> <span
+                    class="cm-operator">||</span> <span class="cm-variable">year</span><span
+                    class="cm-operator">%</span><span class="cm-number">400</span><span
+                    class="cm-operator">==</span><span class="cm-number">0</span>){</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span
+                    class="cm-variable">days</span><span class="cm-operator">++</span>;</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab"
+                                                                                       role="presentation"
+                                                                                       cm-text="	">    </span><span
+                    class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span
+                    class="cm-variable">year</span> <span class="cm-operator">+</span> <span
+                    class="cm-string">"年的2月份共"</span> <span class="cm-operator">+</span> <span
+                    class="cm-variable">days</span> <span class="cm-operator">+</span> <span
+                    class="cm-string">"天"</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span
+                    role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                            cm-text="	">    </span><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">input</span>.<span
+                    class="cm-variable">close</span>();</span></pre><pre class=" CodeMirror-line "
+                                                                         role="presentation"><span role="presentation"
+                                                                                                   style="padding-right: 0.1px;"><span
+                    class="cm-tab" role="presentation" cm-text="	">    </span>}</span></pre><pre
+                    class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                        style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+                    style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 395px;"></div><div
+                    class="CodeMirror-gutters" style="display: none; height: 395px;"></div></div></div></pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n113" mdtype="fences" style="break-inside: unset;">public class Test {
+	public static void main(String[] args) {
+		java.util.Scanner input = new java.util.Scanner(System.in);
+		System.out.print("请输入年份：");
+		int year = input.nextInt();
+		int days = 28;
+		
+		if(year%4==0 &amp;&amp; year%100!=0 || year%400==0)
+			days++;//当语句块只有一句时，可以省略{}，但是建议还是保留比较靠谱
+		
+		System.out.println(year + "年的2月份共" + days + "天");
+		input.close();
+	}
+}
+</pre>
+        </li>
+    </ol>
+    <h3><a name='header-n115' class='md-header-anchor '></a>3.2.2 分支结构：if语句第二种格式</h3>
+    <ol start=''>
+        <li><p><strong>if语句第二种格式：</strong> if...else</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n119" mdtype="fences">if(关系表达式) {
+  	语句体1;
+}else {
+  	语句体2;
+}
+</pre>
+        </li>
+    </ol>
+    <ol start='2'>
+        <li><p>执行流程</p>
+            <p>①首先判断关系表达式看其结果是true还是false</p>
+            <p>②如果是true就执行语句体1</p>
+            <p>③如果是false就执行语句体2</p>
+            <p><img src='imgs03\ifelse.jpg' alt='' referrerPolicy='no-referrer'/></p></li>
+    </ol>
+    <p>&nbsp;</p>
+    <ol start='3'>
+        <li><p><strong>语法案例演示1：</strong></p>
+            <p>输入一个整数，判断是奇数还是偶数？</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n133" mdtype="fences">   public static void main(String[] args){
+       // 判断给定的数据是奇数还是偶数
+       // 定义变量
+       int a = 1;
+       if(a % 2 == 0) {
+           System.out.println("a是偶数");
+       } else{
+           System.out.println("a是奇数");
+       }
+       System.out.println("结束");
+   }
+
+</pre>
+        </li>
+        <li><p><strong>语法案例演示2：if语句和三元运算符的互换</strong></p>
+            <p>在某些简单的应用中，if语句是可以和三元运算符互换使用的。</p>
+            <p>求两个整数中大的一个</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n138" mdtype="fences">public static void main(String[] args) {
+    int a = 10;
+    int b = 20;
+    //定义变量，保存a和b的较大值
+    int max;
+    if(a &gt; b) {
+      	max = a;
+    } else {
+      	max = b;
+    }
+    //可以上述功能改写为三元运算符形式
+    max = a &gt; b ? a : b;
+}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n139" mdtype="fences">public static void main(String[] args) {
+    int a = 10;
+    int b = 20;
+    //定义变量，保存a和b的较大值
+    int max;
+    if(a &gt; b) 
+      	max = a;//当语句块只有一个语句时，可以省略{}，但是不建议省略{}
+     else 
+      	max = b;
+    //输出大的值
+    System.out.println(max);
+}
+</pre>
+        </li>
+    </ol>
+    <ul>
+        <li><p><strong>练习：求出最大值</strong></p>
+            <p>从键盘输入三个数，求出最大值，用单分支if和双分支if..else来计算</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n145" mdtype="fences" style="break-inside: unset;">class Day03_Test08_MaxValueExer{
+	public static void main(String[] args){
+		java.util.Scanner input = new java.util.Scanner(System.in);
+		
+		System.out.print("请输入第1个整数：");
+		int a = input.nextInt();
+		
+		System.out.print("请输入第2个整数：");
+		int b = input.nextInt();
+		
+		System.out.print("请输入第3个整数：");
+		int c = input.nextInt();
+		
+		/*
+		int max;//存储三个数中的最大值
+		if(a &gt; b){
+			max = a;
+		}else{
+			max = b;
+		}
+		if(c &gt; max){
+			max = c;
+		}
+		*/
+		int max = a&gt;b ? a : b;
+		max = max&gt;c ? max : c;
+		System.out.println(a+","+b+","+c+"中最大的是："+ max);
+	}
+}
+</pre>
+        </li>
+    </ul>
+    <h3><a name='header-n147' class='md-header-anchor '></a>3.2.3 分支结构：if语句第三种格式</h3>
+    <ol start=''>
+        <li><p><strong>if语句第三种格式：</strong></p>
+            <p>if...else if ...else</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n152" mdtype="fences">if (判断条件1) {
+  	执行语句1;
+} else if (判断条件2) {
+  	执行语句2;
+}
+...
+}else if (判断条件n) {
+ 	执行语句n;
+} else {
+  	执行语句n+1;
+}
+</pre>
+        </li>
+    </ol>
+    <ol start='2'>
+        <li><p><strong>执行流程</strong></p>
+            <p>①首先判断关系表达式1看其结果是true还是false</p>
+            <p>②如果是true就执行语句体1，然后结束当前多分支</p>
+            <p>③如果是false就继续判断关系表达式2看其结果是true还是false</p>
+            <p>④如果是true就执行语句体2，然后结束当前多分支</p>
+            <p>⑤如果是false就继续判断关系表达式…看其结果是true还是false</p>
+            <p>⑥…</p>
+            <p>⑦如果没有任何关系表达式为true，就执行语句体n+1，然后结束当前多分支。</p></li>
+    </ol>
+    <p><img src="imgs03\ifelseif.jpg" style="zoom:80%;"/></p>
+    <ol start='3'>
+        <li><p><strong>语法案例演示1：</strong></p>
+            <p>计算如下函数：x和y的关系满足如下：
+                （1）x&gt;=3； y = 2x + 1;
+                （2）-1&lt;=x&lt;3； y = 2x;
+                （3）x&lt;-1； y = 2x – 1;
+                从键盘输入x的值，计算出y的值并输出。</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n169" mdtype="fences" style="break-inside: unset;">public static void main(String[] args) {
+    java.util.Scanner input = new java.util.Scanner(System.in);
+    System.out.print("请输入x的值：");
+    int x = input.nextInt();
+    int y;
+    if (x&gt;= 3) {
+      	y = 2 * x + 1;
+    } else if (x &gt;= -1 &amp;&amp; x &lt; 3) {
+      	y = 2 * x;
+    } else  {
+      	y = 2 * x - 1;
+    }
+    System.out.println("y的值是："+y);
+}
+</pre>
+            <p>改造：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n171" mdtype="fences" style="break-inside: unset;">public static void main(String[] args) {
+    java.util.Scanner input = new java.util.Scanner(System.in);
+    System.out.print("请输入x的值：");
+    int x = input.nextInt();
+    int y;
+    if (x&gt;= 3) {
+      	y = 2 * x + 1;
+    } else if (x &gt;= -1) {//优化条件
+      	y = 2 * x;
+    } else  {
+      	y = 2 * x - 1;
+    }
+    System.out.println("y的值是："+y);
+}
+</pre>
+            <p><img src='imgs03/1561700798198.png' alt='1561700798198' referrerPolicy='no-referrer'/></p>
+            <p><img src='imgs03/1561700825016.png' alt='1561700825016' referrerPolicy='no-referrer'/></p></li>
+    </ol>
+    <ol start='4'>
+        <li><p><strong>语法案例演示2：</strong></p>
+            <p>通过指定考试成绩，判断学生等级</p>
+            <p>90-100 优秀</p>
+            <p>80-89 好</p>
+            <p>70-79 良</p>
+            <p>60-69 及格</p>
+            <p>60以下 不及格</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n184" mdtype="fences" style="break-inside: unset;">public static void main(String[] args) {
+    int score = 89；
+    if(score&lt;0 || score&gt;100){
+      	System.out.println("你的成绩是错误的");
+    }else if(score&gt;=90 &amp;&amp; score&lt;=100){
+      	System.out.println("你的成绩属于优秀");
+    }else if(score&gt;=80 &amp;&amp; score&lt;90){
+      	System.out.println("你的成绩属于好");
+    }else if(score&gt;=70 &amp;&amp; score&lt;80){
+      	System.out.println("你的成绩属于良");
+    }else if(score&gt;=60 &amp;&amp; score&lt;70){
+      	System.out.println("你的成绩属于及格");
+    }else {
+      	System.out.println("你的成绩属于不及格");
+    }	
+}
+</pre>
+            <p><img src='imgs03/1561436569004.png' alt='1561436569004' referrerPolicy='no-referrer'/></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n186" mdtype="fences" style="break-inside: unset;">	public static void main(String[] args) {
+	    int score = 89;
+	    if(score&lt;0 || score&gt;100){
+	      	System.out.println("你的成绩是错误的");
+	    }else if(score&gt;=90){
+	      	System.out.println("你的成绩属于优秀");
+	    }else if(score&gt;=80){
+	      	System.out.println("你的成绩属于好");
+	    }else if(score&gt;=70){
+	      	System.out.println("你的成绩属于良");
+	    }else if(score&gt;=60){
+	      	System.out.println("你的成绩属于及格");
+	    }else {
+	      	System.out.println("你的成绩属于不及格");
+	    }	
+	}
+</pre>
+            <p><img src='imgs03/1561437387616.png' alt='1561437387616' referrerPolicy='no-referrer'/></p></li>
+    </ol>
+    <h3><a name='header-n189' class='md-header-anchor '></a>3.2.4 分支结构：if..else嵌套</h3>
+    <p>在if的语句块中，或者是在else语句块中，
+        又包含了另外一个条件判断（可以是单分支、双分支、多分支）</p>
+    <p>执行的特点：
+        （1）如果是嵌套在if语句块中的
+        只有当外部的if条件满足，才会去判断内部的条件
+        （2）如果是嵌套在else语句块中的
+        只有当外部的if条件不满足，进入else后，才会去判断内部的条件</p>
+    <ol start=''>
+        <li><p><strong>语法案例演示1:</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n195" mdtype="fences" style="break-inside: unset;">	public static void main(String[] args) {
+	    int score = 89;
+	    if(score&lt;0 || score&gt;100){
+	      	System.out.println("你的成绩是错误的");
+	    }else{
+	    	if(score&gt;=90){
+		      	System.out.println("你的成绩属于优秀");
+		    }else if(score&gt;=80){
+		      	System.out.println("你的成绩属于好");
+		    }else if(score&gt;=70){
+		      	System.out.println("你的成绩属于良");
+		    }else if(score&gt;=60){
+		      	System.out.println("你的成绩属于及格");
+		    }else {
+		      	System.out.println("你的成绩属于不及格");
+		    }	
+	    }
+	}
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n196" mdtype="fences" style="break-inside: unset;">	//省略{}的情况，else中嵌套了一个完整的多分支结构，也算是一个语句，称为复合语句，所以也可以省略{}
+	public static void main(String[] args) {	
+	    int score = 89;
+	    if(score&lt;0 || score&gt;100)
+	      	System.out.println("你的成绩是错误的");
+	    else
+	    	if(score&gt;=90){
+		      	System.out.println("你的成绩属于优秀");
+		    }else if(score&gt;=80){
+		      	System.out.println("你的成绩属于好");
+		    }else if(score&gt;=70){
+		      	System.out.println("你的成绩属于良");
+		    }else if(score&gt;=60){
+		      	System.out.println("你的成绩属于及格");
+		    }else {
+		      	System.out.println("你的成绩属于不及格");
+		    }
+	}
+</pre>
+        </li>
+    </ol>
+    <ol start='2'>
+        <li><p><strong>语法案例演示2：</strong></p>
+            <p>从键盘输入一个年份，和月份，输出该年份该月的总天数</p>
+            <p>要求：年份为正数，月份1-12</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n203" mdtype="fences" style="break-inside: unset;">	public static void main(String[] args){
+		//从键盘输入一个年份，和月份
+		java.util.Scanner input = new java.util.Scanner(System.in);
+		
+		System.out.print("年份：");
+		int year = input.nextInt();
+		
+		System.out.print("月份：");
+		int month = input.nextInt();
+		
+		if(year&gt;0){
+			if(month&gt;=1 &amp;&amp; month&lt;=12){
+				//合法的情况
+				int days;
+				if(month==2){
+					if(year%4==0 &amp;&amp; year%100!=0 || year%400==0){
+						days = 29;
+					}else{
+						days = 28;
+					}
+				}else if(month==4 || month==6  || month==9 || month==11){
+					days = 30;
+				}else{
+					days = 31;
+				}
+				System.out.println(year+"年" + month + "月有" + days +"天");
+			}else{
+				System.out.println("月份输入不合法");
+			}
+		}else{
+			System.out.println("年份输入不合法");
+		}
+	}
+</pre>
+        </li>
+    </ol>
+    <h3><a name='header-n205' class='md-header-anchor '></a>3.2.5 分支结构：switch选择结构</h3>
+    <ol start=''>
+        <li><p><strong>语法格式：</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n209" mdtype="fences">switch(表达式){
+    case 常量值1:
+        语句块1;
+        break;
+    case 常量值2:
+        语句块2;
+        break;  
+    ...
+   	default:
+        语句块n+1;
+        break;  
+}
+</pre>
+        </li>
+    </ol>
+    <ol start='2'>
+        <li><p><strong>执行过程：</strong></p>
+            <ul>
+                <li><p>（1）入口</p>
+                    <ul>
+                        <li>①当switch(表达式)的值与case后面的某个常量值匹配，就从这个case进入；</li>
+                        <li>②当switch(表达式)的值与case后面的所有常量值都不匹配，寻找default分支进入;不管default在哪里</li>
+                    </ul>
+                </li>
+                <li><p>（2）一旦从“入口”进入switch，就会顺序往下执行，直到遇到“出口”，即可能发生贯穿</p></li>
+                <li><p>（3）出口</p>
+                    <ul>
+                        <li>①自然出口：遇到了switch的结束}</li>
+                        <li>②中断出口：遇到了break等</li>
+                    </ul>
+                </li>
+            </ul>
+            <blockquote><p>注意：</p>
+                <p>（1）switch(表达式)的值的类型，只能是：4种基本数据类型（byte,short,int,char），两种引用数据类型（JDK1.5之后枚举、JDK1.7之后String）</p>
+                <p>（2）case后面必须是常量值，而且不能重复</p></blockquote>
+        </li>
+        <li><p><strong>语法案例演示1：</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n237" mdtype="fences" style="break-inside: unset;">public class SwitchDemo01 {
+	public static void main(String[] args) {
+		//定义指定的星期
+		int weekday = 5;
+		
+		//switch语句实现选择
+		switch(weekday) {
+            case 1:
+                System.out.println("星期一");
+                break;
+            case 2:
+                System.out.println("星期二");
+                break;
+            case 3:
+                System.out.println("星期三");
+                break;
+            case 4:
+                System.out.println("星期四");
+                break;
+            case 5:
+                System.out.println("星期五");
+                break;
+            case 6:
+                System.out.println("星期六");
+                break;
+            case 7:
+                System.out.println("星期日");
+                break;
+            default:
+                System.out.println("你的数字有误");
+                break;
+		}
+	}
+}
+</pre>
+        </li>
+        <li><p><strong>语法案例演示2：case的穿透性</strong></p>
+            <p>
+                在switch语句中，如果case的后面不写break，将出现穿透现象，也就是一旦匹配成功，不会在判断下一个case的值，直接向后运行，直到遇到break或者整个switch语句结束，switch语句执行终止。</p>
+            <p>练习：根据指定的月份输出对应季节（if语句）</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n242" mdtype="fences" style="break-inside: unset;">/*
+ * 需求：定义一个月份，输出该月份对应的季节。
+ * 		一年有四季
+ * 		3,4,5	春季
+ * 		6,7,8	夏季
+ * 		9,10,11	秋季
+ * 		12,1,2	冬季
+ * 
+ * 分析：
+ * 		A:指定一个月份
+ * 		B:判断该月份是几月,根据月份输出对应的季节
+ * 			if
+ * 			switch
+ */
+public class SwitchTest01 {
+	public static void main(String[] args) {
+		//指定一个月份
+		int month = 5;
+		
+		/*
+		if (month == 1) {
+			System.out.println("冬季");
+		} else if (month == 2) {
+			System.out.println("冬季");
+		} else if (month == 3) {
+			System.out.println("春季");
+		} else if (month == 4) {
+			System.out.println("春季");
+		} else if (month == 5) {
+			System.out.println("春季");
+		} else if (month == 6) {
+			System.out.println("夏季");
+		} else if (month == 7) {
+			System.out.println("夏季");
+		} else if (month == 8) {
+			System.out.println("夏季");
+		} else if (month == 9) {
+			System.out.println("秋季");
+		} else if (month == 10) {
+			System.out.println("秋季");
+		} else if (month == 11) {
+			System.out.println("秋季");
+		} else if (mouth == 12) {
+			System.out.println("冬季");
+        } else {
+            System.out.println("你输入的月份有误");
+        }
+		*/
+		
+		// 改进版
+		if ((month == 1) || (month == 2) || (month == 12)) {
+			System.out.println("冬季");
+		} else if ((month == 3) || (month == 4) || (month == 5)) {
+			System.out.println("春季");
+		} else if ((month == 6) || (month == 7) || (month == 8)) {
+			System.out.println("夏季");
+		} else if ((month == 9) || (month == 10) || (month == 11)) {
+			System.out.println("秋季");
+		} else {
+			System.out.println("你输入的月份有误");
+		}
+	}
+}
+</pre>
+            <p>练习：根据指定的月份输出对应季节（switch语句）</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n244" mdtype="fences" style="break-inside: unset;">/*
+ * 需求：指定一个月份，输出该月份对应的季节。
+ * 		一年有四季
+ * 		3,4,5	春季
+ * 		6,7,8	夏季
+ * 		9,10,11	秋季
+ * 		12,1,2	冬季
+ * 
+ * 分析：
+ * 		A:指定一个月份
+ * 		B:判断该月份是几月,根据月份输出对应的季节
+ * 			if
+ * 			switch
+ */
+public class SwitchTest02 {
+	public static void main(String[] args) {
+		//指定一个月份
+		int month = 5;
+		
+		/*
+		switch(month) {
+            case 1:
+                System.out.println("冬季");
+                break;
+            case 2:
+                System.out.println("冬季");
+                break;
+            case 3:
+                System.out.println("春季");
+                break;
+            case 4:
+                System.out.println("春季");
+                break;
+            case 5:
+                System.out.println("春季");
+                break;
+            case 6:
+                System.out.println("夏季");
+                break;
+            case 7:
+                System.out.println("夏季");
+                break;
+            case 8:
+                System.out.println("夏季");
+                break;
+            case 9:
+                System.out.println("秋季");
+                break;
+            case 10:
+                System.out.println("秋季");
+                break;
+            case 11:
+                System.out.println("秋季");
+                break;
+            case 12:
+                System.out.println("冬季");
+                break;
+            default:
+                System.out.println("你输入的月份有误");
+                break;
+		}
+		*/
+	
+        // 改进版 
+		switch(month) {
+            case 1:
+            case 2:
+            case 12:
+                System.out.println("冬季");
+                break;
+            case 3:
+            case 4:
+            case 5:
+                System.out.println("春季");
+                break;
+            case 6:
+            case 7:
+            case 8:
+                System.out.println("夏季");
+                break;
+            case 9:
+            case 10:
+            case 11:
+                System.out.println("秋季");
+                break;
+            default:
+                System.out.println("你输入的月份有误");
+                break;
+		}
+	}
+}
+</pre>
+        </li>
+    </ol>
+    <ol start='5'>
+        <li><p><strong>常见错误实现1：</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n249" mdtype="fences" style="break-inside: unset;">switch(month){
+    case 3|4|5://3|4|5 用了位运算符，11 | 100 | 101结果是 111是7
+        System.out.println("春季");
+        break;
+    case 6|7|8://6|7|8用了位运算符，110 | 111 | 1000结果是1111是15
+        System.out.println("夏季");
+        break;
+    case 9|10|11://9|10|11用了位运算符，1001 | 1010 | 1011结果是1011是11
+        System.out.println("秋季");
+        break;
+    case 12|1|2://12|1|2 用了位运算符，1100 | 1 | 10 结果是1111，是15
+        System.out.println("冬季");
+        break;
+    default:
+        System.out.println("输入有误");
+}
+</pre>
+        </li>
+    </ol>
+    <ol start='6'>
+        <li><p><strong>常见错误实现2：</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n254" mdtype="fences" style="break-inside: unset;">//编译不通过
+switch(month){
+    case 3,4,5:
+        System.out.println("春季");
+        break;
+    case 6,7,8:
+        System.out.println("夏季");
+        break;
+    case 9,10,11:
+        System.out.println("秋季");
+        break;
+    case 12,1,2:
+        System.out.println("冬季");
+        break;
+    default:
+        System.out.println("输入有误");
+}
+</pre>
+            <p>&nbsp;</p></li>
+    </ol>
+    <blockquote><p>Switch 表达式也是作为预览语言功能的第一个语言改动被引入Java12 中，开始支持如下写法：</p></blockquote>
+    <blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                     cid="n259" mdtype="fences">switch(month) {
+ case 3,4,5 -&gt; System.out.println("春季");
+ case 6,7,8 -&gt; System.out.println("夏季");
+ case 9,10,11 -&gt; System.out.println("秋季");
+ case 12,1,2 -&gt; System.out.println("冬季");
+ default-&gt;System.out.println("月份输入有误！");
+};
+</pre>
+    </blockquote>
+    <h3><a name='header-n260' class='md-header-anchor '></a>3.2.5 if语句与switch语句比较</h3>
+    <ul>
+        <li>if语句的条件是一个布尔类型值，通常根据某个判断结果进入分支，使用范围更广。</li>
+        <li>switch语句的条件是一个常量值（byte,short,int,char,枚举,String），一般条件是几个固定的常量值时使用switch语句。</li>
+        <li>如果根据进入分支的条件是几个固定的常量值，这时使用if和switch都可以，如果条件选项比较多时，适合使用switch语句（效率高）。</li>
+    </ul>
+    <p>比如：当条件是x&gt;0时，进入某分支执行代码，这时时候使用if语句，不适合使用switch语句。</p>
+    <h2><a name='header-n269' class='md-header-anchor '></a>3.3. 循环语句</h2>
+    <h3><a name='header-n270' class='md-header-anchor '></a>3.3.1 for循环</h3>
+    <p>循环语句可以在满足循环条件的情况下，反复执行某一段代码，这段被重复执行的代码被称为循环体语句，当反复执行这个循环体时，需要通过修改循环变量使得循环判断条件为false，从而结束循环，否则循环将一直执行下去，形成死循环。</p>
+    <ol start=''>
+        <li><strong>for循环语句格式：</strong></li>
+    </ol>
+    <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n276"
+         mdtype="fences">   for(初始化语句①; 循环条件语句②; 迭代语句④){
+   		循环体语句③
+   }
+
+   for(;;){
+       循环体语句块；//如果循环体中没有跳出循环体的语句，那么就是死循环
+   }
+</pre>
+    <blockquote><p>注意：</p>
+        <p>（1）for(;;)中的两个；是不能多也不能少</p>
+        <p>（2）循环条件必须是boolean类型</p>
+        <p>（3）如果循环条件语句②省略的话，就默认为循环条件成立</p></blockquote>
+    <ol start='2'>
+        <li><p><strong>执行流程：</strong></p>
+            <ul>
+                <li><p>第一步：执行初始化语句①，完成循环变量的初始化；</p></li>
+                <li><p>第二步：执行循环条件语句②，看循环条件语句的值是true，还是false；</p>
+                    <ul>
+                        <li>如果是true，执行第三步；</li>
+                        <li>如果是false，循环语句中止，循环不再执行。</li>
+                    </ul>
+                </li>
+                <li><p>第三步：执行循环体语句③</p></li>
+                <li><p>第四步：执行迭代语句④，针对循环变量重新赋值</p></li>
+                <li><p>第五步：根据循环变量的新值，重新从第二步开始再执行一遍</p></li>
+            </ul>
+        </li>
+        <li><p><strong>语法演示案例1：</strong></p>
+            <p>打印10次的HelloWorld</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n305" mdtype="fences" style="break-inside: unset;">public class ForDemo01 {
+	public static void main(String[] args) {
+    //控制台输出10次HelloWorld，不使用循环
+		System.out.println("HelloWorld");
+		System.out.println("HelloWorld");
+		System.out.println("HelloWorld");
+		System.out.println("HelloWorld");
+		System.out.println("HelloWorld");
+		System.out.println("HelloWorld");
+		System.out.println("HelloWorld");
+		System.out.println("HelloWorld");
+		System.out.println("HelloWorld");
+		System.out.println("HelloWorld");
+		System.out.println("-------------------------");
+
+		//用循环改进，循环10次
+		//定义变量从10开始，循环条件为&lt;=10
+		for(int x = 1; x &lt;= 10; x++) {
+			System.out.println("HelloWorld"+x);
+		}
+	}
+}
+</pre>
+        </li>
+    </ol>
+    <ol start='4'>
+        <li><p><strong>语法演示案例2：</strong></p>
+            <p>打印1-5和5-1</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n311" mdtype="fences" style="break-inside: unset;">/*
+ * 练习：利用for语句打印1-5和5-1
+ */
+public class ForTest01 {
+	public static void main(String[] args) {
+		//原始做法
+		System.out.println(1);
+		System.out.println(2);
+		System.out.println(3);
+		System.out.println(4);
+		System.out.println(5);
+		System.out.println("===============");
+		
+		//用循环改进
+		for(int x=1; x&lt;=5; x++) {
+			System.out.println(x);
+		}
+		System.out.println("===============");
+		
+		//1-5的数据我们获取到了，如何获取5-1呢?
+		for(int x=5; x&gt;=1; x--){
+			System.out.println(x);
+		}
+	}
+}
+</pre>
+        </li>
+    </ol>
+    <ol start='5'>
+        <li><p><strong>语法演示案例3：</strong></p>
+            <p>求出1-5之间数据之和</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n317" mdtype="fences" style="break-inside: unset;">/*
+ * 练习：求出1-5之间数据之和
+ * 
+ * 分析：
+ * 		1.定义求和变量，初始化值是0
+ * 		2.获取1-5之间的数据，用for循环实现
+ * 		3.把每一次获取到的数据，累加起来就可以了
+ * 		4.输出求和变量即可
+ */
+public class ForTest02 {
+	public static void main(String[] args) {
+		//定义求和变量，初始化值是0
+		int sum = 0;
+		
+		//获取1-5之间的数据，用for循环实现
+		for(int x=1; x&lt;=5; x++) {
+			//把每一次获取到的数据，累加起来就可以了
+			//sum = sum + x;
+			/*
+			 * 第一次：sum = 0 + 1 = 1
+			 * 第二次：sum = 1 + 2 = 3
+			 * 第三次：sum = 3 + 3 = 6
+			 * 第四次：sum = 6 + 4 = 10
+			 * 第五次：sum = 10 + 5 = 15
+			 */
+			sum += x;
+		}
+		
+		//输出求和结果
+		System.out.println("sum:" + sum);
+	}
+}
+</pre>
+        </li>
+    </ol>
+    <ol start='6'>
+        <li><p><strong>语法演示案例4：</strong></p>
+            <p>求出1-100之间偶数和</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n323" mdtype="fences" style="break-inside: unset;">/*
+ * 练习：求出1-100之间偶数和
+ * 
+ * 分析：
+ * 		1.定义求和变量，初始化值是0
+ * 		2.获取1-100之间的数据，用for循环实现
+ * 		3.把获取到的数据进行判断，看是否是偶数
+ * 			如果是，就累加
+ * 		4.输出求和结果
+ */
+public class ForTest03 {
+	public static void main(String[] args) {
+		//定义求和变量，初始化值是0
+		int sum = 0;
+		
+		//获取1-100之间的数据，用for循环实现
+		for(int x=1; x&lt;=100; x++) {
+			//把获取到的数据进行判断，看是否是偶数
+			if(x % 2 == 0) {
+				sum += x;
+			}
+		}
+		
+		//输出求和结果
+		System.out.println("sum:"+sum);
+	}
+}
+</pre>
+        </li>
+    </ol>
+    <h3><a name='header-n325' class='md-header-anchor '></a>3.3.2 while循环</h3>
+    <ol start=''>
+        <li><p><strong>while循环语句标准格式：</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n329" mdtype="fences">while (循环条件语句①) {
+    循环体语句②；
+}
+while(true){
+     循环体语句;//如果此时循环体中没有跳出循环的语句，也是死循环
+}
+</pre>
+            <blockquote><p>注意：</p>
+                <p>while(循环条件)中循环条件必须是boolean类型</p></blockquote>
+            <p><strong>执行流程：</strong></p>
+            <ul>
+                <li><p>第一步：执行循环条件语句①，看循环条件语句的值是true，还是false；</p>
+                    <ul>
+                        <li>如果是true，执行第二步；</li>
+                        <li>如果是false，循环语句中止，循环不再执行。</li>
+                    </ul>
+                </li>
+                <li><p>第二步：执行循环体语句②；</p></li>
+                <li><p>第三步：循环体语句执行完后，重新从第一步开始再执行一遍</p></li>
+            </ul>
+            <p>&nbsp;</p></li>
+        <li><p><strong>while循环语句扩展格式：</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n349" mdtype="fences">初始化语句①；
+while (循环条件语句②) {
+    循环体语句③；
+    迭代语句④；
+}
+</pre>
+            <p><strong>执行流程：</strong></p>
+            <ul>
+                <li><p>第一步：执行初始化语句①，完成循环变量的初始化；</p></li>
+                <li><p>第二步：执行循环条件语句②，看循环条件语句的值是true，还是false；</p>
+                    <ul>
+                        <li>如果是true，执行第三步；</li>
+                        <li>如果是false，循环语句中止，循环不再执行。</li>
+                    </ul>
+                </li>
+                <li><p>第三步：执行循环体语句③</p></li>
+                <li><p>第四步：执行迭代语句④，针对循环变量重新赋值</p></li>
+                <li><p>第五步：根据循环变量的新值，重新从第二步开始再执行一遍</p></li>
+            </ul>
+            <p>&nbsp;</p></li>
+        <li><p><strong>语法演示案例1：</strong></p>
+            <p>遍历1-100之间的偶数</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n371" mdtype="fences">int num = 2;
+while(num&lt;=100){
+    System.out.println(num);
+    num+=2;
+}
+</pre>
+        </li>
+    </ol>
+    <ol start='4'>
+        <li><p><strong>语法演示案例2：</strong></p>
+            <p>趣味折纸</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n377" mdtype="fences" style="break-inside: unset;">/*
+ *	练习：趣味折纸
+ * 	
+ *	题目：
+ *		世界最高山峰是珠穆朗玛峰，它的高度是8844.43米，假如我有一张足够大的纸，它的厚度是0.1毫米。
+ *		请问，我折叠多少次，可以折成珠穆朗玛峰的高度?
+ */
+public class WhileTest01 {
+    public static void main(String[] args) {
+		//定义一个计数器，初始值为0
+		int count = 0;
+		
+		//定义纸张厚度
+		double paper = 0.1;
+		
+		//定义珠穆朗玛峰的高度
+		int zf = 8844430;
+		
+		//因为要反复折叠，所以要使用循环，但是不知道折叠多少次，这种情况下更适合使用while循环
+		//折叠的过程中当纸张厚度大于珠峰就停止了，因此继续执行的要求是纸张厚度小于珠峰高度
+		while(paper &lt;= zf) {
+			//循环的执行过程中每次纸张折叠，纸张的厚度要加倍
+			paper *= 2;
+			
+			//在循环中执行累加，对应折叠了多少次
+			count++;
+		}
+		
+		//打印计数器的值
+		System.out.println("需要折叠：" + count + "次");
+    }
+}
+</pre>
+        </li>
+    </ol>
+    <h3><a name='header-n379' class='md-header-anchor '></a>3.3.3 do...while循环</h3>
+    <ol start=''>
+        <li><p><strong>do...while循环语句标准格式：</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n383" mdtype="fences">do {
+    循环体语句①；
+} while (循环条件语句②)；
+</pre>
+            <blockquote><p>注意：</p>
+                <p>（1）while(循环条件)中循环条件必须是boolean类型</p>
+                <p>（2）do{}while();最后有一个分号</p>
+                <p>（3）do...while结构的循环体语句是至少会执行一次，这个和for和while是不一样的</p></blockquote>
+            <p><strong>执行流程：</strong></p>
+            <ul>
+                <li><p>第一步：执行循环体语句①；</p></li>
+                <li><p>第二步：执行循环条件语句②，看循环条件语句的值是true，还是false；</p>
+                    <ul>
+                        <li>如果是true，执行第三步；</li>
+                        <li>如果是false，循环语句终止，循环不再执行。</li>
+                    </ul>
+                </li>
+                <li><p>第三步：循环条件语句执行完后，重新从第一步开始再执行一遍</p></li>
+            </ul>
+            <p>&nbsp;</p></li>
+        <li><p><strong>do...while循环语句扩展格式：</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n405" mdtype="fences">初始化语句①
+do {
+    循环体语句②；
+    迭代语句③；
+} while (循环条件语句④)；
+</pre>
+            <p><strong>执行流程：</strong></p>
+            <ul>
+                <li><p>第一步：执行初始化语句①，完成循环变量的初始化；</p></li>
+                <li><p>第二步：执行循环体语句②；</p></li>
+                <li><p>第三步：执行迭代语句③，针对循环变量重新赋值；</p></li>
+                <li><p>第四步：执行循环条件语句④，看循环条件语句的值是true，还是false；</p>
+                    <ul>
+                        <li>如果是true，根据循环变量的新值，重新从第二步开始再执行一遍；</li>
+                        <li>如果是false，循环语句中止，循环不再执行。</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ol>
+    <ol start='3'>
+        <li><p><strong>语法演示案例1：</strong></p>
+            <p>统计正数、负数个数</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n426" mdtype="fences" style="break-inside: unset;">public static void main(String[] args) {
+    java.util.Scanner input = new java.util.Scanner(System.in);
+
+    int positive = 0;
+    int negative = 0;
+    int num;
+    do{
+        System.out.print("请输入整数（0）结束：");
+        num = input.nextInt();
+        if(num&gt;0){
+            positive++;
+        }else if(num&lt;0){
+            negative++;
+        }
+    }while(num!=0);
+    System.out.println("正数：" + positive + "个，负数：" + negative +"个");
+}
+</pre>
+            <p>&nbsp;</p></li>
+        <li><p><strong>练习：猜数</strong></p>
+            <p>随机生成一个100以内的数，猜数字游戏</p>
+            <p>从键盘输入数，如果大了提示，大了，如果小了，提示小了，如果对了，就不再猜了，并统计一共猜了多少次</p>
+            <p>提示：随机数 <code>Math.random()</code></p>
+            <p>double num = Math.random();// [0,1)的小数</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n434" mdtype="fences" style="break-inside: unset;">   public static void main(String[] args){
+       //随机生成一个100以内的整数
+       /*
+   		Math.random() ==&gt; [0,1)的小数
+   		Math.random()* 100 ==&gt; [0,100)的小数
+   		(int)(Math.random()* 100) ==&gt; [0,100)的整数
+   		*/
+       int num = (int)(Math.random()* 100);
+       //System.out.println(num);
+   
+       //声明一个变量，用来存储猜的次数
+       int count = 0;
+   
+       java.util.Scanner input = new java.util.Scanner(System.in);
+       int guess;//提升作用域
+       do{
+           System.out.print("请输入100以内的整数：");
+           guess = input.nextInt();
+   
+           //输入一次，就表示猜了一次
+           count++;
+   
+           if(guess &gt; num){
+               System.out.println("大了");
+           }else if(guess &lt; num){
+               System.out.println("小了");
+           }
+       }while(num != guess);
+   
+       System.out.println("一共猜了：" + count+"次");
+   
+   }
+</pre>
+            <p>&nbsp;</p></li>
+    </ol>
+    <h3><a name='header-n437' class='md-header-anchor '></a>3.3.4 循环语句的区别</h3>
+    <ol start=''>
+        <li><strong>从循环次数角度分析</strong></li>
+    </ol>
+    <ul>
+        <li>do...while循环至少执行一次循环体语句</li>
+        <li>for和while循环先循环条件语句是否成立，然后决定是否执行循环体，至少执行零次循环体语句</li>
+    </ul>
+    <ol start='2'>
+        <li><strong>从循环变量的生命周期角度分析</strong></li>
+    </ol>
+    <ul>
+        <li>for循环的循环变量在for()中声明的，在循环语句结束后，不可以被访问；</li>
+        <li>while和do...while循环的循环变量因为在外面声明的，所以while和do...while结束后可以被继续使用的；</li>
+    </ul>
+    <ol start='3'>
+        <li><p><strong>如何选择</strong></p>
+            <ul>
+                <li>遍历有明显的循环次数（范围）的需求，选择for循环</li>
+                <li>遍历没有明显的循环次数（范围）的需求，循环while循环</li>
+                <li>如果循环体语句块至少执行一次，可以考虑使用do...while循环</li>
+                <li>本质上：三种循环之间是可以互相转换的，都能实现循环的功能</li>
+            </ul>
+        </li>
+        <li><p><strong>三种循环结构都具有四要素：</strong></p></li>
+    </ol>
+    <ul>
+        <li>（1）循环变量的初始化表达式</li>
+        <li>（2）循环条件</li>
+        <li>（3）循环变量的修改的迭代表达式</li>
+        <li>（4）循环体语句块</li>
+    </ul>
+    <ol start='5'>
+        <li><p><strong>死循环比较</strong></p>
+            <ul>
+                <li><span>	</span>for(;;){循环体}<span>	</span>，除循环体外不需要执行其他语句，性能略高</li>
+                <li><span>	</span>while(true){ 循环体}，除循环体外还需要执行小括号里的表达式</li>
+            </ul>
+        </li>
+    </ol>
+    <h3><a name='header-n485' class='md-header-anchor '></a>3.3.5 关键字：break</h3>
+    <ol start=''>
+        <li><p><strong>使用场景：终止switch或者当前循环</strong></p>
+            <ul>
+                <li>在选择结构switch语句中</li>
+                <li>在循环语句中</li>
+                <li>离开使用场景的存在是没有意义的</li>
+            </ul>
+        </li>
+        <li><p><strong>语法案例演示1：判断某个数是否是素数</strong></p>
+            <p>案例：从键盘输入一个大于1的自然数，判断它是否是素数
+                提示：素数是指大于1的自然数中，除了1和它本身以外不能再有其他因数的自然数，即某个素数n，在[2,n-1]范围内没有其他自然数可以把n整除</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n499" mdtype="fences" style="break-inside: unset;">class Test07BreakExer1{
+	public static void main(String[] args){
+		java.util.Scanner input = new java.util.Scanner(System.in);
+
+		int num;
+		while(true){
+			//true是常量，常量是编译期间就可以确定的值
+			System.out.print("请输入一个大于1的自然数：");
+			num = input.nextInt();
+			
+			if(num&gt;1){
+				break;
+			}
+		}
+		System.out.println("num = " + num);
+		
+		boolean flag = true;//假设num是素数
+		
+		//判断它是否是素数
+		for(int i=2; i&lt;num; i++){
+			if(num % i ==0){//num被某个i整除了，num就不是素数
+				System.out.println(num + "不是素数");
+				flag = false;
+				break;//找到其中一个可以把num整除的数，就可以结束了，因为num已经可以判定不是素数了
+			}
+		}
+		
+		//只有把[2,num-1]之间的所有数都检查过了，才能下定结论，num是素数
+		if(flag){
+			System.out.println(num + "是素数");
+		}
+		
+	}
+}
+</pre>
+            <p>改进版：去除偶数后，从3到x-1，每次+2，进行判断，效率提高</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n501" mdtype="fences" style="break-inside: unset;">Scanner in = new Scanner(System.in);
+
+int x = in.nextInt();
+boolean isPrime = true;
+if(x ==1 || x %2 ==0 &amp;&amp; x !=2 ){
+	isPrime = false;
+}else{
+	for(int i =3; i&lt;x; i +=2){//2,3都是素数，不进入循环
+		if( x % i == 0){
+			isPrime = false;
+			break;
+		}
+	}
+}
+if( isPrime){
+	System.out.println(x +"是素数");
+}else{
+	System.out.println(x+ "不是素数");
+}
+</pre>
+            <p>再改进：引入<code>Math.sqrt(num)</code>方法</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n503" mdtype="fences" style="break-inside: unset;">class Test07BreakExer1_2{
+	public static void main(String[] args){
+		java.util.Scanner input = new java.util.Scanner(System.in);
+		
+		int num;
+		while(true){
+			//true是常量，常量是编译期间就可以确定的值
+			System.out.print("请输入一个大于1的自然数：");
+			num = input.nextInt();
+			
+			if(num&gt;1){
+				break;
+			}
+		}
+		System.out.println("num = " + num);
+		
+		boolean flag = true;//假设num是素数
+		
+		//判断它是否是素数
+		//在[2, num的平方根]之间如果都没有一个自然数可以把num整除，那么num就是素数
+		/*
+		不是素数
+		9的平方根是3，除1和它本身外的因数：3
+		16的平方根是4，除1和它本身外的因数：2,4,8
+		25的平方根是5，除1和它本身外的因数：5
+		是素数
+		7的平方根是2.64，除1和它本身外的只需要判断2，如果2不是，那么就不是
+				无须判断，3,4,5,6
+		*/
+		for(int i=2; i&lt;=Math.sqrt(num); i++){
+			if(num % i ==0){
+				System.out.println(num + "不是素数");
+				flag = false;
+				break;
+			}
+		}
+		
+		System.out.println(num + (flag?"是":"不是") + "素数");
+	}
+}
+</pre>
+        </li>
+        <li><p><strong>语法案例演示2：break同时存在switch和循环中</strong></p>
+            <p>ATM功能演示</p>
+            <p>界面效果：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n508"
+                 mdtype="fences">=========ATM=======
+	1、存款
+	2、取款
+	3、显示余额
+	4、退出
+请选择：
+</pre>
+            <p>代码示例：</p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n510" mdtype="fences" style="break-inside: unset;">public static void main(String[] args){
+    java.util.Scanner input = new java.util.Scanner(System.in);
+
+    //声明一个变量表示余额
+    double balance = 0.0;
+    boolean flag = true;
+    while(flag){
+        System.out.println("=========ATM=======");
+        System.out.println("\t1、存款");
+        System.out.println("\t2、取款");
+        System.out.println("\t3、显示余额");
+        System.out.println("\t4、退出");
+        System.out.print("请选择：");
+        int select = input.nextInt();
+
+        switch(select){
+            case 1:
+                System.out.print("存款的金额：");
+                double money = input.nextDouble();
+                balance += money;
+                break;
+            case 2:
+                System.out.print("取款的金额：");
+                money = input.nextDouble();
+                balance -= money;
+                break;	
+            case 3:
+                System.out.println("现在的余额：" + balance);
+                break;
+            case 4:
+                flag = false;
+                break;//只能结束switch
+        }
+    }
+}
+</pre>
+        </li>
+    </ol>
+    <h3><a name='header-n512' class='md-header-anchor '></a>3.3.6 关键字：continue</h3>
+    <ul>
+        <li><p><strong>使用场景：结束本次循环，继续下一次的循环</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n516" mdtype="fences">//遍历打印1-10的整数，但不打印3的倍数
+public static void main(String[] args) {
+    for (int i = 1; i &lt;= 10; i++) {
+        //需求:不打印3的倍数
+        if(i % 3 == 0){
+            continue;
+        }
+        System.out.println(i);
+    }
+}
+</pre>
+        </li>
+    </ul>
+    <ul>
+        <li><p><strong>练习：打印1-100之间的整数，跳过7的倍数和7结尾的数</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n521" mdtype="fences">public static void main(String[] args){
+    //打印1-100之间的整数，跳过7的倍数和7结尾的数
+    for(int i=1; i&lt;=100; i++){
+        if(i%7==0 || i%10==7){
+            continue;
+            //break;
+        }
+        System.out.println(i);
+    }
+}
+</pre>
+        </li>
+    </ul>
+    <h3><a name='header-n523' class='md-header-anchor '></a>3.3.7 嵌套循环</h3>
+    <ul>
+        <li><p><strong>嵌套循环</strong>，是指一个循环的循环体是另一个循环。比如for循环里面还有一个for循环，就是嵌套循环。总共的循环次数=外循环次数*内循环次数。当然可以是三种循环任意互相嵌套。</p>
+        </li>
+        <li><p><strong>嵌套循环格式：</strong><span>	</span></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n529" mdtype="fences">for(初始化语句①; 循环条件语句②; 迭代语句⑦) {
+    for(初始化语句③; 循环条件语句④; 迭代语句⑥) {
+      	循环体语句⑤;
+    }
+}
+</pre>
+        </li>
+    </ul>
+    <ol start=''>
+        <li><p><strong>语法案例演示1：打印5行5列矩形</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n534" mdtype="fences">public static void main(String[] args){
+    for (int i = 0; i &lt; 5; i++) {
+        for (int j = 0; j &lt; 5; j++) {
+            System.out.print("*");
+        }
+        System.out.println();
+    }
+}
+</pre>
+            <p><img src='imgs03/1561789094346.png' alt='1561789094346' referrerPolicy='no-referrer'/></p>
+            <p>&nbsp;</p></li>
+        <li><p><strong>语法案例演示2：打印5行直角三角形</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n539"
+                 mdtype="fences">*
+**
+***
+****
+*****
+</pre>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n540" mdtype="fences">public static void main(String[] args){
+    for (int i = 0; i &lt; 5; i++) {
+        for (int j = 0; j &lt;= i; j++) {
+            System.out.print("*");
+        }
+        System.out.println();
+    }
+}
+</pre>
+        </li>
+    </ol>
+    <ol start='3'>
+        <li><p><strong>语法案例演示：break与双重循环</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n545" mdtype="fences">//打印5行直角三角形
+public static void main(String[] args){
+    for (int i = 0; i &lt; 5; i++) {
+        for (int j = 0; j &lt; 5; j++) {
+            System.out.print("*");
+            if(i==j){
+                break;
+            }
+        }
+        System.out.println();
+    }
+}
+</pre>
+        </li>
+    </ol>
+    <ol start='4'>
+        <li><p><strong>练习1：</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n550" mdtype="fences" style="break-inside: unset;">/*
+1
+12
+123
+1234
+12345
+*/
+public static void main(String[] args){
+    //外循环控制行数
+    for(int i=1; i&lt;=5; i++){
+        //内循环控制每一行打印的数字
+        /*
+			当i=1，外循环第1次，第1行，j=1
+			当i=2，外循环第2次，第2行，j=1,2
+			当i=3，外循环第3次，第3行，j=1,2,3
+			当i=4，外循环第4次，第4行，j=1,2,3,4
+			当i=5，外循环第5次，第5行，j=1,2,3,4,5
+			j=1,j&lt;=i
+			*/
+        for(int j=1; j&lt;=i; j++){
+            System.out.print(j);
+        }
+        System.out.println();
+    }
+}
+</pre>
+        </li>
+    </ol>
+    <ol start='5'>
+        <li><p><strong>练习2：</strong></p>
+            <pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false"
+                 cid="n555" mdtype="fences" style="break-inside: unset;">/*
+1
+22
+333
+4444
+55555
+*/
+public static void main(String[] args){
+    for(int i=1; i&lt;=5; i++){
+        //内循环控制每一行打印的数字
+        /*
+			当i=1，外循环第1次，第1行，1，    	1个i，j=1
+			当i=2，外循环第2次，第2行，22		2个i，j=1,2
+			当i=3，外循环第3次，第3行，333		3个i，j=1,2,3
+			当i=4，外循环第4次，第4行，4444	4个i，j=1,2,3,4
+			当i=5，外循环第5次，第5行，55555	5个i，j=1,2,3,4,5
+			说明，打印的是i的值，打印几个i
+			j=1,j&lt;=i
+			*/
+        for(int j=1; j&lt;=i; j++){
+            System.out.print(i);
+        }
+        System.out.println();
+    }
+}
+</pre>
+            <p>&nbsp;</p></li>
+    </ol>
+    <figure>
+        <table>
+            <thead>
+            <tr>
+                <th style='text-align:right;'><a href='../javaSE.html'>回目录</a></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style='text-align:right;'>教程版本：1.2 更新日期：2019年1月3日</td>
+            </tr>
+            </tbody>
+        </table>
+    </figure>
+</div>
+
+</body>
+</html>

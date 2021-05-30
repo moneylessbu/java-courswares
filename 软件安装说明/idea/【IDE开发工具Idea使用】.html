@@ -1,0 +1,2403 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width initial-scale=1'>
+    <title>【IDE开发工具Idea使用】</title>
+    <link href='https://fonts.loli.net/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext'
+          rel='stylesheet' type='text/css'/>
+    <style type='text/css'>html {
+        overflow-x: initial !important;
+    }
+
+    :root {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --select-text-bg-color: #B5D6FC;
+        --select-text-font-color: auto;
+        --monospace: "Lucida Console", Consolas, "Courier", monospace;
+    }
+
+    html {
+        font-size: 14px;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        margin: 0px;
+        padding: 0px;
+        height: auto;
+        bottom: 0px;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        font-size: 1rem;
+        line-height: 1.42857;
+        overflow-x: hidden;
+        background: inherit;
+    }
+
+    iframe {
+        margin: auto;
+    }
+
+    a.url {
+        word-break: break-all;
+    }
+
+    a:active, a:hover {
+        outline: 0px;
+    }
+
+    .in-text-selection, ::selection {
+        text-shadow: none;
+        background: var(--select-text-bg-color);
+        color: var(--select-text-font-color);
+    }
+
+    #write {
+        margin: 0px auto;
+        height: auto;
+        width: inherit;
+        word-break: normal;
+        word-wrap: break-word;
+        position: relative;
+        white-space: normal;
+        overflow-x: visible;
+        padding-top: 40px;
+    }
+
+    #write.first-line-indent p {
+        text-indent: 2em;
+    }
+
+    #write.first-line-indent li p, #write.first-line-indent p * {
+        text-indent: 0px;
+    }
+
+    #write.first-line-indent li {
+        margin-left: 2em;
+    }
+
+    .for-image #write {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    body.typora-export {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .typora-export .footnote-line, .typora-export li, .typora-export p {
+        white-space: pre-wrap;
+    }
+
+    @media screen and (max-width: 500px) {
+        body.typora-export {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        #write {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .CodeMirror-sizer {
+            margin-left: 0px !important;
+        }
+
+        .CodeMirror-gutters {
+            display: none !important;
+        }
+    }
+
+    #write li > figure:first-child {
+        margin-top: -20px;
+    }
+
+    #write ol, #write ul {
+        position: relative;
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    button, input, select, textarea {
+        color: inherit;
+        font-style: inherit;
+        font-variant: inherit;
+        font-weight: inherit;
+        font-stretch: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        font-family: inherit;
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+        line-height: normal;
+        padding: 0px;
+    }
+
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre {
+        width: inherit;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p {
+        position: relative;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        break-after: avoid-page;
+        break-inside: avoid;
+        orphans: 2;
+    }
+
+    p {
+        orphans: 4;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+    }
+
+    h4 {
+        font-size: 1.4rem;
+    }
+
+    h5 {
+        font-size: 1.2rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+    }
+
+    .md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .md-blockmeta {
+        color: rgb(204, 204, 204);
+        font-weight: 700;
+        font-style: italic;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    sup.md-footnote {
+        padding: 2px 4px;
+        background-color: rgba(238, 238, 238, 0.7);
+        color: rgb(85, 85, 85);
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    sup.md-footnote a, sup.md-footnote a:hover {
+        color: inherit;
+        text-transform: inherit;
+        text-decoration: inherit;
+    }
+
+    #write input[type="checkbox"] {
+        cursor: pointer;
+        width: inherit;
+        height: inherit;
+    }
+
+    figure {
+        overflow-x: auto;
+        margin: 1.2em 0px;
+        max-width: calc(100% + 16px);
+        padding: 0px;
+    }
+
+    figure > table {
+        margin: 0px !important;
+    }
+
+    tr {
+        break-inside: avoid;
+        break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+        width: 100%;
+        overflow: auto;
+        break-inside: auto;
+        text-align: left;
+    }
+
+    table.md-table td {
+        min-width: 32px;
+    }
+
+    .CodeMirror-gutters {
+        border-right: 0px;
+        background-color: inherit;
+    }
+
+    .CodeMirror {
+        text-align: left;
+    }
+
+    .CodeMirror-placeholder {
+        opacity: 0.3;
+    }
+
+    .CodeMirror pre {
+        padding: 0px 4px;
+    }
+
+    .CodeMirror-lines {
+        padding: 0px;
+    }
+
+    div.hr:focus {
+        cursor: none;
+    }
+
+    #write pre {
+        white-space: pre-wrap;
+    }
+
+    #write.fences-no-line-wrapping pre {
+        white-space: pre;
+    }
+
+    #write pre.ty-contain-cm {
+        white-space: normal;
+    }
+
+    .CodeMirror-gutters {
+        margin-right: 4px;
+    }
+
+    .md-fences {
+        font-size: 0.9rem;
+        display: block;
+        break-inside: avoid;
+        text-align: left;
+        overflow: visible;
+        white-space: pre;
+        background: inherit;
+        position: relative !important;
+    }
+
+    .md-diagram-panel {
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+        padding-top: 0px;
+        padding-bottom: 8px;
+        overflow-x: auto;
+    }
+
+    #write .md-fences.mock-cm {
+        white-space: pre-wrap;
+    }
+
+    .md-fences.md-fences-with-lineno {
+        padding-left: 0px;
+    }
+
+    #write.fences-no-line-wrapping .md-fences.mock-cm {
+        white-space: pre;
+        overflow-x: auto;
+    }
+
+    .md-fences.mock-cm.md-fences-with-lineno {
+        padding-left: 8px;
+    }
+
+    .CodeMirror-line, twitterwidget {
+        break-inside: avoid;
+    }
+
+    .footnotes {
+        opacity: 0.8;
+        font-size: 0.9rem;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .footnotes + .footnotes {
+        margin-top: 0px;
+    }
+
+    .md-reset {
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        outline: 0px;
+        vertical-align: top;
+        background: 0px 0px;
+        text-decoration: none;
+        text-shadow: none;
+        float: none;
+        position: static;
+        width: auto;
+        height: auto;
+        white-space: nowrap;
+        cursor: inherit;
+        -webkit-tap-highlight-color: transparent;
+        line-height: normal;
+        font-weight: 400;
+        text-align: left;
+        box-sizing: content-box;
+        direction: ltr;
+    }
+
+    li div {
+        padding-top: 0px;
+    }
+
+    blockquote {
+        margin: 1rem 0px;
+    }
+
+    li .mathjax-block, li p {
+        margin: 0.5rem 0px;
+    }
+
+    li {
+        margin: 0px;
+        position: relative;
+    }
+
+    blockquote > :last-child {
+        margin-bottom: 0px;
+    }
+
+    blockquote > :first-child, li > :first-child {
+        margin-top: 0px;
+    }
+
+    .footnotes-area {
+        color: rgb(136, 136, 136);
+        margin-top: 0.714rem;
+        padding-bottom: 0.143rem;
+        white-space: normal;
+    }
+
+    #write .footnote-line {
+        white-space: pre-wrap;
+    }
+
+    @media print {
+        body, html {
+            border: 1px solid transparent;
+            height: 99%;
+            break-after: avoid;
+            break-before: avoid;
+        }
+
+        #write {
+            margin-top: 0px;
+            padding-top: 0px;
+            border-color: transparent !important;
+        }
+
+        .typora-export * {
+            -webkit-print-color-adjust: exact;
+        }
+
+        html.blink-to-pdf {
+            font-size: 13px;
+        }
+
+        .typora-export #write {
+            padding-left: 32px;
+            padding-right: 32px;
+            padding-bottom: 0px;
+            break-after: avoid;
+        }
+
+        .typora-export #write::after {
+            height: 0px;
+        }
+
+        @page {
+            margin: 20mm 0px;
+        }
+    }
+
+    .footnote-line {
+        margin-top: 0.714em;
+        font-size: 0.7em;
+    }
+
+    a img, img a {
+        cursor: pointer;
+    }
+
+    pre.md-meta-block {
+        font-size: 0.8rem;
+        min-height: 0.8rem;
+        white-space: pre-wrap;
+        background: rgb(204, 204, 204);
+        display: block;
+        overflow-x: hidden;
+    }
+
+    p > .md-image:only-child:not(.md-img-error) img, p > img:only-child {
+        display: block;
+        margin: auto;
+    }
+
+    p > .md-image:only-child {
+        display: inline-block;
+        width: 100%;
+    }
+
+    #write .MathJax_Display {
+        margin: 0.8em 0px 0px;
+    }
+
+    .md-math-block {
+        width: 100%;
+    }
+
+    .md-math-block:not(:empty)::after {
+        display: none;
+    }
+
+    [contenteditable="true"]:active, [contenteditable="true"]:focus {
+        outline: 0px;
+        box-shadow: none;
+    }
+
+    .md-task-list-item {
+        position: relative;
+        list-style-type: none;
+    }
+
+    .task-list-item.md-task-list-item {
+        padding-left: 0px;
+    }
+
+    .md-task-list-item > input {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        margin-left: -1.2em;
+        margin-top: calc(1em - 10px);
+        border: none;
+    }
+
+    .math {
+        font-size: 1rem;
+    }
+
+    .md-toc {
+        min-height: 3.58rem;
+        position: relative;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .md-toc-content {
+        position: relative;
+        margin-left: 0px;
+    }
+
+    .md-toc-content::after, .md-toc::after {
+        display: none;
+    }
+
+    .md-toc-item {
+        display: block;
+        color: rgb(65, 131, 196);
+    }
+
+    .md-toc-item a {
+        text-decoration: none;
+    }
+
+    .md-toc-inner:hover {
+        text-decoration: underline;
+    }
+
+    .md-toc-inner {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .md-toc-h1 .md-toc-inner {
+        margin-left: 0px;
+        font-weight: 700;
+    }
+
+    .md-toc-h2 .md-toc-inner {
+        margin-left: 2em;
+    }
+
+    .md-toc-h3 .md-toc-inner {
+        margin-left: 4em;
+    }
+
+    .md-toc-h4 .md-toc-inner {
+        margin-left: 6em;
+    }
+
+    .md-toc-h5 .md-toc-inner {
+        margin-left: 8em;
+    }
+
+    .md-toc-h6 .md-toc-inner {
+        margin-left: 10em;
+    }
+
+    @media screen and (max-width: 48em) {
+        .md-toc-h3 .md-toc-inner {
+            margin-left: 3.5em;
+        }
+
+        .md-toc-h4 .md-toc-inner {
+            margin-left: 5em;
+        }
+
+        .md-toc-h5 .md-toc-inner {
+            margin-left: 6.5em;
+        }
+
+        .md-toc-h6 .md-toc-inner {
+            margin-left: 8em;
+        }
+    }
+
+    a.md-toc-inner {
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+
+    .footnote-line a:not(.reversefootnote) {
+        color: inherit;
+    }
+
+    .md-attr {
+        display: none;
+    }
+
+    .md-fn-count::after {
+        content: ".";
+    }
+
+    code, pre, samp, tt {
+        font-family: var(--monospace);
+    }
+
+    kbd {
+        margin: 0px 0.1em;
+        padding: 0.1em 0.6em;
+        font-size: 0.8em;
+        color: rgb(36, 39, 41);
+        background: rgb(255, 255, 255);
+        border: 1px solid rgb(173, 179, 185);
+        border-radius: 3px;
+        box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    .md-comment {
+        color: rgb(162, 127, 3);
+        opacity: 0.8;
+        font-family: var(--monospace);
+    }
+
+    code {
+        text-align: left;
+        vertical-align: initial;
+    }
+
+    a.md-print-anchor {
+        white-space: pre !important;
+        border-width: initial !important;
+        border-style: none !important;
+        border-color: initial !important;
+        display: inline-block !important;
+        position: absolute !important;
+        width: 1px !important;
+        right: 0px !important;
+        outline: 0px !important;
+        background: 0px 0px !important;
+        text-decoration: initial !important;
+        text-shadow: initial !important;
+    }
+
+    .md-inline-math .MathJax_SVG .noError {
+        display: none !important;
+    }
+
+    .html-for-mac .inline-math-svg .MathJax_SVG {
+        vertical-align: 0.2px;
+    }
+
+    .md-math-block .MathJax_SVG_Display {
+        text-align: center;
+        margin: 0px;
+        position: relative;
+        text-indent: 0px;
+        max-width: none;
+        max-height: none;
+        min-height: 0px;
+        min-width: 100%;
+        width: auto;
+        overflow-y: hidden;
+        display: block !important;
+    }
+
+    .MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display {
+        width: auto;
+        margin: inherit;
+        display: inline-block !important;
+    }
+
+    .MathJax_SVG .MJX-monospace {
+        font-family: var(--monospace);
+    }
+
+    .MathJax_SVG .MJX-sans-serif {
+        font-family: sans-serif;
+    }
+
+    .MathJax_SVG {
+        display: inline;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        zoom: 90%;
+        text-indent: 0px;
+        text-align: left;
+        text-transform: none;
+        letter-spacing: normal;
+        word-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        float: none;
+        direction: ltr;
+        max-width: none;
+        max-height: none;
+        min-width: 0px;
+        min-height: 0px;
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .MathJax_SVG * {
+        transition: none;
+    }
+
+    .MathJax_SVG_Display svg {
+        vertical-align: middle !important;
+        margin-bottom: 0px !important;
+    }
+
+    .os-windows.monocolor-emoji .md-emoji {
+        font-family: "Segoe UI Symbol", sans-serif;
+    }
+
+    .md-diagram-panel > svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] svg, [lang="flow"] svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] .node text {
+        font-size: 1rem;
+    }
+
+    table tr th {
+        border-bottom: 0px;
+    }
+
+    video {
+        max-width: 100%;
+        display: block;
+        margin: 0px auto;
+    }
+
+    iframe {
+        max-width: 100%;
+        width: 100%;
+        border: none;
+    }
+
+    .highlight td, .highlight tr {
+        border: 0px;
+    }
+
+
+    .CodeMirror {
+        height: auto;
+    }
+
+    .CodeMirror.cm-s-inner {
+        background: inherit;
+    }
+
+    .CodeMirror-scroll {
+        overflow-y: hidden;
+        overflow-x: auto;
+        z-index: 3;
+    }
+
+    .CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler {
+        background-color: rgb(255, 255, 255);
+    }
+
+    .CodeMirror-gutters {
+        border-right: 1px solid rgb(221, 221, 221);
+        background: inherit;
+        white-space: nowrap;
+    }
+
+    .CodeMirror-linenumber {
+        padding: 0px 3px 0px 5px;
+        text-align: right;
+        color: rgb(153, 153, 153);
+    }
+
+    .cm-s-inner .cm-keyword {
+        color: rgb(119, 0, 136);
+    }
+
+    .cm-s-inner .cm-atom, .cm-s-inner.cm-atom {
+        color: rgb(34, 17, 153);
+    }
+
+    .cm-s-inner .cm-number {
+        color: rgb(17, 102, 68);
+    }
+
+    .cm-s-inner .cm-def {
+        color: rgb(0, 0, 255);
+    }
+
+    .cm-s-inner .cm-variable {
+        color: rgb(0, 0, 0);
+    }
+
+    .cm-s-inner .cm-variable-2 {
+        color: rgb(0, 85, 170);
+    }
+
+    .cm-s-inner .cm-variable-3 {
+        color: rgb(0, 136, 85);
+    }
+
+    .cm-s-inner .cm-string {
+        color: rgb(170, 17, 17);
+    }
+
+    .cm-s-inner .cm-property {
+        color: rgb(0, 0, 0);
+    }
+
+    .cm-s-inner .cm-operator {
+        color: rgb(152, 26, 26);
+    }
+
+    .cm-s-inner .cm-comment, .cm-s-inner.cm-comment {
+        color: rgb(170, 85, 0);
+    }
+
+    .cm-s-inner .cm-string-2 {
+        color: rgb(255, 85, 0);
+    }
+
+    .cm-s-inner .cm-meta {
+        color: rgb(85, 85, 85);
+    }
+
+    .cm-s-inner .cm-qualifier {
+        color: rgb(85, 85, 85);
+    }
+
+    .cm-s-inner .cm-builtin {
+        color: rgb(51, 0, 170);
+    }
+
+    .cm-s-inner .cm-bracket {
+        color: rgb(153, 153, 119);
+    }
+
+    .cm-s-inner .cm-tag {
+        color: rgb(17, 119, 0);
+    }
+
+    .cm-s-inner .cm-attribute {
+        color: rgb(0, 0, 204);
+    }
+
+    .cm-s-inner .cm-header, .cm-s-inner.cm-header {
+        color: rgb(0, 0, 255);
+    }
+
+    .cm-s-inner .cm-quote, .cm-s-inner.cm-quote {
+        color: rgb(0, 153, 0);
+    }
+
+    .cm-s-inner .cm-hr, .cm-s-inner.cm-hr {
+        color: rgb(153, 153, 153);
+    }
+
+    .cm-s-inner .cm-link, .cm-s-inner.cm-link {
+        color: rgb(0, 0, 204);
+    }
+
+    .cm-negative {
+        color: rgb(221, 68, 68);
+    }
+
+    .cm-positive {
+        color: rgb(34, 153, 34);
+    }
+
+    .cm-header, .cm-strong {
+        font-weight: 700;
+    }
+
+    .cm-del {
+        text-decoration: line-through;
+    }
+
+    .cm-em {
+        font-style: italic;
+    }
+
+    .cm-link {
+        text-decoration: underline;
+    }
+
+    .cm-error {
+        color: red;
+    }
+
+    .cm-invalidchar {
+        color: red;
+    }
+
+    .cm-constant {
+        color: rgb(38, 139, 210);
+    }
+
+    .cm-defined {
+        color: rgb(181, 137, 0);
+    }
+
+    div.CodeMirror span.CodeMirror-matchingbracket {
+        color: rgb(0, 255, 0);
+    }
+
+    div.CodeMirror span.CodeMirror-nonmatchingbracket {
+        color: rgb(255, 34, 34);
+    }
+
+    .cm-s-inner .CodeMirror-activeline-background {
+        background: inherit;
+    }
+
+    .CodeMirror {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .CodeMirror-scroll {
+        height: 100%;
+        outline: 0px;
+        position: relative;
+        box-sizing: content-box;
+        background: inherit;
+    }
+
+    .CodeMirror-sizer {
+        position: relative;
+    }
+
+    .CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar {
+        position: absolute;
+        z-index: 6;
+        display: none;
+    }
+
+    .CodeMirror-vscrollbar {
+        right: 0px;
+        top: 0px;
+        overflow: hidden;
+    }
+
+    .CodeMirror-hscrollbar {
+        bottom: 0px;
+        left: 0px;
+        overflow: hidden;
+    }
+
+    .CodeMirror-scrollbar-filler {
+        right: 0px;
+        bottom: 0px;
+    }
+
+    .CodeMirror-gutter-filler {
+        left: 0px;
+        bottom: 0px;
+    }
+
+    .CodeMirror-gutters {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        padding-bottom: 30px;
+        z-index: 3;
+    }
+
+    .CodeMirror-gutter {
+        white-space: normal;
+        height: 100%;
+        box-sizing: content-box;
+        padding-bottom: 30px;
+        margin-bottom: -32px;
+        display: inline-block;
+    }
+
+    .CodeMirror-gutter-wrapper {
+        position: absolute;
+        z-index: 4;
+        background: 0px 0px !important;
+        border: none !important;
+    }
+
+    .CodeMirror-gutter-background {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        z-index: 4;
+    }
+
+    .CodeMirror-gutter-elt {
+        position: absolute;
+        cursor: default;
+        z-index: 4;
+    }
+
+    .CodeMirror-lines {
+        cursor: text;
+    }
+
+    .CodeMirror pre {
+        border-radius: 0px;
+        border-width: 0px;
+        background: 0px 0px;
+        font-family: inherit;
+        font-size: inherit;
+        margin: 0px;
+        white-space: pre;
+        word-wrap: normal;
+        color: inherit;
+        z-index: 2;
+        position: relative;
+        overflow: visible;
+    }
+
+    .CodeMirror-wrap pre {
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        word-break: normal;
+    }
+
+    .CodeMirror-code pre {
+        border-right: 30px solid transparent;
+        width: fit-content;
+    }
+
+    .CodeMirror-wrap .CodeMirror-code pre {
+        border-right: none;
+        width: auto;
+    }
+
+    .CodeMirror-linebackground {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        z-index: 0;
+    }
+
+    .CodeMirror-linewidget {
+        position: relative;
+        z-index: 2;
+        overflow: auto;
+    }
+
+    .CodeMirror-wrap .CodeMirror-scroll {
+        overflow-x: hidden;
+    }
+
+    .CodeMirror-measure {
+        position: absolute;
+        width: 100%;
+        height: 0px;
+        overflow: hidden;
+        visibility: hidden;
+    }
+
+    .CodeMirror-measure pre {
+        position: static;
+    }
+
+    .CodeMirror div.CodeMirror-cursor {
+        position: absolute;
+        visibility: hidden;
+        border-right: none;
+        width: 0px;
+    }
+
+    .CodeMirror div.CodeMirror-cursor {
+        visibility: hidden;
+    }
+
+    .CodeMirror-focused div.CodeMirror-cursor {
+        visibility: inherit;
+    }
+
+    .cm-searching {
+        background: rgba(255, 255, 0, 0.4);
+    }
+
+    @media print {
+        .CodeMirror div.CodeMirror-cursor {
+            visibility: hidden;
+        }
+    }
+
+
+    :root {
+        --active-file-bg-color: rgba(32, 43, 51, 0.63);
+        --active-file-text-color: white;
+        --bg-color: #f3f2ee;
+        --text-color: #1f0909;
+        --control-text-color: #444;
+        --rawblock-edit-panel-bd: #e5e5e5;
+        --select-text-bg-color: rgba(32, 43, 51, 0.63);
+        --select-text-font-color: white;
+    }
+
+    pre {
+        --select-text-bg-color: #36284e;
+        --select-text-font-color: #fff;
+    }
+
+    html {
+        font-size: 16px;
+    }
+
+    html, body {
+        background-color: rgb(243, 242, 238);
+        font-family: "PT Serif", "Times New Roman", Times, serif;
+        color: rgb(31, 9, 9);
+        line-height: 1.5em;
+    }
+
+    #write {
+        max-width: 40em;
+    }
+
+    ol li {
+        list-style-type: decimal;
+        list-style-position: outside;
+    }
+
+    ul li {
+        list-style-type: disc;
+        list-style-position: outside;
+    }
+
+    ol, ul {
+        list-style: none;
+    }
+
+    blockquote, q {
+        quotes: none;
+    }
+
+    blockquote::before, blockquote::after, q::before, q::after {
+        content: none;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 1.875em;
+        line-height: 1.6em;
+        margin-top: 2em;
+    }
+
+    h2, h3 {
+        font-size: 1.3125em;
+        line-height: 1.15;
+        margin-top: 2.28571em;
+        margin-bottom: 1.15em;
+    }
+
+    h3 {
+        font-weight: normal;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        margin-top: 2.67em;
+    }
+
+    h5, h6 {
+        font-size: 1em;
+    }
+
+    h1 {
+        border-bottom: 1px solid;
+        margin-bottom: 1.875em;
+        padding-bottom: 0.8125em;
+    }
+
+    a {
+        text-decoration: none;
+        color: rgb(6, 85, 136);
+    }
+
+    a:hover, a:active {
+        text-decoration: underline;
+    }
+
+    p, blockquote, .md-fences {
+        margin-bottom: 1.5em;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 1.5em;
+    }
+
+    blockquote {
+        font-style: italic;
+        border-left: 5px solid;
+        margin-left: 2em;
+        padding-left: 1em;
+    }
+
+    ul, ol {
+        margin: 0px 0px 1.5em 1.5em;
+    }
+
+    .md-meta, .md-before, .md-after {
+        color: rgb(153, 153, 153);
+    }
+
+    table {
+        margin-bottom: 1.5em;
+        font-size: 1em;
+    }
+
+    thead th, tfoot th {
+        padding: 0.25em 0.25em 0.25em 0.4em;
+        text-transform: uppercase;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    td {
+        vertical-align: top;
+        padding: 0.25em 0.25em 0.25em 0.4em;
+    }
+
+    code, .md-fences {
+        background-color: rgb(218, 218, 218);
+    }
+
+    code {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .md-fences {
+        margin-left: 2em;
+        margin-bottom: 3em;
+        padding-left: 1ch;
+        padding-right: 1ch;
+    }
+
+    pre, code, tt {
+        font-size: 0.875em;
+        line-height: 1.71429em;
+    }
+
+    h1 {
+        line-height: 1.3em;
+        font-weight: normal;
+        margin-bottom: 0.5em;
+    }
+
+    p + ul, p + ol {
+        margin-top: 0.5em;
+    }
+
+    h3 + ul, h4 + ul, h5 + ul, h6 + ul, h3 + ol, h4 + ol, h5 + ol, h6 + ol {
+        margin-top: 0.5em;
+    }
+
+    li > ul, li > ol {
+        margin-top: inherit;
+        margin-bottom: 0px;
+    }
+
+    li ol > li {
+        list-style-type: lower-alpha;
+    }
+
+    li li ol > li {
+        list-style-type: lower-roman;
+    }
+
+    h2, h3 {
+        margin-bottom: 0.75em;
+    }
+
+    hr {
+        border-top: none;
+        border-right: none;
+        border-bottom: 1px solid;
+        border-left: none;
+    }
+
+    h1 {
+        border-color: rgb(197, 197, 197);
+    }
+
+    blockquote {
+        border-color: rgb(186, 186, 186);
+        color: rgb(101, 101, 101);
+    }
+
+    blockquote ul, blockquote ol {
+        margin-left: 0px;
+    }
+
+    .ty-table-edit {
+        background-color: transparent;
+    }
+
+    thead {
+        background-color: rgb(218, 218, 218);
+    }
+
+    tr:nth-child(2n) {
+        background: rgb(232, 231, 231);
+    }
+
+    hr {
+        border-color: rgb(197, 197, 197);
+    }
+
+    .task-list {
+        padding-left: 1rem;
+    }
+
+    .md-task-list-item {
+        padding-left: 1.5rem;
+        list-style-type: none;
+    }
+
+    .md-task-list-item > input::before {
+        content: "√";
+        display: inline-block;
+        width: 1.25rem;
+        height: 1.6rem;
+        vertical-align: middle;
+        text-align: center;
+        color: rgb(221, 221, 221);
+        background-color: rgb(243, 242, 238);
+    }
+
+    .md-task-list-item > input:checked::before, .md-task-list-item > input[checked]::before {
+        color: inherit;
+    }
+
+    #write pre.md-meta-block {
+        min-height: 1.875rem;
+        color: rgb(85, 85, 85);
+        border: 0px;
+        background: transparent;
+        margin-left: 1em;
+        margin-top: 1em;
+    }
+
+    .md-image > .md-meta {
+        color: rgb(155, 81, 70);
+    }
+
+    .md-image > .md-meta {
+        font-family: Menlo, "Ubuntu Mono", Consolas, "Courier New", "Microsoft Yahei", "Hiragino Sans GB", "WenQuanYi Micro Hei", serif;
+    }
+
+    #write > h3.md-focus::before {
+        left: -1.5rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h4.md-focus::before {
+        left: -1.5rem;
+        top: 0.25rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h5.md-focus::before {
+        left: -1.5rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    #write > h6.md-focus::before {
+        left: -1.5rem;
+        top: 0.3125rem;
+        color: rgb(153, 153, 153);
+        border-color: rgb(153, 153, 153);
+    }
+
+    .md-toc:focus .md-toc-content {
+        margin-top: 19px;
+    }
+
+    .md-toc-content:empty::before {
+        color: rgb(6, 85, 136);
+    }
+
+    .md-toc-item {
+        color: rgb(6, 85, 136);
+    }
+
+    #write div.md-toc-tooltip {
+        background-color: rgb(243, 242, 238);
+    }
+
+    #typora-sidebar {
+        background-color: rgb(243, 242, 238);
+        box-shadow: rgba(0, 0, 0, 0.376) 0px 6px 12px;
+    }
+
+    .pin-outline #typora-sidebar {
+        background: inherit;
+        box-shadow: none;
+        border-right: 1px dashed;
+    }
+
+    .pin-outline #typora-sidebar:hover .outline-title-wrapper {
+        border-left: 1px dashed;
+    }
+
+    .outline-item:hover {
+        background-color: rgb(218, 218, 218);
+        border-left: 28px solid rgb(218, 218, 218);
+        border-right: 18px solid rgb(218, 218, 218);
+    }
+
+    .typora-node .outline-item:hover {
+        border-right: 28px solid rgb(218, 218, 218);
+    }
+
+    .outline-expander::before {
+        content: "";
+        font-family: FontAwesome;
+        font-size: 14px;
+        top: 1px;
+    }
+
+    .outline-expander:hover::before, .outline-item-open > .outline-item > .outline-expander::before {
+        content: "";
+    }
+
+    .modal-content {
+        background-color: rgb(243, 242, 238);
+    }
+
+    .auto-suggest-container ul li {
+        list-style-type: none;
+    }
+
+    .megamenu-menu, #top-titlebar, #top-titlebar *, .megamenu-content {
+        background: rgb(243, 242, 238);
+        color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-header {
+        border-bottom: 1px dashed rgb(32, 43, 51);
+    }
+
+    .megamenu-menu {
+        box-shadow: none;
+        border-right: 1px dashed;
+    }
+
+    header, .context-menu, .megamenu-content, footer {
+        font-family: "PT Serif", "Times New Roman", Times, serif;
+        color: rgb(31, 9, 9);
+    }
+
+    #megamenu-back-btn {
+        color: rgb(31, 9, 9);
+        border-color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-header #megamenu-menu-header-title::before {
+        color: rgb(31, 9, 9);
+    }
+
+    .megamenu-menu-list li a:hover, .megamenu-menu-list li a.active {
+        color: inherit;
+        background-color: rgb(232, 231, 223);
+    }
+
+    .long-btn:hover {
+        background-color: rgb(232, 231, 223);
+    }
+
+    #recent-file-panel tbody tr:nth-child(2n-1) {
+        background-color: transparent !important;
+    }
+
+    .megamenu-menu-panel tbody tr:hover td:nth-child(2) {
+        color: inherit;
+    }
+
+    .megamenu-menu-panel .btn {
+        background-color: rgb(210, 209, 209);
+    }
+
+    .btn-default {
+        background-color: transparent;
+    }
+
+    .typora-sourceview-on #toggle-sourceview-btn, .ty-show-word-count #footer-word-count {
+        background: rgb(199, 197, 197);
+    }
+
+    #typora-quick-open {
+        background-color: inherit;
+    }
+
+    .md-diagram-panel {
+        margin-top: 8px;
+    }
+
+    .file-list-item-file-name {
+        font-weight: initial;
+    }
+
+    .file-list-item-summary {
+        opacity: 1;
+    }
+
+    .file-list-item {
+        color: rgb(119, 119, 119);
+    }
+
+    .file-list-item.active {
+        background-color: inherit;
+        color: black;
+    }
+
+    .ty-side-sort-btn.active {
+        background-color: inherit;
+    }
+
+    .file-list-item.active .file-list-item-file-name {
+        font-weight: bold;
+    }
+
+    .file-list-item {
+        opacity: 1 !important;
+    }
+
+    .file-library-node.active > .file-node-background {
+        background-color: var(--active-file-bg-color);
+    }
+
+    .file-tree-node.active > .file-node-content {
+        color: var(--active-file-text-color);
+    }
+
+    .md-task-list-item > input {
+        margin-left: -1.6em;
+        margin-top: calc(1rem - 12px);
+    }
+
+    input {
+        border: 1px solid rgb(170, 170, 170);
+    }
+
+    .megamenu-menu-header #megamenu-menu-header-title, .megamenu-menu-header:hover, .megamenu-menu-header:focus {
+        color: inherit;
+    }
+
+    .dropdown-menu .divider {
+        border-color: rgb(229, 229, 229);
+    }
+
+    .os-windows-7 strong, .os-windows-7 strong {
+        font-weight: 760;
+    }
+
+
+    .typora-export li, .typora-export p, .typora-export, .footnote-line {
+        white-space: normal;
+    }
+    </style>
+</head>
+<body class='typora-export os-windows'>
+<div id='write' class='is-node'><p>IDEA 全称IntelliJ
+    IDEA，是Java语言开发的集成环境，目前已经渐渐代替了Eclipse的使用。IntelliJ在业界被公认为最好的Java开发工具之一，因其功能强悍、设置人性化，而深受Java、大数据、移动端程序员的喜爱。本着&quot;工欲善其事必先利其器&quot;的精神，本套视频从IDEA的介绍、安装、设置入手，讲解IDEA中项目的创建、模板的使用、断点调试等。</p>
+    <p>说明：本文档所有截图针对IntelliJ IDEA 2019.2.3 x64版本。</p>
+    <h1><a name='header-n3' class='md-header-anchor '></a>一、IntelliJ IDEA 介绍</h1>
+    <h2><a name='header-n4' class='md-header-anchor '></a>1、JetBrains 公司介绍</h2>
+    <p>IDEA(<a href='https://www.jetbrains.com/idea/' target='_blank' class='url'>https://www.jetbrains.com/idea/</a>)是
+        JetBrains 公司的产品，公司旗下还有其它产品，比如：</p>
+    <ul>
+        <li>WebStorm：用于开发 JavaScript、HTML5、CSS3 等前端技术；</li>
+        <li>PyCharm：用于开发 python</li>
+        <li>PhpStorm：用于开发 PHP</li>
+        <li>RubyMine：用于开发 Ruby/Rails</li>
+        <li>AppCode：用于开发 Objective - C/Swift</li>
+        <li>CLion：用于开发 C/C++</li>
+        <li>DataGrip：用于开发数据库和 SQL</li>
+        <li>Rider：用于开发.NET</li>
+        <li>GoLand：用于开发 Go</li>
+        <li>Datalore： 用于构建机器学习模型并在Python中创建丰富的可视化。</li>
+    </ul>
+    <p>而且用于开发 android的Android Studio，也是Google 基于 IDEA 社区版进行迭代的。</p>
+    <p><img src='imgs/1576217376761.png' alt='1576217376761' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n29' class='md-header-anchor '></a>2、IntelliJ IDEA 介绍</h2>
+    <p>IDEA，全称 IntelliJ IDEA，是 Java 语言的集成开发环境，IDEA 在业界被公认为是最好的 java 开发工具之一，尤其在智能代码助手、代码自动提示、重构、J2EE支持、Ant、JUnit、CVS
+        整合、代码审查、创新的 GUI 设计等方面的功能可以说是超常的。</p>
+    <p>IntelliJ IDEA 在 2015 年的官网上这样介绍自己：</p>
+    <p>Excel at enterprise, mobile and web development with Java, Scala and Groovy,with all the latest modern
+        technologies and frameworks available out of thebox.</p>
+    <p>简明翻译：IntelliJ IDEA 主要用于支持 Java、Scala、Groovy 等语言的开发工具，同时具备支持目前主流的技术和框架，擅长于企业应用、移动应用和 Web 应用的开发。</p>
+    <p>现在IntelliJ IDEA这样介绍自己的主要特征：</p>
+    <p>Every aspect of IntelliJ IDEA is specifically designed to maximize developer productivity.</p>
+    <p>Together, the powerful static code analysis and ergonomic design make development not only productive but also an
+        enjoyable experience.</p>
+    <p>简明翻译：</p>
+    <p>IntelliJ IDEA 是为在各个方面最大化提高开发者生产力的而设计的。同时强大的静态代码分析和人机工程学设计使开发不仅高效，而且令人愉快。</p>
+    <p>它内置的工具和支持的框架有：</p>
+    <p><img src='imgs/1576218068631.png' alt='1576218068631' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n41' class='md-header-anchor '></a>3、IDEA 的下载</h2>
+    <p>下载网址： <a href='https://www.jetbrains.com/idea/download/#section=windows' target='_blank' class='url'>https://www.jetbrains.com/idea/download/#section=windows</a>
+    </p>
+    <p>IDEA 分为两个版本： 旗舰版(Ultimate)和 社区版(Community)。</p>
+    <p><img src='imgs/1576218509572.png' alt='1576218509572' referrerPolicy='no-referrer'/></p>
+    <p>两个不同版本的详细对比，可以参照官网：
+        <a href='https://www.jetbrains.com/idea/features/editions_comparison_matrix.html' target='_blank' class='url'>https://www.jetbrains.com/idea/features/editions_comparison_matrix.html</a>
+    </p>
+    <p>官网提供的详细使用文档：
+        <a href='https://www.jetbrains.com/help/idea/meet-intellij-idea.html' target='_blank' class='url'>https://www.jetbrains.com/help/idea/meet-intellij-idea.html</a>
+    </p>
+    <h1><a name='header-n47' class='md-header-anchor '></a>二、安装与卸载</h1>
+    <h2><a name='header-n48' class='md-header-anchor '></a>1、安装前的准备</h2>
+    <ul>
+        <li>64位版本的windows10,8,7；</li>
+        <li>最少2G内存，建议8G内存以上；</li>
+        <li>安装需要2.5G硬盘，建议固态硬盘；</li>
+        <li>分辨率1024*768以上；</li>
+    </ul>
+    <p><img src='imgs/1576218673304.png' alt='1576218673304' referrerPolicy='no-referrer'/></p>
+    <p>从安装上来看，IntelliJ IDEA 对硬件的要求似乎不是很高。可是实际在开发中其实并不是这样的，因为 IntelliJ IDEA 执行时会有大量的缓存、索引文件，所以如果你正在使用 Eclipse /
+        MyEclipse，想通过 IntelliJ IDEA 来解决计算机的卡、慢等问题，这基本上是不可能的，本质上你应该对自己的硬件设备进行升级。</p>
+    <h2><a name='header-n60' class='md-header-anchor '></a>2、安装过程</h2>
+    <p>1、双击<img src='imgs/1576220086466.png' alt='1576220086466' referrerPolicy='no-referrer'/></p>
+    <p>2、欢迎安装</p>
+    <p><img src='imgs/1576220155084.png' alt='1576220155084' referrerPolicy='no-referrer'/></p>
+    <p>3、是否删除电脑上低版本的IDEA</p>
+    <p><img src='imgs/1576220238537.png' alt='1576220238537' referrerPolicy='no-referrer'/></p>
+    <p>4、选择安装目录</p>
+    <p><img src='imgs/1576220361942.png' alt='1576220361942' referrerPolicy='no-referrer'/></p>
+    <p>5、确认操作系统类型</p>
+    <p><img src='imgs/1576220467354.png' alt='1576220467354' referrerPolicy='no-referrer'/></p>
+    <p>确认是否与.java、.groovy、.kt 格式文件进行关联，这里也可以选择不关联。</p>
+    <p>6、在【开始】菜单新建一个文件夹，来管理IDEA的相关内容</p>
+    <p><img src='imgs/1576220577166.png' alt='1576220577166' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576220851829.png' alt='1576220851829' referrerPolicy='no-referrer'/></p>
+    <p>7、完成安装</p>
+    <p><img src='imgs/1576220867299.png' alt='1576220867299' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n76' class='md-header-anchor '></a>3、卸载过程</h2>
+    <h3><a name='header-n77' class='md-header-anchor '></a>方式一：【控制面板】中卸载</h3>
+    <p>在【控制面板】找到【卸载程序】</p>
+    <p><img src='imgs/1576219589963.png' alt='1576219589963' referrerPolicy='no-referrer'/></p>
+    <p>双击IntelliJ IDEA 2019.2.3进行卸载：</p>
+    <p><img src='imgs/1576219689050.png' alt='1576219689050' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576219834287.png' alt='1576219834287' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576219889848.png' alt='1576219889848' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576219975738.png' alt='1576219975738' referrerPolicy='no-referrer'/></p>
+    <h3><a name='header-n85' class='md-header-anchor '></a>如何打开控制面板？</h3>
+    <p>win10操作系统 在【搜索框】中输入【控制面板】就可以打开控制面板：</p>
+    <p><img src='imgs/1576219286348.png' alt='1576219286348' referrerPolicy='no-referrer'/></p>
+    <p>如果没有【搜索】图标的，可以这样显示出来：右键任务栏，在弹窗的菜单中选择【搜索】-&gt;显示搜索图标。</p>
+    <p><img src='imgs/1576219509293.png' alt='1576219509293' referrerPolicy='no-referrer'/></p>
+    <h1><a name='header-n90' class='md-header-anchor '></a>三、初始化配置与激活</h1>
+    <p>1、双击<img src='imgs/1576220976081.png' alt='1576220976081' referrerPolicy='no-referrer'/></p>
+    <p>2、是否导入之前版本的配置</p>
+    <p><img src='imgs/1576220963479.png' alt='1576220963479' referrerPolicy='no-referrer'/></p>
+    <p>3、启动界面</p>
+    <p><img src='imgs/1576221009304.png' alt='1576221009304' referrerPolicy='no-referrer'/></p>
+    <p>4、选择UI界面的主题</p>
+    <p><img src='imgs/1576221108093.png' alt='1576221108093' referrerPolicy='no-referrer'/></p>
+    <p>这里根据个人喜好，进行选择，也可以选择跳过(skip all and set defaults)。后面在settings 里也可以再设置主题等。</p>
+    <p>5、激活</p>
+    <p><img src='imgs/1576221263613.png' alt='1576221263613' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576221453749.png' alt='1576221453749' referrerPolicy='no-referrer'/></p>
+    <p>6、创建项目</p>
+    <p><img src='imgs/1576221581332.png' alt='1576221581332' referrerPolicy='no-referrer'/></p>
+    <p>7、创建Java项目</p>
+    <p><img src='imgs/1576221856659.png' alt='1576221856659' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576221875313.png' alt='1576221875313' referrerPolicy='no-referrer'/></p>
+    <p>8、指定项目名称和代码存储目录</p>
+    <p><img src='imgs/1576222003073.png' alt='1576222003073' referrerPolicy='no-referrer'/></p>
+    <p>9、关闭提示</p>
+    <p><img src='imgs/1576222045858.png' alt='1576222045858' referrerPolicy='no-referrer'/></p>
+    <p>10、完成项目创建</p>
+    <p><img src='imgs/1576222124781.png' alt='1576222124781' referrerPolicy='no-referrer'/></p>
+    <h1><a name='header-n113' class='md-header-anchor '></a>四、HelloWorld</h1>
+    <h2><a name='header-n114' class='md-header-anchor '></a>1、新建Java类</h2>
+    <p><img src='imgs/1576225463216.png' alt='1576225463216' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576225497511.png' alt='1576225497511' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n117' class='md-header-anchor '></a>2、编写代码</h2>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span
+            class="cm-def">HelloWorld</span> {</span></pre></div><pre class=" CodeMirror-line "
+                                                                      role="presentation"><span role="presentation"
+                                                                                                style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-keyword">public</span> <span class="cm-keyword">static</span> <span
+            class="cm-variable-3">void</span> <span class="cm-variable">main</span>(<span
+            class="cm-variable-3">String</span>[] <span class="cm-variable">args</span>) {</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span
+            class="cm-variable">println</span>(<span class="cm-string">"hello"</span>);</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 123px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 123px;"></div></div></div></pre>
+    <h2><a name='header-n119' class='md-header-anchor '></a>3、运行</h2>
+    <p><img src='imgs/1576225625102.png' alt='1576225625102' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576225669070.png' alt='1576225669070' referrerPolicy='no-referrer'/></p>
+    <h1><a name='header-n122' class='md-header-anchor '></a>五、配置目录介绍</h1>
+    <p>启动后会在C盘的用户目录下生成如下两个目录，例如：C:\Users\Irene\.IntelliJIdea2019.2</p>
+    <p><img src='imgs/1576222266158.png' alt='1576222266158' referrerPolicy='no-referrer'/></p>
+    <p>这是 IDEA 的各种配置的保存目录。这个设置目录有一个特性，就是你删除掉整个目录之后，重新启动 IntelliJ IDEA 会再自动帮你生成一个全新的默认配置，所以很多时候如果你把 IntelliJ IDEA
+        配置改坏了，没关系，删掉该目录，一切都会还原到默认。</p>
+    <ul>
+        <li>config 目录是 IntelliJ IDEA 个性化化配置目录，或者说是整个 IDE 设置目录。此目录可看成是最重要的目录，没有之一，如果你还记得安装篇的介绍的时候，安装新版本的 IntelliJ IDEA
+            会自动扫描硬盘上的旧配置目录，指的就是该目录。这个目录主要记录了：IDE 主要配置功能、自定义的代码模板、自定义的文件模板、自定义的快捷键、Project 的 tasks 记录等等个性化的设置。
+        </li>
+        <li>system 目录是 IntelliJ IDEA 系统文件目录，是 IntelliJ IDEA 与开发项目一个桥梁目录，里面主要有：缓存、索引、容器文件输出等等，虽然不是最重要目录，但也是最不可或缺的目录之一。
+        </li>
+    </ul>
+    <h1><a name='header-n131' class='md-header-anchor '></a>六、详细配置</h1>
+    <h2><a name='header-n132' class='md-header-anchor '></a>1、运行内存大小配置</h2>
+    <p>找到IDEA安装目录的bin目录例如：D:\ProgramFiles\JetBrains\IntelliJ_IDEA_2019.2.3\bin，找到idea64.exe.vmoptions文件，用文本编辑器打开：</p>
+    <p><img src='imgs/1576465321358.png' alt='1576465321358' referrerPolicy='no-referrer'/></p>
+    <ul>
+        <li>大家根据电脑系统的位数，选择 32 位的 VM 配置文件或者 64 位的 VM 配置文件</li>
+        <li>32 位操作系统内存不会超过 4G，所以没有多大空间可以调整，建议不用调整了</li>
+        <li>64 位操作系统中 8G 内存以下的机子或是静态页面开发者是无需修改的。</li>
+        <li>64 位操作系统且内存大于 8G 的，如果你是开发大型项目、Java 项目或是 Android 项目，建议进行修改，常修改的就是下面 3 个参数：</li>
+    </ul>
+    <p><img src='imgs/1576459471974.png' alt='1576459471974' referrerPolicy='no-referrer'/></p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="properties"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="properties"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-def">-Xms128m</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-def">  如果16 G 内存的机器可尝试设置为 -Xms512m(设置初始的内存数，增加该值可以提高 Java 程序的启动速度。)</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-def">-Xmx750m</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-def"> &nbsp; 如果16 G 内存的机器可尝试设置为 -Xmx1500m(设置最大内存数，提高该值，可以减少内存 Garage 收集的频率，提高程序性能)</span></span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-def">-XX</span>:<span class="cm-quote">ReservedCodeCacheSize</span>=<span
+            class="cm-quote">240m</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-def"><span class="cm-tab"
+                                                                                         role="presentation"
+                                                                                         cm-text="	">    </span>如果16G 内存的机器可尝试设置为-XX</span>:<span
+            class="cm-quote">ReservedCodeCacheSize</span>=<span
+            class="cm-quote">500m(保留代码占用的内存容量)</span></span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 222px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 222px;"></div></div></div></pre>
+    <h2><a name='header-n146' class='md-header-anchor '></a>2、如何打开详细配置界面</h2>
+    <h3><a name='header-n147' class='md-header-anchor '></a>（1）显示工具栏</h3>
+    <p><img src='imgs/1576222818779.png' alt='1576222818779' referrerPolicy='no-referrer'/></p>
+    <h3><a name='header-n149' class='md-header-anchor '></a>（2）选择详细配置菜单和按钮</h3>
+    <p><img src='imgs/1576223449055.png' alt='1576223449055' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576223602257.png' alt='1576223602257' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n152' class='md-header-anchor '></a>3、默认启动项目配置</h2>
+    <p><img src='imgs/1576460061673.png' alt='1576460061673' referrerPolicy='no-referrer'/></p>
+    <p>如果去掉Reopen last project on startup前面的对勾，每次启动IDEA就会出现如下界面：</p>
+    <p><img src='imgs/1576460329524.png' alt='1576460329524' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n156' class='md-header-anchor '></a>4、设置整体主题</h2>
+    <h3><a name='header-n157' class='md-header-anchor '></a>（1）选择主题</h3>
+    <p><img src='imgs/1576224049447.png' alt='1576224049447' referrerPolicy='no-referrer'/></p>
+    <h3><a name='header-n159' class='md-header-anchor '></a>（2）设置菜单和窗口字体和大小</h3>
+    <p><img src='imgs/1576224151081.png' alt='1576224151081' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n161' class='md-header-anchor '></a>3、设置编辑器</h2>
+    <h3><a name='header-n162' class='md-header-anchor '></a>（1）编辑器主题</h3>
+    <p><img src='imgs/1576224319694.png' alt='1576224319694' referrerPolicy='no-referrer'/></p>
+    <h3><a name='header-n164' class='md-header-anchor '></a>（2）字体大小与颜色</h3>
+    <p><img src='imgs/1576224853251.png' alt='1576224853251' referrerPolicy='no-referrer'/></p>
+    <p>更详细的字体与颜色如下：</p>
+    <p><img src='imgs/1576224578709.png' alt='1576224578709' referrerPolicy='no-referrer'/></p>
+    <h3><a name='header-n168' class='md-header-anchor '></a>（3）显示行号与方法分隔符</h3>
+    <p><img src='imgs/1576225151705.png' alt='1576225151705' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n170' class='md-header-anchor '></a>4、自动提示功能</h2>
+    <p><img src='imgs/1576225875876.png' alt='1576225875876' referrerPolicy='no-referrer'/></p>
+    <p>IntelliJ IDEA 的代码提示和补充功能有一个特性：区分大小写。区分大小写的情况是这样的：比如我们在 Java 代码文件中输入 system，IntelliJ IDEA
+        默认是不会帮我们提示或是代码补充的，但是如果我们输入System 就可以进行代码提示和补充。 如果想不区分大小写的话，就把这个对勾去掉。</p>
+    <h2><a name='header-n173' class='md-header-anchor '></a>5、自动导包配置</h2>
+    <ul>
+        <li>默认需要自己手动导包，Alt+Enter快捷键</li>
+    </ul>
+    <p><img src='imgs/wps1-1576465699382.jpg' alt='img' referrerPolicy='no-referrer'/></p>
+    <ul>
+        <li><p>自动导包设置</p>
+            <ul>
+                <li>动态导入明确的包：Add unambiguous imports on the fly，该设置具有全局性；</li>
+                <li>优化动态导入的包：Optimize imports on the fly，该设置只对当前项目有效；</li>
+            </ul>
+        </li>
+    </ul>
+    <p><img src='imgs/1576229139135.png' alt='1576229139135' referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <h2><a name='header-n188' class='md-header-anchor '></a>6、设置编码</h2>
+    <h3><a name='header-n189' class='md-header-anchor '></a>（1）当前项目编码设置</h3>
+    <p>方式一：File菜单--&gt;Settings--&gt;Editor--&gt;File Encodings</p>
+    <p>方式二：工具类的详细配置按钮<img src='imgs/1576462105635.png' alt='1576462105635' referrerPolicy='no-referrer'/>--&gt;Editor--&gt;File
+        Encodings</p>
+    <p><img src='imgs/1576226088699.png' alt='1576226088699' referrerPolicy='no-referrer'/></p>
+    <p>说明： Transparent native-to-ascii conversion主要用于转换ascii，一般都要勾选。</p>
+    <h3><a name='header-n194' class='md-header-anchor '></a>（2）新建项目默认编码设置</h3>
+    <p>方式一：File菜单--&gt;Other Settings--&gt;Settings for New Projects...--&gt;Editor--&gt;File Encodings</p>
+    <p><img src='imgs/1576461819941.png' alt='1576461819941' referrerPolicy='no-referrer'/></p>
+    <p>方式二：启动界面右下角有Config--&gt;Settings--&gt;Editor--&gt;File Encodings</p>
+    <p><img src='imgs/1576461868272.png' alt='1576461868272' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576461926822.png' alt='1576461926822' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576226088699.png' alt='1576226088699' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n201' class='md-header-anchor '></a>7、设置自动编译</h2>
+    <p>方式一：File菜单--&gt;Settings--&gt;Build,Execution,Deployment--&gt;Compiler</p>
+    <p>方式二：工具类的详细配置按钮<img src='imgs/1576462105635.png' alt='1576462105635' referrerPolicy='no-referrer'/>--&gt;Build,Execution,Deployment--&gt;Compiler
+    </p>
+    <p>注意：该项配置只针对当前项目有效。</p>
+    <p><img src='imgs/1576226217115.png' alt='1576226217115' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n206' class='md-header-anchor '></a>8、取消自动更新</h2>
+    <p><img src='imgs/1576466132386.png' alt='1576466132386' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n208' class='md-header-anchor '></a>9、项目的JDK设置</h2>
+    <p>方式一：File--&gt;Project Structure...--&gt;Platform Settings --&gt;SDKs</p>
+    <p>方式二：工具栏--&gt;<img src='imgs/1576466440465.png' alt='1576466440465' referrerPolicy='no-referrer'/>--&gt;Platform
+        Settings --&gt;SDKs</p>
+    <p><img src='imgs/1576466391762.png' alt='1576466391762' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576466334819.png' alt='1576466334819' referrerPolicy='no-referrer'/></p>
+    <p>注：SDKs全称是Software Development Kit </p>
+    <h1><a name='header-n214' class='md-header-anchor '></a>七、快捷键</h1>
+    <h2><a name='header-n215' class='md-header-anchor '></a>1、软件通用的快捷键</h2>
+    <ul>
+        <li>保存：Ctrl + S</li>
+        <li>剪切：Ctrl + X</li>
+        <li>粘贴：Ctrl + V</li>
+        <li>复制：Ctrl + C</li>
+        <li>全选：Ctlr + A</li>
+        <li>撤销：Ctrl + Z</li>
+    </ul>
+    <h2><a name='header-n229' class='md-header-anchor '></a>2、IDEA常用快捷键</h2>
+    <h3><a name='header-n230' class='md-header-anchor '></a>（1）提高代码编写速度</h3>
+    <ul>
+        <li><p>智能提示：Alt + 回车</p></li>
+        <li><p>自动代码</p>
+            <ul>
+                <li>自动补全函数括号、分号、当前行缩进：Ctrl + Shift + 回车</li>
+                <li>提示代码模板：Ctrl + J</li>
+                <li>使用xx块环绕：Ctrl + Alt + T</li>
+                <li>自动生成构造器、get/set：Alt + Insert （有的键盘需要同时按Fn键）</li>
+                <li>由方法自动生成返回值变量：Ctrl + Alt + V</li>
+            </ul>
+        </li>
+        <li><p>格式化代码：Ctrl + Alt + L</p></li>
+        <li><p>插入空行开始编辑</p>
+            <ul>
+                <li>在当前光标下一行插入空行开始编辑：Shift + 回车</li>
+                <li>在当前光标上一行插入空行开始编辑：Ctrl+Alt+回车</li>
+            </ul>
+        </li>
+        <li><p>移动代码</p>
+            <ul>
+                <li>向上移动代码：Ctrl+Shift + ↑ （整个方法移动）或 Alt + Shift + ↑（逐行移动）</li>
+                <li>向下移动代码：Ctrl+Shift + ↓ （整个方法移动） 或 Alt + Shift + ↓（逐行移动）</li>
+            </ul>
+        </li>
+        <li><p>复制行：Ctrl+D</p></li>
+        <li><p>删除行</p>
+            <ul>
+                <li>Ctrl + Y</li>
+                <li>不选中删除光标所在行：Ctrl + X</li>
+            </ul>
+        </li>
+        <li><p>重命名类、变量、方法等：选择要重名的元素，按Shift + F6</p></li>
+        <li><p>抽取代码重构方法：Ctrl + Alt + M</p></li>
+        <li><p>查看所调用方法的形参列表提醒：Ctrl + P</p></li>
+        <li><p>重写或实现方法</p>
+            <ul>
+                <li>实现接口的方法：Ctrl + i</li>
+                <li>重写父类的方法：Ctrl + O</li>
+            </ul>
+        </li>
+        <li><p>注释</p>
+            <ul>
+                <li>单行注释：Ctrl + /</li>
+                <li>多行注释：Ctrl + Shift + /</li>
+            </ul>
+        </li>
+        <li><p>转大小写：Ctrl +Shift + U</p></li>
+    </ul>
+    <h3><a name='header-n294' class='md-header-anchor '></a>（2）移动光标定位</h3>
+    <ul>
+        <li><p>移动定位</p>
+            <ul>
+                <li>跳转到上一个/下一个位置编辑位置：Ctrl + Alt + 左/右键</li>
+                <li>跳转到上一个/下一个方法位置： Alt + 上/下键</li>
+                <li>打开的类文件之间切换： Alt + 左/右键</li>
+                <li>定位某行：Ctrl + G</li>
+            </ul>
+        </li>
+        <li><p>选择文本：Ctrl + W</p>
+            <ul>
+                <li>按一下选择单词，再按选择语句，再按选择行，再按选择方法</li>
+            </ul>
+        </li>
+    </ul>
+    <h3><a name='header-n312' class='md-header-anchor '></a>（3）查找与查看源码</h3>
+    <ul>
+        <li><p>按住Ctrl键，单击某个类或方法就可以打开某个类或方法的源码</p>
+            <ul>
+                <li>但是当某个变量是通过多态引用调用父类或父接口的方法时，想要打开方法的实现类：Ctrl +Alt +B</li>
+            </ul>
+        </li>
+        <li><p>查看方法文档：选中方法名后按Ctrl + Q</p></li>
+        <li><p>查看某个类的结构信息</p>
+            <ul>
+                <li>类的继承层次：Ctrl + H</li>
+                <li>类的UML关系图：Ctrl + Alt + U</li>
+                <li>当前文件结构：Ctrl + F12键</li>
+            </ul>
+        </li>
+        <li><p>搜索</p>
+            <ul>
+                <li>搜索类：Ctrl + N</li>
+                <li>全项目搜索文本：Ctrl + Shift + F</li>
+                <li>全项目替换文本：Ctrl +Shift + R</li>
+                <li>当前源文件查找文本：Ctrl + F</li>
+                <li>当前源文件替换问题：Ctrl + R</li>
+                <li>任何地方搜索：双击Shift</li>
+            </ul>
+        </li>
+        <li><p>折叠与展开</p>
+            <ul>
+                <li>折叠方法实现：Ctrl + Shift + -</li>
+                <li>展开方法实现：Ctrl +Shift + +</li>
+            </ul>
+        </li>
+    </ul>
+    <h3><a name='header-n352' class='md-header-anchor '></a>3、查看和自定义快捷键</h3><h4><a name='header-n353'
+                                                                                   class='md-header-anchor '></a>(1)已知快捷键操作，未知快捷键
+    </h4>
+    <p><img src='imgs/1577246789281.png' alt='1577246789281' referrerPolicy='no-referrer'/></p><h4><a name='header-n355'
+                                                                                                      class='md-header-anchor '></a>(2)已知快捷键，不知道对应的操作名
+    </h4>
+    <p><img src='imgs/1577246895469.png' alt='1577246895469' referrerPolicy='no-referrer'/></p><h4><a name='header-n357'
+                                                                                                      class='md-header-anchor '></a>(3)自定义自己的快捷键
+    </h4>
+    <p><img src='imgs/1577247069135.png' alt='1577247069135' referrerPolicy='no-referrer'/></p>
+    <h3><a name='header-n359' class='md-header-anchor '></a>4、取消双击shift搜索</h3>
+    <p>因为我们按shift切换中英文输入方式，经常被按到，总是弹出搜索框，太麻烦了。可以取消它。</p>
+    <p>双击shift 或 ctrl + shift + a，打开如下搜索窗口：</p>
+    <p><img src='imgs/1577243967254.png' alt='1577243967254' referrerPolicy='no-referrer'/></p>
+    <p>选择registry...，找到&quot;ide.suppress.double.click.handler&quot;，把复选框打上勾就可以取消双击shift出现搜索框了。</p>
+    <p><img src='imgs/1577244045320.png' alt='1577244045320' referrerPolicy='no-referrer'/></p>
+    <h1><a name='header-n365' class='md-header-anchor '></a>八、代码模板</h1>
+    <h2><a name='header-n366' class='md-header-anchor '></a>1、常用快捷模板</h2>
+    <ul>
+        <li><p>主方法</p>
+            <ul>
+                <li>psvm：public static void main(String[] args){}</li>
+                <li>main：public static void main(String[] args){}</li>
+            </ul>
+        </li>
+        <li><p>输出语句</p>
+            <ul>
+                <li>sout：System.out.println();</li>
+                <li>soutp：System.out.println(&quot;xxx :&quot; + 方法形参);</li>
+                <li>soutm：System.out.println(&quot;xx类.当前方法名&quot;);</li>
+                <li>soutv：System.out.println(&quot;变量名 = &quot; + 变量);</li>
+                <li>变量.sout：System.out.println(&quot;变量名 = &quot; + 变量);</li>
+            </ul>
+        </li>
+        <li><p>非空判断</p>
+            <ul>
+                <li>ifn：if(xx == null)</li>
+                <li>inn：if(xx != null)</li>
+                <li>变量.null：if(变量 == null)</li>
+                <li>变量.nn：if(变量 != null)</li>
+            </ul>
+        </li>
+        <li><p>遍历</p>
+            <ul>
+                <li>fori：for循环</li>
+                <li>itar：遍历数组</li>
+                <li>iter：foreach循环</li>
+            </ul>
+        </li>
+        <li><p>静态常量声明</p>
+            <ul>
+                <li>psf：public static final</li>
+                <li>prsf：private static final</li>
+            </ul>
+        </li>
+        <li><p>常量声明：</p>
+            <ul>
+                <li>psfi：public static final int</li>
+                <li>psfs：public static final String</li>
+            </ul>
+        </li>
+        <li><p>List集合遍历</p>
+            <ul>
+                <li>list集合.for：foreach循环</li>
+                <li>list集合.fori：用for循环遍历list集合，正向遍历</li>
+                <li>list集合.forr：用for循环遍历list集合，逆向遍历</li>
+            </ul>
+        </li>
+    </ul>
+    <h2><a name='header-n431' class='md-header-anchor '></a>2、预定义模板</h2>
+    <h3><a name='header-n432' class='md-header-anchor '></a>（1）预定义Postfix Completion模板，不能修改</h3>
+    <p><img src='imgs/wps1.jpg' alt='img' referrerPolicy='no-referrer'/></p>
+    <h3><a name='header-n434' class='md-header-anchor '></a>（2）预定义Live Templates模板，可以修改</h3>
+    <p><img src='imgs/wps2.jpg' alt='img' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n436' class='md-header-anchor '></a>3、自定义模板</h2>
+    <h3><a name='header-n437' class='md-header-anchor '></a>（1）定义sop模板</h3><h4><a name='header-n438'
+                                                                                  class='md-header-anchor '></a>①在Live
+        Templates中增加模板</h4>
+    <p><img src='imgs/1576467339631.png' alt='1576467339631' referrerPolicy='no-referrer'/></p><h4><a name='header-n440'
+                                                                                                      class='md-header-anchor '></a>②先定义一个模板的组
+    </h4>
+    <p><img src='imgs/1576467395084.png' alt='1576467395084' referrerPolicy='no-referrer'/></p><h4><a name='header-n442'
+                                                                                                      class='md-header-anchor '></a>③在模板组里新建模板
+    </h4>
+    <p><img src='imgs/1576467478993.png' alt='1576467478993' referrerPolicy='no-referrer'/></p><h4><a name='header-n444'
+                                                                                                      class='md-header-anchor '></a>④定义模板
+    </h4>
+    <p><img src='imgs/1576467712251.png' alt='1576467712251' referrerPolicy='no-referrer'/></p>
+    <ul>
+        <li>Abbreviation:模板的缩略名称</li>
+        <li>Description:模板的描述</li>
+        <li>Template text:模板的代码片段</li>
+        <li>应用范围。比如点击Define。选择如下：应用在java代码中。</li>
+        <li><img src='imgs/1576467768103.png' alt='1576467768103' referrerPolicy='no-referrer'/></li>
+    </ul>
+    <h3><a name='header-n457' class='md-header-anchor '></a>（2）定义test测试方法模板</h3>
+    <p>选中自定义的模板组，点击”+”（1.Live Template）来定义模板。</p>
+    <p><img src='imgs/1576467947949.png' alt='1576467947949' referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <h1><a name='header-n462' class='md-header-anchor '></a>九、创建模块</h1>
+    <p>在 IntelliJ IDEA 中，没有类似于 Eclipse 工作空间（Workspace）的概念，而是提出了Project和Module这两个概念。接下来，就让我们一起看看 IntelliJ IDEA
+        官方是如何描述两者的吧！对于 Project，IntelliJ IDEA 官方是这样介绍的：</p>
+    <p>A project is a top-level organizational unit for your development work in IntelliJ IDEA. In its finished form, a
+        project may represent a complete software solution. A project is a collection of:</p>
+    <p>Your work results: source code, build scripts, configuration files, documentation, artifacts, etc.
+        SDKs and libraries that you use to develop, compile, run and test your code.
+        Project settings that represent your working preferences in the context of a project.
+        A project has one or more modules as its parts.</p>
+    <p>对于 Module，IntelliJ IDEA 官方是这样介绍的：</p>
+    <p>A module is a part of a project that you can compile, run, test and debug independently.
+        Modules are a way to reduce complexity of large projects while maintaining a common (project) configuration.
+        Modules are reusable: if necessary, a module can be included in more than one project.</p>
+    <p>通过上面的介绍，我们知道：在 IntelliJ IDEA
+        中Project是最顶级的结构单元，然后就是Module，一个Project可以有多个Module。目前，主流的大型项目结构基本都是多Module的结构，这类项目一般是按功能划分的，比如：user-core-module、user-facade-module和user-hessian-module等等，模块之间彼此可以相互依赖。通过这些Module的命名可以看出，它们都是处于同一个项目中的模块，彼此之间是有着不可分割的业务关系。因此，我们可以大致总结出：一个Project是由一个或多个Module组成，</p>
+    <ul>
+        <li>当为单Module项目的时候，这个单独的Module实际上就是一个Project；</li>
+        <li>当为多Module项目的时候，多个模块处于同一个Project之中，此时彼此之间具有互相依赖的关联关系。</li>
+        <li>当然多个模块没有建立依赖关系的话，也可以作为单独一个“小项目”运行</li>
+    </ul>
+    <p>此外， IntelliJ IDEA
+        的Project是一个不具备任何编码设置、构建等开发功能的概念，其主要作用就是起到一个项目定义、范围约束、规范类型的效果，或许，我们也可以简单地理解Project就是一个单纯的目录，只是这个目录在命名上必须有其代表性的意义。在缺省情况下，IntelliJ
+        IDEA
+        是默认单Project单Module的，这时Project和Module合二为一，在没有修改存储路径的时候，显然Project对Module具有强约束作用！不过说实话，这里就是将Module的内容放在了Project的目录下，实际上还是Module自己约束自己。</p>
+    <h2><a name='header-n477' class='md-header-anchor '></a>1、创建模块</h2>
+    <h3><a name='header-n478' class='md-header-anchor '></a>（1）选择创建模块</h3>
+    <p><img src='imgs/1576481229134.png' alt='1576481229134' referrerPolicy='no-referrer'/></p>
+    <h3><a name='header-n480' class='md-header-anchor '></a>（2）选择模块类型</h3>
+    <p>这里选择创建Java模块</p>
+    <p><img src='imgs/1576481295518.png' alt='1576481295518' referrerPolicy='no-referrer'/></p>
+    <h3><a name='header-n483' class='md-header-anchor '></a>（3）给模块命名</h3>
+    <p><img src='imgs/1576481389891.png' alt='1576481389891' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n485' class='md-header-anchor '></a>2、删除模块</h2>
+    <h3><a name='header-n486' class='md-header-anchor '></a>方式一：先从模块设置中移除，然后delete</h3><h4><a name='header-n487'
+                                                                                              class='md-header-anchor '></a>（1）先从模块设置中移除
+    </h4>
+    <p><img src='imgs/1576481686515.png' alt='1576481686515' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576481725044.png' alt='1576481725044' referrerPolicy='no-referrer'/></p><h4><a name='header-n490'
+                                                                                                      class='md-header-anchor '></a>（2）彻底删除模块
+    </h4>
+    <p><img src='imgs/1576486810739.png' alt='1576486810739' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576486862863.png' alt='1576486862863' referrerPolicy='no-referrer'/></p>
+    <h3><a name='header-n493' class='md-header-anchor '></a>方式二：先从项目中remove后delete</h3><h4><a name='header-n494'
+                                                                                              class='md-header-anchor '></a>（1）先从项目中remove
+    </h4>
+    <p><img src='imgs/1576486918591.png' alt='1576486918591' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576481783104.png' alt='1576481783104' referrerPolicy='no-referrer'/></p><h4><a name='header-n497'
+                                                                                                      class='md-header-anchor '></a>（2）彻底删除模块
+    </h4>
+    <p><img src='imgs/1576486810739.png' alt='1576486810739' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576486862863.png' alt='1576486862863' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n500' class='md-header-anchor '></a>3、模块依赖</h2>
+    <p>一个模块可以理解为相当于一个独立的小项目，但是它又区别于独立的项目，因为它们同属于一个工程，而且互相之间可以相互依赖，即一个模块可以使用另一个模块的类型。</p>
+    <h3><a name='header-n502' class='md-header-anchor '></a>整个模块依赖</h3>
+    <p>例如：在day16_teacher_code模块中需要使用day15_teacher_code模块中的所有公共类，例如：Student类，可以通过如下操作。</p>
+    <p>在Student stu = new Student();行按Alt +Enter，根据提示，点击Add dependency on module &#39;day15_teacher_code&#39;。</p>
+    <p><img src='imgs/1576666312301.png' alt='1576666312301' referrerPolicy='no-referrer'/></p>
+    <p>
+        如上操作会在day16_teacher_code.iml文件中增加如下代码，表示依赖于day15_teacher_code模块。此时day15_teacher_code模块下所有公共的类在day16_teacher_code模块下都可以使用了。</p>
+    <p><img src='imgs/1576670329087.png' alt='1576670329087' referrerPolicy='no-referrer'/></p>
+    <h3><a name='header-n508' class='md-header-anchor '></a>模块部分包依赖（了解）</h3>
+    <p>
+        例如：在day18_teacher_code模块中需要使用day17_teacher_code模块中的com.atguigu.bean包中的公共类，而不是该模块下所有的公共类。因为我们面向对象的开发原则中有一个迪米特法则（Only
+        talk to your immediate friends，翻译过来就是：只与直接的朋友通信）。那么，我们可以通过如下操作进行：</p>
+    <p>注意：以下操作仅限于Java9以及以上版本，Java8不支持。</p>
+    <p>单击工具栏的<img src='imgs/1576580533760.png' alt='1576580533760' referrerPolicy='no-referrer'/>打开项目设置</p>
+    <p><img src='imgs/1576741855184.png' alt='1576741855184' referrerPolicy='no-referrer'/></p>
+    <p>（1）先在day17_teacher_code模块暴露需要暴露的包</p>
+    <p>第一步：在day17_teacher_code模块的src下建立module-info.java文件</p>
+    <p><img src='imgs/1576741288762.png' alt='1576741288762' referrerPolicy='no-referrer'/></p>
+    <p>第二步在module-info.java文件加如下代码：</p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">module</span> <span class="cm-variable">day17</span>.<span
+            class="cm-variable">teacher</span>.<span class="cm-variable">code</span> {</span></pre></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-variable">exports</span> <span class="cm-variable">com</span>.<span
+            class="cm-variable">atguigu</span>.<span class="cm-variable">bean</span>;</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 74px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 74px;"></div></div></div></pre>
+    <p>（2）在day18_teacher_code模块中依赖需要依赖的包</p>
+    <p>第一步在day18_teacher_code模块的src下建立module-info.java文件，</p>
+    <p>第二步在module-info.java文件增加如下代码：</p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang=""><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">module day18.teacher.code {</span></pre></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  requires day17.teacher.code;</span></pre><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation"
+                                                                style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 74px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 74px;"></div></div></div></pre>
+    <p>（3）添加模块依赖</p>
+    <p>例如：在day18_teacher_code模块的TestStudent类中使用day17_teacher_code模块的bean包下的Student类，按Alt + Enter，提示添加依赖的模块。</p>
+    <p><img src='imgs/1576741656126.png' alt='1576741656126' referrerPolicy='no-referrer'/></p>
+    <p>发现在day18_teacher_code模块的day18_teacher_code.iml文件增加一句代码：</p>
+    <p><img src='imgs/1576741726238.png' alt='1576741726238' referrerPolicy='no-referrer'/></p>
+    <h1><a name='header-n527' class='md-header-anchor '></a>十、Debug调试</h1>
+    <h2><a name='header-n528' class='md-header-anchor '></a>1、启动Debug</h2>
+    <p>在所有调试中，调试一个Java程序是最简单的，主要有设置断点、启动调试、单步执行、结束调试几步。</p>
+    <p>1）设置断点：在源代码文件中，在想要设置断点的代码行的前面的标记行处，单击鼠标左键就可以设置断点<img src='imgs/1562418582245.png' alt='1562418582245'
+                                                            referrerPolicy='no-referrer'/>，在相同位置再次单击即可取消断点。</p>
+    <p><img src='imgs/1576476225262.png' alt='1576476225262' referrerPolicy='no-referrer'/></p>
+    <p>2）启动调试：IDEA提供多种方式来启动程序(Launch)的调试，分别是通过菜单(Run –&gt; Debug)、图标(“绿色臭虫”<img src='imgs/1576476267687.png'
+                                                                                alt='1576476267687'
+                                                                                referrerPolicy='no-referrer'/>等等</p>
+    <p><img src='imgs/1576476841154.png' alt='1576476841154' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n534' class='md-header-anchor '></a>2、单步调试工具介绍</h2>
+    <p><img src='imgs/1576477907469.png' alt='1576477907469' referrerPolicy='no-referrer'/></p>
+    <p>或</p>
+    <p><img src='imgs/1576477927994.png' alt='1576477927994' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576476917169.png' alt='1576476917169' referrerPolicy='no-referrer'/>：Step
+        Over（F8）：进入下一步，如果当前行断点是调用一个方法，则不进入当前方法体内</p>
+    <p><img src='imgs/1576476984903.png' alt='1576476984903' referrerPolicy='no-referrer'/>：Step
+        Into（F7）：进入下一步，如果当前行断点是调用一个自定义方法，则进入该方法体内</p>
+    <p><img src='imgs/1576477028289.png' alt='1576477028289' referrerPolicy='no-referrer'/>：Force Step Into（Alt +Shift +
+        F7）：进入下一步，如果当前行断点是调用一个核心类库方法，则进入该方法体内</p>
+    <p><img src='imgs/1576477117156.png' alt='1576477117156' referrerPolicy='no-referrer'/>：Step Out（Shift + F8）：跳出当前方法体
+    </p>
+    <p><img src='imgs/1576477204366.png' alt='1576477204366' referrerPolicy='no-referrer'/>：Run to Cursor（Alt +
+        F9）：直接跳到下一个断点处继续调试</p>
+    <p><img src='imgs/1576477448969.png' alt='1576477448969' referrerPolicy='no-referrer'/>：Resume
+        Program（F9）：恢复程序运行，但如果该断点下面代码还有断点则停在下一个断点上</p>
+    <p><img src='imgs/1576477293031.png' alt='1576477293031' referrerPolicy='no-referrer'/>：Stop（Ctrl + F2）：结束调试</p>
+    <p><img src='imgs/1576477330355.png' alt='1576477330355' referrerPolicy='no-referrer'/>：View Breakpoints（Ctrl +
+        Shift + F8）：查看所有断点</p>
+    <p><img src='imgs/1576477381767.png' alt='1576477381767' referrerPolicy='no-referrer'/>：Mute
+        Breakpoints：使得当前代码后面所有的断点失效， 一下执行到底 </p>
+    <h2><a name='header-n547' class='md-header-anchor '></a>3、自定义调试数据视图</h2>
+    <p><img src='imgs/1576478352757.png' alt='1576478352757' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576478431514.png' alt='1576478431514' referrerPolicy='no-referrer'/></p>
+    <h1><a name='header-n550' class='md-header-anchor '></a>十一、生成javadoc</h1>
+    <p><img src='imgs/1576467074566.png' alt='1576467074566' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/javadoc2.jpg' alt='img' referrerPolicy='no-referrer'/></p>
+    <h1><a name='header-n553' class='md-header-anchor '></a>十二、使用第三方框架和组件</h1>
+    <h2><a name='header-n554' class='md-header-anchor '></a>1、JUnit</h2>
+    <h3><a name='header-n555' class='md-header-anchor '></a>方式一：指定Marven仓库</h3>
+    <p>在@Test后面按Alt + 回车，选择Add &#39;JUnit4&#39; to classpath即可</p>
+    <p><img src='imgs/1576580013065.png' alt='1576580013065' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576580073306.png' alt='1576580073306' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576737338486.png' alt='1576737338486' referrerPolicy='no-referrer'/></p>
+    <p>添加完成之后，在External Libraries中可以见到JUnit：</p>
+    <p><img src='imgs/1576580095402.png' alt='1576580095402' referrerPolicy='no-referrer'/></p><h4><a name='header-n562'
+                                                                                                      class='md-header-anchor '></a>JUnit4
+        was not loaded问题</h4>
+    <p><strong>注意：如果Maven的本地仓库（例如：C:\Users\Irene\.m2）中没有对应的library则需要联网从Maven的中央仓库中下载或从其他人那里拷贝对应的库。</strong>否则会报错：</p>
+    <p><img src='imgs/1576736920079.png' alt='1576736920079' referrerPolicy='no-referrer'/></p>
+    <p>查看Maven的本地仓库（例如：C:\Users\Irene\.m2）中是否有对应的library。</p>
+    <p><img src='imgs/1576737429814.png' alt='1576737429814' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576737476324.png' alt='1576737476324' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576737501293.png' alt='1576737501293' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576737539177.png' alt='1576737539177' referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <h3><a name='header-n571' class='md-header-anchor '></a>方式二：指定本地jar目录</h3>
+    <p>如果目前无法联网，也无法拷贝对应maven仓库目录，但是你有JUnit的需要的jar包，那么也可以用如下方式指定：</p>
+    <p>（1）将JUnit框架需要用到的jar包拷贝到当前项目（或模块）的libs目录中（没有libs目录的可以手动创建）</p>
+    <p><img src='imgs/1576737848795.png' alt='1576737848795' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576737876642.png' alt='1576737876642' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576737934768.png' alt='1576737934768' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576738196050.png' alt='1576738196050' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576738234420.png' alt='1576738234420' referrerPolicy='no-referrer'/></p>
+    <p>然后在项目代码中就可以使用JUnit了。</p>
+    <p><img src='imgs/1576738850273.png' alt='1576738850273' referrerPolicy='no-referrer'/></p><h4><a name='header-n581'
+                                                                                                      class='md-header-anchor '></a>如果此时其他模块也想使用刚才添加的library怎么办？
+    </h4>
+    <p>例如：新的模块day09_teacher_code中想要使用刚才的JUnit的library，可以单击工具栏的<img src='imgs/1576580533760.png' alt='1576580533760'
+                                                                   referrerPolicy='no-referrer'/>打开项目设置:</p>
+    <p><img src='imgs/1576739141301.png' alt='1576739141301' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576739309162.png' alt='1576739309162' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576739926956.png' alt='1576739926956' referrerPolicy='no-referrer'/></p>
+    <p><strong>注意Scope：选择Complie，否则编译时，无法使用JUnit。</strong></p>
+    <p>查看day09_teacher_code模块的配置文件day09_teacher_code.iml，发现多了一句配置。</p>
+    <p><img src='imgs/1576739976993.png' alt='1576739976993' referrerPolicy='no-referrer'/></p>
+    <p>现在day09_teacher_code模块中也可以使用JUnit了：</p>
+    <p><img src='imgs/1576740012818.png' alt='1576740012818' referrerPolicy='no-referrer'/></p>
+    <h2><a name='header-n591' class='md-header-anchor '></a>2、在JDBC中使用mysql的驱动</h2>
+    <p>当Java代码中使用了mysql的驱动类，而在项目和模块中又没有引入mysql的驱动jar时，代码运行时会报错的：</p>
+    <p><img src='imgs/1576715337510.png' alt='1576715337510' referrerPolicy='no-referrer'/></p>
+    <p>将提前下载的mysql驱动jar拷贝到当前项目（或模块）的libs目录中（没有libs目录的可以手动创建）。</p>
+    <p><img src='imgs/1576742281667.png' alt='1576742281667' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576742312637.png' alt='1576742312637' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576742335478.png' alt='1576742335478' referrerPolicy='no-referrer'/></p>
+    <p>可以单击工具栏的<img src='imgs/1576580533760.png' alt='1576580533760' referrerPolicy='no-referrer'/>打开项目设置</p>
+    <p><img src='imgs/1576742370173.png' alt='1576742370173' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576742417512.png' alt='1576742417512' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576742432128.png' alt='1576742432128' referrerPolicy='no-referrer'/></p>
+    <p>发现在day29_teacher_code模块的配置文件day29_teacher_code.iml中增加了如下一句代码：</p>
+    <p><img src='imgs/1576742488034.png' alt='1576742488034' referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <h1><a name='header-n605' class='md-header-anchor '></a>十三、设置执行JUnit用例时支持控制台输入</h1>
+    <p>Help菜单--&gt;Edit Custom VM Options...，在最后加入如下参数，然后重启IDEA。</p>
+    <pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="properties"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="properties"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-def">-Deditable.java.test.console</span>=<span
+            class="cm-quote">true</span></span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;"></div><div
+            class="CodeMirror-gutters" style="display: none; height: 25px;"></div></div></div></pre>
+    <p><img src='imgs/1576487971089.png' alt='1576487971089' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576488062778.png' alt='1576488062778' referrerPolicy='no-referrer'/></p>
+    <h1><a name='header-n610' class='md-header-anchor '></a>十四、导入模块</h1>
+    <p>当想要在当前项目中导入一个已存在的模块时，可以进行如下操作：</p>
+    <p>（1）将要导入的模块</p>
+    <p><img src='imgs/1576743611813.png' alt='1576743611813' referrerPolicy='no-referrer'/></p>
+    <p>拷贝到项目目录中：</p>
+    <p><img src='imgs/1576743640197.png' alt='1576743640197' referrerPolicy='no-referrer'/></p>
+    <p>（2）在项目的modules.xml文件中加入如下配置即可</p>
+    <p><img src='imgs/1576743697649.png' alt='1576743697649' referrerPolicy='no-referrer'/></p>
+    <p>（3）注意：如果新导入的模块中有依赖相应的库，必须确保对应的库在项目中能找到，否则会报错</p>
+    <p><img src='imgs/1576743793488.png' alt='1576743793488' referrerPolicy='no-referrer'/></p>
+    <p>（4）注意：如果新导入的模块对其他模块有依赖，那么被依赖的模块也得导入</p>
+    <p><img src='imgs/1576743890418.png' alt='1576743890418' referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <h1><a name='header-n623' class='md-header-anchor '></a>十五、缓存和索引的清理</h1>
+    <p>IntelliJ IDEA 首次加载项目的时候，都会创建索引，而创建索引的时间跟项目的文件多少成正比。</p>
+    <p>在 IntelliJ IDEA 创建索引过程中即使你编辑了代码也是编译不了、运行不起来的，所以还是安安静静等 IntelliJ IDEA 创建索引完成。</p>
+    <p>IntelliJ IDEA 的缓存和索引主要是用来加快文件查询，从而加快各种查找、代码提示等操作的速度，所以 IntelliJ IDEA 的索引的重要性再强调一次也不为过。</p>
+    <p>但是，IntelliJ IDEA 的索引和缓存并不是一直会良好地支持 IntelliJ IDEA 的，某些特殊条件下，IntelliJ IDEA 的缓存和索引文件也是会损坏的，比如：断电、蓝屏引起的强制关机，当你重新打开
+        IntelliJ IDEA，很可能 IntelliJ IDEA 会报各种莫名其妙错误，甚至项目打不开，IntelliJ IDEA 主题还原成默认状态。即使没有断电、蓝屏，也会有莫名奇怪的问题的时候，也很有可能是
+        IntelliJ IDEA 缓存和索引出现了问题，这种情况还不少。遇到此类问题也不用过多担心。我们可以清理缓存和索引。如下：</p>
+    <p><img src='imgs/1576466837132.png' alt='1576466837132' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1576466900410.png' alt='1576466900410' referrerPolicy='no-referrer'/></p>
+    <ul>
+        <li>一般建议点击 Invalidate and Restart，这样会比较干净。</li>
+        <li>上图警告：清除索引和缓存会使得 IntelliJ IDEA 的 Local History 丢失。<strong>所以如果你项目没有加入到版本控制，那你最好备份下你的 LocalHistory 目录</strong>。LocalHistory
+            目录在用户目录下，例如：C:\Users\Irene.IntelliJIdea2019.2\system。
+        </li>
+        <li>通过上面方式清除缓存、索引本质也就是去删除 C 盘下的 system 目录下的对应的文件而已，所以如果你不用上述方法也可以手动删除整个 system。当 IntelliJ IDEA 再次启动项目的时候会重新创建新的
+            system 目录以及对应项目缓存和索引。
+        </li>
+    </ul>
+    <p>&nbsp;</p>
+    <h1><a name='header-n638' class='md-header-anchor '></a>十六、导出jar</h1>
+    <p>（1）单击工具栏的<img src='imgs/1576580533760.png' alt='1576580533760' referrerPolicy='no-referrer'/>打开项目设置。</p>
+    <p>（2）选择Artifacts（打包部署），选择添加jar。</p>
+    <p><img src='imgs/1579162223458.png' alt='1579162223458' referrerPolicy='no-referrer'/></p>
+    <p>（3）给导出的jar命名，确认导出的路径</p>
+    <p>（4）确认创建或选择已有的Manifest.MF文件。单词“manifest”的意思是“显示” 。 这个 manifest 文件定义了与扩展和包相关的数据。</p>
+    <p>说明： 打开Java的JAR文件我们经常可以看到文件中包含着一个META-INF目录，这个目录下会有一些文件，其中必有一个MANIFEST.MF，这个文件描述了该Jar文件的很多信息 </p>
+    <p><img src='imgs/1579162601108.png' alt='1579162601108' referrerPolicy='no-referrer'/></p>
+    <p>（5） 选择Manifest.MF文件存储目录。</p>
+    <p><img src='imgs/1579162349345.png' alt='1579162349345' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1579162651034.png' alt='1579162651034' referrerPolicy='no-referrer'/></p>
+    <p> （6）如果需要可以填写jar的运行入口，main所在的类的全名称。（可选）</p>
+    <p><img src='imgs/1579162731299.png' alt='1579162731299' referrerPolicy='no-referrer'/></p>
+    <p>（7）选择jar要包含的.class文件的目录，即哪些模块的out目录</p>
+    <p><img src='imgs/1579162794688.png' alt='1579162794688' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1579162809562.png' alt='1579162809562' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1579162830386.png' alt='1579162830386' referrerPolicy='no-referrer'/></p>
+    <p>（8）编译生成jar</p>
+    <p><img src='imgs/1579162846939.png' alt='1579162846939' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1579162868829.png' alt='1579162868829' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1579162901325.png' alt='1579162901325' referrerPolicy='no-referrer'/></p>
+    <p>（9）查看生成的jar</p>
+    <p>&nbsp;</p>
+    <p><img src='imgs/1579162927665.png' alt='1579162927665' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1579162961872.png' alt='1579162961872' referrerPolicy='no-referrer'/></p>
+    <p><img src='imgs/1579162984954.png' alt='1579162984954' referrerPolicy='no-referrer'/></p></div>
+<div style="font-size:40px">
+    <a  style="margin-left:40%"  href="扩展资料/idea中建web项目/尚硅谷_柴林燕_Web_【IDE开发工具】.html">idea中建web项目</a>
+    <br/>
+    <br/>
+    <a  style="margin-left:40%"     href="扩展资料/idea中连接database/尚硅谷_柴林燕_Database_【IDE开发工具】.html">idea中连接database</a>
+    <br/>
+    <br/>
+    <a  style="margin-left:40%" href='../软件安装教程.html'>回目录</a> <br/>
+</div>
+
+
+
+
+<br/>
+<br/>
+</body>
+</html>

@@ -1,0 +1,1226 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>第5章 面向对象基础（上）</title><link href='https://fonts.loli.net/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:first-child { margin-top: -20px; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 2; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px !important; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 32px; padding-right: 32px; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="mermaid"] svg, [lang="flow"] svg { max-width: 100%; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; word-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { word-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+:root { --active-file-bg-color: rgba(32, 43, 51, 0.63); --active-file-text-color: white; --bg-color: #f3f2ee; --text-color: #1f0909; --control-text-color: #444; --rawblock-edit-panel-bd: #e5e5e5; --select-text-bg-color: rgba(32, 43, 51, 0.63); --select-text-font-color: white; }
+pre { --select-text-bg-color: #36284e; --select-text-font-color: #fff; }
+html { font-size: 16px; }
+html, body { background-color: rgb(243, 242, 238); font-family: "PT Serif", "Times New Roman", Times, serif; color: rgb(31, 9, 9); line-height: 1.5em; }
+#write { max-width: 40em; }
+ol li { list-style-type: decimal; list-style-position: outside; }
+ul li { list-style-type: disc; list-style-position: outside; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote::before, blockquote::after, q::before, q::after { content: none; }
+table { border-collapse: collapse; border-spacing: 0px; }
+h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+h1 { font-size: 1.875em; line-height: 1.6em; margin-top: 2em; }
+h2, h3 { font-size: 1.3125em; line-height: 1.15; margin-top: 2.28571em; margin-bottom: 1.15em; }
+h3 { font-weight: normal; }
+h4 { font-size: 1.125em; margin-top: 2.67em; }
+h5, h6 { font-size: 1em; }
+h1 { border-bottom: 1px solid; margin-bottom: 1.875em; padding-bottom: 0.8125em; }
+a { text-decoration: none; color: rgb(6, 85, 136); }
+a:hover, a:active { text-decoration: underline; }
+p, blockquote, .md-fences { margin-bottom: 1.5em; }
+h1, h2, h3, h4, h5, h6 { margin-bottom: 1.5em; }
+blockquote { font-style: italic; border-left: 5px solid; margin-left: 2em; padding-left: 1em; }
+ul, ol { margin: 0px 0px 1.5em 1.5em; }
+.md-meta, .md-before, .md-after { color: rgb(153, 153, 153); }
+table { margin-bottom: 1.5em; font-size: 1em; }
+thead th, tfoot th { padding: 0.25em 0.25em 0.25em 0.4em; text-transform: uppercase; }
+th { text-align: left; }
+td { vertical-align: top; padding: 0.25em 0.25em 0.25em 0.4em; }
+code, .md-fences { background-color: rgb(218, 218, 218); }
+code { padding-left: 2px; padding-right: 2px; }
+.md-fences { margin-left: 2em; margin-bottom: 3em; padding-left: 1ch; padding-right: 1ch; }
+pre, code, tt { font-size: 0.875em; line-height: 1.71429em; }
+h1 { line-height: 1.3em; font-weight: normal; margin-bottom: 0.5em; }
+p + ul, p + ol { margin-top: 0.5em; }
+h3 + ul, h4 + ul, h5 + ul, h6 + ul, h3 + ol, h4 + ol, h5 + ol, h6 + ol { margin-top: 0.5em; }
+li > ul, li > ol { margin-top: inherit; margin-bottom: 0px; }
+li ol > li { list-style-type: lower-alpha; }
+li li ol > li { list-style-type: lower-roman; }
+h2, h3 { margin-bottom: 0.75em; }
+hr { border-top: none; border-right: none; border-bottom: 1px solid; border-left: none; }
+h1 { border-color: rgb(197, 197, 197); }
+blockquote { border-color: rgb(186, 186, 186); color: rgb(101, 101, 101); }
+blockquote ul, blockquote ol { margin-left: 0px; }
+.ty-table-edit { background-color: transparent; }
+thead { background-color: rgb(218, 218, 218); }
+tr:nth-child(2n) { background: rgb(232, 231, 231); }
+hr { border-color: rgb(197, 197, 197); }
+.task-list { padding-left: 1rem; }
+.md-task-list-item { padding-left: 1.5rem; list-style-type: none; }
+.md-task-list-item > input::before { content: "√"; display: inline-block; width: 1.25rem; height: 1.6rem; vertical-align: middle; text-align: center; color: rgb(221, 221, 221); background-color: rgb(243, 242, 238); }
+.md-task-list-item > input:checked::before, .md-task-list-item > input[checked]::before { color: inherit; }
+#write pre.md-meta-block { min-height: 1.875rem; color: rgb(85, 85, 85); border: 0px; background: transparent; margin-left: 1em; margin-top: 1em; }
+.md-image > .md-meta { color: rgb(155, 81, 70); }
+.md-image > .md-meta { font-family: Menlo, "Ubuntu Mono", Consolas, "Courier New", "Microsoft Yahei", "Hiragino Sans GB", "WenQuanYi Micro Hei", serif; }
+#write > h3.md-focus::before { left: -1.5rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+#write > h4.md-focus::before { left: -1.5rem; top: 0.25rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+#write > h5.md-focus::before { left: -1.5rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+#write > h6.md-focus::before { left: -1.5rem; top: 0.3125rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+.md-toc:focus .md-toc-content { margin-top: 19px; }
+.md-toc-content:empty::before { color: rgb(6, 85, 136); }
+.md-toc-item { color: rgb(6, 85, 136); }
+#write div.md-toc-tooltip { background-color: rgb(243, 242, 238); }
+#typora-sidebar { background-color: rgb(243, 242, 238); box-shadow: rgba(0, 0, 0, 0.376) 0px 6px 12px; }
+.pin-outline #typora-sidebar { background: inherit; box-shadow: none; border-right: 1px dashed; }
+.pin-outline #typora-sidebar:hover .outline-title-wrapper { border-left: 1px dashed; }
+.outline-item:hover { background-color: rgb(218, 218, 218); border-left: 28px solid rgb(218, 218, 218); border-right: 18px solid rgb(218, 218, 218); }
+.typora-node .outline-item:hover { border-right: 28px solid rgb(218, 218, 218); }
+.outline-expander::before { content: ""; font-family: FontAwesome; font-size: 14px; top: 1px; }
+.outline-expander:hover::before, .outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.modal-content { background-color: rgb(243, 242, 238); }
+.auto-suggest-container ul li { list-style-type: none; }
+.megamenu-menu, #top-titlebar, #top-titlebar *, .megamenu-content { background: rgb(243, 242, 238); color: rgb(31, 9, 9); }
+.megamenu-menu-header { border-bottom: 1px dashed rgb(32, 43, 51); }
+.megamenu-menu { box-shadow: none; border-right: 1px dashed; }
+header, .context-menu, .megamenu-content, footer { font-family: "PT Serif", "Times New Roman", Times, serif; color: rgb(31, 9, 9); }
+#megamenu-back-btn { color: rgb(31, 9, 9); border-color: rgb(31, 9, 9); }
+.megamenu-menu-header #megamenu-menu-header-title::before { color: rgb(31, 9, 9); }
+.megamenu-menu-list li a:hover, .megamenu-menu-list li a.active { color: inherit; background-color: rgb(232, 231, 223); }
+.long-btn:hover { background-color: rgb(232, 231, 223); }
+#recent-file-panel tbody tr:nth-child(2n-1) { background-color: transparent !important; }
+.megamenu-menu-panel tbody tr:hover td:nth-child(2) { color: inherit; }
+.megamenu-menu-panel .btn { background-color: rgb(210, 209, 209); }
+.btn-default { background-color: transparent; }
+.typora-sourceview-on #toggle-sourceview-btn, .ty-show-word-count #footer-word-count { background: rgb(199, 197, 197); }
+#typora-quick-open { background-color: inherit; }
+.md-diagram-panel { margin-top: 8px; }
+.file-list-item-file-name { font-weight: initial; }
+.file-list-item-summary { opacity: 1; }
+.file-list-item { color: rgb(119, 119, 119); }
+.file-list-item.active { background-color: inherit; color: black; }
+.ty-side-sort-btn.active { background-color: inherit; }
+.file-list-item.active .file-list-item-file-name { font-weight: bold; }
+.file-list-item { opacity: 1 !important; }
+.file-library-node.active > .file-node-background { background-color: var(--active-file-bg-color); }
+.file-tree-node.active > .file-node-content { color: var(--active-file-text-color); }
+.md-task-list-item > input { margin-left: -1.6em; margin-top: calc(1rem - 12px); }
+input { border: 1px solid rgb(170, 170, 170); }
+.megamenu-menu-header #megamenu-menu-header-title, .megamenu-menu-header:hover, .megamenu-menu-header:focus { color: inherit; }
+.dropdown-menu .divider { border-color: rgb(229, 229, 229); }
+.os-windows-7 strong, .os-windows-7 strong { font-weight: 760; }
+
+
+
+
+
+ .typora-export li, .typora-export p, .typora-export,  .footnote-line {white-space: normal;} 
+</style>
+</head>
+<body class='typora-export os-windows' >
+<div  id='write'  class = 'is-node'><h1><a name='header-n0' class='md-header-anchor '></a>第5章 面向对象基础（上） </h1><h2><a name='header-n2' class='md-header-anchor '></a>学习目标</h2><ul><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>初步了解面向对象的思想</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够明确类与对象关系</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够掌握类的定义格式</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够掌握创建对象格式</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>理解包的作用</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>掌握包的声明和导入</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够通过类访问类的静态成员变量和静态成员方法</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够通过对象访问对象的非静态成员变量和非静态成员方法</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够区别静态方法和非静态方法</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够区别类变量与实例变量</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够区别成员变量与局部变量</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够理解方法的调用执行机制</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够理解方法的参数传递机制</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>掌握方法的可变参数的使用</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>掌握方法重载的概念</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>能够判断出方法的重载</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>了解命令行参数</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>理解递归方法</p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' disabled='disabled' /><p>理解对象数组</p></li></ul><h1><a name='header-n43' class='md-header-anchor '></a>第五章 面向对象基础（上）</h1><h2><a name='header-n44' class='md-header-anchor '></a>5.1 面向对象思想概述</h2><h3><a name='header-n45' class='md-header-anchor '></a>5.1.1 概述</h3><p>Java语言是一种面向对象的程序设计语言，而面向对象思想（OOP）是一种程序设计思想，我们在面向对象思想的指引下，使用Java语言去设计、开发计算机程序。
+这里的<strong>对象</strong>泛指现实中一切事物，每种事物都具备自己的<strong>属性</strong>和<strong>行为</strong>。面向对象思想就是在计算机程序设计过程中，参照现实中事物，将事物的属性特征、行为特征抽象出来，描述成计算机事件的设计思想。
+它区别于面向过程思想（POP），强调的是通过调用对象的行为来实现功能，而不是自己一步一步的去操作实现。</p><p><!--`对象具有属性，面向对象就是通过调用对象中行为属性来实现功能-->``</p><p>&nbsp;</p><h3><a name='header-n49' class='md-header-anchor '></a>5.1.2 面向对象与面向过程的区别</h3><ol start='' ><li><p><strong>面向过程</strong>：POP: Process-Oriented Programming</p><p>以函数（方法）为最小单位</p><p>数据独立于函数之外</p><p>面向功能划分软件结构</p><p>以过程，步骤为主，考虑怎么做</p><p>程序员是具体执行者</p><p>制约了软件的可维护性和可扩展性</p></li><li><p><strong>面向对象</strong>：OOP: Object Oriented Programming</p><p>以类/对象为最小单位，类包括：数据+方法</p><p>把软件系统看成各种对象的集合</p><p>以对象（谁）为主，考虑谁来做，谁能做</p><p>程序员是指挥者</p><p>面向对象仍然包含面向过程，只不过关注点变了，关注谁来做</p><p>软件可重用性、可维护性和可扩展性强</p></li></ol><p>面向对象思想是一种更符合我们思考习惯的思想，它可以将复杂的事情简单化，并将我们从执行者变成了指挥者。</p><p>例子：吃饭，洗衣服</p><p><span>	</span>把大象装进冰箱</p><p><img src='imgs05/1561535567825.png' alt='1561535567825' referrerPolicy='no-referrer' /></p><p>&nbsp;</p><h3><a name='header-n72' class='md-header-anchor '></a>5.1.3 面向对象的三大特征</h3><p>面向对象的语言中，包含了三大基本特征，即：</p><ul><li><strong>封装(Encapsulation）</strong></li><li><strong>继承(Inheritance) </strong></li><li><strong>多态(Polymorphism) </strong></li></ul><h2><a name='header-n81' class='md-header-anchor '></a>5.2 类和对象</h2><h3><a name='header-n82' class='md-header-anchor '></a>5.2.1 类与对象的概念及关系</h3><p><strong>万物皆对象</strong>，环顾周围，你会发现很多对象，比如桌子，椅子，同学，老师，顾客，收银员等。</p><p>描述身边的对象：</p><p><img src="imgs05\身边对象.png" style="zoom:60%;" /></p><p>如何描述对象？</p><p><strong>对象的属性</strong>：姓名，年龄，体重，员工编号，部门等对象的静态特征</p><p><strong>对象的行为</strong>：购买商品，收款，打印账单等对象的动态特征或行为特征或者功能</p><ol start='' ><li><p><strong>什么是对象？</strong></p><ul><li><strong>对象</strong>：是一个具有特定属性和行为特征的具体事物。</li></ul></li><li><p><strong>什么是类？</strong></p><ul><li><strong>类</strong>：是一类具有相同特征的事物的抽象描述，是一组相同<strong>属性</strong>和<strong>行为</strong>的对象的集合。</li></ul></li><li><p><strong>类与对象的关系</strong></p><ul><li>类是对一类事物的描述，是<strong>抽象的</strong>。</li><li>对象是一类事物的实例，是<strong>具体的</strong>。</li><li><strong>类是对象的模板，对象是类的实体</strong>。</li></ul><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="markdown"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="markdown"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">上例中的类和对象：</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-strong">**顾客**</span>是一类事物的抽象描述，即为类，他们都有姓名，年龄，体重这些属性特征和购买商品的行为特征；<span class="cm-strong">**张三**</span>是一个具体的顾客，即为对象。</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-strong">**收银员**</span>是另一类事物的抽象描述，他们都有员工号，姓名、部门这些属性特征和收款、打印账单的行为特征；<span class="cm-strong">**李四**</span>是一个具体的收银员。</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 173px;"></div><div class="CodeMirror-gutters" style="display: none; height: 173px;"></div></div></div></pre></li></ol><p>举例描述类和对象：学生、手机、汽车、猫等</p><h3><a name='header-n111' class='md-header-anchor '></a>5.2.2 类的定义</h3><p>Java中类的定义，就是把现实中类的概念用Java语言描述。</p><p>Java中用<strong>class</strong>关键字定义一个类，并定义类的成员：成员变量（属性）和成员方法（行为）。</p><p><strong>类的定义格式</strong></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span class="cm-def">类名</span> {</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;<span class="cm-comment">//成员变量，描述这类事物的属性</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;<span class="cm-comment">//成员方法，描述这类事物的行为</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 99px;"></div><div class="CodeMirror-gutters" style="display: none; height: 99px;"></div></div></div></pre><ul><li><strong>成员变量</strong>：和以前定义变量几乎是一样的。只不过位置发生了改变。<strong>在类中，方法外</strong>，用于描述对象的属性特征。</li><li><strong>成员方法</strong>：和以前写的main方法格式类似。只不过功能和形式更丰富了。在类中，方法外，用于描述对象的行为特征。</li></ul><p>定义类的代码举例：</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">//定义顾客类</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span class="cm-def">Customer</span> {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment">//成员变量,描述属性特征</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-variable-3">String</span> <span class="cm-variable">name</span>;<span class="cm-comment">//姓名</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable-3">int</span> <span class="cm-variable">age</span>;<span class="cm-comment">//年龄</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable-3">int</span> <span class="cm-variable">weight</span>;<span class="cm-comment">//体重</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">//成员方法，描述行为特征</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">public</span> <span class="cm-variable-3">void</span> <span class="cm-variable">shopping</span>(){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-string">"购物..."</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 296px;"></div><div class="CodeMirror-gutters" style="display: none; height: 296px;"></div></div></div></pre><p><strong>练习：</strong></p><p><span>	</span>定义学生类，汽车类</p><h3><a name='header-n125' class='md-header-anchor '></a>5.2.3 对象的创建与使用</h3><p>类是对象的模板，所以通过类创建这个类的对象，或者说创建这个类的一个实例，这个过程称为类的实例化：</p><ul><li><p><strong>创建对象语法格式：</strong> </p><p><strong>类名 对象名= new 类名 ();</strong></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">//创建顾客对象</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">Customer</span> <span class="cm-variable">c</span><span class="cm-operator">=</span><span class="cm-keyword">new</span> <span class="cm-variable">Customer</span>();</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 49px;"></div><div class="CodeMirror-gutters" style="display: none; height: 49px;"></div></div></div></pre></li><li><p><strong>使用对象的成员，使用“. ”操作</strong>：</p><p>使用成员变量：<strong>对象名.属性</strong>
+使用成员方法：<strong>对象名.方法名()</strong></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">c</span>.<span class="cm-variable">name</span><span class="cm-operator">=</span><span class="cm-string">"张三"</span>; <span class="cm-comment">//访问对象的属性，赋值</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">c</span>.<span class="cm-variable">age</span><span class="cm-operator">=</span><span class="cm-number">18</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">c</span>.<span class="cm-variable">name</span><span class="cm-operator">+</span><span class="cm-string">"--"</span><span class="cm-operator">+</span><span class="cm-variable">c</span>.<span class="cm-variable">age</span>); <span class="cm-comment">//访问对象的属性，获取值</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">c</span>.<span class="cm-variable">shopping</span>(); <span class="cm-comment">//访问对象的方法</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 123px;"></div><div class="CodeMirror-gutters" style="display: none; height: 123px;"></div></div></div></pre></li></ul><p><strong>练习：</strong></p><p><span>	</span>定义手机类并创建对象再使用</p><h3><a name='header-n138' class='md-header-anchor '></a>5.2.4对象的内存分析</h3><p><span>	</span><strong>JVM内存结构图：</strong></p><p><img src='imgs05\jvm.png' alt='' referrerPolicy='no-referrer' /></p><figure><table><thead><tr><th>区域名称</th><th>作用</th></tr></thead><tbody><tr><td><strong>栈</strong></td><td>虚拟机栈，用于存储正在执行的每个Java方法的局部变量表等。局部变量表存放了编译期可知长度的各种基本数据类型、对象引用，方法执行完，自动释放。</td></tr><tr><td><strong>堆</strong></td><td>存储对象（包括数组对象），new来创建的，都存储在堆内存。</td></tr><tr><td><strong>方法区</strong></td><td>存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</td></tr><tr><td>程序计数器</td><td>程序计数器是CPU中的寄存器，它包含每一个线程下一条要执行的指令的地址</td></tr><tr><td>本地方法栈</td><td>当程序中调用了native的本地方法时，本地方法执行期间的内存区域</td></tr></tbody></table></figure><p>&nbsp;</p><p><strong>对象名中存储的是什么呢？答：对象地址</strong></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">class</span> <span class="cm-def">Student</span>{</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span class="cm-def">TestStudent</span>{</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">//Java程序的入口</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">public</span> <span class="cm-keyword">static</span> <span class="cm-variable-3">void</span> <span class="cm-variable">main</span>(<span class="cm-variable-3">String</span>[] <span class="cm-variable">args</span>){</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-keyword">new</span> <span class="cm-variable">Student</span>());<span class="cm-comment">//Student@7852e922</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">Student</span> <span class="cm-variable">stu</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">Student</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">stu</span>);<span class="cm-comment">//Student@4e25154f</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-3">int</span>[] <span class="cm-variable">arr</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable-3">int</span>[<span class="cm-number">5</span>];</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">println</span>(<span class="cm-variable">arr</span>);<span class="cm-comment">//[I@70dea4e</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">//Student和TestStudent没有位置要求，谁在上面谁在下面都可以</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">//但是如果TestStudent类的main中使用了Student类，那么要求编译时，这个Student已经写好了，不写是不行的</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">//如果两个类都在一个.java源文件中，只能有一个类是public的</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 469px;"></div><div class="CodeMirror-gutters" style="display: none; height: 469px;"></div></div></div></pre><p>发现学生对象和数组对象类似，直接打印对象名和数组名都是显示“类型@对象的hashCode值&quot;，所以说类、数组都是引用数据类型，引用数据类型的变量中存储的是对象的地址，或者说指向堆中对象的首地址。</p><p>那么像“Student@4e25154f”是对象的地址吗？不是，因为Java是对程序员隐藏内存地址的，不暴露内存地址信息，所以打印对象时不直接显示内存地址，而是JVM提取了对象描述信息给你现在，默认提取的是对象的运行时类型@代表对象唯一编码的hashCode值。</p><p><img src='imgs05/1561597909862.png' alt='1561597909862' referrerPolicy='no-referrer' /></p><h2><a name='header-n166' class='md-header-anchor '></a>5.3 包（Package）</h2><h3><a name='header-n167' class='md-header-anchor '></a>5.3.1 包的作用</h3><p>（1）可以避免类重名：有了包之后，类的全名称就变为：包.类名</p><p>（2）分类组织管理众多的类</p><p>例如：</p><ul><li>java.lang----包含一些Java语言的核心类，如String、Math、Integer、 System和Thread等，提供常用功能</li><li>java.net----包含执行与网络相关的操作的类和接口。</li><li>java.io ----包含能提供多种输入/输出功能的类。</li><li>java.util----包含一些实用工具类，如集合框架类、日期时间、数组工具类Arrays，文本扫描仪Scanner，随机值产生工具Random</li><li>java.text----包含了一些java格式化相关的类</li><li>java.sql和javax.sql----包含了java进行JDBC数据库编程的相关类/接口</li><li>java.awt和java.swing----包含了构成抽象窗口工具集（abstract window toolkits）的多个类，这些类被用来构建和管理应用程序的图形用户界面(GUI)。</li></ul><p>（3）可以控制某些类型或成员的可见范围</p><p>如果某个类型或者成员的权限修饰缺省的话，那么就仅限于本包使用</p><h3><a name='header-n188' class='md-header-anchor '></a>5.3.2 声明包的语法格式</h3><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">package</span> <span class="cm-def">包名</span>;</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;"></div><div class="CodeMirror-gutters" style="display: none; height: 25px;"></div></div></div></pre><blockquote><p>注意：</p><p>(1)必须在源文件的代码首行</p><p>(2)一个源文件只能有一个声明包的语句</p></blockquote><p>包的命名规范和习惯：
+（1）所有单词都小写，每一个单词之间使用.分割
+（2）习惯用公司的域名倒置</p><p>例如：com.atguigu.xxx;</p><blockquote><p>建议大家取包名时不要使用“java.xx&quot;包</p></blockquote><h3><a name='header-n198' class='md-header-anchor '></a>5.3.3 如何跨包使用类</h3><p>前提：被使用的类或成员的权限修饰符是&gt;缺省的，即可见的</p><p>（1）使用类型的全名称</p><p>例如：java.util.Scanner input = new java.util.Scanner(System.in);</p><p>（2）使用import 语句之后，代码中使用简名称</p><p>import语句告诉编译器到哪里去寻找类。</p><p>import语句的语法格式：</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">import</span> <span class="cm-variable">包</span>.<span class="cm-variable">类名</span>;</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">import</span> <span class="cm-variable">包</span>.<span class="cm-operator">*</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">import</span> <span class="cm-keyword">static</span> <span class="cm-variable">包</span>.<span class="cm-variable">类名</span>.<span class="cm-variable">静态成员</span>; <span class="cm-comment">//后面再讲</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 74px;"></div><div class="CodeMirror-gutters" style="display: none; height: 74px;"></div></div></div></pre><blockquote><p>注意：</p><p>使用java.lang包下的类，不需要import语句，就直接可以使用简名称</p><p>import语句必须在package下面，class的上面</p><p>当使用两个不同包的同名类时，例如：java.util.Date和java.sql.Date。一个使用全名称，一个使用简名称</p></blockquote><p>示例代码：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n212" mdtype="fences" style="break-inside: unset;">package com.atguigu.bean;
+
+public class Student {
+	// 成员变量
+	private String name;
+	private int age;
+
+	// 构造方法
+	public Student() {
+	}
+
+	public Student(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
+
+	// 成员方法
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public int getAge() {
+		return age;
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n213" mdtype="fences" style="break-inside: unset;">package com.atguigu.test;
+
+import java.util.Scanner;
+import java.util.Date;
+import com.atguigu.bean.Student;
+
+public class Test{
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        Student stu = new Student();
+        String str = "hello";
+        
+        Date now = new Date();
+        java.sql.Date d = new java.sql.Date(346724566);        
+    }
+}
+</pre><h2><a name='header-n214' class='md-header-anchor '></a>5.4 成员变量</h2><h3><a name='header-n215' class='md-header-anchor '></a>5.4.1 变量的分类</h3><p>根据定义位置不同分为：</p><ul><li><p><strong>局部变量：</strong>定义在方法体内或其他局部区域内的变量（之前所使用的都是main方法中定义的变量，为局部变量）。</p></li><li><p><strong>成员变量：</strong>定义在类的成员位置，在方法体外，与方法（例如main方法）平行的位置。并且有修饰符修饰。</p><p>根据修饰的不同成员变量又分为：</p><ul><li><strong>类变量：</strong>或叫<strong>静态变量</strong>，有static修饰的成员变量。（上例中的country为类变量）</li><li><strong>实例变量：</strong>没有static修饰的成员变量。</li></ul></li></ul><h3><a name='header-n228' class='md-header-anchor '></a>5.4.2 成员变量的声明</h3><p>语法格式：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n230" mdtype="fences">class 类名{
+    【修饰符】 数据类型  属性名;    //属性有默认值
+    【修饰符】 数据类型  属性名 = 值; //属性有初始值
+}
+</pre><blockquote><p>说明：常用修饰符有public、缺省、private、protected、final、static</p><p>数据类型可以是任意基本数据类型和引用数据类型。</p><p>属性名即变量名，符合标识符的命名规则和规范。</p></blockquote><p>举例：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n236" mdtype="fences">//定义一个中国人类
+class Chinese{
+    public static String country;
+	public String name;
+    char gender = '男';//显式赋值
+    private int age;
+}
+</pre><h3><a name='header-n237' class='md-header-anchor '></a>5.4.3 成员变量的访问</h3><ul><li><p>实例变量的访问：</p><ul><li>对象名.静态成员变量  </li></ul></li><li><p>类变量的访问：</p><ul><li>类名.静态成员变量 </li><li>对象名.静态成员变量（不推荐）</li></ul></li></ul><p>示例：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n252" mdtype="fences" style="break-inside: unset;">public class TestChinese {
+	public static void main(String[] args) {
+		//类名.静态成员变量
+		System.out.println(Chinese.country);
+		//错误，非静态成员变量必须通过对象.进行访问
+//		System.out.println(Chinese.name);
+		
+		Chinese c1 = new Chinese();
+		//对象名.非静态成员变量
+		System.out.println(c1.name);
+		//静态的成员变量也可以通过对象.进行访问
+		//对象名.非静态成员变量
+		System.out.println(c1.country);
+        System.out.println(c1.gender);
+	}
+}
+class Chinese{
+	static String country;
+	String name;
+    char gender = '男';
+}
+</pre><h3><a name='header-n253' class='md-header-anchor '></a>5.4.4 成员变量的特点</h3><ol start='' ><li><p><strong>成员变量有默认初始值</strong>（同数组元素默认初始值）</p><figure><table><thead><tr><th style='text-align:center;' >数据类型</th><th style='text-align:center;' >默认值</th></tr></thead><tbody><tr><td style='text-align:center;' >byte，short，int，long</td><td style='text-align:center;' >0</td></tr><tr><td style='text-align:center;' >float，double</td><td style='text-align:center;' >0.0</td></tr><tr><td style='text-align:center;' >char</td><td style='text-align:center;' >0或&#39;\u0000&#39;表现为空</td></tr><tr><td style='text-align:center;' >boolean</td><td style='text-align:center;' >false</td></tr><tr><td style='text-align:center;' >数组，类，接口等引用类型</td><td style='text-align:center;' >null</td></tr></tbody></table></figure></li><li><p><strong>类变量的值是所有对象共享的，而实例变量的值是每个对象独立的</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n278" mdtype="fences" style="break-inside: unset;">public class TestChinese {
+	public static void main(String[] args) {
+		Chinese c1 = new Chinese();
+		Chinese c2 = new Chinese();
+		
+		c1.name = "张三";
+		c2.name = "李四";
+        c2.gender = '女';
+		
+//		c1.country = "中国";
+		Chinese.country = "中国";//推荐
+		
+		System.out.println("c1.country = " + c1.country + ",c1.name = " + c1.name + ",c1.gender = " + c1.gender);
+		System.out.println("c2.country = " + c2.country + ",c2.name = " + c2.name + ",c2.gender = " + c2.gender);
+	}	
+}
+class Chinese{
+	static String country;
+	String name;
+    char gender = '男';
+}
+</pre></li></ol><h3><a name='header-n280' class='md-header-anchor '></a>5.4.5 成员变量的内存分析</h3><p>从内存分析看类变量与实例变量如何呈现的以上特点。</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n282" mdtype="fences" style="break-inside: unset;">class Test08FieldSave{
+	public static void main(String[] args){
+		Chinese c1 = new Chinese();
+        Chinese c2 = new Chinese();
+		c1.name = "张三";
+		c2.name = "李四";
+		System.out.println(c1.country+“--”+c1.name);
+        System.out.println(c2.country+“--”+c2.name);
+		System.out.println("-------------------------");
+		//修改类变量值
+		c1.country = "中华人民共和国";
+        //修改实例变量
+        c1.name="张三丰";
+		System.out.println(c1.country+“--”+c1.name);
+        System.out.println(c2.country+“--”+c2.name);
+		System.out.println(Chinese.country);
+	}
+}
+
+class Chinese{
+	static String country = "中国";
+	String name;
+}
+</pre><p><img src='imgs05/2、成员变量内存图分析（2）.png' alt='' referrerPolicy='no-referrer' /></p><h3><a name='header-n284' class='md-header-anchor '></a>5.4.6  小结:成员变量与局部变量的区别</h3><figure><table><thead><tr><th>&nbsp;</th><th><strong>成员变量</strong></th><th><strong>局部变量</strong></th></tr></thead><tbody><tr><td><strong>声明的位置</strong></td><td>直接声明在类的成员位置</td><td>声明在方法体中或其他局部区域内（方法声明上，构造方法，代码块等）</td></tr><tr><td><strong>修饰符</strong></td><td>public、private、static、final等</td><td>不能使用访问权限修饰符，可以使用final</td></tr><tr><td><strong>内存加载位置</strong></td><td>堆或方法区（static修饰时）</td><td>栈</td></tr><tr><td><strong>初始化值</strong></td><td>有默认初始化值</td><td>无默认初始化值</td></tr><tr><td><strong>生命周期</strong></td><td>同对象或类（static时）的生命周期</td><td>随着方法的调用而存在，方法调用完毕即消失</td></tr></tbody></table></figure><h3><a name='header-n310' class='md-header-anchor '></a>练习题</h3><p>（1）声明一个圆的图形类，有属性：半径
+<span>	</span>在测试类的main中，创建圆的2个对象，为半径属性赋值，并显示两个圆的半径值和面积值
+<span>	</span>提示：圆周率为Math.PI</p><p>（2）声明一个银行账户类，有属性：利率、账号、余额</p><p><span>	</span>在测试类的main中，创建账户类的两个对象，其中所有账户的利率是相同的，都是0.035，而账号和余额是不同的，并打印显示</p><p>（3）声明一个MyDate类型，有属性：年，月，日</p><p><span>		</span>  声明另一个Employee类型，有属性：姓名（String类型），生日（MyDate类型）</p><p>在测试类中的main中，创建两个员工对象，并为他们的姓名和生日赋值，并显示</p><p>&nbsp;</p><h2><a name='header-n318' class='md-header-anchor '></a>5.5 方法</h2><p><strong>成员变量是用来存储对象的数据信息的，那么如何表示对象的行为功能呢？就要通过方法来实现</strong></p><h3><a name='header-n320' class='md-header-anchor '></a><strong>5.5.1 方法的概念</strong></h3><p><strong>方法也叫函数，是一个独立功能的定义，是一个类中最基本的功能单元。</strong></p><p><strong>把一个功能封装为方法的目的是，可以实现代码重用，从而简少代码量。</strong></p><h3><a name='header-n323' class='md-header-anchor '></a><strong>5.5.2 成员方法的分类</strong></h3><p>根据修饰不同方法主要分为两类：</p><ul><li><strong>实例方法：</strong>没有static修饰的方法，必须通过实例对象来调用。</li><li><strong>静态方法：</strong>有static修饰的方法，也叫类方法，主要特点是可以由类名来调用。</li></ul><h3><a name='header-n330' class='md-header-anchor '></a>5.5.3 方法的声明</h3><ol start='' ><li><p><strong>方法声明的位置必须在类中方法外，在类的成员位置</strong></p></li><li><p><strong>语法格式</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n336" mdtype="fences">【修饰符】 返回值类型 方法名(【参数列表：参数类型1 参数名1,参数类型2 参数名, ...... 】){
+        方法体；
+        【return 返回值;】
+}
+</pre></li><li><p><strong>格式说明</strong>：</p><ul><li><p><strong>修饰符：</strong> 修饰符后面详细讲，例如：public，static等都是修饰符</p></li><li><p><strong>返回值类型：</strong> 表示方法运行的结果的数据类型，与<strong>”return 返回值“</strong>搭配使用</p><ul><li>无返回值：void</li><li>有返回值：可以是任意基本数据类型和引用数据类型</li></ul></li><li><p><strong>方法名：</strong>给方法起一个名字，要符合标识符的命名规则，尽量见名知意，能准确代表该方法功能的名字</p></li><li><p><strong>参数列表：</strong>方法内部需要用到其他方法中的数据，需要通过参数传递的形式将数据传递过来，可以是基本数据类型、引用数据类型、也可以没有参数，什么都不写</p></li><li><p><strong>方法体：</strong>特定功能的代码</p></li><li><p><strong>return：</strong>结束方法，可以返回方法的运行结果</p><ul><li>可以返回不同类型的数据，对应匹配的<strong>返回值类型</strong>。</li><li>如果方法无返回值，可以省去return，并且返回值类型为<strong>void</strong></li></ul><p><strong>简单示例：</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n363" mdtype="fences">public class Person {
+    
+    public void hello(){
+        System.out.println("hello world");
+    }
+}
+</pre></li></ul></li><li><p><strong>示例一：</strong></p><p>定义一个圆的图形类：</p><p>属性（成员变量）：半径，</p><p>功能（成员方法）：计算圆的面积，并返回面积</p><p>在测试类的main中，创建圆的2个对象，为半径属性赋值，调用两个方法进行测试
+​<em>提示：圆周率为Math.PI</em></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n370" mdtype="fences">class Circle{
+	double radius;
+	double area() {	
+		return Math.PI * radius * radius;
+	}
+}
+</pre><blockquote><p><strong>Circle不同的对象，半径值不同，那么面积也不同，所以这里area()是非静态的</strong></p></blockquote></li><li><p><strong>示例二：</strong></p><p>定义一个计算工具类CountTools：</p><p>方法1：求两个整数的最大值</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n377" mdtype="fences">class CountTools{
+	static int max(int a, int b) {
+        return a &gt; b ? a : b;
+	}
+}
+</pre><blockquote><p><strong>CountTools只是一个工具类，求两个整数最大值的功能，和CountTools对象无关，所以这里max方法声明为静态的更好，当然也可以声明为非静态的，就是调用的时候需要创建CountTools对象而已。</strong></p></blockquote></li></ol><p>&nbsp;</p><h3><a name='header-n381' class='md-header-anchor '></a>5.5.4方法的调用</h3><p>方法必须先声明后使用，不调用不执行，调用一次执行一次。</p><ol start='' ><li><p><strong>实例方法的调用</strong></p><p>对象名.实例方法(【实参列表】)  </p><p><strong>示例：</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n388" mdtype="fences" style="break-inside: unset;">public class TestCircle {
+	public static void main(String[] args) {
+		Circle c1 = new Circle();
+		c1.radius = 1.2;
+		System.out.println("c1的面积：" + c1.area());
+		//非静态方法只能通过"对象."进行访问
+//		System.out.println("c1的面积：" + Circle.area());
+        
+		Circle c2 = new Circle();
+		c2.radius = 2.5;
+		System.out.println("c2的面积：" + c2.area());
+	}
+}
+class Circle{
+	double radius;
+	public double area() {
+		return Math.PI * radius * radius;
+	}
+}
+</pre></li><li><p><strong>类方法（静态方法）的调用</strong></p><p>类名.类方法(【实参列表】) </p><p>对象名.类方法(【实参列表】)  （不推荐）</p><p><strong>示例：</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n394" mdtype="fences" style="break-inside: unset;">public class TestCount {
+	public static void main(String[] args) {
+		System.out.println(CountTools.max(4, 1));
+		
+		//静态方法也可以通过“对象.”访问，就是麻烦点
+		CountTools c = new CountTools();
+		System.out.println(c.max(2, 5));
+	}
+}
+class CountTools{
+	static int max(int a, int b) {
+		return a &gt; b ? a : b;
+	}
+}
+</pre><p>&nbsp;</p></li><li><p><strong>形参与实参的概念理解</strong></p><ul><li><strong>形参：</strong>在定义方法时方法名后面括号中声明的变量称为形式参数（简称形参）即形参出现在方法定义时。</li><li><strong>实参：</strong>调用方法时方法名后面括号中的使用的值/变量/表达式称为实际参数（简称实参）即实参出现在方法调用时。</li></ul></li><li><p><strong>方法调用的注意事项</strong></p><ul><li>调用方法时，实参的个数、类型、顺序必须要与形参列表一一对应</li><li>调用方法时，如果方法有返回值，可以用与返回值类型相同的变量接受或直接处理返回值结果，如果方法的返回值类型是void，不需要也不能接收和处理返回值结果。</li></ul></li></ol><h3><a name='header-n410' class='md-header-anchor '></a>5.5.5 本类内的成员变量和方法访问</h3><p>在一个类的内部，调用本类的方法或成员变量时，<strong>直接用，不需要加“对象名.&quot;和&quot;类名.&quot;</strong></p><p><strong>例外情况：静态方法中不能直接访问本类的非静态的成员变量和成员方法</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n413" mdtype="fences">* 静态不能调用非静态
+* 非静态可以调用静态
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n414" mdtype="fences" style="break-inside: unset;">class Circle{
+	double radius;
+	
+	//写一个方法，可以返回“圆对象”的详细信息
+	String getDetailInfo(){
+		return "半径：" + radius + "，面积：" + area() +"，周长：" + perimeter();
+	}
+	
+	//写一个方法，可以返回“圆对象”的面积
+	double area(){
+		return Math.PI*radius*radius;
+	}
+	
+	//写一个方法，可以返回“圆对象”的周长
+	double perimeter(){
+		return 2*Math.PI*radius;
+	}
+
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n415" mdtype="fences" style="break-inside: unset;">class Test{
+		
+	static void test(){
+		System.out.println("");
+	}
+	void method(){
+		 test();
+	}
+    
+    public static void main(String[] args){
+        method();//错误
+        test();//正确
+    }
+}
+</pre><h3><a name='header-n416' class='md-header-anchor '></a>5.5.6 方法的声明与调用练习</h3><ol start='' ><li><p><strong>声明数学工具类MathTools</strong></p><p>（1）静态方法1：可以比较两个整数是否相同
+（2）静态方法2：可以判断某个数是否是素数</p></li><li><p><strong>声明数组工具类ArraysTools</strong></p><p>（1）静态方法1：可以实现给任意整型数组实现从小到大排序
+（2）静态方法2：可以遍历任意整型数组，返回结果效果：[元素1，元素2，元素3。。。]</p></li><li><p><strong>声明矩形类Rectangle</strong></p><p>（1）包含属性：长、宽</p><p>（2）包含3个方法：</p><ol start='' ><li>求面积、</li><li>求周长、</li><li>返回矩形对象的信息：长：xx，宽：xx，面积：xx，周长：xx</li></ol></li><li><p><strong>声明一个圆类，有半径radius成员变量</strong></p><ol start='' ><li>声明一个图形工具类GraphicTools，包含一个静态方法可以返回两个圆中面积大的那一个圆的方法</li><li>在测试类中测试</li></ol></li></ol><h3><a name='header-n442' class='md-header-anchor '></a>5.5.7 方法调用内存分析</h3><p><strong>方法不调用不执行，调用一次执行一次，每次调用会在栈中有一个入栈动作，即给当前方法开辟一块独立的内存区域，用于存储当前方法的局部变量的值，当方法执行结束后，会释放该内存，称为出栈，如果方法有返回值，就会把结果返回调用处，如果没有返回值，就直接结束，回到调用处继续执行下一条指令。</strong></p><p><strong>栈结构特点：先进后出，后进先出。</strong></p><ol start='' ><li><p><strong>示例一：</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n448" mdtype="fences">public class TestCount {
+	public static void main(String[] args) {
+        int a = 4;
+        int b = 2;
+		int m = CountTools.max(a, b));
+	}
+}
+class CountTools{
+	static int max(int a, int b) {
+		return a &gt; b ? a : b;
+	}
+}
+</pre><p><strong><img src='imgs05/1572349992849.png' alt='1572349992849' referrerPolicy='no-referrer' /></strong></p><p>&nbsp;</p></li><li><p><strong>示例二：</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n453" mdtype="fences" style="break-inside: unset;">public class TestCircle {
+	public static void main(String[] args) {
+		Circle c1 = new Circle();
+		c1.radius = 1.2;
+		int area1 = c1.area();
+		
+		Circle c2 = new Circle();
+		c2.radius = 2.5;
+		int area2 = c2.area();
+	}
+}
+class Circle{
+	double radius;
+	public double area() {
+		return Math.PI * radius * radius;
+	}
+}
+</pre><p><strong><img src='imgs05/1572350522409.png' alt='1572350522409' referrerPolicy='no-referrer' /></strong></p><p>&nbsp;</p></li><li><p><strong>示例三：</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n458" mdtype="fences" style="break-inside: unset;">public class Test {
+	public static void main(String[] args) {
+		int[] arr = {2,4,1,5,3};
+		
+		ArrayUtil.sort(arr);
+		
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+	}
+}
+class ArrayUtil{
+	public static void sort(int[] arr){
+		for (int i = 1; i &lt; arr.length; i++) {
+			for (int j = 0; j &lt; arr.length - i; j++) {
+				if(arr[j] &gt; arr[j+1]){
+					int temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+				}
+			}
+		}
+	}
+}
+</pre><p><strong><img src='imgs05/1572350909017.png' alt='1572350909017' referrerPolicy='no-referrer' /></strong></p><p>&nbsp;</p></li></ol><h2><a name='header-n461' class='md-header-anchor '></a>5.6 方法参数的值传递机制</h2><ul><li><p><strong>方法的参数传递机制：实参给形参赋值</strong></p><ul><li><p><strong>方法的形参是基本数据类型时，形参值的改变不会影响实参；</strong></p></li><li><p><strong>方法的形参是引用数据类型时，形参地址值的改变不会影响实参，但是形参地址值里面的数据的改变会影响实参，例如，修改数组元素的值，或修改对象的属性值。</strong></p><ul><li><strong>注意：String、Integer等特殊类型容易错</strong></li></ul></li></ul></li></ul><p><strong>示例代码1：</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n474" mdtype="fences" style="break-inside: unset;">class Test{
+    public static void swap(int a, int b){
+        int temp = a;
+        a = b;
+        b = temp;
+	}
+
+	public static void main（String[] args){
+        int x = 1;
+        int y = 2;
+        swap(x,y);//调用完之后，x与y的值不变
+    }
+}
+
+</pre><p><strong>示例代码2：</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n476" mdtype="fences" style="break-inside: unset;">class Test{
+    public static void change(MyData my){
+        my.num *= 2;
+    }
+    
+    public static void main(String[] args){
+        MyData m = new MyData();
+        m.num = 1;
+        
+        change(m);//调用完之后，m对象的num属性值就变为2
+    }
+}
+
+class MyData{
+    int num;
+}
+</pre><p><strong>示例代码3：</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n478" mdtype="fences" style="break-inside: unset;">public class Test {
+	public static void main(String[] args) {
+		int[] arr = {2,4,1,5,3};
+		
+		ArrayUtil.sort(arr);
+		
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+	}
+}
+class ArrayUtil{
+	public static void sort(int[] arr){
+		for (int i = 1; i &lt; arr.length; i++) {
+			for (int j = 0; j &lt; arr.length - i; j++) {
+				if(arr[j] &gt; arr[j+1]){
+					int temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+				}
+			}
+		}
+	}
+}
+</pre><p><strong>陷阱1：</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n480" mdtype="fences" style="break-inside: unset;">/*
+陷阱1：在方法中，形参 = 新new对象，那么就和实参无关了
+*/
+class Test{
+    public static void change(MyData my){
+        my = new MyData();//形参指向了新对象
+        my.num *= 2;
+    }
+    
+    public static void main(String[] args){
+        MyData m = new MyData();
+        m.num = 1;
+        
+        change(m);//调用完之后，m对象的num属性值仍然为1
+    }
+}
+
+class MyData{
+    int num;
+}
+</pre><p><strong>陷阱2：见字符串和包装类部分</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n482" mdtype="fences">public class Test {
+	public static void main(String[] args) {
+		StringUtil util = new StringUtil();
+		String str = "尚硅谷";
+		util.change(str);
+		System.out.println(str);//
+	}
+}
+class StringUtil{
+	public void change(String str){
+		str += "你好";//String对象不可变，一旦修改就会产生新对象
+	}
+}
+</pre><p>&nbsp;</p><h2><a name='header-n484' class='md-header-anchor '></a><strong>5.7 方法重载</strong></h2><p><strong>方法重载：指在同一个类中，允许存在一个以上的同名方法，只要它们的参数列表不同即可，与修饰符和返回值类型无关。</strong></p><p><strong>参数列表不同：指的是参数个数不同，数据类型不同，数据类型顺序不同。</strong></p><p>&nbsp;</p><ol start='' ><li><p><strong>示例一：比较两个数据是否相等</strong></p><p><strong>比较两个数据是否相等。参数类型分别为两个<code>byte</code>类型，两个<code>short</code>类型，两个<code>int</code>类型，两个<code>long</code>类型，并在<code>main</code>方法中进行测试。</strong> </p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n492" mdtype="fences" style="break-inside: unset;">public class Method_Demo6 {
+    public static void main(String[] args) {
+        //定义不同数据类型的变量
+        byte a = 10;
+        byte b = 20;
+        short c = 10;
+        short d = 20;
+        int e = 10;
+        int f = 10;
+        long g = 10;
+        long h = 20;
+        // 调用
+        System.out.println(compare(a, b));
+        System.out.println(compare(c, d));
+        System.out.println(compare(e, f));
+        System.out.println(compare(g, h));
+    }
+    // 两个byte类型的
+    public static boolean compare(byte a, byte b) {
+        System.out.println("byte");
+        return a == b;
+    }
+
+    // 两个short类型的
+    public static boolean compare(short a, short b) {
+        System.out.println("short");
+        return a == b;
+    }
+
+    // 两个int类型的
+    public static boolean compare(int a, int b) {
+        System.out.println("int");
+        return a == b;
+    }
+
+    // 两个long类型的
+    public static boolean compare(long a, long b) {
+        System.out.println("long");
+        return a == b;
+    }
+}
+</pre></li><li><p><strong>示例二：求各种最大值</strong></p><p><strong>用重载实现：</strong>
+<strong>定义方法求两个整数的最大值</strong>
+<strong>定义方法求三个整数的最大值</strong>
+<strong>定义方法求两个小数的最大值</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n496" mdtype="fences" style="break-inside: unset;">//求两个整数的最大值
+public int max(int a,int b){
+    return a&gt;b?a:b;
+}
+	
+//求三个整数的最大值
+public int max(int a, int b, int c){
+    return max(max(a,b),c);
+}
+	
+//求两个小数的最大值
+public double max(double a, double b){
+    return a&gt;b?a:b;
+}
+</pre></li><li><p><strong>示例三：判断两个方法是否是合理的重载方法</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n499" mdtype="fences" style="break-inside: unset;">//判断如下两个方法是否构成重载：是
+class StringUtil{
+	public static String concat(char seperator, String... args){
+		String str = "";
+		for (int i = 0; i &lt; args.length; i++) {
+			if(i==0){
+				str += args[i];
+			}else{
+				str += seperator + args[i];
+			}
+		}
+		return str;
+	}
+	public static String concat(String[] args){
+		String str = "";
+		for (int i = 0; i &lt; args.length; i++) {
+			str += args[i];
+		}
+		return str;
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n500" mdtype="fences" style="break-inside: unset;">//判断如下两个方法是否构成重载：不是
+class Count{
+	public static int getSum(int... nums){
+		int sum = 0;
+		for (int i = 0; i &lt; nums.length; i++) {
+			sum += nums[i];
+		}
+		return sum;
+	}
+	public static int getSum(int[] nums){
+		int sum = 0;
+		for (int i = 0; i &lt; nums.length; i++) {
+			sum += nums[i];
+		}
+		return sum;
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n501" mdtype="fences" style="break-inside: unset;">class Test06_Overload_Problem2{
+	public static void main(String[] args){
+		System.out.println(sum(1,2));//(int a, int b)
+		System.out.println(sum(1,2,3));//(int... args)和(int a, int... args)都兼容，就有问题
+	}
+
+	//不调用编译没问题，但是调用时就有问题
+	public static int sum(int a, int b){
+		return a+b;
+	}
+	public static int sum(int... args){
+		int sum = 0;
+		for(int i=0; i&lt;args.length; i++){
+			sum += args[i];
+		}
+		return sum;
+	}
+	public static int sum(int a, int... args){
+		int sum = a;
+		for(int i=0; i&lt;args.length; i++){
+			sum += args[i];
+		}
+		return sum;
+	}	
+}
+</pre><h4><a name='header-n502' class='md-header-anchor '></a><strong>课后练习</strong></h4><p>1、声明一个数组工具类ArraysTools，包含几个重载方法</p><p>（1）重载方法系列1：可以为byte[]，short[]，int[]，long[]，double[]，char[]数组实现从小到大排序</p><p>（2）重载方法系列2：可以遍历byte[]，short[]，int[]，long[]，double[]，char[]数组，遍历结果形式：</p><p><span>		</span>[元素1，元素2，。。。]</p><p>2、声明一个图形工具类GraphicTools，包含两个重载方法</p><p>（1）包含方法1：根据底边和高，求三角形面积，
+（2）包含方法2：根据三条边，求三角形面积</p><p>提示：根据三角形三边求面积的海伦公式： </p><p><strong><img src='imgs05/1577091140580.png' alt='1577091140580' referrerPolicy='no-referrer' /></strong></p></li></ol><h2><a name='header-n511' class='md-header-anchor '></a><strong>5.8  可变参数</strong></h2><p><strong>在JDK1.5之后，如果我们定义一个方法时，此时某个形参的类型可以确定，但是形参的个数不确定，那么我们可以使用可变参数。</strong></p><p><strong>格式：</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n514" mdtype="fences">【修饰符】 返回值类型 方法名(【非可变参数部分的形参列表,】参数类型... 形参名){  }
+</pre><p>注意：</p><p>（1）一个方法最多只能有一个可变参数</p><p>（2）如果一个方法包含可变参数，那么可变参数必须是形参列表的最后一个</p><ol start='' ><li><p><strong>示例一：    求n个整数的和</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n521" mdtype="fences" style="break-inside: unset;">public class ChangeArgs {
+	public static void main(String[] args) {
+		int[] arr = { 1, 4, 62, 431, 2 };
+		int sum1 = getSum1(arr);
+		System.out.println(sum1);
+
+		int sum2 = getSum2(arr);
+		System.out.println(sum2);
+		int sum3 = getSum2(1, 4, 62, 431, 2);
+		System.out.println(sum3);
+	}
+
+	// 完成数组 所有元素的求和
+	// 原始写法
+	public static int getSum1(int[] arr) {
+		int sum = 0;
+		for (int i = 0; i &lt; arr.length; i++) {
+			sum += arr[i];
+		}
+
+		return sum;
+	}
+
+	// 可变参数写法
+	public static int getSum2(int... arr) {
+		int sum = 0;
+		for (int i = 0; i &lt; arr.length; i++) {
+			sum += arr[i];
+		}
+		return sum;
+	}
+}
+</pre></li><li><p><strong>示例二：求1-n个整数中的最大值</strong></p><p>&nbsp;</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n525" mdtype="fences" style="break-inside: unset;">public class ChangeArgs_Exer1 {
+	public static void main(String[] args) {
+		System.out.println(max(1));
+		System.out.println(max(5,3,2,6));
+	}
+
+	public static int max(int num, int... others){
+		int max = num;
+		for (int i = 0; i &lt; others.length; i++) {
+			if(max &lt; others[i]){
+				max = num;
+			}
+		}
+		return max;
+	}
+}
+</pre></li><li><p><strong>示例三：字符串拼接</strong></p><ul><li><strong>需求一：返回n个字符串拼接结果，如果没有传入字符串，那么返回空字符串&quot;&quot;</strong></li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n531" mdtype="fences">public class ChangeArgs_Exer2 {
+	public static void main(String[] args) {
+		System.out.println(concat());
+		System.out.println(concat("hello","world"));
+	}
+	public static String concat(String... args){
+		String str = "";
+		for (int i = 0; i &lt; args.length; i++) {
+			str += args[i];
+		}
+		return str;
+	}
+}
+</pre><ul><li><strong>需求二：n个字符串进行拼接，每一个字符串之间使用某字符进行分割，如果没有传入字符串，那么返回空字符串&quot;&quot;</strong></li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n535" mdtype="fences" style="break-inside: unset;">public class ChangeArgs_Exer4 {
+	public static void main(String[] args) {
+		System.out.println(concat('+'));
+		System.out.println(concat('+',"hello","world"));
+	}
+	public static String concat(char seperator, String... args){
+		String str = "";
+		for (int i = 0; i &lt; args.length; i++) {
+			if(i==0){
+				str += args[i];
+			}else{
+				str += seperator + args[i];
+			}
+		}
+		return str;
+	}
+}
+</pre><p>&nbsp;</p><p><strong>课后练习</strong></p><p>1、声明一个方法，可以找出任意个整数的最大公约数</p><p>2、声明一个方法，可以找出任意个字符串中的公共字符，例如：hello与world的公共字符是o和l，如果没有就返回&quot;&quot;</p><p>提示：获取字符串长度的方法：int length()</p><p><span>				</span>例如：字符串.length()，   &quot;hello&quot;.length()返回5</p><p><span>		</span>   获取字符串[index]位置的字符：char charAt(int index)</p><p><span>				</span>例如：字符串.charAt(index)    hello.charAt(1)返回&#39;e&#39;</p><p><strong>参考答案：</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n545" mdtype="fences" style="break-inside: unset;">class Test12MethodExer1{
+	public static void main(String[] args){
+		System.out.println(maxYue(6,9));
+		System.out.println(maxYue(16,18,4,8));
+	}
+	
+	public static int maxYue(int... args){
+		//找很多个数的公约数
+		//(1)找出它们中最小的
+		//类似于在数组中找最小值
+		int min = args[0];
+		for(int i=1; i&lt;args.length; i++){
+			if(args[i] &lt; min){
+				min = args[i];
+			}
+		}
+		
+		//(2)从小的数往1的方向找，找到的第一个公约数就是它们的最大公约数
+		for(int i=min; i&gt;=1; i--){
+			//这个i得把args中所有的数都整除了，那么i就是他们的公约数
+			boolean flag = true;//假设i可以把args中所有数都整除了
+			for(int j=0; j&lt;args.length; j++){
+				if(args[j] % i !=0){//args中有一个数不能被i整除，说明这个i不是它们的公约数
+					flag = false;
+					break;
+				}
+			}
+			if(flag){
+				return i;//return会结束当前方法
+			}
+		}
+		
+		return 1;//1是所有数的公约数
+		/*
+		假设args中6和9  args[0]是6，args[1]是9，min=6
+		外循环第一次i=min=6,  
+				内循环第一次：j=0,  if(args[0] % 6！=0)不成立 j++
+				内循环第二次：j=1,  if(args[1] % 6!=0)成立   flag = false  ;break;
+				说明i不是它们公约数
+		外循环第二次i=5
+				内循环第一次：j=0,  if(args[0] % 5 !=0)成立 j++  flag = false;break;
+				说明i不是它们公约数
+		外循环第三次i=4
+				内循环第一次：j=0,  if(args[0] % 4 !=0)成立 j++  flag = false;break;
+				说明i不是它们公约数
+		外循环第四次i=3
+				内循环第一次：j=0,  if(args[0] % 3 !=0)不成立 j++ 
+				内循环第二次：j=1,  if(args[1] % 3 !=0)不成立 j++  
+				if(flag)成立，return i;
+		*/
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n546" mdtype="fences" style="break-inside: unset;">class Test12MethodExer2{
+	public static void main(String[] args){
+		System.out.println(sameChars("hello","world"));//ol
+		System.out.println(sameChars("chai","wolrd"));
+		System.out.println(sameChars("atguigu","java"));
+		System.out.println(sameChars("samething","string","thin"));
+	}
+	
+	public static String sameChars(String... words){
+		String same = "";
+		//找出所有words中相同的字符，拼接起来
+		//先用一个数组，表示26个字母是否在所有单词中出现过
+		boolean[] appear = new boolean[26];//默认值false
+		/*
+		appear[0]表示a字符是否在所有的单词中出现，如果是true，表示出现了，就是共同的
+												如果是false,表示没有出现，不是共同的
+		*/
+		//从'a' -&gt; 'z'
+		for(char letter = 'a'; letter &lt;= 'z'; letter++){
+			boolean flag = true;//假设所有words中都有这个letter
+			for(int i=0; i&lt;words.length; i++){
+				//判断letter是否在words中出现过，
+				boolean now = false;//假设在words[i]中没有出现过
+				for(int j=0; j&lt;words[i].length(); j++){
+					if(words[i].charAt(j) == letter){//说明letter在当前words中出现了
+						now = true;
+						break;
+					}
+				}			
+				if(now == false){//说明letter在当前words[i]中没有出现
+					flag = false;
+					break;
+				}
+			}
+			if(flag==true){
+				appear[letter-97]=true;
+			}
+		}
+		
+		for(int i=0; i&lt;appear.length; i++){
+			if(appear[i] == true){
+				same += (char)(97+i);
+			}
+		}
+		
+		return same;
+	}
+}
+</pre><p>&nbsp;</p></li></ol><h2><a name='header-n548' class='md-header-anchor '></a><strong>5.9 命令行参数（了解）</strong></h2><p><strong>通过命令行给main方法的形参传递的实参称为命令行参数</strong></p><p><strong><img src='imgs05/1561632816552.png' alt='1561632816552' referrerPolicy='no-referrer' /></strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n551" mdtype="fences">public class TestCommandParam{
+	//形参：String[] args
+	public static void main(String[] args){
+		System.out.println(args);
+		System.out.println(args.length);
+		
+		for(int i=0; i&lt;args.length; i++){
+			System.out.println("第" + (i+1) + "个参数的值是：" + args[i]);
+		}
+	}
+}
+</pre><p><strong>运行命令：</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="command" contenteditable="false" cid="n553" mdtype="fences">java TestCommandParam
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="command" contenteditable="false" cid="n554" mdtype="fences">java TestCommandParam 1 2 3
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="command" contenteditable="false" cid="n555" mdtype="fences">java TestCommandParam hello atguigu
+</pre><h2><a name='header-n556' class='md-header-anchor '></a><strong>5.10 递归</strong> Recursion</h2><ul><li><p><strong>递归：指在当前方法内调用自己的这种现象。</strong></p></li><li><p><strong>递归的分类:递归分为两种，直接递归和间接递归。</strong></p><ul><li><strong>直接递归称为方法自身调用自己。</strong></li><li><strong>间接递归可以A方法调用B方法，B方法调用C方法，C方法调用A方法。</strong></li></ul></li><li><p><strong>注意事项：</strong></p><ul><li><strong>递归一定要有条件限定，保证递归能够停止下来，否则会发生栈内存溢出。(无穷递归，类似死循环)</strong></li><li><strong>在递归中虽然有限定条件，但是递归次数不能太多。否则也会发生栈内存溢出。</strong></li></ul></li></ul><p>&nbsp;</p><ol start='' ><li><p><strong>示例一：计算1-100之间所有自然数的和</strong></p><p>循环实现：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n579" mdtype="fences" style="break-inside: unset;">public class RecursionMethod1{
+	public static void main(String[] args) {
+		int sum = sum(100);
+		System.out.println("1-100的和：" + sum);
+	}
+
+	public static int sum(int n){
+		int sum=0;
+        for(int i=1;i&lt;=n;i++){
+            sum+=i;
+        }
+        return sum;
+	}
+}
+</pre><p>递归实现：</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n581" mdtype="fences" style="break-inside: unset;">public class RecursionMethod1{
+	public static void main(String[] args) {
+		int sum = sum(100);
+		System.out.println("1-100的和：" + sum);
+	}
+
+	public static int sum(int n){
+		if(n == 1){
+			return 1;
+		}else{
+			return n + sum(n-1);
+		}
+	}
+}
+</pre><p><strong><img src='imgs05/1561731643079.png' alt='1561731643079' referrerPolicy='no-referrer' /></strong></p></li><li><p><strong>示例二：求n!</strong></p><p><strong><img src='imgs05/1573725058457.png' alt='1573725058457' referrerPolicy='no-referrer' /></strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n586" mdtype="fences">public class RecursionMethod2{
+	public static void main(String[] args) {
+		int jieCheng = jieCheng(10);
+		System.out.println("10的阶乘是：" + jieCheng);
+	}
+	public static int jieCheng(int n){
+		if(n &lt;= 1){
+			return 1;
+		}else{
+			return n * jieCheng(n-1);
+		}
+	}
+}
+</pre><p><strong><img src='imgs05/1561731297753.png' alt='1561731297753' referrerPolicy='no-referrer' /></strong></p></li><li><p><strong>示例三：计算斐波那契数列（Fibonacci）的第n个值</strong></p><p><strong>规律：一个数等于前两个数之和，</strong></p><p><span>	</span><strong>f(0) =1，</strong></p><p><span>	</span><strong>f(1) = 1，</strong></p><p><span>	</span><strong>f(2) = f(0) + f(1) =2，</strong></p><p><span>	</span><strong>f(3) = f(1) + f(2) = 3,</strong> </p><p><span>	</span><strong>f(4) = f(2) + f(3) = 5</strong></p><p><span>	</span><strong>...</strong></p><p><span>	</span><strong>f(n) = f(n-2) + f(n-1);</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n598" mdtype="fences" style="break-inside: unset;">public class RecursionMethod3{
+	public static void main(String[] args) {
+		Count c = new Count();
+		
+		System.out.println("f(10)：" + c.f(10));
+		System.out.println("f方法被调用的总次数：" + c.total);
+	}
+}
+class Count{
+	int total = 0;
+	public int f(int n){
+		total++;
+		if(n &lt;= 1){
+			return 1;
+		}else{
+			return f(n-2) + f(n-1);
+		}
+	}
+}
+</pre><p><strong><img src='imgs05/1561733124831.png' alt='1561733124831' referrerPolicy='no-referrer' /></strong></p></li><li><h4><a name='header-n601' class='md-header-anchor '></a><strong>练习</strong></h4><p><strong>1、描述：猴子吃桃子问题，猴子第一天摘下若干个桃子，当即吃了所有桃子的一半，还不过瘾，又多吃了一个。第二天又将仅剩下的桃子吃掉了一半，又多吃了一个。以后每天都吃了前一天剩下的一半多一个。到第十天，只剩下一个桃子。试求第一天共摘了多少桃子？</strong></p><p><strong><img src='imgs05/1573725022751.png' alt='1573725022751' referrerPolicy='no-referrer' /></strong></p><p><strong>2、有n级台阶，一次只能上1步或2步，共有多少种走法？</strong></p><p><strong><img src='imgs05/1573724181996.png' alt='1573724181996' referrerPolicy='no-referrer' /></strong></p><p><strong>3、求1+2！+3！+4！+...+20！的和</strong></p><p><strong><img src='imgs05/1573724277746.png' alt='1573724277746' referrerPolicy='no-referrer' /></strong></p></li></ol><h2><a name='header-n608' class='md-header-anchor '></a><strong>5.11  对象数组</strong></h2><p><strong>数组是用来存储一组数据的容器，一组基本数据类型的数据可以用数组装，那么一组对象也可以使用数组来装。</strong></p><p><strong>即数组的元素可以是基本数据类型，也可以是引用数据类型。当元素是引用数据类型是，我们称为对象数组。</strong></p><blockquote><p><strong>注意：对象数组，首先要创建数组对象本身，即确定数组的长度，然后再创建每一个元素对象，如果不创建，数组的元素的默认值就是null，所以很容易出现空指针异常NullPointerException。</strong></p></blockquote><ol start='' ><li><p><strong>示例：</strong></p><p><strong>（1）定义圆Circle类，包含radius半径属性，getArea()求面积方法，getPerimeter()求周长方法，String getInfo()返回圆对象的详细信息的方法</strong></p><p><strong>（2）在测试类中创建长度为5的Circle[]数组，用来装5个圆对象，并给5个圆对象的半径赋值为[1,10)的随机值</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n618" mdtype="fences" style="break-inside: unset;">class Test16_ObjectArray{
+	public static void main(String[] args){
+		//要在数组中存储5个圆对象
+		//声明一个可以用来存储圆对象的数组
+		Circle[] arr = new Circle[5];
+		//for(int i=0; i&lt;arr.length; i++){
+		//	System.out.println(arr[i]);
+		//}
+		//System.out.println(arr[0].radius);//NullPointerException
+		
+		//给元素赋值
+		//元素的类型是：Circle，应该给它一个Circle的对象
+		//arr[0] = 1.2;//错误的
+		//arr[0]相当于它是一个Circle类型的变量，也是对象名，必须赋值为对象
+		/*
+		arr[0] =  new Circle();
+		arr[0].radius = 1.2;
+		System.out.println(arr[0].radius);
+		*/
+		
+		//创建5个对象，半径随机赋值为[1,10)的随机值
+		//Math.random()==&gt;[0,1)
+		//Math.random()*9==&gt;[0,9)
+		//Math.random()*9+1==&gt;[1,10)
+		for(int i=0; i&lt;arr.length; i++){
+			arr[i] = new Circle();//有对象才有半径
+			arr[i].radius = Math.random()*9+1;
+		}
+		
+		
+		//遍历显示圆对象的信息
+		for(int i=0; i&lt;arr.length; i++){
+			//arr[i]是一个Circle的对象，就可以调用Circle类中的属性和方法
+			System.out.println(arr[i].getInfo());
+		}
+	}
+}
+class Circle{
+	double radius;
+	public double getArea(){
+		return 3.14 * radius * radius;
+	}
+	public double getPerimeter(){
+		return 3.14 * 2 * radius;
+	}
+	public String getInfo(){
+		return "半径：" + radius +"，面积：" + getArea() + "，周长：" + getPerimeter();
+	}
+}
+</pre></li><li><p><strong>对象数组的内存图分析</strong></p><p>&nbsp;</p></li><li><p><strong>练习1</strong></p><p><strong>（1）定义学生类Student</strong></p><p><span>	</span><strong>声明姓名和成绩实例变量，</strong></p><p><span>	</span><strong>getInfo()方法：用于返回学生对象的信息</strong></p><p><strong>（2）测试类ObjectArrayTest的main中创建一个可以装3个学生对象的数组，并且按照学生成绩排序，显示学生信息</strong></p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n628" mdtype="fences" style="break-inside: unset;">public class ObjectArrayTest {
+	public static void main(String[] args) {
+		Student[] arr = new Student[3];
+		arr[0] = new Student();
+		arr[0].name = "张三";
+		arr[0].score = 89;
+		
+		arr[1] = new Student();
+		arr[1].name = "李四";
+		arr[1].score = 84;
+		
+		arr[2] = new Student();
+		arr[2].name = "王五";
+		arr[2].score = 85;
+		
+		for (int i = 1; i &lt; arr.length; i++) {
+			for (int j = 0; j &lt; arr.length-1; j++) {
+				if(arr[j].score &gt; arr[j+1].score){
+					Student temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+				}
+			}
+		}
+		
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i].getInfo());
+		}
+	}
+}
+class Student{
+	String name;
+	int score;
+	public String getInfo(){
+		return "姓名：" + name + ",成绩：" + score;
+	}
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n629" mdtype="fences" style="break-inside: unset;">class Test18_ObjectArrayExer2_2{
+	public static void main(String[] args){
+		//创建一个可以装3个学生对象的数组
+		Student[] arr = new Student[3];//只是申明这个数组，可以用来装3个学生，此时里面没有学生对象
+		
+		//从键盘输入
+		java.util.Scanner input = new java.util.Scanner(System.in);
+		for(int i=0;i&lt;arr.length; i++){
+			System.out.println("请输入第" + (i+1) + "个学生信息：");
+			arr[i] = new Student();
+			
+			System.out.print("姓名：");
+			arr[i].name = input.next();
+			
+			System.out.print("成绩：");
+			arr[i].score = input.nextInt();
+		}
+		
+		//先显示一下目前的顺序
+		for(int i=0; i&lt;arr.length; i++){
+			System.out.println(arr[i].getInfo());
+		}
+		
+		System.out.println("------------------------------------------");
+		//冒泡排序
+		for(int i=1; i&lt;arr.length; i++){
+			for(int j=0; j&lt;arr.length-i; j++){
+				//arr[j] &gt; arr[j+1]//错误的
+				if(arr[j].score &gt; arr[j+1].score){
+					//交换两个元素，这里是两个学生对象，所以temp也得是Student类型
+					Student temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+				}
+			}
+		}
+		//再显示一下目前的顺序
+		for(int i=0; i&lt;arr.length; i++){
+			System.out.println(arr[i].getInfo());
+		}
+	}
+}
+class Student{
+	String name;
+	int score;//使用int或double都可以
+	
+	public String getInfo(){
+		return "姓名：" + name +"，成绩：" + score;
+	}
+}
+</pre><p>&nbsp;</p><p>&nbsp;</p></li></ol><p>&nbsp;</p>
+	<figure>
+		<table>
+			<thead>
+			<tr>
+				<th style='text-align:right;'><a href='../javaSE.html'>回目录</a></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td style='text-align:right;'>教程版本：1.2 更新日期：2019年1月3日</td>
+			</tr>
+			</tbody>
+		</table>
+	</figure>
+</div>
+</body>
+</html>
