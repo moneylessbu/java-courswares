@@ -19,3 +19,11 @@
 ## 2、ibatis.binding.BindingException
 
 ![04](F:\尚硅谷\Java课件汇总\bug汇总\imgs\04.png)
+
+## 3、注意bean名的字母大小写问题，尤其是在调用中
+
+```
+ travelgroup  ===》travelGroup    
+```
+
+ 

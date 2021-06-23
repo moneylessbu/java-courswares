@@ -16,8 +16,8 @@ git remote -v  //查看别名
  //创建远程库别名
 git remote add + 别名 + 远程库链接【https://github.com/moneylessbu/gitSpace.git】 
 
-
-ssh-keygen -t rsa -C "1289494540@qq.com" 
+//获取密钥
+ssh-keygen -t rsa -C "邮箱地址" 
 
 
 
